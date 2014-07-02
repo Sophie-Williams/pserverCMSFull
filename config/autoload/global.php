@@ -12,6 +12,20 @@
  */
 
 return array(
+	'zfctwig' => array(
+		'environment_loader' => 'ZfcTwigLoaderChain',
+		'environment_options' => array(),
+		'loader_chain' => array(
+			'ZfcTwigLoaderTemplateMap',
+			'ZfcTwigLoaderTemplatePathStack'
+		),
+		'extensions' => array(
+			'zfctwig' => 'ZfcTwigExtension'
+		),
+		'suffix' => 'twig',
+		'enable_fallback_functions' => true,
+		'disable_zf_model' => true
+	),
 	'zenddevelopertools' => array(
 		/**
 		 * General Profiler settings
