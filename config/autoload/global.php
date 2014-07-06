@@ -100,15 +100,27 @@ return array(
 			),
 			'orm_sro_account' => array(
 				'connection'    => 'orm_sro_account',
-				'configuration' => 'orm_default'
+				'configuration' => 'orm_sro_account'
 			),
 			'orm_sro_shard' => array(
 				'connection'    => 'orm_sro_shard',
-				'configuration' => 'orm_default'
+				'configuration' => 'orm_sro_shard'
 			),
 			'orm_sro_log' => array(
 				'connection'    => 'orm_sro_log',
-				'configuration' => 'orm_default'
+				'configuration' => 'orm_sro_log'
+			)
+		),
+		'configuration' => array(
+			'orm_sro_account' => array(
+				'metadata_cache'    => 'array',
+				'query_cache'       => 'array',
+				'result_cache'      => 'array',
+				'driver'            => 'sro_account_entities', // This driver will be defined later
+				'generate_proxies'  => true,
+				'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
+				'proxy_namespace'   => 'DoctrineORMModule\Proxy',
+				'filters'           => array()
 			)
 		),
 	),
