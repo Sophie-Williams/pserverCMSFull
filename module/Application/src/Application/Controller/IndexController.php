@@ -15,16 +15,22 @@ use Zend\View\Model\ViewModel;
 class IndexController extends AbstractActionController {
 	public function indexAction() {
 
-		$objectManager = $this->getServiceLocator()
-			->get('Doctrine\ORM\EntityManager');
+		$oObjectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
-		$user = new \Application\Entity\User();
-		$user->setFullName('Test User');
+		$oEntityUser = new \Application\Entity\Frontend\User();
+		$oEntityUser->setFullName('Test User');
 
-		$objectManager->persist($user);
-		$objectManager->flush();
 
-		\Zend\Debug\Debug::dump($user);
+		$oObjectManager->persist($oEntityUser);
+		$oObjectManager->flush();
+
+		\Zend\Debug\Debug::dump($oEntityUser);
+
+
+		/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */
+		$oRepositoryUser = $oObjectManager->getRepository('Application\Entity\Frontend\User');
+
+		\Zend\Debug\Debug::dump($oRepositoryUser->findBy(array('fullName' => 'Test User')));
 
 		return new ViewModel();
 	}
