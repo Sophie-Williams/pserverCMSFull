@@ -105,7 +105,7 @@ return array(
 			'application_entities' => array(
 				'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
 				'cache' => 'array',
-				'paths' => array(__DIR__ . '/../src/Application/Entity')
+				'paths' => array(__DIR__ . '/../src/Application/Entity/Frontend')
 			),
 			'sro_account_entities' => array(
 				'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
@@ -125,7 +125,7 @@ return array(
 
 			'orm_default' => array(
 				'drivers' => array(
-					'Application\Entity' => 'application_entities'
+					'Application\Entity\Frontend' => 'application_entities'
 				),
 			),
 			'orm_sro_account' => array(
