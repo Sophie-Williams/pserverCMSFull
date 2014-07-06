@@ -1,10 +1,11 @@
 {
-    "name": "zendframework/skeleton-application",
-    "description": "Skeleton Application for ZF2",
+    "name": "kokspflanze/pserverCMS",
+    "description": "CMS for pServer",
     "license": "BSD-3-Clause",
     "keywords": [
         "framework",
-        "zf2"
+        "zf2",
+		"twig"
     ],
     "homepage": "http://framework.zend.com/",
     "require": {
@@ -13,6 +14,7 @@
 		"zf-commons/zfc-twig": "dev-master",
 		"zendframework/Zend-developer-tools": "dev-master",
 		"twig/twig": "1.*",
-		"doctrine/doctrine-orm-module": "0.*"
+		"doctrine/doctrine-orm-module": "0.*",
+		"mabuzagu/pdo-dblib-module": "dev-master"
     }
 }
