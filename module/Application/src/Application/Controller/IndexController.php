@@ -14,7 +14,7 @@ class IndexController extends AbstractActionController {
 		\Zend\Debug\Debug::dump($oRepositoryUser->findBy(array('StrUserID' => 'fantans')));
 	//	\Zend\Debug\Debug::dump($oRepositoryUser->findBy(array()));
 
-		\Zend\Debug\Debug::dump($this->getServiceLocator()->get('dataservice'));
+		\Zend\Debug\Debug::dump($this->getServiceLocator()->get('dataservice')->getRandomNumber());
 
 
 		$oObjectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');

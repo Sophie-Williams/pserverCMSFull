@@ -8,11 +8,10 @@
 
 namespace GameBackend\DataService;
 
-use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 
-class Factory implements FactoryInterface {
+class Factory {
 	/**
 	 * Create service
 	 *
@@ -20,7 +19,7 @@ class Factory implements FactoryInterface {
 	 *
 	 * @return \GameBackend\DataService\DataServiceInterface
 	 */
-	public function createService( ServiceLocatorInterface $serviceLocator ) {
+	public static function getInstance( ServiceLocatorInterface $serviceLocator ) {
 		$config = $serviceLocator->get( 'Configuration' );
 
 		return new SRO();
