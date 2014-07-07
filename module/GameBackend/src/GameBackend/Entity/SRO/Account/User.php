@@ -1,6 +1,6 @@
 <?php
 
-namespace Application\Entity\SRO\Account;
+namespace GameBackend\Entity\SRO\Account;
 
 use Doctrine\ORM\Mapping as ORM;
 
