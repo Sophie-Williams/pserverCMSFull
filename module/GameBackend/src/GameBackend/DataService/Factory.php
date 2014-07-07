@@ -23,9 +23,6 @@ class Factory implements FactoryInterface {
 	public function createService( ServiceLocatorInterface $serviceLocator ) {
 		$config = $serviceLocator->get( 'Configuration' );
 
-		\Zend\Debug\Debug::dump( $config );
-		die();
-
 		return new SRO();
 	}
 } 
