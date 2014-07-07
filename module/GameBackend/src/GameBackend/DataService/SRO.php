@@ -10,5 +10,10 @@ namespace GameBackend\DataService;
 
 
 class SRO implements DataServiceInterface {
-
+	/*
+	 * ONLY TO TEST
+	 */
+	public function getRandomNumber(){
+		return rand(0,123);
+	}
 } 
