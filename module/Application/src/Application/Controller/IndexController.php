@@ -10,8 +10,8 @@ class IndexController extends AbstractActionController {
 
 		/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */
 
-		$oRepositoryUser = $this->getServiceLocator()->get('doctrine.entitymanager.orm_sro_account')->getRepository('Application\Entity\SRO\Account\User');
-		\Zend\Debug\Debug::dump($oRepositoryUser->findBy(array('StrUserID' => 'fantans')));
+	//	$oRepositoryUser = $this->getServiceLocator()->get('doctrine.entitymanager.orm_sro_account')->getRepository('Application\Entity\SRO\Account\User');
+	//	\Zend\Debug\Debug::dump($oRepositoryUser->findBy(array('StrUserID' => 'fantans')));
 	//	\Zend\Debug\Debug::dump($oRepositoryUser->findBy(array()));
 
 

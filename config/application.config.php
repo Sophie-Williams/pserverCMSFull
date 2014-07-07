@@ -8,6 +8,7 @@ return array(
 		'DoctrineModule',
 		'DoctrineORMModule',
 		'PDODblibModule',
+		'GameBackend',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
