@@ -16,4 +16,4 @@ class SRO implements DataServiceInterface {
 	public function getRandomNumber(){
 		return rand(0,123);
 	}
-} 
+}
