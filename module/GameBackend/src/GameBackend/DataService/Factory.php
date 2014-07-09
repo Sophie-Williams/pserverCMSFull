@@ -15,12 +15,14 @@ class Factory {
 	/**
 	 * Create service
 	 *
-	 * @param ServiceLocatorInterface $serviceLocator
+	 * @param ServiceLocatorInterface $oServiceLocator
 	 *
 	 * @return \GameBackend\DataService\DataServiceInterface
 	 */
-	public static function getInstance( ServiceLocatorInterface $serviceLocator ) {
-		$config = $serviceLocator->get( 'Configuration' );
+	public static function getInstance( ServiceLocatorInterface $oServiceLocator ) {
+		$config = $oServiceLocator->get( 'Configuration' );
+
+		//\Zend\Debug\Debug::dump($config);die();
 
 		return new SRO();
 	}
