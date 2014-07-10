@@ -5,12 +5,12 @@ namespace GameBackend\Entity\SRO\Account;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Smclog
+ * SmcLog
  *
  * @ORM\Table(name="_SMCLog", indexes={@ORM\Index(name="IX_SMCLog", columns={"dLogDate"})})
  * @ORM\Entity
  */
-class Smclog
+class SmcLog
 {
     /**
      * @var integer
@@ -52,7 +52,7 @@ class Smclog
 	/**
 	 * @param int $catagory
 	 *
-	 * @return Smclog
+	 * @return SmcLog
 	 */
 	public function setCatagory( $catagory ) {
 		$this->catagory = $catagory;
@@ -70,7 +70,7 @@ class Smclog
 	/**
 	 * @param \DateTime $dlogdate
 	 *
-	 * @return Smclog
+	 * @return SmcLog
 	 */
 	public function setDlogdate( $dlogdate ) {
 		$this->dlogdate = $dlogdate;
@@ -88,7 +88,7 @@ class Smclog
 	/**
 	 * @param int $id
 	 *
-	 * @return Smclog
+	 * @return SmcLog
 	 */
 	public function setId( $id ) {
 		$this->id = $id;
@@ -106,7 +106,7 @@ class Smclog
 	/**
 	 * @param string $szlog
 	 *
-	 * @return Smclog
+	 * @return SmcLog
 	 */
 	public function setSzlog( $szlog ) {
 		$this->szlog = $szlog;
@@ -124,7 +124,7 @@ class Smclog
 	/**
 	 * @param string $szuserid
 	 *
-	 * @return Smclog
+	 * @return SmcLog
 	 */
 	public function setSzuserid( $szuserid ) {
 		$this->szuserid = $szuserid;

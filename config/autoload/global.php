@@ -121,6 +121,26 @@ return array(
 				'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
 				'proxy_namespace'   => 'DoctrineORMModule\Proxy',
 				'filters'           => array()
+			),
+			'orm_sro_shard' => array(
+				'metadata_cache'    => 'array',
+				'query_cache'       => 'array',
+				'result_cache'      => 'array',
+				'driver'            => 'sro_shard_entities', // This driver will be defined later
+				'generate_proxies'  => true,
+				'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
+				'proxy_namespace'   => 'DoctrineORMModule\Proxy',
+				'filters'           => array()
+			),
+			'orm_sro_log' => array(
+				'metadata_cache'    => 'array',
+				'query_cache'       => 'array',
+				'result_cache'      => 'array',
+				'driver'            => 'sro_log_entities', // This driver will be defined later
+				'generate_proxies'  => true,
+				'proxy_dir'         => 'data/DoctrineORMModule/Proxy',
+				'proxy_namespace'   => 'DoctrineORMModule\Proxy',
+				'filters'           => array()
 			)
 		),
 	),

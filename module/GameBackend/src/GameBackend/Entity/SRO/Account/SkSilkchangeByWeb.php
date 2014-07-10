@@ -5,12 +5,12 @@ namespace GameBackend\Entity\SRO\Account;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * SkSilkchangeByWeb
+ * SkSilkChangeByWeb
  *
  * @ORM\Table(name="SK_SilkChange_BY_Web")
  * @ORM\Entity
  */
-class SkSilkchangeByWeb
+class SkSilkChangeByWeb
 {
     /**
      * @var integer
@@ -59,7 +59,7 @@ class SkSilkchangeByWeb
 	/**
 	 * @param int $id
 	 *
-	 * @return SkSilkchangeByWeb
+	 * @return SkSilkChangeByWeb
 	 */
 	public function setId( $id ) {
 		$this->id = $id;
@@ -77,7 +77,7 @@ class SkSilkchangeByWeb
 	/**
 	 * @param int $jid
 	 *
-	 * @return SkSilkchangeByWeb
+	 * @return SkSilkChangeByWeb
 	 */
 	public function setJid( $jid ) {
 		$this->jid = $jid;
@@ -95,7 +95,7 @@ class SkSilkchangeByWeb
 	/**
 	 * @param int $reason
 	 *
-	 * @return SkSilkchangeByWeb
+	 * @return SkSilkChangeByWeb
 	 */
 	public function setReason( $reason ) {
 		$this->reason = $reason;
@@ -113,7 +113,7 @@ class SkSilkchangeByWeb
 	/**
 	 * @param int $silkOffset
 	 *
-	 * @return SkSilkchangeByWeb
+	 * @return SkSilkChangeByWeb
 	 */
 	public function setSilkOffset( $silkOffset ) {
 		$this->silkOffset = $silkOffset;
@@ -131,7 +131,7 @@ class SkSilkchangeByWeb
 	/**
 	 * @param int $silkRemain
 	 *
-	 * @return SkSilkchangeByWeb
+	 * @return SkSilkChangeByWeb
 	 */
 	public function setSilkRemain( $silkRemain ) {
 		$this->silkRemain = $silkRemain;
@@ -149,7 +149,7 @@ class SkSilkchangeByWeb
 	/**
 	 * @param int $silkType
 	 *
-	 * @return SkSilkchangeByWeb
+	 * @return SkSilkChangeByWeb
 	 */
 	public function setSilkType( $silkType ) {
 		$this->silkType = $silkType;

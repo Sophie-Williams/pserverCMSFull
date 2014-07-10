@@ -5,12 +5,12 @@ namespace GameBackend\Entity\SRO\Account;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * SkSilkbuylist
+ * SkSilkBuyList
  *
  * @ORM\Table(name="SK_SilkBuyList")
  * @ORM\Entity
  */
-class SkSilkbuylist
+class SkSilkBuyList
 {
     /**
      * @var integer
@@ -164,7 +164,7 @@ class SkSilkbuylist
 	/**
 	 * @param \DateTime $authdate
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setAuthdate( $authdate ) {
 		$this->authdate = $authdate;
@@ -182,7 +182,7 @@ class SkSilkbuylist
 	/**
 	 * @param string $authnumber
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setAuthnumber( $authnumber ) {
 		$this->authnumber = $authnumber;
@@ -200,7 +200,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $buyid
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setBuyid( $buyid ) {
 		$this->buyid = $buyid;
@@ -218,7 +218,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $buyno
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setBuyno( $buyno ) {
 		$this->buyno = $buyno;
@@ -236,7 +236,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $buyquantity
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setBuyquantity( $buyquantity ) {
 		$this->buyquantity = $buyquantity;
@@ -254,7 +254,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $id
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setId( $id ) {
 		$this->id = $id;
@@ -272,7 +272,7 @@ class SkSilkbuylist
 	/**
 	 * @param string $ip
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setIp( $ip ) {
 		$this->ip = $ip;
@@ -290,7 +290,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $mngid
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setMngid( $mngid ) {
 		$this->mngid = $mngid;
@@ -308,7 +308,7 @@ class SkSilkbuylist
 	/**
 	 * @param string $ordernumber
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setOrdernumber( $ordernumber ) {
 		$this->ordernumber = $ordernumber;
@@ -326,7 +326,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $paymethod
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setPaymethod( $paymethod ) {
 		$this->paymethod = $paymethod;
@@ -344,7 +344,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $pgcompany
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setPgcompany( $pgcompany ) {
 		$this->pgcompany = $pgcompany;
@@ -362,7 +362,7 @@ class SkSilkbuylist
 	/**
 	 * @param string $pguniqueno
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setPguniqueno( $pguniqueno ) {
 		$this->pguniqueno = $pguniqueno;
@@ -380,7 +380,7 @@ class SkSilkbuylist
 	/**
 	 * @param \DateTime $regdate
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setRegdate( $regdate ) {
 		$this->regdate = $regdate;
@@ -398,7 +398,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $silkOffset
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setSilkOffset( $silkOffset ) {
 		$this->silkOffset = $silkOffset;
@@ -416,7 +416,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $silkReason
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setSilkReason( $silkReason ) {
 		$this->silkReason = $silkReason;
@@ -434,7 +434,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $silkRemain
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setSilkRemain( $silkRemain ) {
 		$this->silkRemain = $silkRemain;
@@ -452,7 +452,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $silkType
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setSilkType( $silkType ) {
 		$this->silkType = $silkType;
@@ -470,7 +470,7 @@ class SkSilkbuylist
 	/**
 	 * @param string $slippaper
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setSlippaper( $slippaper ) {
 		$this->slippaper = $slippaper;
@@ -488,7 +488,7 @@ class SkSilkbuylist
 	/**
 	 * @param string $srid
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setSrid( $srid ) {
 		$this->srid = $srid;
@@ -506,7 +506,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $subjid
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setSubjid( $subjid ) {
 		$this->subjid = $subjid;
@@ -524,7 +524,7 @@ class SkSilkbuylist
 	/**
 	 * @param int $userjid
 	 *
-	 * @return SkSilkbuylist
+	 * @return SkSilkBuyList
 	 */
 	public function setUserjid( $userjid ) {
 		$this->userjid = $userjid;
