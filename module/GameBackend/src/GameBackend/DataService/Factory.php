@@ -23,7 +23,10 @@ class Factory {
 		$config = $oServiceLocator->get( 'Configuration' );
 
 		//\Zend\Debug\Debug::dump($config);die();
+		if(!class_exists($config['gamebackend']['game'])){
+			throw new \Exception('GameBackend Game Class not exists!');
+		}
 
-		return new SRO();
+		return new $config['gamebackend']['game']();
 	}
 } 

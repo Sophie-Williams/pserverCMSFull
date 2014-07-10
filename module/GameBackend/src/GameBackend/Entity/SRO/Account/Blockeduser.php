@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="_BlockedUser")
  * @ORM\Entity
  */
-class Blockeduser
+class BlockedUser
 {
     /**
      * @var integer
@@ -61,7 +61,7 @@ class Blockeduser
 	/**
 	 * @param int $serialno
 	 *
-	 * @return Blockeduser
+	 * @return BlockedUser
 	 */
 	public function setSerialno( $serialno ) {
 		$this->serialno = $serialno;
@@ -79,7 +79,7 @@ class Blockeduser
 	/**
 	 * @param \DateTime $timebegin
 	 *
-	 * @return Blockeduser
+	 * @return BlockedUser
 	 */
 	public function setTimebegin( $timebegin ) {
 		$this->timebegin = $timebegin;
@@ -97,7 +97,7 @@ class Blockeduser
 	/**
 	 * @param \DateTime $timeend
 	 *
-	 * @return Blockeduser
+	 * @return BlockedUser
 	 */
 	public function setTimeend( $timeend ) {
 		$this->timeend = $timeend;
@@ -115,7 +115,7 @@ class Blockeduser
 	/**
 	 * @param int $type
 	 *
-	 * @return Blockeduser
+	 * @return BlockedUser
 	 */
 	public function setType( $type ) {
 		$this->type = $type;
@@ -133,7 +133,7 @@ class Blockeduser
 	/**
 	 * @param string $userid
 	 *
-	 * @return Blockeduser
+	 * @return BlockedUser
 	 */
 	public function setUserid( $userid ) {
 		$this->userid = $userid;
@@ -151,7 +151,7 @@ class Blockeduser
 	/**
 	 * @param int $userjid
 	 *
-	 * @return Blockeduser
+	 * @return BlockedUser
 	 */
 	public function setUserjid( $userjid ) {
 		$this->userjid = $userjid;

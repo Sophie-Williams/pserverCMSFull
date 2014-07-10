@@ -35,4 +35,7 @@ return array(
 			),
 		),
 	),
+	'gamebackend' => array(
+		'game' => 'GameBackend\DataService\SRO'
+	)
 );
