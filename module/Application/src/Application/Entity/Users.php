@@ -3,6 +3,7 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Zend\I18n\Validator\DateTime;
 
 /**
  * Users
@@ -67,6 +68,7 @@ class Users {
 	 */
 	public function __construct() {
 		$this->userRole = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->created = new \DateTime();
 	}
 
 

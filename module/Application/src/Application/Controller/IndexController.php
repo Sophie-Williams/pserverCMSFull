@@ -18,18 +18,16 @@ class IndexController extends AbstractActionController {
 
 
 		$oObjectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-/*
-		$oEntityUser = new \Application\Entity\Frontend\User();
-		$oEntityUser->setStrUserID('UserZend');
+
+		$oEntityUser = new \Application\Entity\Users();
+		$oEntityUser->setUsername('UserZend'.rand(0,999));
 
 
 		$oObjectManager->persist($oEntityUser);
 		$oObjectManager->flush();
 
-		\Zend\Debug\Debug::dump($oEntityUser);
-*/
 		/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */
-		$oRepositoryUser = $oObjectManager->getRepository('Application\Entity\Frontend\User');
+		$oRepositoryUser = $oObjectManager->getRepository('Application\Entity\Users');
 
 		//\Zend\Debug\Debug::dump($oRepositoryUser->findBy(array('StrUserID' => 'fantans')));
 		\Zend\Debug\Debug::dump($oRepositoryUser->findBy(array()));
