@@ -10,149 +10,142 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="logs", indexes={@ORM\Index(name="fk_logs_users1_idx", columns={"users_usrId"})})
  * @ORM\Entity
  */
-class Logs
-{
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="lId", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $lid;
+class Logs {
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="lId", type="integer", nullable=false)
+	 * @ORM\Id
+	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 */
+	private $lid;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="topic", type="string", length=45, nullable=false)
-     */
-    private $topic;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="topic", type="string", length=45, nullable=false)
+	 */
+	private $topic;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="memo", type="text", nullable=false)
-     */
-    private $memo;
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="memo", type="text", nullable=false)
+	 */
+	private $memo;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created", type="datetime", nullable=false)
-     */
-    private $created;
+	/**
+	 * @var \DateTime
+	 *
+	 * @ORM\Column(name="created", type="datetime", nullable=false)
+	 */
+	private $created;
 
-    /**
-     * @var \Application\Entity\Users
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Entity\Users")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="users_usrId", referencedColumnName="usrId")
-     * })
-     */
-    private $usersUsrid;
-
+	/**
+	 * @var \Application\Entity\Users
+	 *
+	 * @ORM\ManyToOne(targetEntity="Application\Entity\Users")
+	 * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="users_usrId", referencedColumnName="usrId")
+	 * })
+	 */
+	private $usersUsrid;
 
 
-    /**
-     * Get lid
-     *
-     * @return integer 
-     */
-    public function getLid()
-    {
-        return $this->lid;
-    }
+	/**
+	 * Get lid
+	 *
+	 * @return integer
+	 */
+	public function getLid() {
+		return $this->lid;
+	}
 
-    /**
-     * Set topic
-     *
-     * @param string $topic
-     * @return Logs
-     */
-    public function setTopic($topic)
-    {
-        $this->topic = $topic;
+	/**
+	 * Set topic
+	 *
+	 * @param string $topic
+	 *
+	 * @return Logs
+	 */
+	public function setTopic( $topic ) {
+		$this->topic = $topic;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get topic
-     *
-     * @return string 
-     */
-    public function getTopic()
-    {
-        return $this->topic;
-    }
+	/**
+	 * Get topic
+	 *
+	 * @return string
+	 */
+	public function getTopic() {
+		return $this->topic;
+	}
 
-    /**
-     * Set memo
-     *
-     * @param string $memo
-     * @return Logs
-     */
-    public function setMemo($memo)
-    {
-        $this->memo = $memo;
+	/**
+	 * Set memo
+	 *
+	 * @param string $memo
+	 *
+	 * @return Logs
+	 */
+	public function setMemo( $memo ) {
+		$this->memo = $memo;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get memo
-     *
-     * @return string 
-     */
-    public function getMemo()
-    {
-        return $this->memo;
-    }
+	/**
+	 * Get memo
+	 *
+	 * @return string
+	 */
+	public function getMemo() {
+		return $this->memo;
+	}
 
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     * @return Logs
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
+	/**
+	 * Set created
+	 *
+	 * @param \DateTime $created
+	 *
+	 * @return Logs
+	 */
+	public function setCreated( $created ) {
+		$this->created = $created;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get created
-     *
-     * @return \DateTime 
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
+	/**
+	 * Get created
+	 *
+	 * @return \DateTime
+	 */
+	public function getCreated() {
+		return $this->created;
+	}
 
-    /**
-     * Set usersUsrid
-     *
-     * @param \Application\Entity\Users $usersUsrid
-     * @return Logs
-     */
-    public function setUsersUsrid(\Application\Entity\Users $usersUsrid = null)
-    {
-        $this->usersUsrid = $usersUsrid;
+	/**
+	 * Set usersUsrid
+	 *
+	 * @param \Application\Entity\Users $usersUsrid
+	 *
+	 * @return Logs
+	 */
+	public function setUsersUsrid( \Application\Entity\Users $usersUsrid = null ) {
+		$this->usersUsrid = $usersUsrid;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get usersUsrid
-     *
-     * @return \Application\Entity\Users 
-     */
-    public function getUsersUsrid()
-    {
-        return $this->usersUsrid;
-    }
+	/**
+	 * Get usersUsrid
+	 *
+	 * @return \Application\Entity\Users
+	 */
+	public function getUsersUsrid() {
+		return $this->usersUsrid;
+	}
 }
