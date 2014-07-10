@@ -94,40 +94,9 @@ return array(
 				'cache' => 'array',
 				'paths' => array(__DIR__ . '/../src/Application/Entity/Frontend')
 			),
-			'sro_account_entities' => array(
-				'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-				'cache' => 'array',
-				'paths' => array(__DIR__ . '/../src/Application/Entity/SRO/Account')
-			),
-			'sro_shard_entities' => array(
-				'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-				'cache' => 'array',
-				'paths' => array(__DIR__ . '/../src/Application/Entity/SRO/Shard')
-			),
-			'sro_log_entities' => array(
-				'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-				'cache' => 'array',
-				'paths' => array(__DIR__ . '/../src/Application/Entity/SRO/Log')
-			),
-
 			'orm_default' => array(
 				'drivers' => array(
 					'Application\Entity\Frontend' => 'application_entities'
-				),
-			),
-			'orm_sro_account' => array(
-				'drivers' => array(
-					'Application\Entity\SRO\Account' => 'sro_account_entities'
-				),
-			),
-			'orm_sro_shard' => array(
-				'drivers' => array(
-					'Application\Entity\SRO\Shard' => 'sro_shard_entities'
-				),
-			),
-			'orm_sro_log' => array(
-				'drivers' => array(
-					'Application\Entity\SRO\Log' => 'sro_log_entities'
 				),
 			),
 		),
