@@ -61,6 +61,9 @@ return array(
 					'password' => 'password',
 					'dbname'   => 'dbname',
 				),
+				'doctrine_type_mappings' => array(
+					'enum' => 'string'
+				),
 			),
 			'orm_sro_account' => array(
 				'driverClass' => 'PDODblibModule\Doctrine\DBAL\Driver\PDODblib\Driver',
