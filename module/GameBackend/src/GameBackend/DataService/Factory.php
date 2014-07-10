@@ -12,12 +12,13 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 
 class Factory {
+
 	/**
-	 * Create service
-	 *
+	 * create service
 	 * @param ServiceLocatorInterface $oServiceLocator
 	 *
-	 * @return \GameBackend\DataService\DataServiceInterface
+	 * @return mixed
+	 * @throws \Exception
 	 */
 	public static function getInstance( ServiceLocatorInterface $oServiceLocator ) {
 		$config = $oServiceLocator->get( 'Configuration' );

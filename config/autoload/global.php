@@ -147,4 +147,10 @@ return array(
 			)
 		),
 	),
+	'zfcuser' => array(
+		// telling ZfcUser to use our own class
+		'user_entity_class'       => 'Application\Entity\Users',
+		// telling ZfcUserDoctrineORM to skip the entities it defines
+		'enable_default_entities' => false,
+	),
 );

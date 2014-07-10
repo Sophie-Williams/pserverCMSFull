@@ -8,6 +8,9 @@ return array(
 		'DoctrineModule',
 		'DoctrineORMModule',
 		'PDODblibModule',
+		'ZfcBase',
+		'ZfcUser',
+		'ZfcUserDoctrineORM',
 		'GameBackend',
     ),
 
