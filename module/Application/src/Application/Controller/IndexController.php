@@ -4,9 +4,12 @@ namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Helper;
+use Zend\Debug\Debug;
 
 class IndexController extends AbstractActionController {
 	public function indexAction() {
+        Debug::dump(Helper\ConfigRead::get('test.configtest'));
 
 		/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */
 		$oRepositoryUser = $this->getServiceLocator()->get('doctrine.entitymanager.orm_sro_account')->getRepository('GameBackend\Entity\SRO\Account\TbUser');
