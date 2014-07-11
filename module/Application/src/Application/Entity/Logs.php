@@ -51,6 +51,9 @@ class Logs {
 	 */
 	private $usersUsrid;
 
+	public function __construct( ) {
+		$this->created = new \DateTime();
+	}
 
 	/**
 	 * Get lid

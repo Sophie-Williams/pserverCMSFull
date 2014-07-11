@@ -68,6 +68,9 @@ class News {
 	 */
 	private $newstypeTid;
 
+	public function __construct( ) {
+		$this->created = new \DateTime();
+	}
 
 	/**
 	 * Get nid

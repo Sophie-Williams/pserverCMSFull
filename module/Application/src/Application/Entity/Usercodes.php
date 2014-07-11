@@ -51,6 +51,10 @@ class Usercodes {
 	 */
 	private $usersUsrid;
 
+	public function __construct( ) {
+		$this->created = new \DateTime();
+	}
+
 
 	/**
 	 * Get code

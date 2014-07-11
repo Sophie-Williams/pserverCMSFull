@@ -61,6 +61,9 @@ class Ticketsubject {
 	 */
 	private $ticketcategoryCategoryid;
 
+	public function __construct( ) {
+		$this->created = new \DateTime();
+	}
 
 	/**
 	 * Get ticketid
