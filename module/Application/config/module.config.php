@@ -101,4 +101,13 @@ return array(
 			),
 		),
 	),
+	'authenticationadapter' => array(
+		'odm_default' => array(
+			'objectManager' => 'doctrine.documentmanager.odm_default',
+			'identityClass' => 'Application\Model\Users',
+			'identityProperty' => 'username',
+			'credentialProperty' => 'password',
+			//'credentialCallable' => 'Application\Model\Users::hashPassword'
+		),
+	),
 );

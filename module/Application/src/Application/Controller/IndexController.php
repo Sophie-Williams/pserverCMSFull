@@ -9,14 +9,15 @@ use Zend\Debug\Debug;
 
 class IndexController extends AbstractActionController {
 	public function indexAction() {
-        Debug::dump(Helper\ConfigRead::get('test.configtest'));
+
+        //Debug::dump(Helper\ConfigRead::get('test.configtest'));
 
 		/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */
-		$oRepositoryUser = $this->getServiceLocator()->get('doctrine.entitymanager.orm_sro_account')->getRepository('GameBackend\Entity\SRO\Account\TbUser');
-		\Zend\Debug\Debug::dump($oRepositoryUser->findBy(array('struserid' => 'fantans')));
+		//$oRepositoryUser = $this->getServiceLocator()->get('doctrine.entitymanager.orm_sro_account')->getRepository('GameBackend\Entity\SRO\Account\TbUser');
+		//\Zend\Debug\Debug::dump($oRepositoryUser->findBy(array('struserid' => 'fantans')));
 	//	\Zend\Debug\Debug::dump($oRepositoryUser->findBy(array()));
 
-		\Zend\Debug\Debug::dump($this->getServiceLocator()->get('dataservice')->getRandomNumber());
+		//\Zend\Debug\Debug::dump($this->getServiceLocator()->get('dataservice')->getRandomNumber());
 
 	//	$oObjectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 /*
