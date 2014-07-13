@@ -3,7 +3,6 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Zend\I18n\Validator\DateTime;
 
 /**
  * Users
@@ -220,5 +219,9 @@ class Users {
 	 */
 	public function getUserRole() {
 		return $this->userRole;
+	}
+
+	public static function hashPassword(Users $oEntity, $plaintext){
+		return sha1($plaintext);
 	}
 }

@@ -20,10 +20,24 @@ return array(
                     ),
                 ),
             ),
+			'auth' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'    => '/auth/[:action]',
+					'constraints' => array(
+						'action'     => '[a-zA-Z]*',
+					),
+					'defaults' => array(
+						'controller'   => 'Application\Controller\Auth',
+						'action'     => 'login',
+					),
+				),
+			)
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
             // using the path /application/:controller/:action
+			/*
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -49,7 +63,7 @@ return array(
                         ),
                     ),
                 ),
-            ),
+            ),*/
         ),
     ),
     'service_manager' => array(
@@ -105,10 +119,10 @@ return array(
 	'authenticationadapter' => array(
 		'odm_default' => array(
 			'objectManager' => 'doctrine.documentmanager.odm_default',
-			'identityClass' => 'Application\Model\Users',
+			'identityClass' => 'Application\Entity\Users',
 			'identityProperty' => 'username',
 			'credentialProperty' => 'password',
-			//'credentialCallable' => 'Application\Model\Users::hashPassword'
+			'credentialCallable' => 'Application\Model\Users::hashPassword'
 		),
 	),
 );

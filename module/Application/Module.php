@@ -28,4 +28,36 @@ class Module {
 		);
 	}
 
+	/**
+	 * Expected to return \Zend\ServiceManager\Config object or array to
+	 * seed such an object.
+	 *
+	 * @return array|\Zend\ServiceManager\Config
+	 */
+	public function getServiceConfig() {
+		return array(
+			'factories' => array(
+				'user_auth_service' =>  function($sm){
+						/* @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
+					/** @var \DoctrineModule\Authentication\Adapter\ObjectRepository $adapter */
+					$adapter = $sm->get('doctrine.authenticationadapter.odm_default');
+
+// TODO read from Config
+					$adapter->setOptions(
+						array(
+							'objectManager'=>$sm->get('Doctrine\ORM\EntityManager'),
+							'identityClass'=>'Application\Entity\Users',
+							'identityProperty'=>'username',
+							'credentialProperty'=>'password',
+							'credentialCallable' => 'Application\Entity\Users::hashPassword'
+						)
+					);
+					$oAuthService = new \Zend\Authentication\AuthenticationService();
+					return $oAuthService->setAdapter($adapter);
+
+				}
+			),
+		);
+	}
+
 }
