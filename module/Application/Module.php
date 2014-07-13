@@ -39,21 +39,16 @@ class Module {
 			'factories' => array(
 				'user_auth_service' =>  function($sm){
 						/* @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
-					/** @var \DoctrineModule\Authentication\Adapter\ObjectRepository $adapter */
-					$adapter = $sm->get('doctrine.authenticationadapter.odm_default');
+					/** @var \DoctrineModule\Authentication\Adapter\ObjectRepository $oAdapter */
+					$oAdapter = $sm->get('doctrine.authenticationadapter.odm_default');
 
-// TODO read from Config
-					$adapter->setOptions(
-						array(
-							'objectManager'=>$sm->get('Doctrine\ORM\EntityManager'),
-							'identityClass'=>'Application\Entity\Users',
-							'identityProperty'=>'username',
-							'credentialProperty'=>'password',
-							'credentialCallable' => 'Application\Entity\Users::hashPassword'
-						)
-					);
+					// In Config there is not EntityManager =(, so we have to add it now =)
+					$aConfig = Helper\ConfigRead::get('authenticationadapter.odm_default', array());
+					$aConfig['objectManager'] = $sm->get('Doctrine\ORM\EntityManager');
+					$oAdapter->setOptions( $aConfig );
+
 					$oAuthService = new \Zend\Authentication\AuthenticationService();
-					return $oAuthService->setAdapter($adapter);
+					return $oAuthService->setAdapter($oAdapter);
 
 				}
 			),

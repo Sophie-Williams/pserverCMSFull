@@ -122,7 +122,7 @@ return array(
 			'identityClass' => 'Application\Entity\Users',
 			'identityProperty' => 'username',
 			'credentialProperty' => 'password',
-			'credentialCallable' => 'Application\Model\Users::hashPassword'
+			'credentialCallable' => 'Application\Entity\Users::hashPassword'
 		),
 	),
 );
