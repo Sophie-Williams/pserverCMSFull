@@ -25,7 +25,7 @@ return array(
 				'options' => array(
 					'route'    => '/auth/[:action]',
 					'constraints' => array(
-						'action'     => '[a-zA-Z]*',
+						'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
 					),
 					'defaults' => array(
 						'controller'   => 'Application\Controller\Auth',

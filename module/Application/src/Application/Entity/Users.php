@@ -2,6 +2,7 @@
 
 namespace Application\Entity;
 
+use BjyAuthorize\Provider\Role\ProviderInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="users", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"})})
  * @ORM\Entity
  */
-class Users {
+class Users implements ProviderInterface {
 	/**
 	 * @var integer
 	 *
@@ -223,5 +224,12 @@ class Users {
 
 	public static function hashPassword(Users $oEntity, $plaintext){
 		return sha1($plaintext);
+	}
+
+	/**
+	 * @return \Zend\Permissions\Acl\Role\RoleInterface[]
+	 */
+	public function getRoles() {
+		return $this->userRole->getValues();
 	}
 }

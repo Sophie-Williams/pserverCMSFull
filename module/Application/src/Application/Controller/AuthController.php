@@ -7,6 +7,7 @@ use Zend\View\Model\ViewModel;
 
 class AuthController extends AbstractActionController {
 	const ErrorNameSpace = 'user-auth';
+	const RouteLoggedIn = 'home';
 	private $authservice;
 	private $failedLoginMessage = 'Authentication failed. Please try again.';
 
@@ -14,7 +15,7 @@ class AuthController extends AbstractActionController {
 
 		//if already login, redirect to success page
 		if ($this->getAuthService()->hasIdentity()){
-			return $this->redirect()->toRoute('home');
+			return $this->redirect()->toRoute(self::RouteLoggedIn);
 		}
 
 		$oRequest = $this->getRequest();
@@ -30,21 +31,65 @@ class AuthController extends AbstractActionController {
 		$oAdapter->setCredential($oRequest->getPost('password',''));
 		$oResult = $oAuthService->authenticate($oAdapter);
 
+
 		if($oResult->isValid()){
-			return $this->redirect()->toRoute('home');
+			$bSuccess = true;
+			/** @var \Application\Entity\Users $oUser */
+			$oUser = $oResult->getIdentity();
+			if(!(bool) $oUser->getUserRole()->getKeys()){
+				$bSuccess = false;
+				$this->setFailedLoginMessage('Your Account is not active, please confirm your email');
+			}else{
+				// TODO check country
+			//}else{
+				// TODO check if blocked
+			}
+
+			if($bSuccess){
+				return $this->redirect()->toRoute(self::RouteLoggedIn);
+			}else{
+				// Login correct but not active or blocked or smth else
+				$oAuthService->clearIdentity();
+				$oAuthService->getStorage()->clear();
+			}
 		}
 
-		$this->flashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage($this->failedLoginMessage);
+		$this->flashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage($this->getFailedLoginMessage());
 		return $this->redirect()->toUrl($this->url()->fromRoute('auth'));
 	}
 
+	/**
+	 * TODO RegisterForm
+	 *
+	 * @return \Zend\Http\Response|ViewModel
+	 */
 	public function registerAction(){
 
 		//if already login, redirect to success page
 		if ($this->getAuthService()->hasIdentity()){
-			return $this->redirect()->toRoute('home');
+			return $this->redirect()->toRoute(self::RouteLoggedIn);
 		}
 
+		return new ViewModel();
+	}
+
+	/**
+	 * Logout and clear the identity + Redirect to fix the identity
+	 * @return ViewModel
+	 */
+	public function logoutAction(){
+
+		$this->getAuthService()->getStorage()->clear();
+		$this->getAuthService()->clearIdentity();
+
+		return $this->redirect()->toRoute('auth', array('action' => 'logout-page'));
+	}
+
+	/**
+	 * LogoutPage
+	 * @return ViewModel
+	 */
+	public function logoutPageAction(){
 		return new ViewModel();
 	}
 
@@ -57,5 +102,13 @@ class AuthController extends AbstractActionController {
 		}
 
 		return $this->authservice;
+	}
+
+	protected function setFailedLoginMessage( $sMessage ){
+		$this->failedLoginMessage = $sMessage;
+	}
+
+	protected function getFailedLoginMessage(){
+		return $this->failedLoginMessage;
 	}
 }

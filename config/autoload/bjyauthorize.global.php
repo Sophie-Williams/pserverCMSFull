@@ -28,33 +28,13 @@ return array(
 		 * Zend\Db adapter.
 		 */
 		'role_providers' => array(
-
-			/* here, 'guest' and 'user are defined as top-level roles, with
-			 * 'admin' inheriting from user
-			 */
-			'BjyAuthorize\Provider\Role\Config' => array(
-				'guest' => array(),
-				'user'  => array('children' => array(
-					'admin' => array(),
-				)),
-			),
-
-			// this will load roles from the user_role table in a database
-			// format: user_role(role_id(varchar), parent(varchar))
-			'BjyAuthorize\Provider\Role\ZendDb' => array(
-				'table'                 => 'user_role',
-				'identifier_field_name' => 'id',
-				'role_id_field'         => 'role_id',
-				'parent_role_field'     => 'parent_id',
-			),
-
 			// this will load roles from
 			// the 'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' service
 			'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => array(
 				// class name of the entity representing the role
-				'role_entity_class' => 'My\Role\Entity',
+				'role_entity_class' => 'Application\Entity\UserRole',
 				// service name of the object manager
-				'object_manager'    => 'My\Doctrine\Common\Persistence\ObjectManager',
+				'object_manager'    => 'doctrine.entitymanager.orm_default',
 			),
 		),
 
@@ -62,9 +42,10 @@ return array(
 		// in the ACL. like roles, they can be hierarchical
 		'resource_providers' => array(
 			'BjyAuthorize\Provider\Resource\Config' => array(
-				'pants' => array(),
+				'auth' => array(),
 			),
 		),
+
 
 		/* rules can be specified here with the format:
 		 * array(roles (array), resource, [privilege (array|string), assertion])
@@ -77,16 +58,18 @@ return array(
 				'allow' => array(
 					// allow guests and users (and admins, through inheritance)
 					// the "wear" privilege on the resource "pants"
-					array(array('guest', 'user'), 'pants', 'wear')
+					array('guest', 'auth', 'index'),
+					array(array(), 'auth', 'logout'),
 				),
 
 				// Don't mix allow/deny rules if you are using role inheritance.
 				// There are some weird bugs.
 				'deny' => array(
-					// ...
+					array('guest', 'auth', 'logout'),
 				),
 			),
 		),
+
 
 		/* Currently, only controller and route guards exist
 		 *
@@ -98,8 +81,8 @@ return array(
 			 * You may omit the 'action' index to allow access to the entire controller
 			 */
 			'BjyAuthorize\Guard\Controller' => array(
-				array('controller' => 'index', 'action' => 'index', 'roles' => array('guest','user')),
-				array('controller' => 'index', 'action' => 'stuff', 'roles' => array('user')),
+				/*array('controller' => 'index', 'roles' => array('guest')),
+				array('controller' => 'site', 'roles' => array('guest')),
 				// You can also specify an array of actions or an array of controllers (or both)
 				// allow "guest" and "admin" to access actions "list" and "manage" on these "index",
 				// "static" and "console" controllers
@@ -110,12 +93,45 @@ return array(
 				),
 				array(
 					'controller' => array('search', 'administration'),
-					'roles' => array('staffer', 'admin')
+					'roles' => array('admin')
 				),
 				array('controller' => 'zfcuser', 'roles' => array()),
+				 */
 				// Below is the default index action used by the ZendSkeletonApplication
-				// array('controller' => 'Application\Controller\Index', 'roles' => array('guest', 'user')),
+				array('controller' => 'Application\Controller\Index', 'roles' => array()),
+				array('controller' => 'Application\Controller\Auth', 'roles' => array('guest')),
+				array('controller' => 'Application\Controller\Auth', 'roles' => array(), 'action' => array('logout')),
 			),
+
+			/* If this guard is specified here (i.e. it is enabled), it will block
+			 * access to all routes unless they are specified here.
+			'BjyAuthorize\Guard\Route' => array(
+				array('route' => 'zfcuser', 'roles' => array('user')),
+				array('route' => 'zfcuser/logout', 'roles' => array('user')),
+				array('route' => 'zfcuser/login', 'roles' => array('guest')),
+				array('route' => 'zfcuser/register', 'roles' => array('guest')),
+				// Below is the default index action used by the ZendSkeletonApplication
+				array('route' => 'home', 'roles' => array('guest', 'user')),
+			),
+			 */
 		),
+		// strategy service name for the strategy listener to be used when permission-related errors are detected
+		'unauthorized_strategy' => 'BjyAuthorize\View\UnauthorizedStrategy',
+
+		// Template name for the unauthorized strategy
+		'template'              => 'error/403',
+
+		// cache options have to be compatible with Zend\Cache\StorageFactory::factory
+		'cache_options'         => array(
+			'adapter'   => array(
+				'name' => 'memory',
+			),
+			'plugins'   => array(
+				'serializer',
+			)
+		),
+
+		// Key used by the cache for caching the acl
+		'cache_key'             => 'bjyauthorize_acl'
 	),
 );

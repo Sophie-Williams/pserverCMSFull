@@ -2,6 +2,7 @@
 
 namespace Application\Entity;
 
+use BjyAuthorize\Acl\HierarchicalRoleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user_role", indexes={@ORM\Index(name="fk_users_role_users_role1_idx", columns={"parent_id"})})
  * @ORM\Entity
  */
-class UserRole {
+class UserRole implements HierarchicalRoleInterface {
 	/**
 	 * @var integer
 	 *
@@ -35,12 +36,9 @@ class UserRole {
 	private $isDefault = '0';
 
 	/**
-	 * @var \Application\Entity\UserRole
+	 * @var string
 	 *
-	 * @ORM\ManyToOne(targetEntity="Application\Entity\UserRole")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-	 * })
+	 * @ORM\Column(name="parent_id", type="string", length=255, nullable=true)
 	 */
 	private $parent;
 
@@ -123,11 +121,11 @@ class UserRole {
 	/**
 	 * Set parent
 	 *
-	 * @param \Application\Entity\UserRole $parent
+	 * @param string $parent
 	 *
 	 * @return UserRole
 	 */
-	public function setParent( \Application\Entity\UserRole $parent = null ) {
+	public function setParent( $parent ) {
 		$this->parent = $parent;
 
 		return $this;
@@ -136,7 +134,7 @@ class UserRole {
 	/**
 	 * Get parent
 	 *
-	 * @return \Application\Entity\UserRole
+	 * @return string
 	 */
 	public function getParent() {
 		return $this->parent;
@@ -172,4 +170,5 @@ class UserRole {
 	public function getUsersUsrid() {
 		return $this->usersUsrid;
 	}
+
 }

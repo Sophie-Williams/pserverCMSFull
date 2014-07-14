@@ -9,11 +9,27 @@
 namespace GameBackend\DataService;
 
 
+use Application\Entity\Users;
+
 class SRO implements DataServiceInterface {
-	/*
-	 * ONLY TO TEST
+
+	/**
+	 * @param Users $oUser
+	 * @param       $sPlainPassword
+	 *
+	 * @return Users
 	 */
-	public function getRandomNumber(){
-		return rand(0,123);
+	public function setUser( Users $oUser, $sPlainPassword ) {
+		return $oUser;
+	}
+
+	/**
+	 * @param Users $oUser
+	 * @param       $iCoins
+	 *
+	 * @return boolean
+	 */
+	public function setCoins( Users $oUser, $iCoins ) {
+		return false;
 	}
 }

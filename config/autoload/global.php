@@ -24,7 +24,7 @@ return array(
 		),
 		'suffix' => 'twig',
 		'enable_fallback_functions' => true,
-		'disable_zf_model' => true
+		'disable_zf_model' => true,
 	),
 	'zenddevelopertools' => array(
 		/**
@@ -146,11 +146,5 @@ return array(
 				'filters'           => array()
 			)
 		),
-	),
-	'zfcuser' => array(
-		// telling ZfcUser to use our own class
-		'user_entity_class'       => 'Application\Entity\Users',
-		// telling ZfcUserDoctrineORM to skip the entities it defines
-		'enable_default_entities' => false,
 	),
 );

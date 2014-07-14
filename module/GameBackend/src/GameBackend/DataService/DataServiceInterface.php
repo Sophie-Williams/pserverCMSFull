@@ -9,6 +9,22 @@
 namespace GameBackend\DataService;
 
 
-interface DataServiceInterface {
+use Application\Entity\Users;
 
+interface DataServiceInterface {
+	/**
+	 * @param Users $oUser
+	 * @param       $sPlainPassword
+	 *
+	 * @return Users
+	 */
+	public function setUser(Users $oUser, $sPlainPassword);
+
+	/**
+	 * @param Users $oUser
+	 * @param       $iCoins
+	 *
+	 * @return boolean
+	 */
+	public function setCoins(Users $oUser, $iCoins);
 } 

@@ -38,7 +38,7 @@ class Module {
 		return array(
 			'factories' => array(
 				'user_auth_service' =>  function($sm){
-						/* @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
+					/** @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
 					/** @var \DoctrineModule\Authentication\Adapter\ObjectRepository $oAdapter */
 					$oAdapter = $sm->get('doctrine.authenticationadapter.odm_default');
 

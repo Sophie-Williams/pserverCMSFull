@@ -4,9 +4,12 @@ return array(
     'modules' => array(
 		'ZendDeveloperTools',
 		'ZfcTwig',
+		'ZfcUser',
+		'ZfcBase',
 		'DoctrineModule',
 		'DoctrineORMModule',
 		'PDODblibModule',
+		'BjyAuthorize',
 		'Application',
 		'GameBackend',
     ),
