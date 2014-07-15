@@ -30,7 +30,7 @@ class RegisterFilter extends ProvidesEventsInputFilter {
 					'name'    => 'StringLength',
 					'options' => array(
 						'min' => 3,
-						'max' => 255,
+						'max' => 16,
 					),
 				),
 				$this->getUsernameValidator(),
@@ -56,6 +56,7 @@ class RegisterFilter extends ProvidesEventsInputFilter {
 					'name'    => 'StringLength',
 					'options' => array(
 						'min' => 6,
+						'max' => 255,
 					),
 				),
 				array(
@@ -76,6 +77,7 @@ class RegisterFilter extends ProvidesEventsInputFilter {
 					'name'    => 'StringLength',
 					'options' => array(
 						'min' => 6,
+						'max' => 16,
 					),
 				),
 			),
@@ -90,6 +92,7 @@ class RegisterFilter extends ProvidesEventsInputFilter {
 					'name'    => 'StringLength',
 					'options' => array(
 						'min' => 6,
+						'max' => 16,
 					),
 				),
 				array(
