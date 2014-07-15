@@ -3,13 +3,16 @@
 namespace Application\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
 
 class AuthController extends AbstractActionController {
 	const ErrorNameSpace = 'user-auth';
 	const RouteLoggedIn = 'home';
-	private $authservice;
+
 	private $failedLoginMessage = 'Authentication failed. Please try again.';
+
+	protected $userService;
+	protected $authService;
+	protected $registerForm;
 
 	public function loginAction() {
 
@@ -58,11 +61,6 @@ class AuthController extends AbstractActionController {
 		return $this->redirect()->toUrl($this->url()->fromRoute('auth'));
 	}
 
-	/**
-	 * TODO RegisterForm
-	 *
-	 * @return \Zend\Http\Response|ViewModel
-	 */
 	public function registerAction(){
 
 		//if already login, redirect to success page
@@ -70,12 +68,25 @@ class AuthController extends AbstractActionController {
 			return $this->redirect()->toRoute(self::RouteLoggedIn);
 		}
 
-		return new ViewModel();
+		$oForm = $this->getRegisterForm();
+
+		$oRequest = $this->getRequest();
+		if($oRequest->isPost()){
+			$oUser = $this->getUserService()->register($this->params()->fromPost());
+			if($oUser){
+				return $this->redirect()->toRoute('auth', array('action' => 'register-done'));
+			}
+		}
+
+		return array('registerForm' => $oForm);
+	}
+
+	public function registerDoneAction(){
+
 	}
 
 	/**
 	 * Logout and clear the identity + Redirect to fix the identity
-	 * @return ViewModel
 	 */
 	public function logoutAction(){
 
@@ -87,21 +98,42 @@ class AuthController extends AbstractActionController {
 
 	/**
 	 * LogoutPage
-	 * @return ViewModel
 	 */
 	public function logoutPageAction(){
-		return new ViewModel();
+		return array();
 	}
 
 	/**
 	 * @return \Zend\Authentication\AuthenticationService
 	 */
 	protected function getAuthService() {
-		if (! $this->authservice) {
-			$this->authservice = $this->getServiceLocator()->get('user_auth_service');
+		if (! $this->authService) {
+			$this->authService = $this->getServiceLocator()->get('user_auth_service');
 		}
 
-		return $this->authservice;
+		return $this->authService;
+	}
+
+	/**
+	 * @return \Application\Form\Register
+	 */
+	protected function getRegisterForm() {
+		if (! $this->registerForm) {
+			$this->registerForm = $this->getServiceLocator()->get('pserver_user_register_form');
+		}
+
+		return $this->registerForm;
+	}
+
+	/**
+	 * @return \Application\Service\User
+	 */
+	protected function getUserService(){
+		if (! $this->userService) {
+			$this->userService = $this->getServiceLocator()->get('pserver_user_service');
+		}
+
+		return $this->userService;
 	}
 
 	protected function setFailedLoginMessage( $sMessage ){

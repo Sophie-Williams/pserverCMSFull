@@ -4,6 +4,7 @@ namespace Application\Entity;
 
 use BjyAuthorize\Provider\Role\ProviderInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Zend\Crypt\Password\Bcrypt;
 
 /**
  * Users
@@ -222,8 +223,15 @@ class Users implements ProviderInterface {
 		return $this->userRole;
 	}
 
+	/**
+	 * @param Users $oEntity
+	 * @param       $plaintext
+	 *
+	 * @return bool
+	 */
 	public static function hashPassword(Users $oEntity, $plaintext){
-		return sha1($plaintext);
+		$oBcrypt = new Bcrypt();
+		return $oBcrypt->verify($plaintext, $oEntity->getPassword());
 	}
 
 	/**

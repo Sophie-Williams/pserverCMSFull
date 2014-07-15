@@ -36,8 +36,11 @@ class Module {
 	 */
 	public function getServiceConfig() {
 		return array(
+			'invokables' => array(
+				'pserver_user_service'              => 'Application\Service\User',
+			),
 			'factories' => array(
-				'user_auth_service' =>  function($sm){
+				'user_auth_service' => function($sm){
 					/** @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
 					/** @var \DoctrineModule\Authentication\Adapter\ObjectRepository $oAdapter */
 					$oAdapter = $sm->get('doctrine.authenticationadapter.odm_default');
@@ -49,7 +52,16 @@ class Module {
 
 					$oAuthService = new \Zend\Authentication\AuthenticationService();
 					return $oAuthService->setAdapter($oAdapter);
-
+				},
+				'pserver_user_register_form' => function($sm){
+					/** @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
+					/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */
+					$oRepositoryUser = $sm->get('Doctrine\ORM\EntityManager')->getRepository('Application\Entity\Users');
+					$oForm = new Form\Register();
+					$oForm->setInputFilter(new Form\RegisterFilter(
+						new Validator\NoRecordExists( $oRepositoryUser, 'username' )
+					));
+					return $oForm;
 				}
 			),
 		);
