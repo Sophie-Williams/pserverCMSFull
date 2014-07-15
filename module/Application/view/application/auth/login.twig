@@ -1,8 +1,10 @@
 {% extends 'layout/layout.twig' %}
 
-{% block content %}
+{% block header %}
+    Login
+{% endblock header %}
 
-	<h1>Login</h1>
+{% block content %}
 
 	{% if aErrorMessages is not empty %}
 	<div class="alert alert-danger" role="alert">

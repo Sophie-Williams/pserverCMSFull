@@ -1,0 +1,135 @@
+.login>a { color: #898989; }
+.navigation>a { color: #898989; }
+
+.nav>li.login>a:hover, .nav>li.login>a:focus {
+    background-color: #ffffff;
+    text-decoration: underline;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+#header .navbar-brand {
+    padding: 0 10px 10px;
+    position: relative;
+    top: -10px;
+    z-index: 1;
+}
+
+.navbar, .container-fluid {
+    background-color: white;
+    border: none;
+}
+
+.navbar-default {
+    box-shadow: none !important;
+}
+
+.nav>li.navigation>a, .nav>li.navigation>a{
+    font-size: 17px;
+}
+
+.nav>li.navigation>a:hover, .nav>li.navigation>a:focus {
+    background-color: #ffffff;
+    color: #279FBB;
+}
+
+.nav>li.navigation.active>a, .nav>li.navigation.active>a{
+    background-color: #ffffff !important;
+    color: #279FBB;
+}
+
+.navbar-default .navbar-nav>.active>a{
+    box-shadow: none;
+    background-image: none;
+}
+
+.navbar-collapse, .container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.block-right {
+    border-style: solid;
+    border-left-width: 1px;
+    border-left-color: #279FBB;
+    border-bottom-color: transparent;
+    border-top-color: transparent;
+    border-right-color: transparent;
+}
+
+ul li ul {
+    display: none;
+}
+
+@media (min-width: 770px) {
+    ul li:hover ul {
+        display: block;
+    }
+}
+
+.dropdown-menu {
+    margin-top: 0px;
+}
+
+.modal-dialog {
+    margin-top: 10% !important;
+}
+
+.strich {
+    padding: 10px 15px;
+    display: block;
+    color: #898989;
+}
+
+.footer {
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    background-color: #383838;
+}
+
+.footertext>a {
+    color: white;
+    margin-left: 15px;
+}
+
+.footerheadlines {
+    color: #898989;
+}
+
+.logo{
+    width: 100px;
+    height: 50px;
+}
+
+.header {
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-color: #279FBB;
+    border-width: 2px;
+}
+
+.carouselimage {
+    width: 100%;
+    max-height: 400px;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+    background-color: transparent;
+    color: #279FBB;
+}
+
+.margin-top-5 { margin-top: 5px; }
+.margin-top-10 { margin-top: 10px; }
+.margin-top-15 { margin-top: 15px; }
+.margin-top-20 { margin-top: 20px; }
+.margin-top-25 { margin-top: 25px; }
+.margin-top-40 { margin-top: 40px; }
+
+.margin-bottom-5 { margin-bottom: 5px; }
+.margin-bottom-10 { margin-bottom: 10px; }
+.margin-bottom-15 { margin-bottom: 15px; }
+.margin-bottom-20 { margin-bottom: 20px; }
+.margin-bottom-25 { margin-bottom: 25px; }
