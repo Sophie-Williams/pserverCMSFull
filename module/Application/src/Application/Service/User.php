@@ -12,15 +12,8 @@ namespace Application\Service;
 use Application\Entity\Users;
 use Application\Helper\Ip;
 use Zend\Crypt\Password\Bcrypt;
-use Zend\ServiceManager\ServiceManagerAwareInterface;
-use Zend\ServiceManager\ServiceManager;
 
-class User implements ServiceManagerAwareInterface {
-
-	/**
-	 * @var ServiceManager
-	 */
-	protected $serviceManager;
+class User extends InvokablesBase {
 
 	/**
 	 * @var \Zend\Authentication\AuthenticationService
@@ -33,14 +26,18 @@ class User implements ServiceManagerAwareInterface {
 	protected $registerForm;
 
 	/**
-	 * @var \Doctrine\ORM\EntityManager
+	 * @var \Application\Service\Mail
 	 */
-	protected $entityManager;
+	protected $mailService;
+
+	/**
+	 * @var \Application\Service\UserCodes
+	 */
+	protected $userCodesService;
 
 	public function register( array $aData ){
 
 		$oForm = $this->getRegisterForm();
-
 
 		$oForm->setHydrator( new \Application\Mapper\Hydrator() );
 		$oForm->bind(new Users());
@@ -49,7 +46,7 @@ class User implements ServiceManagerAwareInterface {
 			return false;
 		}
 
-		$oObjectManager = $this->getEntityManager();
+		$oEntityManager = $this->getEntityManager();
 		/** @var Users $oUserEntity */
 		$oUserEntity = $oForm->getData();
 		$oUserEntity->setCreateip(Ip::getIp());
@@ -57,38 +54,14 @@ class User implements ServiceManagerAwareInterface {
 		$oBcrypt = new Bcrypt();
 		$oUserEntity->setPassword($oBcrypt->create($oUserEntity->getPassword()));
 
-		$oObjectManager->persist($oUserEntity);
-		$oObjectManager->flush();
+		$oEntityManager->persist($oUserEntity);
+		$oEntityManager->flush();
 
-		// TODO Mail active
+		$sCode = $this->getUserCodesService()->setCode4User($oUserEntity, \Application\Entity\Usercodes::Type_Register);
+
+		$this->getMailService()->register($oUserEntity, $sCode);
 
 		return $oUserEntity;
-	}
-
-	/**
-	 * @return ServiceManager
-	 */
-	public function getServiceManager(){
-		return $this->serviceManager;
-	}
-
-	/**
-	 * @param ServiceManager $oServiceManager
-	 *
-	 * @return $this
-	 */
-	public function setServiceManager( ServiceManager $oServiceManager ) {
-		$this->serviceManager = $oServiceManager;
-
-		return $this;
-	}
-
-	public function getEntityManager(){
-		if (! $this->entityManager) {
-			$this->entityManager = $this->getServiceManager()->get('Doctrine\ORM\EntityManager');
-		}
-
-		return $this->entityManager;
 	}
 
 
@@ -112,5 +85,27 @@ class User implements ServiceManagerAwareInterface {
 		}
 
 		return $this->registerForm;
+	}
+
+	/**
+	 * @return \Application\Service\Mail
+	 */
+	protected function getMailService() {
+		if (! $this->mailService) {
+			$this->mailService = $this->getServiceManager()->get('pserver_mail_service');
+		}
+
+		return $this->mailService;
+	}
+
+	/**
+	 * @return \Application\Service\UserCodes
+	 */
+	protected function getUserCodesService(){
+		if (! $this->userCodesService) {
+			$this->userCodesService = $this->getServiceManager()->get('pserver_usercodes_service');
+		}
+
+		return $this->userCodesService;
 	}
 }

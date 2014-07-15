@@ -9,7 +9,6 @@ use Zend\Debug\Debug;
 
 class IndexController extends AbstractActionController {
 	public function indexAction() {
-
         //Debug::dump(Helper\ConfigRead::get('test.configtest'));
 
 		/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */

@@ -108,12 +108,12 @@
 
 <div class="clearfix"></div>
 
-{% block carousel %}{{ content|raw }}{% endblock carousel %}
+{% block carousel %}{% endblock carousel %}
 
 <div class="clearfix"></div>
 <div class="container margin-top-25">
     <div class="col-sm-9">
-        <h1 class="header">{% block header %}{{ content|raw }}{% endblock header %}</h1>
+        <h1 class="header">{% block header %}{% endblock header %}</h1>
         {% block content %}{{ content|raw }}{% endblock content %}
     </div>
     <div class="col-sm-3 block-right">

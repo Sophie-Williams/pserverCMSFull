@@ -2,6 +2,7 @@
 
 namespace Application;
 
+use Application\Keys\Entity;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Application\Helper;
@@ -11,6 +12,8 @@ class Module {
 		$eventManager        = $e->getApplication()->getEventManager();
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach( $eventManager );
+
+		// TODO to invokables
         new Helper\ConfigRead($e->getApplication()->getServiceManager());
 	}
 
@@ -37,7 +40,9 @@ class Module {
 	public function getServiceConfig() {
 		return array(
 			'invokables' => array(
-				'pserver_user_service'              => 'Application\Service\User',
+				'pserver_user_service'				=> 'Application\Service\User',
+				'pserver_mail_service'				=> 'Application\Service\Mail',
+				'pserver_usercodes_service'			=> 'Application\Service\UserCodes',
 			),
 			'factories' => array(
 				'user_auth_service' => function($sm){
@@ -56,13 +61,13 @@ class Module {
 				'pserver_user_register_form' => function($sm){
 					/** @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
 					/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */
-					$oRepositoryUser = $sm->get('Doctrine\ORM\EntityManager')->getRepository('Application\Entity\Users');
+					$oRepositoryUser = $sm->get('Doctrine\ORM\EntityManager')->getRepository(Entity::Users);
 					$oForm = new Form\Register();
 					$oForm->setInputFilter(new Form\RegisterFilter(
 						new Validator\NoRecordExists( $oRepositoryUser, 'username' )
 					));
 					return $oForm;
-				}
+				},
 			),
 		);
 	}

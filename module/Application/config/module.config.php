@@ -23,9 +23,10 @@ return array(
 			'auth' => array(
 				'type' => 'segment',
 				'options' => array(
-					'route'    => '/auth/[:action]',
+					'route'    => '/auth/[:action][/:code]',
 					'constraints' => array(
 						'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'code'     => '[a-zA-Z0-9]*',
 					),
 					'defaults' => array(
 						'controller'   => 'Application\Controller\Auth',
@@ -123,6 +124,26 @@ return array(
 			'identityProperty' => 'username',
 			'credentialProperty' => 'password',
 			'credentialCallable' => 'Application\Entity\Users::hashPassword'
+		),
+	),
+	'pserver' => array(
+		'mail' => array(
+			'from' => 'abcd@example.com',
+			'fromName' => 'team',
+			'subject' => array(
+				'register' => 'RegisterMail',
+			),
+			'basic' => array(
+				'name' => 'localhost',
+				'host' => 'smtp.example.com',
+				'port'=> 587,
+				'connection_class' => 'login',
+				'connection_config' => array(
+					'username' => 'put your username ',
+					'password' => 'put your password',
+					'ssl'=> 'tls',
+				),
+			),
 		),
 	),
 );

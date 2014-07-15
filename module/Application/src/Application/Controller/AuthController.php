@@ -2,6 +2,8 @@
 
 namespace Application\Controller;
 
+use Application\Entity\Usercodes;
+use Application\Keys\Entity;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class AuthController extends AbstractActionController {
@@ -13,6 +15,10 @@ class AuthController extends AbstractActionController {
 	protected $userService;
 	protected $authService;
 	protected $registerForm;
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	protected $entityManager;
 
 	public function loginAction() {
 
@@ -82,7 +88,24 @@ class AuthController extends AbstractActionController {
 	}
 
 	public function registerDoneAction(){
+		return array();
+	}
 
+	public function registerConfirmAction(){
+		$sCode = $this->params()->fromRoute('code');
+
+		$oEntityManager = $this->getEntityManager();
+		/** @var $oRepository \Application\Entity\Repository\Usercodes */
+		$oRepository = $oEntityManager->getRepository(Entity::UserCodes);
+		$oCodes = $oRepository->getData4CodeType($sCode, Usercodes::Type_Register);
+
+		if(!$oCodes){
+			return $this->forward()->dispatch('Application\Controller\Auth', array('action' => 'wrong-code'));
+		}
+
+
+
+		return array();
 	}
 
 	/**
@@ -100,6 +123,10 @@ class AuthController extends AbstractActionController {
 	 * LogoutPage
 	 */
 	public function logoutPageAction(){
+		return array();
+	}
+
+	public function wrongCodeAction(){
 		return array();
 	}
 
@@ -134,6 +161,17 @@ class AuthController extends AbstractActionController {
 		}
 
 		return $this->userService;
+	}
+
+	/**
+	 * @return \Doctrine\ORM\EntityManager
+	 */
+	public function getEntityManager(){
+		if (! $this->entityManager) {
+			$this->entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+		}
+
+		return $this->entityManager;
 	}
 
 	protected function setFailedLoginMessage( $sMessage ){

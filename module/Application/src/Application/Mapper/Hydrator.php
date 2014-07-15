@@ -8,6 +8,7 @@
 
 namespace Application\Mapper;
 
+use Application\Keys\Entity;
 use ZfcUser\Mapper\Exception;
 use Zend\Stdlib\Hydrator\ClassMethods;
 use Application\Entity\Users;
@@ -23,7 +24,7 @@ class Hydrator extends ClassMethods {
 	 */
 	public function extract($object) {
 		if (!$object instanceof Users) {
-			throw new Exception\InvalidArgumentException('$object must be an instance of Application\Entity\Users');
+			throw new Exception\InvalidArgumentException('$object must be an instance of '.Entity::Users);
 		}
 		/* @var $object Users */
 		$data = parent::extract($object);
@@ -40,7 +41,7 @@ class Hydrator extends ClassMethods {
 	 */
 	public function hydrate(array $data, $object) {
 		if (!$object instanceof Users) {
-			throw new Exception\InvalidArgumentException('$object must be an instance of Application\Entity\Users');
+			throw new Exception\InvalidArgumentException('$object must be an instance of '.Entity::Users);
 		}
 		return parent::hydrate($data, $object);
 	}

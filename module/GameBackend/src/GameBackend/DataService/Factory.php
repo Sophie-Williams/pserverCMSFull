@@ -14,7 +14,11 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class Factory {
 
 	/**
+	 * TODO better without Factory and add to Module.php
+	 *
+	 *
 	 * create service
+	 *
 	 * @param ServiceLocatorInterface $oServiceLocator
 	 *
 	 * @return mixed

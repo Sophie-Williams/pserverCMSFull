@@ -94,6 +94,7 @@ class Logs {
 	 * @return Logs
 	 */
 	public function setMemo( $memo ) {
+		$memo = is_array($memo)?json_encode($memo):$memo;
 		$this->memo = $memo;
 
 		return $this;

@@ -25,7 +25,7 @@ class ConfigRead{
      */
     public function __construct( ServiceLocatorInterface $oServiceLocator ){
         if(!(bool) self::$aConfig){
-            self::$aConfig =  $oServiceLocator->get('Configuration');
+            self::$aConfig =  $oServiceLocator->get('Config');
         }
     }
 

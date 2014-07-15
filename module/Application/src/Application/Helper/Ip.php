@@ -13,9 +13,18 @@ class Ip{
 	 */
 	public static function getIp(){
 		if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && !empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-			return $_SERVER['HTTP_X_FORWARDED_FOR'];
+			$sResult = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		}else{
+			$sResult = $_SERVER['REMOTE_ADDR'];
 		}
-		return $_SERVER['REMOTE_ADDR'];
+
+		// Check if there smth like xxx.xxx.xxx.xxx[internal-network-ip], xxx.xxx.xxx.xxx[www-network-ip]
+		if(strpos($sResult, ',') === true){
+			$aResult = explode(',', $sResult);
+			$sResult = trim($aResult[count($aResult)-1]);
+		}
+
+		return $sResult;
 	}
 
 	/**

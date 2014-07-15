@@ -8,15 +8,20 @@ use Doctrine\ORM\Mapping as ORM;
  * Usercodes
  *
  * @ORM\Table(name="userCodes", indexes={@ORM\Index(name="fk_userCodes_users1_idx", columns={"users_usrId"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Application\Entity\Repository\Usercodes")
  */
 class Usercodes {
+
+	const Type_Register = 'register';
+	const Type_LostPassword = 'password';
+	const Expire_Default = 86400;
+
 	/**
 	 * @var string
 	 *
 	 * @ORM\Column(name="code", type="string", length=32, nullable=false)
 	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\GeneratedValue(strategy="NONE")
 	 */
 	private $code;
 
@@ -30,7 +35,7 @@ class Usercodes {
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="expire", type="integer", nullable=false)
+	 * @ORM\Column(name="expire", type="datetime", nullable=false)
 	 */
 	private $expire;
 
@@ -53,8 +58,23 @@ class Usercodes {
 
 	public function __construct( ) {
 		$this->created = new \DateTime();
+		$oDateTime = new \DateTime();
+		$this->expire = $oDateTime->setTimestamp(time()+static::Expire_Default);
 	}
 
+
+	/**
+	 * Set code
+	 *
+	 * @param string $sCode
+	 *
+	 * @return Usercodes
+	 */
+	public function setCode( $sCode ) {
+		$this->code = $sCode;
+
+		return $this;
+	}
 
 	/**
 	 * Get code
@@ -90,11 +110,11 @@ class Usercodes {
 	/**
 	 * Set expire
 	 *
-	 * @param integer $expire
+	 * @param \DateTime $expire
 	 *
 	 * @return Usercodes
 	 */
-	public function setExpire( $expire ) {
+	public function setExpire( \DateTime $expire ) {
 		$this->expire = $expire;
 
 		return $this;
@@ -103,7 +123,7 @@ class Usercodes {
 	/**
 	 * Get expire
 	 *
-	 * @return integer
+	 * @return \DateTime
 	 */
 	public function getExpire() {
 		return $this->expire;
@@ -116,7 +136,7 @@ class Usercodes {
 	 *
 	 * @return Usercodes
 	 */
-	public function setCreated( $created ) {
+	public function setCreated( \DateTime $created ) {
 		$this->created = $created;
 
 		return $this;
