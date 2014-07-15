@@ -11,28 +11,21 @@
 
 	<!-- Le styles -->
 	<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
-	<link href="{{ basePath() }}/assets/bootstrap/css/style.css" media="screen" rel="stylesheet" type="text/css">
 	<link href="{{ basePath() }}/assets/bootstrap/css/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css">
 	<link href="{{ basePath() }}/assets/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
-    <link href="{{ basePath() }}/assets/layout/css/layout.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="{{ basePath() }}/css/layout.css" media="screen" rel="stylesheet" type="text/css">
 
 	{% block style %}{% endblock style %}
 
 	<!-- Scripts -->
-	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="{{ basePath() }}/assets/js/jquery.min.js"></script>
 	<script type="text/javascript" src="{{ basePath() }}/assets/bootstrap/js/bootstrap.min.js"></script>
-	<!--[if lt IE 9]><script type="text/javascript" src="/js/respond.min.js"></script><![endif]-->
-	<!--[if lt IE 9]><script type="text/javascript" src="/js/html5shiv.js"></script><![endif]-->
+	<!--[if lt IE 9]><script type="text/javascript" src="{{ basePath() }}/assets/js/respond.min.js"></script><![endif]-->
+	<!--[if lt IE 9]><script type="text/javascript" src="{{ basePath() }}/assets/js/html5shiv.js"></script><![endif]-->
 	{% block script %}{% endblock script %}
 </head>
 <body>
-<script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script type="application/javascript">
-    function opendropdown(){
-        $('.dropdown-toggle').dropdown();
-    }
-</script>
+
 <header id="header">
     <div class="container">
         <div>
@@ -82,7 +75,7 @@
                             <a class="navbar-brand" href="{{ url('home') }}"><img src="http://framework.zend.com/images/logos/zf2-logo-mark.png" class="logo"></a>
                         </div>
                         <div class="collapse navbar-collapse" id="navbar">
-                            <ul class="nav navbar-nav pull-right">
+                            <ul class="nav navbar-nav pull-right-lg">
                                 <li class="active navigation"><a href="{{ url('home') }}">{{ translate('Home') }}</a></li>
                                 <li class="navigation">
                                     <a data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>

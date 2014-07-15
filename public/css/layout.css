@@ -67,6 +67,15 @@ ul li ul {
     ul li:hover ul {
         display: block;
     }
+    .pull-right-lg {
+        float: right !important;
+    }
+}
+
+@media (max-width: 770px) {
+    .navigation {
+        margin-left: 15px !important;
+    }
 }
 
 .dropdown-menu {
