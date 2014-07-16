@@ -3,144 +3,116 @@
 <head>
 	<meta charset="utf-8">
 	<title>
-		{% block title %}ZF2 {{ translate('Skeleton PServerCMS') }}{% endblock title %}
+		{% block title %}{% endblock title %} >> {{ translate('PServerCMS') }}
 	</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{% block meta %}{% endblock meta %}
 
-	<!-- Le styles -->
-	<link href="/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+	<!-- styles -->
+	{#<link href="{{ basePath() }}/images/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">#}
 	<link href="{{ basePath() }}/assets/bootstrap/css/bootstrap-theme.min.css" media="screen" rel="stylesheet" type="text/css">
 	<link href="{{ basePath() }}/assets/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet" type="text/css">
     <link href="{{ basePath() }}/css/layout.css" media="screen" rel="stylesheet" type="text/css">
 
 	{% block style %}{% endblock style %}
 
-	<!-- Scripts -->
-	<script type="text/javascript" src="{{ basePath() }}/assets/js/jquery.min.js"></script>
-	<script type="text/javascript" src="{{ basePath() }}/assets/bootstrap/js/bootstrap.min.js"></script>
-	<!--[if lt IE 9]><script type="text/javascript" src="{{ basePath() }}/assets/js/respond.min.js"></script><![endif]-->
-	<!--[if lt IE 9]><script type="text/javascript" src="{{ basePath() }}/assets/js/html5shiv.js"></script><![endif]-->
-	{% block script %}{% endblock script %}
 </head>
 <body>
 
-<header id="header">
+<div class="top">
+	<div class="container">
+		<ul class="loginbar pull-right">
+			{% if isAllowed('auth','index') %}
+				<li><a href="{{ url('auth',{'action':'register'}) }}">{{ translate('Register') }}</a></li>
+				<li><span class="strich">|</span></li>
+				<li><a href="{{ url('auth') }}">{{ translate('Login') }}</a></li>
+			{% endif %}
+			{% if isAllowed('auth','logout') %}
+				<li><a href="{{ url('auth',{'action':'logout'}) }}">{{ translate('Logout') }}</a></li>
+			{% endif %}
+		</ul>
+		<div class="clearfix"></div>
+	</div>
+</div>
+
+<div class="header">
     <div class="container">
-        <div>
-            <div>
-                <div class="pull-right">
-                    <ul class="nav nav-pills">
-                        {% if isAllowed('auth','index') %}
-                        <li class="login"><a href="{{ url('auth',{'action':'register'}) }}">{{ translate('Register') }}</a></li>
-                        <li class="login"><span class="strich">|</span></li>
-                        <li class="login"><a href="{{ url('auth') }}">{{ translate('Login') }}</a></li>
-                        {% endif %}
-                        {% if isAllowed('auth','logout') %}
-                            <li class="login"><a href="{{ url('auth',{'action':'logout'}) }}">{{ translate('Logout') }}</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-            <!-- Modal -->
-            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Login</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Login</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div>
-                <nav class="navbar navbar-default" role="navigation">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="{{ url('home') }}"><img src="http://framework.zend.com/images/logos/zf2-logo-mark.png" class="logo"></a>
-                        </div>
-                        <div class="collapse navbar-collapse" id="navbar">
-                            <ul class="nav navbar-nav pull-right-lg">
-                                <li class="active navigation"><a href="{{ url('home') }}">{{ translate('Home') }}</a></li>
-                                <li class="navigation">
-                                    <a data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                        <li><a href="#">test</a></li>
-                                        <li><a href="#">test</a></li>
-                                        <li><a href="#">test</a></li>
-                                    </ul>
-                                </li>
-                                <li class="navigation"><a href="#">Messages</a></li>
-                                <li class="navigation"><a href="#">Profile</a></li>
-                                <li class="navigation"><a href="#">Messages</a></li>
-                                <li class="navigation">
-                                    <a data-toggle="dropdown" href="#">Profile <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                        <li><a href="#">test</a></li>
-                                        <li><a href="#">test</a></li>
-                                        <li><a href="#">test</a></li>
-                                    </ul>
-                                </li>
-                                <li class="navigation"><a href="#">Messages</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="{{ url('home') }}"></a>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="navigation"><a href="{{ url('home') }}">{{ translate('Home') }}</a></li>
+					<li class="navigation"><a href="#">Download</a></li>
+					<li class="navigation dropdown">
+						<a data-toggle="dropdown" href="#">ServerInfo <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#">Rules</a></li>
+							<li><a href="#">Guides</a></li>
+							<li><a href="#">Events</a></li>
+						</ul>
+					</li>
+					<li class="navigation"><a href="#">Forum</a></li>
+				</ul>
+			</div>
+		</nav>
     </div>
-</header>
+</div>
 
 <div class="clearfix"></div>
 
-{% block carousel %}{% endblock carousel %}
+{% block breadcrumbs %}
+	<!--=== Breadcrumbs ===-->
+	<div class="breadcrumbs margin-bottom-30">
+		<div class="container">
+			<h1 class="pull-left">{{ block('title') }}</h1>
+		</div><!--/container-->
+	</div><!--/breadcrumbs-->
+{% endblock %}
 
 <div class="clearfix"></div>
+
 <div class="container margin-top-25">
-    <div class="col-sm-9">
-        <h1 class="header">{% block header %}{% endblock header %}</h1>
-        {% block content %}{{ content|raw }}{% endblock content %}
-    </div>
-    <div class="col-sm-3 block-right">
-        <div>
-            <h3>Server Stats</h3>
-            <hr/>
-            <ul class="list-unstyled">
-                <li>lalalala</li>
-                <li>lululu</li>
-                <li><span style="font-weight: bold">Test:</span> Nummer 1</li>
-            </ul>
-        </div>
-        <div class="margin-top-40">
-            <h3>Servertime</h3>
-            <hr/>
-            <ul class="list-unstyled">
-                <li>lalalala</li>
-                <li>lululu</li>
-                <li><span style="font-weight: bold">Test:</span> Nummer 1</li>
-            </ul>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-sm-9">
+			<h1 class="header">{% block header %}{% endblock header %}</h1>
+			{% block content %}{{ content|raw }}{% endblock content %}
+		</div>
+		<div class="col-sm-3">
+			<div>
+				<h3>Server Stats</h3>
+				<hr/>
+				<ul class="list-unstyled">
+					<li>lalalala</li>
+					<li>lululu</li>
+					<li><span style="font-weight: bold">Test:</span> Nummer 1</li>
+				</ul>
+			</div>
+			<div class="margin-top-40">
+				<h3>Servertime</h3>
+				<hr/>
+				<ul class="list-unstyled">
+					<li>lalalala</li>
+					<li>lululu</li>
+					<li><span style="font-weight: bold">Test:</span> Nummer 1</li>
+				</ul>
+			</div>
+		</div>
+	</div>
     <div class="clearfix"></div>
 </div>
 <div class="footer">
     <div class="container">
-        <a class="col-sm-3 margin-top-20" href="{{ url('home') }}"><img src="http://framework.zend.com/images/logos/zf2-logo-mark.png" class="logo"></a>
+        <a class="col-sm-3 margin-top-20" href="{{ url('home') }}"><img src="{{ basePath() }}/images/zf2-logo-mark.png"></a>
         <div class="col-sm-3">
             <h3 class="footerheadlines">Test</h3>
             <ul class="list-unstyled">
@@ -167,5 +139,13 @@
         </div>
     </div>
 </div>
+
+<!-- Scripts -->
+<script type="text/javascript" src="{{ basePath() }}/assets/js/jquery.min.js"></script>
+<script type="text/javascript" src="{{ basePath() }}/assets/bootstrap/js/bootstrap.min.js"></script>
+<!--[if lt IE 9]><script type="text/javascript" src="{{ basePath() }}/assets/js/respond.min.js"></script><![endif]-->
+<!--[if lt IE 9]><script type="text/javascript" src="{{ basePath() }}/assets/js/html5shiv.js"></script><![endif]-->
+{% block script %}{% endblock script %}
+
 </body>
 </html>
