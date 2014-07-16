@@ -110,7 +110,10 @@ class AuthController extends AbstractActionController {
 		if($oRequest->isPost()){
 			$oUser = $this->getUserService()->registerGame($this->params()->fromPost(), $oCode);
 			if($oUser){
-				return $this->redirect()->toRoute('auth', array('action' => 'register-done'));
+				$oAuthService = $this->getAuthService();
+				$oAuthService->getStorage()->write($oUser);
+
+				return $this->redirect()->toRoute('home');
 			}
 		}
 
