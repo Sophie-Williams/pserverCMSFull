@@ -13,7 +13,7 @@ use Application\Entity\Users;
 use Application\Helper\Format;
 use Application\Keys\Entity;
 
-class UserCodes extends InvokablesBase {
+class UserCodes extends InvokableBase {
 
 	/**
 	 * @var \Doctrine\Common\Persistence\ObjectRepository

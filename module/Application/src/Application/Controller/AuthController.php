@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Entity\Usercodes;
+use Application\Helper\ConfigRead;
 use Application\Keys\Entity;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -15,6 +16,7 @@ class AuthController extends AbstractActionController {
 	protected $userService;
 	protected $authService;
 	protected $registerForm;
+	protected $registerGameForm;
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
@@ -95,17 +97,24 @@ class AuthController extends AbstractActionController {
 		$sCode = $this->params()->fromRoute('code');
 
 		$oEntityManager = $this->getEntityManager();
-		/** @var $oRepository \Application\Entity\Repository\Usercodes */
-		$oRepository = $oEntityManager->getRepository(Entity::UserCodes);
-		$oCodes = $oRepository->getData4CodeType($sCode, Usercodes::Type_Register);
+		/** @var $oRepositoryCode \Application\Entity\Repository\Usercodes */
+		$oRepositoryCode = $oEntityManager->getRepository(Entity::UserCodes);
+		$oCode = $oRepositoryCode->getData4CodeType($sCode, Usercodes::Type_Register);
 
-		if(!$oCodes){
+		if(!$oCode){
 			return $this->forward()->dispatch('Application\Controller\Auth', array('action' => 'wrong-code'));
 		}
 
+		$oForm = $this->getRegisterGameForm();
+		$oRequest = $this->getRequest();
+		if($oRequest->isPost()){
+			$oUser = $this->getUserService()->registerGame($this->params()->fromPost(), $oCode);
+			if($oUser){
+				return $this->redirect()->toRoute('auth', array('action' => 'register-done'));
+			}
+		}
 
-
-		return array();
+		return array('registerForm' => $oForm);
 	}
 
 	/**
@@ -134,7 +143,7 @@ class AuthController extends AbstractActionController {
 	 * @return \Zend\Authentication\AuthenticationService
 	 */
 	protected function getAuthService() {
-		if (! $this->authService) {
+		if (!$this->authService) {
 			$this->authService = $this->getServiceLocator()->get('user_auth_service');
 		}
 
@@ -145,7 +154,7 @@ class AuthController extends AbstractActionController {
 	 * @return \Application\Form\Register
 	 */
 	protected function getRegisterForm() {
-		if (! $this->registerForm) {
+		if (!$this->registerForm) {
 			$this->registerForm = $this->getServiceLocator()->get('pserver_user_register_form');
 		}
 
@@ -153,10 +162,21 @@ class AuthController extends AbstractActionController {
 	}
 
 	/**
+	 * @return \Application\Form\RegisterGame
+	 */
+	protected function getRegisterGameForm() {
+		if (!$this->registerGameForm) {
+			$this->registerGameForm = $this->getServiceLocator()->get('pserver_user_registergame_form');
+		}
+
+		return $this->registerGameForm;
+	}
+
+	/**
 	 * @return \Application\Service\User
 	 */
 	protected function getUserService(){
-		if (! $this->userService) {
+		if (!$this->userService) {
 			$this->userService = $this->getServiceLocator()->get('pserver_user_service');
 		}
 
@@ -167,7 +187,7 @@ class AuthController extends AbstractActionController {
 	 * @return \Doctrine\ORM\EntityManager
 	 */
 	public function getEntityManager(){
-		if (! $this->entityManager) {
+		if (!$this->entityManager) {
 			$this->entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 		}
 

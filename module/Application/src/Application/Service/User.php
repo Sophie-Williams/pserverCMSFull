@@ -9,11 +9,15 @@
 namespace Application\Service;
 
 
+use Application\Entity\User2server;
+use Application\Entity\Usercodes;
 use Application\Entity\Users;
+use Application\Helper\ConfigRead;
 use Application\Helper\Ip;
+use Application\Keys\Entity;
 use Zend\Crypt\Password\Bcrypt;
 
-class User extends InvokablesBase {
+class User extends InvokableBase {
 
 	/**
 	 * @var \Zend\Authentication\AuthenticationService
@@ -35,6 +39,21 @@ class User extends InvokablesBase {
 	 */
 	protected $userCodesService;
 
+	/**
+	 * @var \Application\Form\RegisterGame
+	 */
+	protected $registerGameForm;
+
+	/**
+	 * @var \GameBackend\DataService\DataServiceInterface
+	 */
+	protected $gameBackendService;
+
+	/**
+	 * @param array $aData
+	 *
+	 * @return Users|bool
+	 */
 	public function register( array $aData ){
 
 		$oForm = $this->getRegisterForm();
@@ -64,6 +83,52 @@ class User extends InvokablesBase {
 		return $oUserEntity;
 	}
 
+	/**
+	 * @param array     $aData
+	 * @param Usercodes $oUserCodes
+	 *
+	 * @return Users|bool
+	 */
+	public function registerGame( array $aData, Usercodes $oUserCodes ){
+
+		$oForm = $this->getRegisterGameForm();
+
+		$oForm->setData($aData);
+		if(!$oForm->isValid()){
+			return false;
+		}
+
+		$aData = $oForm->getData();
+		$sPlainPassword = $aData['password'];
+
+		$oGameBackend = $this->getGameBackendService();
+
+		$oUser = $oUserCodes->getUsersUsrid();
+		$iBackendId = $oGameBackend->setUser($oUser, $sPlainPassword);
+
+		$oUser2Server = new User2server();
+		$oUser2Server->setUserId($oUser->getUsrid());
+		$oUser2Server->setBackendId($iBackendId);
+		$oUser->setUser2Server($oUser2Server);
+
+		$oEntityManager = $this->getEntityManager();
+		$oRepositoryRole = $oEntityManager->getRepository(Entity::UserRole);
+		$sRole = ConfigRead::get('pserver.register.role','user');
+		$oRole = $oRepositoryRole->findOneBy(array('roleId' => $sRole));
+
+		// add the ROLE + BackendId + Remove the Key
+		$oEntityManager->persist($oUser2Server);
+		$oEntityManager->flush();
+		$oUser->addUserRole($oRole);
+		$oRole->addUsersUsrid($oUser);
+		$oEntityManager->persist($oUser);
+		$oEntityManager->persist($oRole);
+		$oEntityManager->remove($oUserCodes);
+		$oEntityManager->flush();
+
+		return $oUser;
+	}
+
 
 	/**
 	 * @return \Zend\Authentication\AuthenticationService
@@ -88,6 +153,17 @@ class User extends InvokablesBase {
 	}
 
 	/**
+	 * @return \Application\Form\RegisterGame
+	 */
+	protected function getRegisterGameForm() {
+		if (! $this->registerGameForm) {
+			$this->registerGameForm = $this->getServiceManager()->get('pserver_user_registergame_form');
+		}
+
+		return $this->registerGameForm;
+	}
+
+	/**
 	 * @return \Application\Service\Mail
 	 */
 	protected function getMailService() {
@@ -107,5 +183,16 @@ class User extends InvokablesBase {
 		}
 
 		return $this->userCodesService;
+	}
+
+	/**
+	 * @return \GameBackend\DataService\DataServiceInterface
+	 */
+	protected function getGameBackendService(){
+		if (! $this->gameBackendService) {
+			$this->gameBackendService = $this->getServiceManager()->get('gamebackend_dataservice');
+		}
+
+		return $this->gameBackendService;
 	}
 }

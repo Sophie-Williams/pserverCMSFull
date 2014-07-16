@@ -10,17 +10,43 @@ namespace GameBackend\DataService;
 
 
 use Application\Entity\Users;
+use GameBackend\Entity\SRO\Keys\Account;
 
-class SRO implements DataServiceInterface {
+class SRO extends InvokableBase implements DataServiceInterface {
+
+	/**
+	 * @var \Doctrine\ORM\EntityManager
+	 */
+	protected $accountEntityManager;
 
 	/**
 	 * @param Users $oUser
 	 * @param       $sPlainPassword
 	 *
-	 * @return Users
+	 * @return int
 	 */
 	public function setUser( Users $oUser, $sPlainPassword ) {
-		return $oUser;
+		$oAccEntityManager = $this->getAccountEntityManager();
+		// TODO better way?
+		try{
+			$iJID = $oUser->getUser2Server()->getBackendId();
+			$oRepoTbUser = $oAccEntityManager->getRepository(Account::TbUser);
+			/** @var \GameBackend\Entity\SRO\Account\TbUser $oTbUser */
+			$oTbUser = $oRepoTbUser->findOneBy(array('JID' => $iJID));
+		}catch (\Exception $e){
+			$class = Account::TbUser;
+			/** @var \GameBackend\Entity\SRO\Account\TbUser $oTbUser */
+			$oTbUser = new $class();
+			$oTbUser->setStruserid($oUser->getUsername());
+			$oTbUser->setEmail($oUser->getEmail());
+			$oTbUser->setRegIp($oUser->getCreateip());
+		}
+
+		$oTbUser->setPassword(md5($sPlainPassword));
+		$oAccEntityManager->persist($oTbUser);
+		$oAccEntityManager->flush();
+
+		return $oTbUser->getJid();
 	}
 
 	/**
@@ -32,4 +58,15 @@ class SRO implements DataServiceInterface {
 	public function setCoins( Users $oUser, $iCoins ) {
 		return false;
 	}
+
+	/**
+	 * @return \Doctrine\ORM\EntityManager
+	 */
+	protected function getAccountEntityManager(){
+		if(!$this->accountEntityManager){
+			$this->accountEntityManager = $this->getServiceManager()->get('doctrine.entitymanager.orm_sro_account');
+		}
+		return $this->accountEntityManager;
+	}
+
 }

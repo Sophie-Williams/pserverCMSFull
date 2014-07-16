@@ -64,6 +64,17 @@ class Users implements ProviderInterface {
 	 */
 	private $userRole;
 
+
+	/**
+	 * @var \Application\Entity\User2server
+	 *
+	 * @ORM\OneToOne(targetEntity="Application\Entity\User2server")
+	 * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="usrId", referencedColumnName="users_usrId")
+	 * })
+	 */
+	private $user2Server;
+
 	/**
 	 * Constructor
 	 */
@@ -239,5 +250,23 @@ class Users implements ProviderInterface {
 	 */
 	public function getRoles() {
 		return $this->userRole->getValues();
+	}
+
+	/**
+	 * @return User2server
+	 */
+	public function getUser2Server(){
+		return $this->user2Server;
+	}
+
+	/**
+	 * @param User2server $user2server
+	 *
+	 * @return $this
+	 */
+	public function setUser2Server( User2server $user2server ){
+		$this->user2Server = $user2server;
+
+		return $this;
 	}
 }

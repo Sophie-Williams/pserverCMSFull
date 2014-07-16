@@ -40,14 +40,14 @@ class TbUser
      *
      * @ORM\Column(name="Status", type="smallint", nullable=true)
      */
-    private $status;
+    private $status = '1';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="GMrank", type="smallint", nullable=true)
      */
-    private $gmrank;
+    private $gmrank = '0';
 
     /**
      * @var string

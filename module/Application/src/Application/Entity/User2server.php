@@ -14,11 +14,11 @@ class User2server {
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="userServerId", type="integer", nullable=false)
+	 * @ORM\Column(name="users_usrId", type="integer", nullable=false)
 	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
+	 * @ORM\GeneratedValue(strategy="NONE")
 	 */
-	private $userserverid;
+	private $userid;
 
 	/**
 	 * @var integer
@@ -27,35 +27,36 @@ class User2server {
 	 */
 	private $backendid;
 
-	/**
-	 * @var \Application\Entity\Users
-	 *
-	 * @ORM\ManyToOne(targetEntity="Application\Entity\Users")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="users_usrId", referencedColumnName="usrId")
-	 * })
-	 */
-	private $usersUsrid;
-
 
 	/**
-	 * Get userserverid
+	 * Get userid
 	 *
 	 * @return integer
 	 */
-	public function getUserserverid() {
-		return $this->userserverid;
+	public function getUserId() {
+		return $this->userid;
+	}
+
+	/**
+	 * Set userid
+	 *
+	 * @return User2server
+	 */
+	public function setUserId( $iUserId ) {
+		$this->userid = $iUserId;
+
+		return $this;
 	}
 
 	/**
 	 * Set backendid
 	 *
-	 * @param integer $backendid
+	 * @param integer $backendId
 	 *
 	 * @return User2server
 	 */
-	public function setBackendid( $backendid ) {
-		$this->backendid = $backendid;
+	public function setBackendId( $backendId ) {
+		$this->backendid = $backendId;
 
 		return $this;
 	}
@@ -65,29 +66,8 @@ class User2server {
 	 *
 	 * @return integer
 	 */
-	public function getBackendid() {
+	public function getBackendId() {
 		return $this->backendid;
 	}
 
-	/**
-	 * Set usersUsrid
-	 *
-	 * @param \Application\Entity\Users $usersUsrid
-	 *
-	 * @return User2server
-	 */
-	public function setUsersUsrid( \Application\Entity\Users $usersUsrid = null ) {
-		$this->usersUsrid = $usersUsrid;
-
-		return $this;
-	}
-
-	/**
-	 * Get usersUsrid
-	 *
-	 * @return \Application\Entity\Users
-	 */
-	public function getUsersUsrid() {
-		return $this->usersUsrid;
-	}
 }

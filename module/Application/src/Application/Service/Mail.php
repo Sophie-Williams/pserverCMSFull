@@ -16,7 +16,7 @@ use Zend\Mime\Part;
 use Zend\Mime\Message as MimeMessage;
 use Zend\View\Model\ViewModel;
 
-class Mail extends InvokablesBase {
+class Mail extends InvokableBase {
 
 	const SubjectKeyRegister = 'register';
 	const SubjectKeyPasswordLost = 'password';

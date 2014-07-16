@@ -6,13 +6,13 @@
  * Time: 18:52
  */
 
-namespace Application\Service;
+namespace GameBackend\DataService;
 
 
 use Zend\ServiceManager\ServiceManager;
 use Zend\ServiceManager\ServiceManagerAwareInterface;
 
-class InvokablesBase implements ServiceManagerAwareInterface {
+class InvokableBase implements ServiceManagerAwareInterface {
 
 	/**
 	 * @var ServiceManager
@@ -20,10 +20,9 @@ class InvokablesBase implements ServiceManagerAwareInterface {
 	protected $serviceManager;
 
 	/**
-	 * @var \Doctrine\ORM\EntityManager
+	 * @var array
 	 */
-	protected $entityManager;
-
+	protected $config;
 
 	/**
 	 * @return ServiceManager
@@ -43,12 +42,15 @@ class InvokablesBase implements ServiceManagerAwareInterface {
 		return $this;
 	}
 
-
-	public function getEntityManager(){
-		if (! $this->entityManager) {
-			$this->entityManager = $this->getServiceManager()->get('Doctrine\ORM\EntityManager');
+	/**
+	 * @return array
+	 */
+	public function getConfig(){
+		if(!$this->config){
+			$aConfig = $this->getServiceManager()->get('Config');
+			$this->config = $aConfig['pserver'];
 		}
 
-		return $this->entityManager;
+		return $this->config;
 	}
 }

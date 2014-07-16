@@ -127,6 +127,9 @@ return array(
 		),
 	),
 	'pserver' => array(
+		'register' => array(
+			'role' => 'user'
+		),
 		'mail' => array(
 			'from' => 'abcd@example.com',
 			'fromName' => 'team',

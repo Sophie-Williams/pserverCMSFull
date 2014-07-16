@@ -68,6 +68,11 @@ class Module {
 					));
 					return $oForm;
 				},
+				'pserver_user_registergame_form' => function($sm){
+					$oForm = new Form\RegisterGame();
+					$oForm->setInputFilter(new Form\RegisterGameFilter());
+					return $oForm;
+				},
 			),
 		);
 	}

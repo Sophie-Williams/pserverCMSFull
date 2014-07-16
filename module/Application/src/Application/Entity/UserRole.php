@@ -33,7 +33,7 @@ class UserRole implements HierarchicalRoleInterface {
 	 *
 	 * @ORM\Column(name="is_default", type="boolean", nullable=true)
 	 */
-	private $isDefault = '0';
+	private $isDefault;
 
 	/**
 	 * @var string

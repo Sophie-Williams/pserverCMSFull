@@ -35,7 +35,9 @@ return array(
 			),
 		),
 	),
-	'gamebackend' => array(
-		'game' => 'GameBackend\DataService\SRO'
-	)
+	'service_manager' => array(
+		'invokables' => array(
+			'gamebackend_dataservice' => 'GameBackend\DataService\SRO',
+		),
+	),
 );

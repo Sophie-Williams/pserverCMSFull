@@ -31,10 +31,6 @@ class Module implements ServiceProviderInterface {
 				'doctrine.entitymanager.orm_sro_account'        => new \DoctrineORMModule\Service\EntityManagerFactory('orm_sro_account'),
 				'doctrine.connection.orm_sro_account'           => new \DoctrineORMModule\Service\DBALConnectionFactory('orm_sro_account'),
 				'doctrine.configuration.orm_sro_account'        => new \DoctrineORMModule\Service\ConfigurationFactory('orm_sro_account'),
-				'dataservice' =>  function($oServiceManager){
-						// TODO Maybe there is a better way?
-						return \GameBackend\DataService\Factory::getInstance($oServiceManager);
-				}
 			),
 		);
 	}
