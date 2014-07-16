@@ -1,6 +1,6 @@
 <?php
 return array(
-    // This should be an array of module namespaces used in the application.
+    // This should be an array of module namespaces used in the p-server-cms.
     'modules' => array(
 		'ZendDeveloperTools',
 		'ZfcTwig',
@@ -10,7 +10,7 @@ return array(
 		'DoctrineORMModule',
 		'PDODblibModule',
 		'BjyAuthorize',
-		'Application',
+		'PServerCMS',
 		'GameBackend',
     ),
 

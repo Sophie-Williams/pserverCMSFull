@@ -9,7 +9,7 @@
 namespace GameBackend\DataService;
 
 
-use Application\Entity\Users;
+use PServerCMS\Entity\Users;
 use GameBackend\Entity\SRO\Keys\Account;
 
 class SRO extends InvokableBase implements DataServiceInterface {

@@ -32,7 +32,7 @@ return array(
 			// the 'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' service
 			'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => array(
 				// class name of the entity representing the role
-				'role_entity_class' => 'Application\Entity\UserRole',
+				'role_entity_class' => 'PServerCMS\Entity\UserRole',
 				// service name of the object manager
 				'object_manager'    => 'doctrine.entitymanager.orm_default',
 			),
@@ -98,9 +98,9 @@ return array(
 				array('controller' => 'zfcuser', 'roles' => array()),
 				 */
 				// Below is the default index action used by the ZendSkeletonApplication
-				array('controller' => 'Application\Controller\Index', 'roles' => array()),
-				array('controller' => 'Application\Controller\Auth', 'roles' => array('guest')),
-				array('controller' => 'Application\Controller\Auth', 'roles' => array(), 'action' => array('logout')),
+				array('controller' => 'PServerCMS\Controller\Index', 'roles' => array()),
+				array('controller' => 'PServerCMS\Controller\Auth', 'roles' => array('guest')),
+				array('controller' => 'PServerCMS\Controller\Auth', 'roles' => array(), 'action' => array('logout')),
 			),
 
 			/* If this guard is specified here (i.e. it is enabled), it will block
