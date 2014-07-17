@@ -68,7 +68,6 @@ class Users implements ProviderInterface {
 	/**
 	 * @var \PServerCMS\Entity\User2server
 	 *
-	 * @ORM\OneToOne(targetEntity="PServerCMS\Entity\User2server")
 	 * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="usrId", referencedColumnName="users_usrId")
 	 * })
