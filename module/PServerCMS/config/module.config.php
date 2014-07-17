@@ -76,7 +76,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
 			'PServerCMS\Controller\Index' => 'PServerCMS\Controller\IndexController',
-            'PServerCMS\Controller\Auth' => 'PServerCMS\Controller\AuthController'
+			'PServerCMS\Controller\Auth' => 'PServerCMS\Controller\AuthController'
         ),
     ),
     'view_manager' => array(

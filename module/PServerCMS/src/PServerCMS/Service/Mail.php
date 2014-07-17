@@ -10,6 +10,7 @@ namespace PServerCMS\Service;
 
 
 use PServerCMS\Entity\Users;
+use PServerCMS\Keys\Entity;
 use Zend\Mail\Transport\Smtp;
 use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mime\Part;
@@ -43,21 +44,21 @@ class Mail extends InvokableBase {
 	 * @param Users $oUserEntity
 	 * @param       $sCode
 	 */
-	public function register( Users $oUserEntity, $sCode ){
+	public function register( Users $oUser, $sCode ){
 
 		$aParams = array(
-			'user' => $oUserEntity,
+			'user' => $oUser,
 			'code' => $sCode
 		);
 
-		$this->send(static::SubjectKeyRegister, $oUserEntity->getEmail(), $aParams);
+		$this->send(static::SubjectKeyRegister, $oUser, $aParams);
 	}
 
 	/**
 	 * @param $sSubjectKey
 	 * @param $sReceiverMail
 	 */
-	protected function send($sSubjectKey, $sReceiverMail, $aParams){
+	protected function send($sSubjectKey, Users $oUser, $aParams){
 		// TODO TwigTemplateEngine
 		$oRenderer = $this->getViewRenderer();
 		/** @var \ZfcTwig\View\TwigResolver $oResolver */
@@ -86,15 +87,22 @@ class Mail extends InvokableBase {
 			$oMail->setBody($oBody);
 			$aConfig = $this->getMailConfig();
 			$oMail->setFrom($aConfig['from'], $aConfig['fromName']);
-			$oMail->setTo($sReceiverMail);
+			$oMail->setTo($oUser->getEmail());
 			$oMail->setSubject($sSubject);
 
 			$transport = new Smtp($this->getSMTPOptions());
 			$transport->send($oMail);
 		}catch (\Exception $e){
-			// TODO Log in DB
-			\Zend\Debug\Debug::dump($e);
-			\Zend\Debug\Debug::dump($sBody);die();
+			// Logging if smth wrong in Configuration or SMTP Offline =)
+			$oEntityManager = $this->getEntityManager();
+			$sClass = Entity::Logs;
+			/** @var \PServerCMS\Entity\Logs $oLogs */
+			$oLogs = new $sClass();
+			$oLogs->setTopic('mail_faild');
+			$oLogs->setMemo($e->getMessage());
+			$oLogs->setUsersUsrid($oUser);
+			$oEntityManager->persist($oLogs);
+			$oEntityManager->flush();
 		}
 	}
 
@@ -103,6 +111,7 @@ class Mail extends InvokableBase {
 	 */
 	public function getViewRenderer(){
 		if (! $this->viewRenderer) {
+			// $this->viewRenderer = $this->getServiceManager()->get('TwigViewRenderer');
 			$this->viewRenderer = $this->getServiceManager()->get('ViewRenderer');
 		}
 
