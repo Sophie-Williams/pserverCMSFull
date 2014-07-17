@@ -127,6 +127,12 @@
 <script type="text/javascript" src="{{ basePath() }}/assets/bootstrap/js/bootstrap.min.js"></script>
 <!--[if lt IE 9]><script type="text/javascript" src="{{ basePath() }}/assets/js/respond.min.js"></script><![endif]-->
 <!--[if lt IE 9]><script type="text/javascript" src="{{ basePath() }}/assets/js/html5shiv.js"></script><![endif]-->
+<script type="text/javascript" src="{{ basePath() }}/js/function.js"></script>
+<script type="text/javascript">
+	var ServerTime = new Date( {{ "now"|date("Y, n, j, G, i, s") }} );
+	startClockTimer('#idTimerClock');
+</script>
+
 {% block script %}{% endblock script %}
 
 </body>

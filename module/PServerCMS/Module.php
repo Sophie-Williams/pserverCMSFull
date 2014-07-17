@@ -36,7 +36,7 @@ class Module {
 		return array(
 			'factories' => array(
 				'sidebarWidget' => function(AbstractPluginManager $pluginManager){
-					return new View\Helper\SideBarWidget();
+					return new View\Helper\SideBarWidget($pluginManager->getServiceLocator());
 				}
 			)
 		);
