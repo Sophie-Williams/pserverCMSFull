@@ -6,6 +6,7 @@ use PServerCMS\Keys\Entity;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use PServerCMS\Helper;
+use Zend\ServiceManager\AbstractPluginManager;
 
 class Module {
 	public function onBootstrap( MvcEvent $e ) {
@@ -28,6 +29,16 @@ class Module {
 					__NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
 				),
 			),
+		);
+	}
+
+	public function getViewHelperConfig(){
+		return array(
+			'factories' => array(
+				'sidebarWidget' => function(AbstractPluginManager $pluginManager){
+					return new View\Helper\SideBarWidget();
+				}
+			)
 		);
 	}
 

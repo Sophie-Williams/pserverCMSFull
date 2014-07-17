@@ -24,7 +24,6 @@ class InvokableBase implements ServiceManagerAwareInterface {
 	 */
 	protected $entityManager;
 
-
 	/**
 	 * @return ServiceManager
 	 */
