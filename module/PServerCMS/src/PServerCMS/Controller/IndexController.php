@@ -5,7 +5,6 @@ namespace PServerCMS\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use PServerCMS\Helper;
-use Zend\Debug\Debug;
 
 class IndexController extends AbstractActionController {
 	public function indexAction() {

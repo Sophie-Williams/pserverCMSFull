@@ -101,6 +101,7 @@ return array(
 				array('controller' => 'PServerCMS\Controller\Index', 'roles' => array()),
 				array('controller' => 'PServerCMS\Controller\Auth', 'roles' => array('guest')),
 				array('controller' => 'PServerCMS\Controller\Auth', 'roles' => array(), 'action' => array('logout')),
+				array('controller' => 'PServerCMS\Controller\Site', 'roles' => array()),
 			),
 
 			/* If this guard is specified here (i.e. it is enabled), it will block

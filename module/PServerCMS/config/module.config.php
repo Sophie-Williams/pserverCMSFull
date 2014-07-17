@@ -25,12 +25,24 @@ return array(
 				'options' => array(
 					'route'    => '/auth/[:action][/:code]',
 					'constraints' => array(
-						'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'code'     => '[a-zA-Z0-9]*',
 					),
 					'defaults' => array(
-						'controller'   => 'PServerCMS\Controller\Auth',
-						'action'     => 'login',
+						'controller'	=> 'PServerCMS\Controller\Auth',
+						'action'		=> 'login',
+					),
+				),
+			),
+			'site' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'    => '/[:action].html',
+					'constraints' => array(
+						'action'     => '[a-zA-Z]*',
+					),
+					'defaults' => array(
+						'controller'   => 'PServerCMS\Controller\Site',
 					),
 				),
 			)
@@ -76,7 +88,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
 			'PServerCMS\Controller\Index' => 'PServerCMS\Controller\IndexController',
-			'PServerCMS\Controller\Auth' => 'PServerCMS\Controller\AuthController'
+			'PServerCMS\Controller\Auth' => 'PServerCMS\Controller\AuthController',
+			'PServerCMS\Controller\Site' => 'PServerCMS\Controller\SiteController'
         ),
     ),
     'view_manager' => array(
