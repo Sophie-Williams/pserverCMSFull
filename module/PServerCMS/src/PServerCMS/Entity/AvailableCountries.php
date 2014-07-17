@@ -5,12 +5,12 @@ namespace PServerCMS\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Availablecountrys
+ * AvailableCountries
  *
  * @ORM\Table(name="availableCountrys", indexes={@ORM\Index(name="fk_availableCountrys_users1_idx", columns={"users_usrId"})})
  * @ORM\Entity
  */
-class Availablecountrys {
+class AvailableCountries {
 	/**
 	 * @var integer
 	 *
@@ -69,7 +69,7 @@ class Availablecountrys {
 	 *
 	 * @param string $cntry
 	 *
-	 * @return Availablecountrys
+	 * @return AvailableCountries
 	 */
 	public function setCntry( $cntry ) {
 		$this->cntry = $cntry;
@@ -91,7 +91,7 @@ class Availablecountrys {
 	 *
 	 * @param string $active
 	 *
-	 * @return Availablecountrys
+	 * @return AvailableCountries
 	 */
 	public function setActive( $active ) {
 		$this->active = $active;
@@ -113,7 +113,7 @@ class Availablecountrys {
 	 *
 	 * @param \DateTime $created
 	 *
-	 * @return Availablecountrys
+	 * @return AvailableCountries
 	 */
 	public function setCreated( $created ) {
 		$this->created = $created;
@@ -135,7 +135,7 @@ class Availablecountrys {
 	 *
 	 * @param \PServerCMS\Entity\Users $usersUsrid
 	 *
-	 * @return Availablecountrys
+	 * @return AvailableCountries
 	 */
 	public function setUsersUsrid( \PServerCMS\Entity\Users $usersUsrid = null ) {
 		$this->usersUsrid = $usersUsrid;

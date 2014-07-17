@@ -21,6 +21,13 @@ class Userexstension {
 	private $eid;
 
 	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="users_usrId", type="integer", nullable=false)
+	 */
+	private $usersUsrid;
+
+	/**
 	 * @var string
 	 *
 	 * @ORM\Column(name="key", type="string", length=255, nullable=false)
@@ -33,16 +40,6 @@ class Userexstension {
 	 * @ORM\Column(name="value", type="string", length=255, nullable=false)
 	 */
 	private $value;
-
-	/**
-	 * @var \PServerCMS\Entity\Users
-	 *
-	 * @ORM\ManyToOne(targetEntity="PServerCMS\Entity\Users")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="users_usrId", referencedColumnName="usrId")
-	 * })
-	 */
-	private $usersUsrid;
 
 
 	/**

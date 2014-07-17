@@ -23,6 +23,13 @@ class Users implements ProviderInterface {
 	private $usrid;
 
 	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="backendId", type="integer", nullable=true)
+	 */
+	private $backendId;
+
+	/**
 	 * @var string
 	 *
 	 * @ORM\Column(name="username", type="string", length=45, nullable=false)
@@ -64,21 +71,22 @@ class Users implements ProviderInterface {
 	 */
 	private $userRole;
 
-
 	/**
-	 * @var \PServerCMS\Entity\User2server
+	 * @var \PServerCMS\Entity\Userexstension
 	 *
+	 * @ORM\OneToMany(targetEntity="PServerCMS\Entity\Userexstension", mappedBy="usersUsrid")
 	 * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="usrId", referencedColumnName="users_usrId")
 	 * })
 	 */
-	private $user2Server;
+	private $userExtension;
 
 	/**
 	 * Constructor
 	 */
 	public function __construct() {
 		$this->userRole = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->userExtension = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->created = new \DateTime();
 	}
 
@@ -90,6 +98,24 @@ class Users implements ProviderInterface {
 	 */
 	public function getUsrid() {
 		return $this->usrid;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getBackendId(){
+		return $this->backendId;
+	}
+
+	/**
+	 * @param $iBackendId
+	 *
+	 * @return $this
+	 */
+	public function setBackendId( $iBackendId ){
+		$this->backendId = $iBackendId;
+
+		return $this;
 	}
 
 	/**
@@ -234,6 +260,45 @@ class Users implements ProviderInterface {
 	}
 
 	/**
+	 * @return \Zend\Permissions\Acl\Role\RoleInterface[]
+	 */
+	public function getRoles() {
+		return $this->userRole->getValues();
+	}
+
+
+	/**
+	 * Add userExtension
+	 *
+	 * @param \PServerCMS\Entity\Userexstension $userExtension
+	 *
+	 * @return Users
+	 */
+	public function addUserExtension( \PServerCMS\Entity\Userexstension $userExtension ) {
+		$this->userExtension[] = $userExtension;
+
+		return $this;
+	}
+
+	/**
+	 * Remove userExtension
+	 *
+	 * @param \PServerCMS\Entity\Userexstension $userExtension
+	 */
+	public function removeUserExtension( \PServerCMS\Entity\Userexstension $userExtension ) {
+		$this->userExtension->removeElement( $userExtension );
+
+		return $this;
+	}
+
+	/**
+	 * @return Userexstension
+	 */
+	public function getUserExtension(){
+		return $this->userExtension;
+	}
+
+	/**
 	 * @param Users $oEntity
 	 * @param       $plaintext
 	 *
@@ -244,28 +309,4 @@ class Users implements ProviderInterface {
 		return $oBcrypt->verify($plaintext, $oEntity->getPassword());
 	}
 
-	/**
-	 * @return \Zend\Permissions\Acl\Role\RoleInterface[]
-	 */
-	public function getRoles() {
-		return $this->userRole->getValues();
-	}
-
-	/**
-	 * @return User2server
-	 */
-	public function getUser2Server(){
-		return $this->user2Server;
-	}
-
-	/**
-	 * @param User2server $user2server
-	 *
-	 * @return $this
-	 */
-	public function setUser2Server( User2server $user2server ){
-		$this->user2Server = $user2server;
-
-		return $this;
-	}
 }

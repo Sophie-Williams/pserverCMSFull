@@ -105,11 +105,7 @@ class User extends InvokableBase {
 
 		$oUser = $oUserCodes->getUsersUsrid();
 		$iBackendId = $oGameBackend->setUser($oUser, $sPlainPassword);
-
-		$oUser2Server = new User2server();
-		$oUser2Server->setUserId($oUser->getUsrid());
-		$oUser2Server->setBackendId($iBackendId);
-		$oUser->setUser2Server($oUser2Server);
+		$oUser->setBackendId($iBackendId);
 
 		$oEntityManager = $this->getEntityManager();
 		$oRepositoryRole = $oEntityManager->getRepository(Entity::UserRole);
@@ -117,8 +113,6 @@ class User extends InvokableBase {
 		$oRole = $oRepositoryRole->findOneBy(array('roleId' => $sRole));
 
 		// add the ROLE + BackendId + Remove the Key
-		$oEntityManager->persist($oUser2Server);
-		$oEntityManager->flush();
 		$oUser->addUserRole($oRole);
 		$oRole->addUsersUsrid($oUser);
 		$oEntityManager->persist($oUser);

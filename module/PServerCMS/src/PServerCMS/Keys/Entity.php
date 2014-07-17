@@ -11,7 +11,7 @@ namespace PServerCMS\Keys;
 
 class Entity {
 
-	const AvailableCountries	= 'PServerCMS\Entity\Availablecountrys';
+	const AvailableCountries	= 'PServerCMS\Entity\AvailableCountries';
 	const CountryList			= 'PServerCMS\Entity\Countrylist';
 	const DonateLog				= 'PServerCMS\Entity\Donatelog';
 	const DownloadList			= 'PServerCMS\Entity\Downloadlist';
@@ -20,12 +20,9 @@ class Entity {
 	const LoginHistory			= 'PServerCMS\Entity\Loginhistory';
 	const Logs					= 'PServerCMS\Entity\Logs';
 	const News					= 'PServerCMS\Entity\News';
-	const NewsType				= 'PServerCMS\Entity\Newstype';
 	const TicketCategory		= 'PServerCMS\Entity\Ticketcategory';
 	const TicketEntry			= 'PServerCMS\Entity\Ticketentry';
 	const TicketSubject			= 'PServerCMS\Entity\Ticketsubject';
-	const User2server			= 'PServerCMS\Entity\User2server';
-	const UserAlias				= 'PServerCMS\Entity\Useralias';
 	const UserBlock				= 'PServerCMS\Entity\Userblock';
 	const UserCodes				= 'PServerCMS\Entity\Usercodes';
 	const UserExtension			= 'PServerCMS\Entity\Userexstension';

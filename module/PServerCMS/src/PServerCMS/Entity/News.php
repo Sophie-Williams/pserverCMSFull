@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * News
  *
- * @ORM\Table(name="news", indexes={@ORM\Index(name="fk_news_users1_idx", columns={"users_usrId"}), @ORM\Index(name="fk_news_newsType1_idx", columns={"newsType_tId"})})
+ * @ORM\Table(name="news", indexes={@ORM\Index(name="fk_news_users1_idx", columns={"users_usrId"})})
  * @ORM\Entity
  */
 class News {
@@ -57,16 +57,6 @@ class News {
 	 * })
 	 */
 	private $usersUsrid;
-
-	/**
-	 * @var \PServerCMS\Entity\Newstype
-	 *
-	 * @ORM\ManyToOne(targetEntity="PServerCMS\Entity\Newstype")
-	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="newsType_tId", referencedColumnName="tId")
-	 * })
-	 */
-	private $newstypeTid;
 
 	public function __construct( ) {
 		$this->created = new \DateTime();
@@ -191,25 +181,4 @@ class News {
 		return $this->usersUsrid;
 	}
 
-	/**
-	 * Set newstypeTid
-	 *
-	 * @param \PServerCMS\Entity\Newstype $newstypeTid
-	 *
-	 * @return News
-	 */
-	public function setNewstypeTid( \PServerCMS\Entity\Newstype $newstypeTid = null ) {
-		$this->newstypeTid = $newstypeTid;
-
-		return $this;
-	}
-
-	/**
-	 * Get newstypeTid
-	 *
-	 * @return \PServerCMS\Entity\Newstype
-	 */
-	public function getNewstypeTid() {
-		return $this->newstypeTid;
-	}
 }

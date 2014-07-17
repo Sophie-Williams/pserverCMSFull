@@ -27,13 +27,14 @@ class SRO extends InvokableBase implements DataServiceInterface {
 	 */
 	public function setUser( Users $oUser, $sPlainPassword ) {
 		$oAccEntityManager = $this->getAccountEntityManager();
-		// TODO better way?
-		try{
-			$iJID = $oUser->getUser2Server()->getBackendId();
+
+		if((bool) $oUser->getBackendId()){
+			$iJID = $oUser->getBackendId();
+
 			$oRepoTbUser = $oAccEntityManager->getRepository(Account::TbUser);
 			/** @var \GameBackend\Entity\SRO\Account\TbUser $oTbUser */
 			$oTbUser = $oRepoTbUser->findOneBy(array('JID' => $iJID));
-		}catch (\Exception $e){
+		}else{
 			$class = Account::TbUser;
 			/** @var \GameBackend\Entity\SRO\Account\TbUser $oTbUser */
 			$oTbUser = new $class();
