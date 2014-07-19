@@ -9,6 +9,7 @@
 namespace PServerCMS\View\Helper;
 
 
+use PServerCMS\Helper\Timer;
 use Zend\Form\View\Helper\AbstractHelper;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -27,6 +28,16 @@ class SideBarWidget extends AbstractHelper {
 	protected $authService;
 
 	/**
+	 * @var array
+	 */
+	protected $configService;
+
+	/**
+	 * @var array
+	 */
+	protected $timerService;
+
+	/**
 	 * @param ServiceLocatorInterface $serviceLocatorInterface
 	 */
 	public function __construct(ServiceLocatorInterface $serviceLocatorInterface){
@@ -42,11 +53,16 @@ class SideBarWidget extends AbstractHelper {
 			$oViewModel->setTemplate('helper/sidebarLoggedInWidget');
 			$sTemplate = $this->getView()->render($oViewModel);
 		}
-		$oViewModel = new ViewModel();
+		$oViewModel = new ViewModel(array(
+			'timer' => $this->getTimer()
+		));
 		$oViewModel->setTemplate('helper/sidebarWidget');
 		return $sTemplate.$this->getView()->render($oViewModel);
 	}
 
+	/**
+	 * @return ServiceLocatorInterface
+	 */
 	public function getServiceLocator(){
 		return $this->serviceLocator;
 	}
@@ -73,4 +89,26 @@ class SideBarWidget extends AbstractHelper {
 		return $this->authService;
 	}
 
+	/**
+	 * @return array
+	 */
+	protected function getConfigService(){
+		if (!$this->configService) {
+			$this->configService = $this->getServiceLocator()->get('Config');
+		}
+
+		return $this->configService;
+	}
+
+	protected function getTimer(){
+		if(!$this->timerService){
+			$aConfig = $this->getConfigService();
+			$aTimerConfig = isset($aConfig['pserver']['timer'])?$aConfig['pserver']['timer']:array();
+			foreach($aTimerConfig as $aCurData){
+				$this->timerService[$aCurData['name']] = Timer::getNextTime( $aCurData['hours'],$aCurData['min'] );
+			}
+		}
+
+		return $this->timerService;
+	}
 }

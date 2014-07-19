@@ -130,6 +130,7 @@
 <script type="text/javascript" src="{{ basePath() }}/js/function.js"></script>
 <script type="text/javascript">
 	var ServerTime = new Date( {{ "now"|date("Y, n, j, G, i, s") }} );
+	var iTimeStamp = {{ "now"|date("U") }} - Math.round( + new Date() / 1000 );
 	startClockTimer('#idTimerClock');
 </script>
 

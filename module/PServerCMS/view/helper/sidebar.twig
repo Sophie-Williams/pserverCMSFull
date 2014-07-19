@@ -12,8 +12,8 @@
 	<h3>Servertime</h3>
 	<hr/>
 	<ul class="list-unstyled">
-		<li>lalalala</li>
-		<li>lululu</li>
-		<li><span style="font-weight: bold">Test:</span> Nummer 1</li>
+		<?php $i=0; foreach($this->timer as $sKey => $iEndTimer){ ?>
+		<li><?php echo $sKey ?>: <span class="timerCountdown" id="<?php echo 'idTimeCountdown_'.$i++; ?>" data-time="<?php echo $iEndTimer ?>"></span></li>
+		<?php } ?>
 	</ul>
 </div>
