@@ -105,7 +105,11 @@ class SideBarWidget extends AbstractHelper {
 			$aConfig = $this->getConfigService();
 			$aTimerConfig = isset($aConfig['pserver']['timer'])?$aConfig['pserver']['timer']:array();
 			foreach($aTimerConfig as $aCurData){
-				$this->timerService[$aCurData['name']] = Timer::getNextTime( $aCurData['hours'],$aCurData['min'] );
+				if(isset($aCurData['days'])){
+					$this->timerService[$aCurData['name']] = Timer::getNextTimeDay( $aCurData['days'], $aCurData['hour'], $aCurData['min'] );
+				}else{
+					$this->timerService[$aCurData['name']] = Timer::getNextTime( $aCurData['hours'],$aCurData['min'] );
+				}
 			}
 		}
 
