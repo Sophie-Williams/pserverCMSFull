@@ -12,8 +12,15 @@
 	<h3>Servertime</h3>
 	<hr/>
 	<ul class="list-unstyled">
-		<?php $i=0; foreach($this->timer as $sKey => $iEndTimer){ ?>
-		<li><?php echo $sKey ?>: <span class="timerCountdown" id="<?php echo 'idTimeCountdown_'.$i++; ?>" data-time="<?php echo $iEndTimer ?>"></span></li>
+		<?php $i=0; foreach($this->timer as $aCurTimer){ ?>
+		<li><i class="<?php echo $aCurTimer['icon'] ?>"></i>
+			<?php echo $aCurTimer['name'] ?>:
+			<?php if($aCurTimer['time'] > 0){ ?>
+				<span class="timerCountdown" id="<?php echo 'idTimeCountdown_'.$i++; ?>" data-time="<?php echo $aCurTimer['time'] ?>"></span>
+			<?php }else { ?>
+				<?php echo $aCurTimer['text'] ?>
+			<?php } ?>
+		</li>
 		<?php } ?>
 	</ul>
 </div>
