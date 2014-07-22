@@ -158,7 +158,7 @@ return array(
 				'port'=> 587,
 				'connection_class' => 'login',
 				'connection_config' => array(
-					'username' => 'put your username ',
+					'username' => 'put your username',
 					'password' => 'put your password',
 					'ssl'=> 'tls',
 				),

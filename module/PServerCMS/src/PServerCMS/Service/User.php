@@ -9,10 +9,8 @@
 namespace PServerCMS\Service;
 
 
-use PServerCMS\Entity\User2server;
 use PServerCMS\Entity\Usercodes;
 use PServerCMS\Entity\Users;
-use PServerCMS\Helper\ConfigRead;
 use PServerCMS\Helper\Ip;
 use PServerCMS\Keys\Entity;
 use Zend\Crypt\Password\Bcrypt;
@@ -109,7 +107,7 @@ class User extends InvokableBase {
 
 		$oEntityManager = $this->getEntityManager();
 		$oRepositoryRole = $oEntityManager->getRepository(Entity::UserRole);
-		$sRole = ConfigRead::get('pserver.register.role','user');
+		$sRole = $this->getConfigService()->get('pserver.register.role','user');
 		$oRole = $oRepositoryRole->findOneBy(array('roleId' => $sRole));
 
 		// add the ROLE + BackendId + Remove the Key

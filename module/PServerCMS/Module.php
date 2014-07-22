@@ -13,9 +13,6 @@ class Module {
 		$eventManager        = $e->getApplication()->getEventManager();
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach( $eventManager );
-
-		// TODO to invokables
-        new Helper\ConfigRead($e->getApplication()->getServiceManager());
 	}
 
 	public function getConfig() {
@@ -54,6 +51,7 @@ class Module {
 				'pserver_user_service'				=> 'PServerCMS\Service\User',
 				'pserver_mail_service'				=> 'PServerCMS\Service\Mail',
 				'pserver_usercodes_service'			=> 'PServerCMS\Service\UserCodes',
+				'pserver_configread_service'		=> 'PServerCMS\Service\ConfigRead',
 			),
 			'factories' => array(
 				'user_auth_service' => function($sm){
@@ -62,7 +60,9 @@ class Module {
 					$oAdapter = $sm->get('doctrine.authenticationadapter.odm_default');
 
 					// In Config there is not EntityManager =(, so we have to add it now =)
-					$aConfig = Helper\ConfigRead::get('authenticationadapter.odm_default', array());
+					/** @var \PServerCMS\Service\ConfigRead $oConfigService */
+					$oConfigService = $sm->get('pserver_configread_service');
+					$aConfig = $oConfigService->get('authenticationadapter.odm_default', array());
 					$aConfig['objectManager'] = $sm->get('Doctrine\ORM\EntityManager');
 					$oAdapter->setOptions( $aConfig );
 

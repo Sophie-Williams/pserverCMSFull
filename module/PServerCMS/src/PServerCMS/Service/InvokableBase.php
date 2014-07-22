@@ -25,9 +25,14 @@ class InvokableBase implements ServiceManagerAwareInterface {
 	protected $entityManager;
 
 	/**
+	 * @var ConfigRead
+	 */
+	protected $configReadService;
+
+	/**
 	 * @return ServiceManager
 	 */
-	public function getServiceManager(){
+	public function getServiceManager() {
 		return $this->serviceManager;
 	}
 
@@ -45,11 +50,22 @@ class InvokableBase implements ServiceManagerAwareInterface {
 	/**
 	 * @return \Doctrine\ORM\EntityManager
 	 */
-	public function getEntityManager(){
+	public function getEntityManager() {
 		if (!$this->entityManager) {
 			$this->entityManager = $this->getServiceManager()->get('Doctrine\ORM\EntityManager');
 		}
 
 		return $this->entityManager;
+	}
+
+	/**
+	 * @return ConfigRead
+	 */
+	public function getConfigService() {
+		if (!$this->configReadService) {
+			$this->configReadService = $this->getServiceManager()->get('pserver_configread_service');
+		}
+
+		return $this->configReadService;
 	}
 }
