@@ -55,6 +55,20 @@ class Mail extends InvokableBase {
 	}
 
 	/**
+	 * @param Users $oUser
+	 * @param       $sCode
+	 */
+	public function lostPw( Users $oUser, $sCode ){
+
+		$aParams = array(
+			'user' => $oUser,
+			'code' => $sCode
+		);
+
+		$this->send(static::SubjectKeyPasswordLost, $oUser, $aParams);
+	}
+
+	/**
 	 * @param $sSubjectKey
 	 * @param $sReceiverMail
 	 */

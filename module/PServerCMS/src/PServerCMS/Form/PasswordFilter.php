@@ -11,7 +11,7 @@ namespace PServerCMS\Form;
 
 use ZfcBase\InputFilter\ProvidesEventsInputFilter;
 
-class RegisterGameFilter extends ProvidesEventsInputFilter {
+class PasswordFilter extends ProvidesEventsInputFilter {
 
 	public function __construct( ){
 

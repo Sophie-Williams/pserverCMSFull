@@ -27,4 +27,21 @@ class Usercodes extends EntityRepository {
 			->getQuery();
 		return $oQuery->getOneOrNullResult();
 	}
+
+	/**
+	 * @param $iUserId
+	 * @param $sType
+	 *
+	 * @return mixed
+	 */
+	public function deleteCodes4User($iUserId, $sType){
+		$oQuery = $this->createQueryBuilder('p')
+			->delete('PServerCMS\Entity\Usercodes','p')
+			->where('p.usersUsrid = :user_id')
+			->setParameter('user_id', $iUserId)
+			->andWhere('p.type = :type')
+			->setParameter('type', $sType)
+			->getQuery();
+		return $oQuery->execute();
+	}
 }

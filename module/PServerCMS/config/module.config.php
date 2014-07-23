@@ -104,6 +104,7 @@ return array(
             'error/404'						=> __DIR__ . '/../view/error/404.phtml',
             'error/index'					=> __DIR__ . '/../view/error/index.phtml',
 			'email/tpl/register'			=> __DIR__ . '/../view/email/tpl/register.phtml',
+			'email/tpl/password'			=> __DIR__ . '/../view/email/tpl/password.phtml',
 			'helper/sidebarWidget'			=> __DIR__ . '/../view/helper/sidebar.twig',
 			'helper/sidebarLoggedInWidget'	=> __DIR__ . '/../view/helper/logged-in.twig',
         ),
@@ -151,6 +152,7 @@ return array(
 			'fromName' => 'team',
 			'subject' => array(
 				'register' => 'RegisterMail',
+				'password' => 'LostPasswordMail',
 			),
 			'basic' => array(
 				'name' => 'localhost',

@@ -9,13 +9,14 @@ use Zend\Mvc\Controller\AbstractActionController;
 class AuthController extends AbstractActionController {
 	const ErrorNameSpace = 'user-auth';
 	const RouteLoggedIn = 'home';
+	protected $passwordLostForm;
 
 	private $failedLoginMessage = 'Authentication failed. Please try again.';
 
 	protected $userService;
 	protected $authService;
 	protected $registerForm;
-	protected $registerGameForm;
+	protected $passwordForm;
 	/**
 	 * @var \Doctrine\ORM\EntityManager
 	 */
@@ -104,7 +105,7 @@ class AuthController extends AbstractActionController {
 			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
 		}
 
-		$oForm = $this->getRegisterGameForm();
+		$oForm = $this->getPasswordForm();
 		$oRequest = $this->getRequest();
 		if($oRequest->isPost()){
 			$oUser = $this->getUserService()->registerGame($this->params()->fromPost(), $oCode);
@@ -137,6 +138,53 @@ class AuthController extends AbstractActionController {
 		return array();
 	}
 
+	public function pwLostAction(){
+
+		$oForm = $this->getPasswordLostForm();
+
+		$oRequest = $this->getRequest();
+		if($oRequest->isPost()){
+			$oUser = $this->getUserService()->lostPw($this->params()->fromPost());
+			if($oUser){
+				return $this->redirect()->toRoute('auth', array('action' => 'pw-lost-done'));
+			}
+		}
+
+		return array('pwLostForm' => $oForm);
+	}
+
+	public function pwLostDoneAction(){
+		return array();
+	}
+
+	public function pwLostConfirmAction(){
+		$sCode = $this->params()->fromRoute('code');
+
+		$oEntityManager = $this->getEntityManager();
+		/** @var $oRepositoryCode \PServerCMS\Entity\Repository\Usercodes */
+		$oRepositoryCode = $oEntityManager->getRepository(Entity::UserCodes);
+		$oCode = $oRepositoryCode->getData4CodeType($sCode, Usercodes::Type_LostPassword);
+
+		if(!$oCode){
+			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
+		}
+
+		$oForm = $this->getPasswordForm();
+		$oRequest = $this->getRequest();
+		if($oRequest->isPost()){
+			$oUser = $this->getUserService()->lostPwConfirm($this->params()->fromPost(), $oCode);
+			if($oUser){
+				return $this->redirect()->toRoute('auth', array('action' => 'pw-lost-confirm-done'));
+			}
+		}
+
+		return array('pwLostForm' => $oForm);
+	}
+
+	public function pwLostConfirmDoneAction(){
+		return array();
+	}
+
 	public function wrongCodeAction(){
 		return array();
 	}
@@ -164,14 +212,25 @@ class AuthController extends AbstractActionController {
 	}
 
 	/**
-	 * @return \PServerCMS\Form\RegisterGame
+	 * @return \PServerCMS\Form\Password
 	 */
-	protected function getRegisterGameForm() {
-		if (!$this->registerGameForm) {
-			$this->registerGameForm = $this->getServiceLocator()->get('pserver_user_registergame_form');
+	protected function getPasswordForm() {
+		if (!$this->passwordForm) {
+			$this->passwordForm = $this->getServiceLocator()->get('pserver_user_password_form');
 		}
 
-		return $this->registerGameForm;
+		return $this->passwordForm;
+	}
+
+	/**
+	 * @return \PServerCMS\Form\PwLost
+	 */
+	protected function getPasswordLostForm() {
+		if (!$this->passwordLostForm) {
+			$this->passwordLostForm = $this->getServiceLocator()->get('pserver_user_pwlost_form');
+		}
+
+		return $this->passwordLostForm;
 	}
 
 	/**

@@ -38,14 +38,19 @@ class User extends InvokableBase {
 	protected $userCodesService;
 
 	/**
-	 * @var \PServerCMS\Form\RegisterGame
+	 * @var \PServerCMS\Form\Password
 	 */
-	protected $registerGameForm;
+	protected $passwordForm;
 
 	/**
 	 * @var \GameBackend\DataService\DataServiceInterface
 	 */
 	protected $gameBackendService;
+
+	/**
+	 * @var \PServerCMS\Form\PwLost
+	 */
+	protected $passwordLostForm;
 
 	/**
 	 * @param array $aData
@@ -89,7 +94,7 @@ class User extends InvokableBase {
 	 */
 	public function registerGame( array $aData, Usercodes $oUserCodes ){
 
-		$oForm = $this->getRegisterGameForm();
+		$oForm = $this->getPasswordForm();
 
 		$oForm->setData($aData);
 		if(!$oForm->isValid()){
@@ -121,6 +126,54 @@ class User extends InvokableBase {
 		return $oUser;
 	}
 
+	public function lostPw( array $aData ){
+
+		$oForm = $this->getPasswordLostForm();
+
+		$oForm->setData($aData);
+		if(!$oForm->isValid()){
+			return false;
+		}
+
+		$aData = $oForm->getData();
+
+		$oEntityManager = $this->getEntityManager();
+		$oUser = $oEntityManager->getRepository(Entity::Users)->findOneBy(array('username' => $aData['username']));
+
+
+		$sCode = $this->getUserCodesService()->setCode4User($oUser, \PServerCMS\Entity\Usercodes::Type_LostPassword);
+
+		$this->getMailService()->lostPw($oUser, $sCode);
+
+		return $oUser;
+	}
+
+	public function lostPwConfirm( array $aData, Usercodes $oUserCodes ){
+
+		$oForm = $this->getPasswordForm();
+
+		$oForm->setData($aData);
+		if(!$oForm->isValid()){
+			return false;
+		}
+
+		$aData = $oForm->getData();
+		$sPlainPassword = $aData['password'];
+
+		$oEntityManager = $this->getEntityManager();
+		/** @var Users $oUserEntity */
+		$oUserEntity = $oUserCodes->getUsersUsrid();
+
+		$oBcrypt = new Bcrypt();
+		$oUserEntity->setPassword($oBcrypt->create($sPlainPassword));
+
+		$oEntityManager->persist($oUserEntity);
+		$oEntityManager->remove($oUserCodes);
+		$oEntityManager->flush();
+
+		return $oUserEntity;
+	}
+
 
 	/**
 	 * @return \Zend\Authentication\AuthenticationService
@@ -145,14 +198,25 @@ class User extends InvokableBase {
 	}
 
 	/**
-	 * @return \PServerCMS\Form\RegisterGame
+	 * @return \PServerCMS\Form\Password
 	 */
-	protected function getRegisterGameForm() {
-		if (! $this->registerGameForm) {
-			$this->registerGameForm = $this->getServiceManager()->get('pserver_user_registergame_form');
+	protected function getPasswordForm() {
+		if (! $this->passwordForm) {
+			$this->passwordForm = $this->getServiceManager()->get('pserver_user_password_form');
 		}
 
-		return $this->registerGameForm;
+		return $this->passwordForm;
+	}
+
+	/**
+	 * @return \PServerCMS\Form\PwLost
+	 */
+	protected function getPasswordLostForm() {
+		if (! $this->passwordLostForm) {
+			$this->passwordLostForm = $this->getServiceManager()->get('pserver_user_pwlost_form');
+		}
+
+		return $this->passwordLostForm;
 	}
 
 	/**

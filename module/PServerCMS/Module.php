@@ -79,9 +79,19 @@ class Module {
 					));
 					return $oForm;
 				},
-				'pserver_user_registergame_form' => function($sm){
-					$oForm = new Form\RegisterGame();
-					$oForm->setInputFilter(new Form\RegisterGameFilter());
+				'pserver_user_password_form' => function(){
+					$oForm = new Form\Password();
+					$oForm->setInputFilter(new Form\PasswordFilter());
+					return $oForm;
+				},
+				'pserver_user_pwlost_form' => function($sm){
+					/** @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
+					/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */
+					$oRepositoryUser = $sm->get('Doctrine\ORM\EntityManager')->getRepository(Entity::Users);
+					$oForm = new Form\PwLost();
+					$oForm->setInputFilter(new Form\PwLostFilter(
+						new Validator\RecordExists( $oRepositoryUser, 'username' )
+					));
 					return $oForm;
 				},
 			),

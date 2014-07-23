@@ -11,7 +11,7 @@ namespace PServerCMS\Form;
 use Zend\Form\Element;
 use ZfcBase\Form\ProvidesEventsForm;
 
-class RegisterGame extends ProvidesEventsForm {
+class Password extends ProvidesEventsForm {
 
 	public function __construct() {
 		parent::__construct();
@@ -45,7 +45,7 @@ class RegisterGame extends ProvidesEventsForm {
 
 		$submitElement = new Element\Button('submit');
 		$submitElement
-			->setLabel('Register')
+			->setLabel('Submit')
 			->setAttributes(array(
 				'type'  => 'submit',
 			));
