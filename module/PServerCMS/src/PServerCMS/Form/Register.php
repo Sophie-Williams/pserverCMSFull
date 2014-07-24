@@ -22,6 +22,8 @@ class Register extends ProvidesEventsForm {
 				'label' => 'Username',
 			),
 			'attributes' => array(
+                'placeholder' => 'Username',
+                'class' => 'form-control',
 				'type' => 'text'
 			),
 		));
@@ -32,6 +34,8 @@ class Register extends ProvidesEventsForm {
 				'label' => 'Email',
 			),
 			'attributes' => array(
+                'placeholder' => 'Email',
+                'class' => 'form-control',
 				'type' => 'email'
 			),
 		));
@@ -41,6 +45,8 @@ class Register extends ProvidesEventsForm {
 				'label' => 'Email Verify',
 			),
 			'attributes' => array(
+                'placeholder' => 'Email Verify',
+                'class' => 'form-control',
 				'type' => 'email'
 			),
 		));
@@ -51,6 +57,8 @@ class Register extends ProvidesEventsForm {
 				'label' => 'Password',
 			),
 			'attributes' => array(
+                'placeholder' => 'Password',
+                'class' => 'form-control',
 				'type' => 'password'
 			),
 		));
@@ -61,6 +69,8 @@ class Register extends ProvidesEventsForm {
 				'label' => 'Password Verify',
 			),
 			'attributes' => array(
+                'placeholder' => 'Password Verify',
+                'class' => 'form-control',
 				'type' => 'password'
 			),
 		));
@@ -76,6 +86,7 @@ class Register extends ProvidesEventsForm {
 		$submitElement
 			->setLabel('Register')
 			->setAttributes(array(
+                'class' => 'btn btn-default',
 				'type'  => 'submit',
 			));
 

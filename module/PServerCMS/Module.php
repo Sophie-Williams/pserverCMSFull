@@ -34,7 +34,10 @@ class Module {
 			'factories' => array(
 				'sidebarWidget' => function(AbstractPluginManager $pluginManager){
 					return new View\Helper\SideBarWidget($pluginManager->getServiceLocator());
-				}
+				},
+                'formWidget' => function(AbstractPluginManager $pluginManager){
+                    return new View\Helper\FormWidget($pluginManager->getServiceLocator());
+                }
 			)
 		);
 	}
@@ -79,6 +82,11 @@ class Module {
 					));
 					return $oForm;
 				},
+                'pserver_user_login_form' => function(){
+                    $oForm = new Form\Login();
+                    $oForm->setInputFilter(new Form\LoginFilter());
+                    return $oForm;
+                },
 				'pserver_user_password_form' => function(){
 					$oForm = new Form\Password();
 					$oForm->setInputFilter(new Form\PasswordFilter());

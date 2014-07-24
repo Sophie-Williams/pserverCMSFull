@@ -22,6 +22,7 @@ class PwLost extends ProvidesEventsForm {
 				'label' => 'Username',
 			),
 			'attributes' => array(
+                'class' => 'form-control',
 				'type' => 'text'
 			),
 		));
@@ -30,6 +31,7 @@ class PwLost extends ProvidesEventsForm {
 		$submitElement
 			->setLabel('PwLost')
 			->setAttributes(array(
+                'class' => 'btn btn-default',
 				'type'  => 'submit',
 			));
 

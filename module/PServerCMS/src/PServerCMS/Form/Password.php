@@ -22,6 +22,7 @@ class Password extends ProvidesEventsForm {
 				'label' => 'Password',
 			),
 			'attributes' => array(
+                'class' => 'form-control',
 				'type' => 'password'
 			),
 		));
@@ -32,6 +33,7 @@ class Password extends ProvidesEventsForm {
 				'label' => 'Password Verify',
 			),
 			'attributes' => array(
+                'class' => 'form-control',
 				'type' => 'password'
 			),
 		));
@@ -47,6 +49,7 @@ class Password extends ProvidesEventsForm {
 		$submitElement
 			->setLabel('Submit')
 			->setAttributes(array(
+                'class' => 'btn btn-default',
 				'type'  => 'submit',
 			));
 

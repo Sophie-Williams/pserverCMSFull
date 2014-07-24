@@ -16,6 +16,7 @@ class AuthController extends AbstractActionController {
 	protected $userService;
 	protected $authService;
 	protected $registerForm;
+    protected $loginForm;
 	protected $passwordForm;
 	/**
 	 * @var \Doctrine\ORM\EntityManager
@@ -29,10 +30,11 @@ class AuthController extends AbstractActionController {
 			return $this->redirect()->toRoute(self::RouteLoggedIn);
 		}
 
+        $oForm = $this->getLoginForm();
 		$oRequest = $this->getRequest();
 
 		if (!$oRequest->isPost()){
-			return array('aErrorMessages'  => $this->flashmessenger()->getMessagesFromNamespace(self::ErrorNameSpace));
+			return array('aErrorMessages' => $this->flashmessenger()->getMessagesFromNamespace(self::ErrorNameSpace), 'loginForm' => $oForm);
 		}
 
 		$oAuthService = $this->getAuthService();
@@ -199,6 +201,17 @@ class AuthController extends AbstractActionController {
 
 		return $this->authService;
 	}
+
+    /**
+     * @return \PServerCMS\Form\Login
+     */
+    protected function getLoginForm() {
+        if (!$this->loginForm) {
+            $this->loginForm = $this->getServiceLocator()->get('pserver_user_login_form');
+        }
+
+        return $this->loginForm;
+    }
 
 	/**
 	 * @return \PServerCMS\Form\Register

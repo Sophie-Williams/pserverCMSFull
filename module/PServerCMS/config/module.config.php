@@ -107,6 +107,7 @@ return array(
 			'email/tpl/password'			=> __DIR__ . '/../view/email/tpl/password.phtml',
 			'helper/sidebarWidget'			=> __DIR__ . '/../view/helper/sidebar.twig',
 			'helper/sidebarLoggedInWidget'	=> __DIR__ . '/../view/helper/logged-in.twig',
+            'helper/FormWidget'		        => __DIR__ . '/../view/helper/register.twig',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
