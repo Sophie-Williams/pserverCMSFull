@@ -11,6 +11,7 @@ return array(
 		'PDODblibModule',
 		'BjyAuthorize',
 		'PServerCMS',
+		'PServerAdmin',
 		'GameBackend',
     ),
 

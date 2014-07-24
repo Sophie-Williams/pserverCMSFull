@@ -43,6 +43,8 @@ return array(
 		'resource_providers' => array(
 			'BjyAuthorize\Provider\Resource\Config' => array(
 				'auth' => array(),
+				'user' => array(),
+				'admin_home' => array(),
 			),
 		),
 
@@ -60,6 +62,8 @@ return array(
 					// the "wear" privilege on the resource "pants"
 					array('guest', 'auth', 'index'),
 					array(array(), 'auth', 'logout'),
+					array(array('user', 'admin'), 'user'),
+					array(array('admin'), 'admin_home'),
 				),
 
 				// Don't mix allow/deny rules if you are using role inheritance.
@@ -102,6 +106,8 @@ return array(
 				array('controller' => 'PServerCMS\Controller\Auth', 'roles' => array('guest')),
 				array('controller' => 'PServerCMS\Controller\Auth', 'roles' => array(), 'action' => array('logout')),
 				array('controller' => 'PServerCMS\Controller\Site', 'roles' => array()),
+				array('controller' => 'PServerCMS\Controller\Account', 'roles' => array('user','admin')),
+				array('controller' => 'PServerAdmin\Controller\Index', 'roles' => array('admin')),
 			),
 
 			/* If this guard is specified here (i.e. it is enabled), it will block
