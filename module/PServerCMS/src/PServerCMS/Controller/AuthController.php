@@ -23,6 +23,11 @@ class AuthController extends AbstractActionController {
 	 */
 	protected $entityManager;
 
+	/**
+	 * TODO refactoring [export to service\user] and use the form
+	 *
+	 * @return array|\Zend\Http\Response
+	 */
 	public function loginAction() {
 
 		//if already login, redirect to success page
@@ -34,7 +39,10 @@ class AuthController extends AbstractActionController {
 		$oRequest = $this->getRequest();
 
 		if (!$oRequest->isPost()){
-			return array('aErrorMessages' => $this->flashmessenger()->getMessagesFromNamespace(self::ErrorNameSpace), 'loginForm' => $oForm);
+			return array(
+				'aErrorMessages' => $this->flashmessenger()->getMessagesFromNamespace(self::ErrorNameSpace),
+				'loginForm' => $oForm
+			);
 		}
 
 		$oAuthService = $this->getAuthService();

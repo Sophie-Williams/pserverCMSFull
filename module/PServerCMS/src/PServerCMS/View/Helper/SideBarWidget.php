@@ -44,6 +44,9 @@ class SideBarWidget extends AbstractHelper {
 		$this->setServiceLocator($serviceLocatorInterface);
 	}
 
+	/**
+	 * @return string
+	 */
 	public function __invoke(){
 		$sTemplate = '';
 		if($this->getAuthService()->getIdentity()){
@@ -100,6 +103,9 @@ class SideBarWidget extends AbstractHelper {
 		return $this->configService;
 	}
 
+	/**
+	 * @return array
+	 */
 	protected function getTimer(){
 		if(!$this->timerService){
 			$aConfig = $this->getConfigService();

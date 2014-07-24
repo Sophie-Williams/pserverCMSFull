@@ -22,11 +22,12 @@ class FormWidget extends AbstractHelper {
 
     public function __invoke($oForm){
 
-        $oViewModel = new ViewModel(array('registerForm' => $oForm));
-        $oViewModel->setTemplate('helper/form.twig');
-        $sTemplate = $this->getView()->render($oViewModel);
+        $oViewModel = new ViewModel(array(
+			'registerForm' => $oForm
+		));
+        $oViewModel->setTemplate('helper/formWidget');
 
-        return $sTemplate;
+        return $this->getView()->render($oViewModel);
     }
 
     /**

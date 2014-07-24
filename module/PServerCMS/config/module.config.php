@@ -45,7 +45,7 @@ return array(
 						'controller'   => 'PServerCMS\Controller\Site',
 					),
 				),
-			)
+			),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -107,7 +107,7 @@ return array(
 			'email/tpl/password'			=> __DIR__ . '/../view/email/tpl/password.phtml',
 			'helper/sidebarWidget'			=> __DIR__ . '/../view/helper/sidebar.twig',
 			'helper/sidebarLoggedInWidget'	=> __DIR__ . '/../view/helper/logged-in.twig',
-            'helper/FormWidget'		        => __DIR__ . '/../view/helper/register.twig',
+            'helper/formWidget'		        => __DIR__ . '/../view/helper/form.twig',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
