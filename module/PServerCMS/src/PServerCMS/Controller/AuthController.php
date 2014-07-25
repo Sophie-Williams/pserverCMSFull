@@ -24,8 +24,6 @@ class AuthController extends AbstractActionController {
 	protected $entityManager;
 
 	/**
-	 * TODO refactoring [export to service\user] and use the form
-	 *
 	 * @return array|\Zend\Http\Response
 	 */
 	public function loginAction() {
@@ -35,47 +33,20 @@ class AuthController extends AbstractActionController {
 			return $this->redirect()->toRoute(self::RouteLoggedIn);
 		}
 
-        $oForm = $this->getLoginForm();
+		$oForm = $this->getLoginForm();
 		$oRequest = $this->getRequest();
 
 		if (!$oRequest->isPost()){
 			return array(
 				'aErrorMessages' => $this->flashmessenger()->getMessagesFromNamespace(self::ErrorNameSpace),
+				//'aErrorMessages' => array('dfdsf'),
 				'loginForm' => $oForm
 			);
 		}
 
-		$oAuthService = $this->getAuthService();
-		/** @var \DoctrineModule\Authentication\Adapter\ObjectRepository $oAdapter */
-		$oAdapter = $oAuthService->getAdapter();
-		$oAdapter->setIdentity($oRequest->getPost('username',''));
-		$oAdapter->setCredential($oRequest->getPost('password',''));
-		$oResult = $oAuthService->authenticate($oAdapter);
-
-
-		if($oResult->isValid()){
-			$bSuccess = true;
-			/** @var \PServerCMS\Entity\Users $oUser */
-			$oUser = $oResult->getIdentity();
-			if(!(bool) $oUser->getUserRole()->getKeys()){
-				$bSuccess = false;
-				$this->setFailedLoginMessage('Your Account is not active, please confirm your email');
-			}else{
-				// TODO check country
-			//}else{
-				// TODO check if blocked
-			}
-
-			if($bSuccess){
-				return $this->redirect()->toRoute(self::RouteLoggedIn);
-			}else{
-				// Login correct but not active or blocked or smth else
-				$oAuthService->clearIdentity();
-				$oAuthService->getStorage()->clear();
-			}
+		if($this->getUserService()->login($this->params()->fromPost())){
+			return $this->redirect()->toRoute(self::RouteLoggedIn);
 		}
-
-		$this->flashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage($this->getFailedLoginMessage());
 		return $this->redirect()->toUrl($this->url()->fromRoute('auth'));
 	}
 
@@ -120,9 +91,7 @@ class AuthController extends AbstractActionController {
 		if($oRequest->isPost()){
 			$oUser = $this->getUserService()->registerGame($this->params()->fromPost(), $oCode);
 			if($oUser){
-				$oAuthService = $this->getAuthService();
-				$oAuthService->getStorage()->write($oUser);
-
+				$this->getUserService()->doAuthentication($oUser);
 				return $this->redirect()->toRoute('home');
 			}
 		}
@@ -274,13 +243,5 @@ class AuthController extends AbstractActionController {
 		}
 
 		return $this->entityManager;
-	}
-
-	protected function setFailedLoginMessage( $sMessage ){
-		$this->failedLoginMessage = $sMessage;
-	}
-
-	protected function getFailedLoginMessage(){
-		return $this->failedLoginMessage;
 	}
 }

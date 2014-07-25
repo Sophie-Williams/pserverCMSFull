@@ -13,44 +13,87 @@ use PServerCMS\Entity\Usercodes;
 use PServerCMS\Entity\Users;
 use PServerCMS\Helper\Ip;
 use PServerCMS\Keys\Entity;
+use PServerCMS\Mapper\Hydrator;
 use Zend\Crypt\Password\Bcrypt;
+use Zend\Mvc\Service\ControllerPluginManagerFactory;
 
 class User extends InvokableBase {
-
-	/**
-	 * @var \Zend\Authentication\AuthenticationService
-	 */
+	const ErrorNameSpace = 'user-auth';
+	/** @var \Zend\Mvc\Controller\Plugin\FlashMessenger */
+	protected $flashMessenger;
+	/** @var \Zend\Mvc\Controller\PluginManager */
+	protected $controllerPluginManager;
+	/** @var \Zend\Authentication\AuthenticationService */
 	protected $authService;
-
-	/**
-	 * @var \PServerCMS\Form\Register
-	 */
+	/** @var \PServerCMS\Form\Login */
+	protected $loginForm;
+	/** @var \PServerCMS\Form\Register */
 	protected $registerForm;
-
-	/**
-	 * @var \PServerCMS\Service\Mail
-	 */
+	/** @var \PServerCMS\Service\Mail */
 	protected $mailService;
-
-	/**
-	 * @var \PServerCMS\Service\UserCodes
-	 */
+	/** @var \PServerCMS\Service\UserCodes */
 	protected $userCodesService;
-
-	/**
-	 * @var \PServerCMS\Form\Password
-	 */
+	/** @var \PServerCMS\Form\Password */
 	protected $passwordForm;
-
-	/**
-	 * @var \GameBackend\DataService\DataServiceInterface
-	 */
+	/** @var \GameBackend\DataService\DataServiceInterface */
 	protected $gameBackendService;
+	/** @var \PServerCMS\Form\PwLost */
+	protected $passwordLostForm;
+	/** @var string */
+	private $failedLoginMessage = 'Authentication failed. Please try again.';
+
+	public function login( array $aData ){
+		$oForm = $this->getLoginForm();
+		$oForm->setHydrator( new Hydrator() );
+		$oForm->bind( new Users() );
+		$oForm->setData($aData);
+		if(!$oForm->isValid()){
+			return false;
+		}
+
+		/** @var \PServerCMS\Entity\Users $oUser */
+		$oUser = $oForm->getData();
+
+		$oAuthService = $this->getAuthService();
+		/** @var \DoctrineModule\Authentication\Adapter\ObjectRepository $oAdapter */
+		$oAdapter = $oAuthService->getAdapter();
+		$oAdapter->setIdentity($oUser->getUsername());
+		$oAdapter->setCredential($oUser->getPassword());
+		$oResult = $oAuthService->authenticate($oAdapter);
+		if($oResult->isValid()){
+			$bSuccess = true;
+			/** @var \PServerCMS\Entity\Users $oUser */
+			$oUser = $oResult->getIdentity();
+			if(!(bool) $oUser->getUserRole()->getKeys()){
+				$bSuccess = false;
+				$this->setFailedLoginMessage('Your Account is not active, please confirm your email');
+			}else{
+				// TODO check country
+				//}else{
+				// TODO check if blocked
+			}
+
+			if($bSuccess){
+				return true;
+			}else{
+				// Login correct but not active or blocked or smth else
+				$oAuthService->clearIdentity();
+				$oAuthService->getStorage()->clear();
+			}
+		}
+		$this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage($this->getFailedLoginMessage());
+		return false;
+	}
 
 	/**
-	 * @var \PServerCMS\Form\PwLost
+	 *	TODO TEST
 	 */
-	protected $passwordLostForm;
+	public function doAuthentication( \PServerCMS\Entity\Users $oUser ){
+		$oAuthService = $this->getAuthService();
+		// FIX: no roles after register
+		$oUser->getRoles();
+		$oAuthService->getStorage()->write($oUser);
+	}
 
 	/**
 	 * @param array $aData
@@ -60,9 +103,8 @@ class User extends InvokableBase {
 	public function register( array $aData ){
 
 		$oForm = $this->getRegisterForm();
-
-		$oForm->setHydrator( new \PServerCMS\Mapper\Hydrator() );
-		$oForm->bind(new Users());
+		$oForm->setHydrator( new Hydrator() );
+		$oForm->bind( new Users() );
 		$oForm->setData($aData);
 		if(!$oForm->isValid()){
 			return false;
@@ -187,6 +229,17 @@ class User extends InvokableBase {
 	}
 
 	/**
+	 * @return \PServerCMS\Form\Login
+	 */
+	protected function getLoginForm() {
+		if (! $this->loginForm) {
+			$this->loginForm = $this->getServiceManager()->get('pserver_user_login_form');
+		}
+
+		return $this->loginForm;
+	}
+
+	/**
 	 * @return \PServerCMS\Form\Register
 	 */
 	protected function getRegisterForm() {
@@ -250,5 +303,41 @@ class User extends InvokableBase {
 		}
 
 		return $this->gameBackendService;
+	}
+
+	/**
+	 * @return \Zend\Mvc\Controller\PluginManager
+	 */
+	protected function getControllerPluginManager(){
+		if (! $this->controllerPluginManager) {
+			$this->controllerPluginManager = $this->getServiceManager()->get('ControllerPluginManager');
+		}
+
+		return $this->controllerPluginManager;
+	}
+
+	/**
+	 * @return \Zend\Mvc\Controller\Plugin\FlashMessenger
+	 */
+	protected function getFlashMessenger(){
+		if (! $this->flashMessenger) {
+			$this->flashMessenger = $this->getControllerPluginManager()->get('flashMessenger');
+		}
+
+		return $this->flashMessenger;
+	}
+
+	/**
+	 * @param $sMessage
+	 */
+	protected function setFailedLoginMessage( $sMessage ){
+		$this->failedLoginMessage = $sMessage;
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getFailedLoginMessage(){
+		return $this->failedLoginMessage;
 	}
 }

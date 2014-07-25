@@ -3,6 +3,7 @@
 namespace PServerCMS;
 
 use PServerCMS\Keys\Entity;
+use PServerCMS\Model\AuthStorage;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use PServerCMS\Helper;
@@ -70,6 +71,7 @@ class Module {
 					$oAdapter->setOptions( $aConfig );
 
 					$oAuthService = new \Zend\Authentication\AuthenticationService();
+					$oAuthService->setStorage( new AuthStorage() );
 					return $oAuthService->setAdapter($oAdapter);
 				},
 				'pserver_user_register_form' => function($sm){
