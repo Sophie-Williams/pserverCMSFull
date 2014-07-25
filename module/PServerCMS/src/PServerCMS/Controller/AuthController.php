@@ -11,8 +11,6 @@ class AuthController extends AbstractActionController {
 	const RouteLoggedIn = 'home';
 	protected $passwordLostForm;
 
-	private $failedLoginMessage = 'Authentication failed. Please try again.';
-
 	protected $userService;
 	protected $authService;
 	protected $registerForm;

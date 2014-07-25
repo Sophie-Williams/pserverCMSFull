@@ -19,10 +19,6 @@ use Zend\Mvc\Service\ControllerPluginManagerFactory;
 
 class User extends InvokableBase {
 	const ErrorNameSpace = 'user-auth';
-	/** @var \Zend\Mvc\Controller\Plugin\FlashMessenger */
-	protected $flashMessenger;
-	/** @var \Zend\Mvc\Controller\PluginManager */
-	protected $controllerPluginManager;
 	/** @var \Zend\Authentication\AuthenticationService */
 	protected $authService;
 	/** @var \PServerCMS\Form\Login */
@@ -47,6 +43,9 @@ class User extends InvokableBase {
 		$oForm->setHydrator( new Hydrator() );
 		$oForm->bind( new Users() );
 		$oForm->setData($aData);
+
+		$this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage($this->getFailedLoginMessage());
+
 		if(!$oForm->isValid()){
 			return false;
 		}
@@ -74,6 +73,7 @@ class User extends InvokableBase {
 			}
 
 			if($bSuccess){
+				$this->getFlashMessenger()->clearCurrentMessagesFromNamespace(self::ErrorNameSpace);
 				return true;
 			}else{
 				// Login correct but not active or blocked or smth else
@@ -81,7 +81,6 @@ class User extends InvokableBase {
 				$oAuthService->getStorage()->clear();
 			}
 		}
-		$this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage($this->getFailedLoginMessage());
 		return false;
 	}
 
@@ -303,28 +302,6 @@ class User extends InvokableBase {
 		}
 
 		return $this->gameBackendService;
-	}
-
-	/**
-	 * @return \Zend\Mvc\Controller\PluginManager
-	 */
-	protected function getControllerPluginManager(){
-		if (! $this->controllerPluginManager) {
-			$this->controllerPluginManager = $this->getServiceManager()->get('ControllerPluginManager');
-		}
-
-		return $this->controllerPluginManager;
-	}
-
-	/**
-	 * @return \Zend\Mvc\Controller\Plugin\FlashMessenger
-	 */
-	protected function getFlashMessenger(){
-		if (! $this->flashMessenger) {
-			$this->flashMessenger = $this->getControllerPluginManager()->get('flashMessenger');
-		}
-
-		return $this->flashMessenger;
 	}
 
 	/**

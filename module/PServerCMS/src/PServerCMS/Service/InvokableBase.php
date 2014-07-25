@@ -14,24 +14,19 @@ use Zend\ServiceManager\ServiceManagerAwareInterface;
 
 class InvokableBase implements ServiceManagerAwareInterface {
 
-	/**
-	 * @var ServiceManager
-	 */
+	/** @var ServiceManager */
 	protected $serviceManager;
-
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
+	/** @var \Doctrine\ORM\EntityManager */
 	protected $entityManager;
-
-	/**
-	 * @var ConfigRead
-	 */
+	/** @var ConfigRead */
 	protected $configReadService;
+	/** @return ServiceManager */
+	/** @var \Zend\Mvc\Controller\Plugin\FlashMessenger */
+	protected $flashMessenger;
+	/** @var \Zend\Mvc\Controller\PluginManager */
+	protected $controllerPluginManager;
 
-	/**
-	 * @return ServiceManager
-	 */
+
 	public function getServiceManager() {
 		return $this->serviceManager;
 	}
@@ -67,5 +62,27 @@ class InvokableBase implements ServiceManagerAwareInterface {
 		}
 
 		return $this->configReadService;
+	}
+
+	/**
+	 * @return \Zend\Mvc\Controller\PluginManager
+	 */
+	protected function getControllerPluginManager(){
+		if (! $this->controllerPluginManager) {
+			$this->controllerPluginManager = $this->getServiceManager()->get('ControllerPluginManager');
+		}
+
+		return $this->controllerPluginManager;
+	}
+
+	/**
+	 * @return \Zend\Mvc\Controller\Plugin\FlashMessenger
+	 */
+	protected function getFlashMessenger(){
+		if (! $this->flashMessenger) {
+			$this->flashMessenger = $this->getControllerPluginManager()->get('flashMessenger');
+		}
+
+		return $this->flashMessenger;
 	}
 }
