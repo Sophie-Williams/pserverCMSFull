@@ -2,13 +2,29 @@
 
 namespace PServerCMS\Controller;
 
+use PServerCMS\Keys\Entity;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use PServerCMS\Helper;
 
 class IndexController extends AbstractActionController {
-	public function indexAction() {
+	/** @var \Doctrine\ORM\EntityManager $entityManager */
+	protected $entityManager;
 
-		return new ViewModel();
+	public function indexAction() {
+		return array(
+			'aNews' => $this->getEntityManager()->getRepository(Entity::News)->getActiveNews()
+		);
+	}
+
+
+	/**
+	 * @return \Doctrine\ORM\EntityManager
+	 */
+	public function getEntityManager(){
+		if (!$this->entityManager) {
+			$this->entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+		}
+
+		return $this->entityManager;
 	}
 }

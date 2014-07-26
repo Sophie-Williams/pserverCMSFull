@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * News
  *
  * @ORM\Table(name="news", indexes={@ORM\Index(name="fk_news_users1_idx", columns={"users_usrId"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PServerCMS\Entity\Repository\News")
  */
 class News {
 	/**
