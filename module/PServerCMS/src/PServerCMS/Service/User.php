@@ -50,6 +50,14 @@ class User extends InvokableBase {
 			return false;
 		}
 
+		$oEntityManager = $this->getEntityManager();
+		/** @var \PServerCMS\Entity\Repository\IPBlock $RepositoryIPBlock */
+		$RepositoryIPBlock = $oEntityManager->getRepository(Entity::IpBlock);
+		if($RepositoryIPBlock->isIPAllowed( Ip::getIp() )){
+			$this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Your IP is blocked!, try it later again');
+			return false;
+		}
+
 		/** @var \PServerCMS\Entity\Users $oUser */
 		$oUser = $oForm->getData();
 
@@ -74,13 +82,37 @@ class User extends InvokableBase {
 
 			if($bSuccess){
 				$this->getFlashMessenger()->clearCurrentMessagesFromNamespace(self::ErrorNameSpace);
+
+				/**
+				 * Set LoginHistory
+				 */
+				$class = Entity::LoginHistory;
+				/** @var \PServerCMS\Entity\LoginHistory $oLoginHistory */
+				$oLoginHistory = new $class();
+				$oLoginHistory->setUsersUsrid($oUser);
+				$oLoginHistory->setIp(Ip::getIp());
+				$oEntityManager->persist($oLoginHistory);
+				$oEntityManager->flush();
+
 				return true;
 			}else{
 				// Login correct but not active or blocked or smth else
 				$oAuthService->clearIdentity();
 				$oAuthService->getStorage()->clear();
 			}
+		}else{
+			/**
+			 * Set LoginHistory
+			 */
+			$class = Entity::LoginFailed;
+			/** @var \PServerCMS\Entity\Loginfaild $oLoginFailed */
+			$oLoginFailed = new $class();
+			$oLoginFailed->setUsername($oUser->getUsername());
+			$oLoginFailed->setIp(Ip::getIp());
+			$oEntityManager->persist($oLoginFailed);
+			$oEntityManager->flush();
 		}
+
 		return false;
 	}
 

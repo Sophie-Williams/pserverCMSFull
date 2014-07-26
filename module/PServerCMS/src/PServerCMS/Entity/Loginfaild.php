@@ -37,7 +37,7 @@ class Loginfaild {
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="created", type="integer", nullable=false)
+	 * @ORM\Column(name="created", type="datetime", nullable=false)
 	 */
 	private $created;
 

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Ipblock
  *
  * @ORM\Table(name="ipBlock")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PServerCMS\Entity\Repository\IPBlock")
  */
 class Ipblock {
 	/**
@@ -30,14 +30,14 @@ class Ipblock {
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="expire", type="integer", nullable=false)
+	 * @ORM\Column(name="expire", type="datetime", nullable=false)
 	 */
 	private $expire;
 
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="created", type="integer", nullable=false)
+	 * @ORM\Column(name="created", type="datetime", nullable=false)
 	 */
 	private $created;
 
