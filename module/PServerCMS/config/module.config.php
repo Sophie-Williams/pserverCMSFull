@@ -181,5 +181,11 @@ return array(
 				),
 			),
 		),
+        'login' => array(
+            'exploit' => array(
+                'time' => 900, //in seconds
+                'try' => 5
+            )
+        )
 	),
 );

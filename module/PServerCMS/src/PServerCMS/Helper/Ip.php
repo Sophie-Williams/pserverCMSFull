@@ -8,10 +8,20 @@ namespace PServerCMS\Helper;
  */
 class Ip{
 
+    /**
+     * @var string cache ClientIP
+     */
+    private static $sIP;
+
 	/**
 	 * @return string
 	 */
 	public static function getIp(){
+
+        if(self::$sIP){
+            return self::$sIP;
+        }
+
 		if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && !empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
 			$sResult = $_SERVER['HTTP_X_FORWARDED_FOR'];
 		}else{
@@ -23,6 +33,8 @@ class Ip{
 			$aResult = explode(',', $sResult);
 			$sResult = trim($aResult[count($aResult)-1]);
 		}
+
+        self::$sIP = $sResult;
 
 		return $sResult;
 	}

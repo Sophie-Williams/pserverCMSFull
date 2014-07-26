@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Loginfaild
  *
  * @ORM\Table(name="loginFaild")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PServerCMS\Entity\Repository\LoginFaild")
  */
 class Loginfaild {
 	/**

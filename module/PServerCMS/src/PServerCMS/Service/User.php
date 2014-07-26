@@ -38,7 +38,13 @@ class User extends InvokableBase {
 	/** @var string */
 	private $failedLoginMessage = 'Authentication failed. Please try again.';
 
-	public function login( array $aData ){
+    /**
+     * TODO Refactoring
+     *
+     * @param array $aData
+     * @return bool
+     */
+    public function login( array $aData ){
 		$oForm = $this->getLoginForm();
 		$oForm->setHydrator( new Hydrator() );
 		$oForm->bind( new Users() );
@@ -53,8 +59,9 @@ class User extends InvokableBase {
 		$oEntityManager = $this->getEntityManager();
 		/** @var \PServerCMS\Entity\Repository\IPBlock $RepositoryIPBlock */
 		$RepositoryIPBlock = $oEntityManager->getRepository(Entity::IpBlock);
-		if($RepositoryIPBlock->isIPAllowed( Ip::getIp() )){
-			$this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Your IP is blocked!, try it later again');
+        $oIsIpAllowed = $RepositoryIPBlock->isIPAllowed( Ip::getIp() );
+		if($oIsIpAllowed){
+			$this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Your IP is blocked!, try it again '.$oIsIpAllowed->getExpire()->format('H:i:s'));
 			return false;
 		}
 
@@ -101,16 +108,37 @@ class User extends InvokableBase {
 				$oAuthService->getStorage()->clear();
 			}
 		}else{
-			/**
-			 * Set LoginHistory
-			 */
-			$class = Entity::LoginFailed;
-			/** @var \PServerCMS\Entity\Loginfaild $oLoginFailed */
-			$oLoginFailed = new $class();
-			$oLoginFailed->setUsername($oUser->getUsername());
-			$oLoginFailed->setIp(Ip::getIp());
-			$oEntityManager->persist($oLoginFailed);
-			$oEntityManager->flush();
+
+            $iMaxTries = $this->getConfigService()->get('pserver.login.exploit.try');
+            if(!$iMaxTries){
+                return false;
+            }
+
+            /**
+             * Set LoginHistory
+             */
+            $class = Entity::LoginFailed;
+            /** @var \PServerCMS\Entity\Loginfaild $oLoginFailed */
+            $oLoginFailed = new $class();
+            $oLoginFailed->setUsername($oUser->getUsername());
+            $oLoginFailed->setIp(Ip::getIp());
+            $oEntityManager->persist($oLoginFailed);
+            $oEntityManager->flush();
+
+            /** @var \PServerCMS\Entity\Repository\LoginFaild $oRespositoryLoginFaild */
+            $oRespositoryLoginFaild = $oEntityManager->getRepository($class);
+            if($oRespositoryLoginFaild->getNumberOfFailLogins4Ip(Ip::getIp()) >= $iMaxTries){
+                $class = Entity::IpBlock;
+                /** @var \PServerCMS\Entity\Ipblock $oIPBlock */
+                $oIPBlock = new $class();
+                $oDateTime = new \DateTime();
+                $oDateTime->setTimestamp(time()+$this->getConfigService()->get('pserver.login.exploit.time'));
+                $oIPBlock->setExpire($oDateTime);
+                $oIPBlock->setIp(Ip::getIp());
+                $oEntityManager->persist($oIPBlock);
+                $oEntityManager->flush();
+            }
+
 		}
 
 		return false;
@@ -183,12 +211,16 @@ class User extends InvokableBase {
 		$iBackendId = $oGameBackend->setUser($oUser, $sPlainPassword);
 		$oUser->setBackendId($iBackendId);
 
-		$oEntityManager = $this->getEntityManager();
+        $oEntityManager = $this->getEntityManager();
+        /** user have already a backendId, so better to set it there */
+        $oEntityManager->persist($oUser);
+        $oEntityManager->flush();
+
 		$oRepositoryRole = $oEntityManager->getRepository(Entity::UserRole);
 		$sRole = $this->getConfigService()->get('pserver.register.role','user');
 		$oRole = $oRepositoryRole->findOneBy(array('roleId' => $sRole));
 
-		// add the ROLE + BackendId + Remove the Key
+		// add the ROLE + Remove the Key
 		$oUser->addUserRole($oRole);
 		$oRole->addUsersUsrid($oUser);
 		$oEntityManager->persist($oUser);

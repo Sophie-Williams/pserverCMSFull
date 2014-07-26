@@ -28,14 +28,14 @@ class Ipblock {
 	private $ip;
 
 	/**
-	 * @var integer
+	 * @var \DateTime
 	 *
 	 * @ORM\Column(name="expire", type="datetime", nullable=false)
 	 */
 	private $expire;
 
 	/**
-	 * @var integer
+	 * @var \DateTime
 	 *
 	 * @ORM\Column(name="created", type="datetime", nullable=false)
 	 */
@@ -79,11 +79,11 @@ class Ipblock {
 	/**
 	 * Set expire
 	 *
-	 * @param integer $expire
+	 * @param \DateTime $expire
 	 *
 	 * @return Ipblock
 	 */
-	public function setExpire( $expire ) {
+	public function setExpire( \DateTime $expire ) {
 		$this->expire = $expire;
 
 		return $this;
@@ -92,7 +92,7 @@ class Ipblock {
 	/**
 	 * Get expire
 	 *
-	 * @return integer
+	 * @return \DateTime
 	 */
 	public function getExpire() {
 		return $this->expire;
@@ -101,11 +101,11 @@ class Ipblock {
 	/**
 	 * Set created
 	 *
-	 * @param integer $created
+	 * @param \DateTime $created
 	 *
 	 * @return Ipblock
 	 */
-	public function setCreated( $created ) {
+	public function setCreated( \DateTime $created ) {
 		$this->created = $created;
 
 		return $this;
@@ -114,7 +114,7 @@ class Ipblock {
 	/**
 	 * Get created
 	 *
-	 * @return integer
+	 * @return \DateTime
 	 */
 	public function getCreated() {
 		return $this->created;

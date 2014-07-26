@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
 class IPBlock extends EntityRepository {
 
 	/**
-	 * @return boolean
+	 * @return \PServerCMS\Entity\Ipblock
 	 */
 	public function isIPAllowed( $sIP ){
 		$oQuery = $this->createQueryBuilder('p')
@@ -19,9 +19,11 @@ class IPBlock extends EntityRepository {
 			->setParameter('ipString', $sIP)
 			->andWhere('p.expire >= :expireTime')
 			->setParameter('expireTime', new \DateTime())
+            ->orderBy('p.expire', 'desc')
+            ->setMaxResults(1)
 			->getQuery();
 //		\Zend\Debug\Debug::dump($oQuery->getParameters());die();
 
-		return (bool) $oQuery->getOneOrNullResult();
+		return $oQuery->getOneOrNullResult();
 	}
 }
