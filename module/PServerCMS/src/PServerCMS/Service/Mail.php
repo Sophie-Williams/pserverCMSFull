@@ -41,7 +41,7 @@ class Mail extends InvokableBase {
 	/**
 	 * RegisterMail
 	 *
-	 * @param Users $oUserEntity
+	 * @param Users $oUser
 	 * @param       $sCode
 	 */
 	public function register( Users $oUser, $sCode ){
@@ -69,8 +69,9 @@ class Mail extends InvokableBase {
 	}
 
 	/**
-	 * @param $sSubjectKey
-	 * @param $sReceiverMail
+	 * @param       $sSubjectKey
+	 * @param Users $oUser
+	 * @param       $aParams
 	 */
 	protected function send($sSubjectKey, Users $oUser, $aParams){
 		// TODO TwigTemplateEngine

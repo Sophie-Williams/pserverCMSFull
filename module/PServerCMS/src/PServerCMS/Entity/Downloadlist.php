@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Downloadlist
  *
  * @ORM\Table(name="downloadList")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PServerCMS\Entity\Repository\DownloadList")
  */
 class Downloadlist {
 	/**

@@ -22,7 +22,6 @@ class IPBlock extends EntityRepository {
             ->orderBy('p.expire', 'desc')
             ->setMaxResults(1)
 			->getQuery();
-//		\Zend\Debug\Debug::dump($oQuery->getParameters());die();
 
 		return $oQuery->getOneOrNullResult();
 	}

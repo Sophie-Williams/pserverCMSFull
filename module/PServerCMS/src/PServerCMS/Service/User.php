@@ -11,11 +11,11 @@ namespace PServerCMS\Service;
 
 use PServerCMS\Entity\Usercodes;
 use PServerCMS\Entity\Users;
+use PServerCMS\Helper\DateTimer;
 use PServerCMS\Helper\Ip;
 use PServerCMS\Keys\Entity;
 use PServerCMS\Mapper\Hydrator;
 use Zend\Crypt\Password\Bcrypt;
-use Zend\Mvc\Service\ControllerPluginManagerFactory;
 
 class User extends InvokableBase {
 	const ErrorNameSpace = 'user-auth';
@@ -53,7 +53,7 @@ class User extends InvokableBase {
 		if(!$oForm->isValid()){
 			return false;
 		}
-        if(!$this->checkIpAllowed()){
+        if(!$this->isIpAllowed()){
             return false;
         }
 		/** @var \PServerCMS\Entity\Users $oUser */
@@ -379,9 +379,7 @@ class User extends InvokableBase {
             $class = Entity::IpBlock;
             /** @var \PServerCMS\Entity\Ipblock $oIPBlock */
             $oIPBlock = new $class();
-            $oDateTime = new \DateTime();
-            $oDateTime->setTimestamp(time()+$iTime);
-            $oIPBlock->setExpire($oDateTime);
+            $oIPBlock->setExpire(DateTimer::getDateTime4TimeStamp(time()+$iTime));
             $oIPBlock->setIp(Ip::getIp());
             $oEntityManager->persist($oIPBlock);
             $oEntityManager->flush();
@@ -404,12 +402,13 @@ class User extends InvokableBase {
     /**
      * @return bool
      */
-    protected function checkIpAllowed(){
+    protected function isIpAllowed(){
         $oEntityManager = $this->getEntityManager();
         /** @var \PServerCMS\Entity\Repository\IPBlock $RepositoryIPBlock */
         $RepositoryIPBlock = $oEntityManager->getRepository(Entity::IpBlock);
         $oIsIpAllowed = $RepositoryIPBlock->isIPAllowed( Ip::getIp() );
         if($oIsIpAllowed){
+			\Zend\Debug\Debug::dump($oIsIpAllowed);die();
             $this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Your IP is blocked!, try it again '.$oIsIpAllowed->getExpire()->format('H:i:s'));
             return false;
         }

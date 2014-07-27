@@ -3,6 +3,7 @@
 namespace PServerCMS\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use PServerCMS\Helper\DateTimer;
 
 /**
  * LoginFaild
@@ -16,14 +17,12 @@ class LoginFaild extends EntityRepository {
 	 * @return int
 	 */
 	public function getNumberOfFailLogins4Ip( $sIP, $iTimeInterVal ){
-        $oDateTime = new \DateTime();
-        $oDateTime = $oDateTime->setTimestamp(time()-$iTimeInterVal);
         $oQuery = $this->createQueryBuilder('p')
             ->select('p')
             ->where('p.ip = :ipString')
             ->setParameter('ipString', $sIP)
             ->andWhere('p.created >= :expireTime')
-            ->setParameter('expireTime', $oDateTime)
+            ->setParameter('expireTime', DateTimer::getDateTime4TimeStamp(time()-$iTimeInterVal))
             ->getQuery();
         /**
          * TODO remove count

@@ -11,11 +11,13 @@ class IndexController extends AbstractActionController {
 	protected $entityManager;
 
 	public function indexAction() {
+		/** @var \PServerCMS\Entity\Repository\News $oRepositoryNews */
+		$oRepositoryNews = $this->getEntityManager()->getRepository(Entity::News);
+
 		return array(
-			'aNews' => $this->getEntityManager()->getRepository(Entity::News)->getActiveNews()
+			'aNews' => $oRepositoryNews->getActiveNews()
 		);
 	}
-
 
 	/**
 	 * @return \Doctrine\ORM\EntityManager

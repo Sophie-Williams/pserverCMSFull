@@ -9,15 +9,23 @@
 namespace PServerCMS\Controller;
 
 
+use PServerCMS\Keys\Entity;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class SiteController extends AbstractActionController {
+	/** @var \Doctrine\ORM\EntityManager $entityManager */
+	protected $entityManager;
 
 	/**
 	 * DownloadPage
 	 */
 	public function downloadAction(){
-		return array();
+		/** @var \PServerCMS\Entity\Repository\DownloadList $oRepositoryDownload */
+		$oRepositoryDownload = $this->getEntityManager()->getRepository(Entity::DownloadList);
+
+		return array(
+			'aDownloadList' => $oRepositoryDownload->getActiveDownloadList()
+		);
 	}
 
 	/**
@@ -48,4 +56,14 @@ class SiteController extends AbstractActionController {
 		return array();
 	}
 
+	/**
+	 * @return \Doctrine\ORM\EntityManager
+	 */
+	public function getEntityManager(){
+		if (!$this->entityManager) {
+			$this->entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+		}
+
+		return $this->entityManager;
+	}
 } 
