@@ -125,14 +125,16 @@ class User extends InvokableBase {
             $oEntityManager->persist($oLoginFailed);
             $oEntityManager->flush();
 
+			$iTime = $this->getConfigService()->get('pserver.login.exploit.time');
+
             /** @var \PServerCMS\Entity\Repository\LoginFaild $oRespositoryLoginFaild */
             $oRespositoryLoginFaild = $oEntityManager->getRepository($class);
-            if($oRespositoryLoginFaild->getNumberOfFailLogins4Ip(Ip::getIp()) >= $iMaxTries){
+            if($oRespositoryLoginFaild->getNumberOfFailLogins4Ip(Ip::getIp(), $iTime) >= $iMaxTries){
                 $class = Entity::IpBlock;
                 /** @var \PServerCMS\Entity\Ipblock $oIPBlock */
                 $oIPBlock = new $class();
                 $oDateTime = new \DateTime();
-                $oDateTime->setTimestamp(time()+$this->getConfigService()->get('pserver.login.exploit.time'));
+                $oDateTime->setTimestamp(time()+$iTime);
                 $oIPBlock->setExpire($oDateTime);
                 $oIPBlock->setIp(Ip::getIp());
                 $oEntityManager->persist($oIPBlock);
