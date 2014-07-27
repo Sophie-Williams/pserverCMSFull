@@ -39,13 +39,16 @@ class User extends InvokableBase {
 	private $failedLoginMessage = 'Authentication failed. Please try again.';
 
     /**
-     * TODO Refactoring
-     *
      * @param array $aData
      * @return bool
      */
     public function login( array $aData ){
-        $oForm = $this->setDataAtForm($aData);
+
+		$oForm = $this->getLoginForm();
+		$oForm->setHydrator( new Hydrator() );
+		$oForm->bind( new Users() );
+		$oForm->setData($aData);
+
 		$this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage($this->getFailedLoginMessage());
 		if(!$oForm->isValid()){
 			return false;
@@ -370,9 +373,9 @@ class User extends InvokableBase {
 
         $iTime = $this->getConfigService()->get('pserver.login.exploit.time');
 
-        /** @var \PServerCMS\Entity\Repository\LoginFaild $oRespositoryLoginFaild */
-        $oRespositoryLoginFaild = $oEntityManager->getRepository($class);
-        if($oRespositoryLoginFaild->getNumberOfFailLogins4Ip(Ip::getIp(), $iTime) >= $iMaxTries){
+        /** @var \PServerCMS\Entity\Repository\LoginFaild $oRepositoryLoginFailed */
+        $oRepositoryLoginFailed = $oEntityManager->getRepository($class);
+        if($oRepositoryLoginFailed->getNumberOfFailLogins4Ip(Ip::getIp(), $iTime) >= $iMaxTries){
             $class = Entity::IpBlock;
             /** @var \PServerCMS\Entity\Ipblock $oIPBlock */
             $oIPBlock = new $class();
@@ -383,18 +386,6 @@ class User extends InvokableBase {
             $oEntityManager->persist($oIPBlock);
             $oEntityManager->flush();
         }
-    }
-
-    /**
-     * @param $aData
-     * @return \PServerCMS\Form\Login
-     */
-    protected function setDataAtForm($aData){
-        $oForm = $this->getLoginForm();
-        $oForm->setHydrator( new Hydrator() );
-        $oForm->bind( new Users() );
-        $oForm->setData($aData);
-        return $oForm;
     }
 
     /**
