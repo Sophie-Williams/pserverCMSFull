@@ -45,62 +45,23 @@ class User extends InvokableBase {
      * @return bool
      */
     public function login( array $aData ){
-		$oForm = $this->getLoginForm();
-		$oForm->setHydrator( new Hydrator() );
-		$oForm->bind( new Users() );
-		$oForm->setData($aData);
-
+        $oForm = $this->setDataAtForm($aData);
 		$this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage($this->getFailedLoginMessage());
-
 		if(!$oForm->isValid()){
 			return false;
 		}
-
-		$oEntityManager = $this->getEntityManager();
-		/** @var \PServerCMS\Entity\Repository\IPBlock $RepositoryIPBlock */
-		$RepositoryIPBlock = $oEntityManager->getRepository(Entity::IpBlock);
-        $oIsIpAllowed = $RepositoryIPBlock->isIPAllowed( Ip::getIp() );
-		if($oIsIpAllowed){
-			$this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Your IP is blocked!, try it again '.$oIsIpAllowed->getExpire()->format('H:i:s'));
-			return false;
-		}
-
+        if(!$this->checkIpAllowed()){
+            return false;
+        }
 		/** @var \PServerCMS\Entity\Users $oUser */
 		$oUser = $oForm->getData();
-
 		$oAuthService = $this->getAuthService();
-		/** @var \DoctrineModule\Authentication\Adapter\ObjectRepository $oAdapter */
-		$oAdapter = $oAuthService->getAdapter();
-		$oAdapter->setIdentity($oUser->getUsername());
-		$oAdapter->setCredential($oUser->getPassword());
-		$oResult = $oAuthService->authenticate($oAdapter);
+        $oResult = $this->getAuthResult($oAuthService,$oUser);
 		if($oResult->isValid()){
-			$bSuccess = true;
 			/** @var \PServerCMS\Entity\Users $oUser */
 			$oUser = $oResult->getIdentity();
-			if(!(bool) $oUser->getUserRole()->getKeys()){
-				$bSuccess = false;
-				$this->setFailedLoginMessage('Your Account is not active, please confirm your email');
-			}else{
-				// TODO check country
-				//}else{
-				// TODO check if blocked
-			}
-
-			if($bSuccess){
-				$this->getFlashMessenger()->clearCurrentMessagesFromNamespace(self::ErrorNameSpace);
-
-				/**
-				 * Set LoginHistory
-				 */
-				$class = Entity::LoginHistory;
-				/** @var \PServerCMS\Entity\LoginHistory $oLoginHistory */
-				$oLoginHistory = new $class();
-				$oLoginHistory->setUsersUsrid($oUser);
-				$oLoginHistory->setIp(Ip::getIp());
-				$oEntityManager->persist($oLoginHistory);
-				$oEntityManager->flush();
-
+            if($this->isValidLogin($oUser)){
+                $this->doLogin($oUser);
 				return true;
 			}else{
 				// Login correct but not active or blocked or smth else
@@ -108,41 +69,8 @@ class User extends InvokableBase {
 				$oAuthService->getStorage()->clear();
 			}
 		}else{
-
-            $iMaxTries = $this->getConfigService()->get('pserver.login.exploit.try');
-            if(!$iMaxTries){
-                return false;
-            }
-
-            /**
-             * Set LoginHistory
-             */
-            $class = Entity::LoginFailed;
-            /** @var \PServerCMS\Entity\Loginfaild $oLoginFailed */
-            $oLoginFailed = new $class();
-            $oLoginFailed->setUsername($oUser->getUsername());
-            $oLoginFailed->setIp(Ip::getIp());
-            $oEntityManager->persist($oLoginFailed);
-            $oEntityManager->flush();
-
-			$iTime = $this->getConfigService()->get('pserver.login.exploit.time');
-
-            /** @var \PServerCMS\Entity\Repository\LoginFaild $oRespositoryLoginFaild */
-            $oRespositoryLoginFaild = $oEntityManager->getRepository($class);
-            if($oRespositoryLoginFaild->getNumberOfFailLogins4Ip(Ip::getIp(), $iTime) >= $iMaxTries){
-                $class = Entity::IpBlock;
-                /** @var \PServerCMS\Entity\Ipblock $oIPBlock */
-                $oIPBlock = new $class();
-                $oDateTime = new \DateTime();
-                $oDateTime->setTimestamp(time()+$iTime);
-                $oIPBlock->setExpire($oDateTime);
-                $oIPBlock->setIp(Ip::getIp());
-                $oEntityManager->persist($oIPBlock);
-                $oEntityManager->flush();
-            }
-
+            $this->handleInvalidLogin($oUser);
 		}
-
 		return false;
 	}
 
@@ -383,4 +311,117 @@ class User extends InvokableBase {
 	protected function getFailedLoginMessage(){
 		return $this->failedLoginMessage;
 	}
+
+    /**
+     * @param Users $oUser
+     * @return bool
+     */
+    protected function isValidLogin(Users $oUser)
+    {
+        $bSuccess = true;
+        if (!(bool)$oUser->getUserRole()->getKeys()) {
+            $bSuccess = false;
+            $this->setFailedLoginMessage('Your Account is not active, please confirm your email');
+            return $bSuccess;
+        } else {
+            // TODO check country
+            //}else{
+            // TODO check if blocked
+        }
+        return $bSuccess;
+    }
+
+    /**
+     * @param Users $oUser
+     */
+    protected function doLogin(Users $oUser)
+    {
+        $this->getFlashMessenger()->clearCurrentMessagesFromNamespace(self::ErrorNameSpace);
+        $oEntityManager = $this->getEntityManager();
+        /**
+         * Set LoginHistory
+         */
+        $class = Entity::LoginHistory;
+        /** @var \PServerCMS\Entity\LoginHistory $oLoginHistory */
+        $oLoginHistory = new $class();
+        $oLoginHistory->setUsersUsrid($oUser);
+        $oLoginHistory->setIp(Ip::getIp());
+        $oEntityManager->persist($oLoginHistory);
+        $oEntityManager->flush();
+    }
+
+    protected function handleInvalidLogin(Users $oUser){
+        $iMaxTries = $this->getConfigService()->get('pserver.login.exploit.try');
+        if(!$iMaxTries){
+            return false;
+        }
+
+        $oEntityManager = $this->getEntityManager();
+        /**
+         * Set LoginHistory
+         */
+        $class = Entity::LoginFailed;
+        /** @var \PServerCMS\Entity\Loginfaild $oLoginFailed */
+        $oLoginFailed = new $class();
+        $oLoginFailed->setUsername($oUser->getUsername());
+        $oLoginFailed->setIp(Ip::getIp());
+        $oEntityManager->persist($oLoginFailed);
+        $oEntityManager->flush();
+
+        $iTime = $this->getConfigService()->get('pserver.login.exploit.time');
+
+        /** @var \PServerCMS\Entity\Repository\LoginFaild $oRespositoryLoginFaild */
+        $oRespositoryLoginFaild = $oEntityManager->getRepository($class);
+        if($oRespositoryLoginFaild->getNumberOfFailLogins4Ip(Ip::getIp(), $iTime) >= $iMaxTries){
+            $class = Entity::IpBlock;
+            /** @var \PServerCMS\Entity\Ipblock $oIPBlock */
+            $oIPBlock = new $class();
+            $oDateTime = new \DateTime();
+            $oDateTime->setTimestamp(time()+$iTime);
+            $oIPBlock->setExpire($oDateTime);
+            $oIPBlock->setIp(Ip::getIp());
+            $oEntityManager->persist($oIPBlock);
+            $oEntityManager->flush();
+        }
+    }
+
+    /**
+     * @param $aData
+     * @return \PServerCMS\Form\Login
+     */
+    protected function setDataAtForm($aData){
+        $oForm = $this->getLoginForm();
+        $oForm->setHydrator( new Hydrator() );
+        $oForm->bind( new Users() );
+        $oForm->setData($aData);
+        return $oForm;
+    }
+
+    /**
+     * @param \Zend\Authentication\AuthenticationService $oAuthService
+     * @param Users $oUser
+     * @return \Zend\Authentication\Result
+     */
+    protected function getAuthResult(\Zend\Authentication\AuthenticationService $oAuthService,Users $oUser){
+        /** @var \DoctrineModule\Authentication\Adapter\ObjectRepository $oAdapter */
+        $oAdapter = $oAuthService->getAdapter();
+        $oAdapter->setIdentity($oUser->getUsername());
+        $oAdapter->setCredential($oUser->getPassword());
+        return $oAuthService->authenticate($oAdapter);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function checkIpAllowed(){
+        $oEntityManager = $this->getEntityManager();
+        /** @var \PServerCMS\Entity\Repository\IPBlock $RepositoryIPBlock */
+        $RepositoryIPBlock = $oEntityManager->getRepository(Entity::IpBlock);
+        $oIsIpAllowed = $RepositoryIPBlock->isIPAllowed( Ip::getIp() );
+        if($oIsIpAllowed){
+            $this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Your IP is blocked!, try it again '.$oIsIpAllowed->getExpire()->format('H:i:s'));
+            return false;
+        }
+        return true;
+    }
 }
