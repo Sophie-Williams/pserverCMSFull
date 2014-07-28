@@ -408,7 +408,6 @@ class User extends InvokableBase {
         $RepositoryIPBlock = $oEntityManager->getRepository(Entity::IpBlock);
         $oIsIpAllowed = $RepositoryIPBlock->isIPAllowed( Ip::getIp() );
         if($oIsIpAllowed){
-			\Zend\Debug\Debug::dump($oIsIpAllowed);die();
             $this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Your IP is blocked!, try it again '.$oIsIpAllowed->getExpire()->format('H:i:s'));
             return false;
         }
