@@ -33,7 +33,7 @@ class SRO extends InvokableBase implements DataServiceInterface {
 
 			$oRepoTbUser = $oAccEntityManager->getRepository(Account::TbUser);
 			/** @var \GameBackend\Entity\SRO\Account\TbUser $oTbUser */
-			$oTbUser = $oRepoTbUser->findOneBy(array('JID' => $iJID));
+			$oTbUser = $oRepoTbUser->findOneBy(array('jid' => $iJID));
 		}else{
 			$class = Account::TbUser;
 			/** @var \GameBackend\Entity\SRO\Account\TbUser $oTbUser */

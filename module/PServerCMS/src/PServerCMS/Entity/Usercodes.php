@@ -14,6 +14,7 @@ class Usercodes {
 
 	const Type_Register = 'register';
 	const Type_LostPassword = 'password';
+    const Type_ConfirmCountry = 'country';
 	const Expire_Default = 86400;
 
 	/**

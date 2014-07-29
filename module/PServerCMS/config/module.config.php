@@ -34,6 +34,20 @@ return array(
 					),
 				),
 			),
+            'country' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route'    => '/auth/[:action][/:code][/:country]',
+                    'constraints' => array(
+                        'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'code'     => '[a-zA-Z0-9]*',
+                    ),
+                    'defaults' => array(
+                        'controller'	=> 'PServerCMS\Controller\Auth',
+                        'action'		=> 'login',
+                    ),
+                ),
+            ),
 			'site' => array(
 				'type' => 'segment',
 				'options' => array(
@@ -119,6 +133,7 @@ return array(
             'error/index'					=> __DIR__ . '/../view/error/index.phtml',
 			'email/tpl/register'			=> __DIR__ . '/../view/email/tpl/register.phtml',
 			'email/tpl/password'			=> __DIR__ . '/../view/email/tpl/password.phtml',
+            'email/tpl/country' 			=> __DIR__ . '/../view/email/tpl/country.phtml',
 			'helper/sidebarWidget'			=> __DIR__ . '/../view/helper/sidebar.twig',
 			'helper/sidebarLoggedInWidget'	=> __DIR__ . '/../view/helper/logged-in.twig',
             'helper/formWidget'		        => __DIR__ . '/../view/helper/form.twig',

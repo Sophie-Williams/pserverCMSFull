@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * AvailableCountries
  *
  * @ORM\Table(name="availableCountrys", indexes={@ORM\Index(name="fk_availableCountrys_users1_idx", columns={"users_usrId"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PServerCMS\Entity\Repository\AvailableCountries")
  */
 class AvailableCountries {
 	/**

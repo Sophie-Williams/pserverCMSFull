@@ -11,6 +11,9 @@ namespace PServerCMS\Service;
 
 use PServerCMS\Entity\Usercodes;
 use PServerCMS\Entity\Users;
+use PServerCMS\Entity\AvailableCountries;
+use PServerCMS\Entity\Repository\AvailableCountries as RepositoryAvailableCountries;
+use PServerCMS\Entity\Repository\CountryList;
 use PServerCMS\Helper\DateTimer;
 use PServerCMS\Helper\Ip;
 use PServerCMS\Keys\Entity;
@@ -149,6 +152,13 @@ class User extends InvokableBase {
         $oEntityManager->persist($oUser);
         $oEntityManager->flush();
 
+        /** @var CountryList $oCountryList */
+        $oCountryList = $oEntityManager->getRepository(Entity::CountryList);
+        $oAvailableCountries = new AvailableCountries();
+        $oAvailableCountries->setActive('1');
+        $oAvailableCountries->setUsersUsrid($oUser);
+        $oAvailableCountries->setCntry($oCountryList->getCountryCode4Ip(Ip::getIp()));
+
 		$oRepositoryRole = $oEntityManager->getRepository(Entity::UserRole);
 		$sRole = $this->getConfigService()->get('pserver.register.role','user');
 		$oRole = $oRepositoryRole->findOneBy(array('roleId' => $sRole));
@@ -158,6 +168,7 @@ class User extends InvokableBase {
 		$oRole->addUsersUsrid($oUser);
 		$oEntityManager->persist($oUser);
 		$oEntityManager->persist($oRole);
+        $oEntityManager->persist($oAvailableCountries);
 		$oEntityManager->remove($oUserCodes);
 		$oEntityManager->flush();
 
@@ -211,6 +222,24 @@ class User extends InvokableBase {
 
 		return $oUserEntity;
 	}
+
+    public function countryConfirm( $sCountry, Usercodes $oUserCodes ){
+        $oEntityManager = $this->getEntityManager();
+
+        /** @var Users $oUserEntity */
+        $oUserEntity = $oUserCodes->getUsersUsrid();
+
+        $oAvailableCountries = new AvailableCountries();
+        $oAvailableCountries->setCntry($sCountry);
+        $oAvailableCountries->setUsersUsrid($oUserEntity);
+        $oAvailableCountries->setActive('1');
+
+        $oEntityManager->persist($oAvailableCountries);
+        $oEntityManager->remove($oUserCodes);
+        $oEntityManager->flush();
+
+        return $oUserEntity;
+    }
 
 
 	/**
@@ -321,17 +350,56 @@ class User extends InvokableBase {
      */
     protected function isValidLogin(Users $oUser)
     {
-        $bSuccess = true;
         if (!(bool)$oUser->getUserRole()->getKeys()) {
-            $bSuccess = false;
             $this->setFailedLoginMessage('Your Account is not active, please confirm your email');
-            return $bSuccess;
-        } else {
-            // TODO check country
-            //}else{
-            // TODO check if blocked
+            return false;
         }
-        return $bSuccess;
+        if(!$this->isCountryAllowed($oUser)){
+            return false;
+        }
+        if($this->isUserBlocked($oUser)){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param Users $oUser
+     * @return bool
+     */
+    protected function isCountryAllowed(Users $oUser){
+        $oEntityManager = $this->getEntityManager();
+
+        /** @var CountryList $oCountryList */
+        $oCountryList = $oEntityManager->getRepository(Entity::CountryList);
+        $sCountry = $oCountryList->getCountryCode4Ip(Ip::getIp());
+        $sCountryDescription = $oCountryList->getDescription4CountryCode($sCountry);
+        /** @var RepositoryAvailableCountries $oAvailableCountries */
+        $oAvailableCountries = $oEntityManager->getRepository(Entity::AvailableCountries);
+        if($oAvailableCountries->isCountryAllowedForUser($oUser->getUsrid(), $sCountry)){
+            return true;
+        }else{
+            $sCode = $this->getUserCodesService()->setCode4User($oUser, \PServerCMS\Entity\Usercodes::Type_ConfirmCountry);
+            $this->getMailService()->confirmCountry($oUser, $sCode, $sCountryDescription, $sCountry);
+            $this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Your Account is not safe, please check your email.');
+            return false;
+        }
+    }
+
+    /**
+     * @param Users $oUser
+     * @return bool
+     */
+    protected function isUserBlocked(Users $oUser){
+        $oEntityManager = $this->getEntityManager();
+        /** @var \PServerCMS\Entity\Repository\UserBlock $RepositoryUserBlock */
+        $RepositoryUserBlock = $oEntityManager->getRepository(Entity::UserBlock);
+        $oIsUserBlocked = $RepositoryUserBlock->isUserAllowed( $oUser->getUsrid() );
+        if($oIsUserBlocked){
+            $this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('You are blocked because '.$oIsUserBlocked->getReason().' !, try it again '.$oIsUserBlocked->getExpire()->format('H:i:s'));
+            return true;
+        }
+        return false;
     }
 
     /**

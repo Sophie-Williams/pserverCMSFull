@@ -21,6 +21,7 @@ class Mail extends InvokableBase {
 
 	const SubjectKeyRegister = 'register';
 	const SubjectKeyPasswordLost = 'password';
+    const SubjectKeyConfirmCountry = 'country';
 
 	/**
 	 * @var \Zend\View\Renderer\PhpRenderer
@@ -67,6 +68,24 @@ class Mail extends InvokableBase {
 
 		$this->send(static::SubjectKeyPasswordLost, $oUser, $aParams);
 	}
+
+    /**
+     * @param Users $oUser
+     * @param $sCode
+     * @param $sCountry
+     * @param $sCountryCode
+     */
+    public function confirmCountry( Users $oUser, $sCode, $sCountry, $sCountryCode ){
+
+        $aParams = array(
+            'user' => $oUser,
+            'code' => $sCode,
+            'country' => $sCountry,
+            'countryCode' => $sCountryCode
+        );
+
+        $this->send(static::SubjectKeyConfirmCountry, $oUser, $aParams);
+    }
 
 	/**
 	 * @param       $sSubjectKey

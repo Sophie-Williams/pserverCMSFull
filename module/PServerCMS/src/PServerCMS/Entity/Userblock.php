@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Userblock
  *
  * @ORM\Table(name="userBlock", indexes={@ORM\Index(name="fk_userBlock_users1_idx", columns={"users_usrId"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PServerCMS\Entity\Repository\UserBlock")
  */
 class Userblock {
 	/**
@@ -28,9 +28,9 @@ class Userblock {
 	private $reason;
 
 	/**
-	 * @var integer
+	 * @var \DateTime
 	 *
-	 * @ORM\Column(name="expire", type="integer", nullable=false)
+	 * @ORM\Column(name="expire", type="datetime", nullable=false)
 	 */
 	private $expire;
 
@@ -89,7 +89,7 @@ class Userblock {
 	/**
 	 * Set expire
 	 *
-	 * @param integer $expire
+	 * @param \DateTime $expire
 	 *
 	 * @return Userblock
 	 */
@@ -102,7 +102,7 @@ class Userblock {
 	/**
 	 * Get expire
 	 *
-	 * @return integer
+	 * @return \DateTime
 	 */
 	public function getExpire() {
 		return $this->expire;

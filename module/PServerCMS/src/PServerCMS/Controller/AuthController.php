@@ -97,6 +97,31 @@ class AuthController extends AbstractActionController {
 		return array('registerForm' => $oForm);
 	}
 
+    public function countryConfirmAction(){
+        $sCode = $this->params()->fromRoute('code');
+        
+        $oEntityManager = $this->getEntityManager();
+        /** @var $oRepositoryCode \PServerCMS\Entity\Repository\Usercodes */
+        $oRepositoryCode = $oEntityManager->getRepository(Entity::UserCodes);
+        $oCode = $oRepositoryCode->getData4CodeType($sCode, Usercodes::Type_ConfirmCountry);
+
+        if(!$oCode){
+            return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
+        }
+
+        $sCountry = $this->params()->fromRoute('country');
+        $oUser = $this->getUserService()->countryConfirm($sCountry, $oCode);
+        if($oUser){
+            return $this->redirect()->toRoute('auth', array('action' => 'country-confirm-done'));
+        }
+
+        return array();
+    }
+
+    public function countryConfirmDoneAction(){
+        return array();
+    }
+
 	/**
 	 * Logout and clear the identity + Redirect to fix the identity
 	 */
