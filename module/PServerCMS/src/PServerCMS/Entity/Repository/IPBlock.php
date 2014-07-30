@@ -12,7 +12,7 @@ class IPBlock extends EntityRepository {
 	/**
 	 * @return \PServerCMS\Entity\Ipblock
 	 */
-	public function isIPAllowed( $sIP ){
+	public function isIPAllowed( $sIP ) {
 		$oQuery = $this->createQueryBuilder('p')
 			->select('p')
 			->where('p.ip = :ipString')

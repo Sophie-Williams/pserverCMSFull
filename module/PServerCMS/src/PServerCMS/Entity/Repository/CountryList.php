@@ -15,7 +15,7 @@ class CountryList extends EntityRepository{
      * @param $sIp
      * @return \PServerCMS\Entity\CountryList
      */
-    public function getCountryCode4Ip($sIp){
+    public function getCountryCode4Ip($sIp) {
         $oQuery  = $this->createQueryBuilder('p')
             ->select('p')
             ->where('p.ipmin <= :sIp')
@@ -35,7 +35,7 @@ class CountryList extends EntityRepository{
      * @param string $sCntry
      * @return string
      */
-    public function getDescription4CountryCode($sCntry){
+    public function getDescription4CountryCode($sCntry) {
 
         $oQuery = $this->createQueryBuilder('p')
             ->select('p')
@@ -46,6 +46,11 @@ class CountryList extends EntityRepository{
 
         /** @var \PServerCMS\Entity\CountryList $oResult */
         $oResult = $oQuery->getOneOrNullResult();
+
+		// no country found
+		if(!$oResult){
+			return 'ZZZ';
+		}
 
         return $oResult->getCountry();
     }

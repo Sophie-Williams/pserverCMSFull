@@ -75,11 +75,7 @@ class AuthController extends AbstractActionController {
 	public function registerConfirmAction(){
 		$sCode = $this->params()->fromRoute('code');
 
-		$oEntityManager = $this->getEntityManager();
-		/** @var $oRepositoryCode \PServerCMS\Entity\Repository\Usercodes */
-		$oRepositoryCode = $oEntityManager->getRepository(Entity::UserCodes);
-		$oCode = $oRepositoryCode->getData4CodeType($sCode, Usercodes::Type_Register);
-
+		$oCode = $this->getCode4Data($sCode, Usercodes::Type_Register);
 		if(!$oCode){
 			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
 		}
@@ -97,17 +93,13 @@ class AuthController extends AbstractActionController {
 		return array('registerForm' => $oForm);
 	}
 
-    public function countryConfirmAction(){
+    public function ipConfirmAction(){
         $sCode = $this->params()->fromRoute('code');
-        
-        $oEntityManager = $this->getEntityManager();
-        /** @var $oRepositoryCode \PServerCMS\Entity\Repository\Usercodes */
-        $oRepositoryCode = $oEntityManager->getRepository(Entity::UserCodes);
-        $oCode = $oRepositoryCode->getData4CodeType($sCode, Usercodes::Type_ConfirmCountry);
 
-        if(!$oCode){
-            return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
-        }
+		$oCode = $this->getCode4Data($sCode, Usercodes::Type_ConfirmCountry);
+		if(!$oCode){
+			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
+		}
 
         $sCountry = $this->params()->fromRoute('country');
         $oUser = $this->getUserService()->countryConfirm($sCountry, $oCode);
@@ -162,11 +154,7 @@ class AuthController extends AbstractActionController {
 	public function pwLostConfirmAction(){
 		$sCode = $this->params()->fromRoute('code');
 
-		$oEntityManager = $this->getEntityManager();
-		/** @var $oRepositoryCode \PServerCMS\Entity\Repository\Usercodes */
-		$oRepositoryCode = $oEntityManager->getRepository(Entity::UserCodes);
-		$oCode = $oRepositoryCode->getData4CodeType($sCode, Usercodes::Type_LostPassword);
-
+		$oCode = $this->getCode4Data($sCode, Usercodes::Type_LostPassword);
 		if(!$oCode){
 			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
 		}
@@ -260,11 +248,20 @@ class AuthController extends AbstractActionController {
 	/**
 	 * @return \Doctrine\ORM\EntityManager
 	 */
-	public function getEntityManager(){
+	protected function getEntityManager(){
 		if (!$this->entityManager) {
 			$this->entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 		}
 
 		return $this->entityManager;
+	}
+
+	protected function getCode4Data($sCode, $sType){
+		$oEntityManager = $this->getEntityManager();
+		/** @var $oRepositoryCode \PServerCMS\Entity\Repository\Usercodes */
+		$oRepositoryCode = $oEntityManager->getRepository(Entity::UserCodes);
+		$oCode = $oRepositoryCode->getData4CodeType($sCode, $sType);
+
+		return $oCode;
 	}
 }

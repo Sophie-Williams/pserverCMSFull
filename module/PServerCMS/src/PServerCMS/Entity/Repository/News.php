@@ -12,7 +12,7 @@ class News extends EntityRepository {
 	/**
 	 * @return null|\PServerCMS\Entity\News[]
 	 */
-	public function getActiveNews(){
+	public function getActiveNews() {
 		$oQuery = $this->createQueryBuilder('p')
 			->select('p')
 			->where('p.active = :active')

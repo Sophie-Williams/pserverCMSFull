@@ -311,7 +311,7 @@ class User extends InvokableBase {
 	/**
 	 * @return \PServerCMS\Service\UserCodes
 	 */
-	protected function getUserCodesService(){
+	protected function getUserCodesService() {
 		if (! $this->userCodesService) {
 			$this->userCodesService = $this->getServiceManager()->get('pserver_usercodes_service');
 		}
@@ -322,7 +322,7 @@ class User extends InvokableBase {
 	/**
 	 * @return \GameBackend\DataService\DataServiceInterface
 	 */
-	protected function getGameBackendService(){
+	protected function getGameBackendService() {
 		if (! $this->gameBackendService) {
 			$this->gameBackendService = $this->getServiceManager()->get('gamebackend_dataservice');
 		}
@@ -340,7 +340,7 @@ class User extends InvokableBase {
 	/**
 	 * @return string
 	 */
-	protected function getFailedLoginMessage(){
+	protected function getFailedLoginMessage() {
 		return $this->failedLoginMessage;
 	}
 
@@ -348,8 +348,7 @@ class User extends InvokableBase {
      * @param Users $oUser
      * @return bool
      */
-    protected function isValidLogin(Users $oUser)
-    {
+    protected function isValidLogin(Users $oUser) {
         if (!(bool)$oUser->getUserRole()->getKeys()) {
             $this->setFailedLoginMessage('Your Account is not active, please confirm your email');
             return false;
@@ -367,30 +366,28 @@ class User extends InvokableBase {
      * @param Users $oUser
      * @return bool
      */
-    protected function isCountryAllowed(Users $oUser){
+    protected function isCountryAllowed(Users $oUser) {
         $oEntityManager = $this->getEntityManager();
 
         /** @var CountryList $oCountryList */
         $oCountryList = $oEntityManager->getRepository(Entity::CountryList);
         $sCountry = $oCountryList->getCountryCode4Ip(Ip::getIp());
-        $sCountryDescription = $oCountryList->getDescription4CountryCode($sCountry);
         /** @var RepositoryAvailableCountries $oAvailableCountries */
         $oAvailableCountries = $oEntityManager->getRepository(Entity::AvailableCountries);
-        if($oAvailableCountries->isCountryAllowedForUser($oUser->getUsrid(), $sCountry)){
-            return true;
-        }else{
+        if(!$oAvailableCountries->isCountryAllowedForUser($oUser->getUsrid(), $sCountry)){
             $sCode = $this->getUserCodesService()->setCode4User($oUser, \PServerCMS\Entity\Usercodes::Type_ConfirmCountry);
-            $this->getMailService()->confirmCountry($oUser, $sCode, $sCountryDescription, $sCountry);
-            $this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Your Account is not safe, please check your email.');
+            $this->getMailService()->confirmCountry($oUser, $sCode);
+            $this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Please confirm your new ip with your email');
             return false;
         }
+		return true;
     }
 
     /**
      * @param Users $oUser
      * @return bool
      */
-    protected function isUserBlocked(Users $oUser){
+    protected function isUserBlocked(Users $oUser) {
         $oEntityManager = $this->getEntityManager();
         /** @var \PServerCMS\Entity\Repository\UserBlock $RepositoryUserBlock */
         $RepositoryUserBlock = $oEntityManager->getRepository(Entity::UserBlock);
@@ -405,8 +402,7 @@ class User extends InvokableBase {
     /**
      * @param Users $oUser
      */
-    protected function doLogin(Users $oUser)
-    {
+    protected function doLogin(Users $oUser) {
         $this->getFlashMessenger()->clearCurrentMessagesFromNamespace(self::ErrorNameSpace);
         $oEntityManager = $this->getEntityManager();
         /**
@@ -421,7 +417,7 @@ class User extends InvokableBase {
         $oEntityManager->flush();
     }
 
-    protected function handleInvalidLogin(Users $oUser){
+    protected function handleInvalidLogin(Users $oUser) {
         $iMaxTries = $this->getConfigService()->get('pserver.login.exploit.try');
         if(!$iMaxTries){
             return false;

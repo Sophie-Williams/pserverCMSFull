@@ -72,16 +72,12 @@ class Mail extends InvokableBase {
     /**
      * @param Users $oUser
      * @param $sCode
-     * @param $sCountry
-     * @param $sCountryCode
      */
-    public function confirmCountry( Users $oUser, $sCode, $sCountry, $sCountryCode ){
+    public function confirmCountry( Users $oUser, $sCode ){
 
         $aParams = array(
             'user' => $oUser,
-            'code' => $sCode,
-            'country' => $sCountry,
-            'countryCode' => $sCountryCode
+            'code' => $sCode
         );
 
         $this->send(static::SubjectKeyConfirmCountry, $oUser, $aParams);

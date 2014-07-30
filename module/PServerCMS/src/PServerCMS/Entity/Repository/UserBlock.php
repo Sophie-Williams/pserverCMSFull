@@ -13,7 +13,7 @@ class UserBlock extends EntityRepository {
      * @param $iUserId
      * @return \PServerCMS\Entity\UserBlock
      */
-    public function isUserAllowed( $iUserId ){
+    public function isUserAllowed( $iUserId ) {
         $oQuery = $this->createQueryBuilder('p')
             ->select('p')
             ->where('p.usersUsrid = :userId')

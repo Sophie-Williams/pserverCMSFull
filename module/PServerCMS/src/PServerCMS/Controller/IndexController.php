@@ -4,7 +4,6 @@ namespace PServerCMS\Controller;
 
 use PServerCMS\Keys\Entity;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
 
 class IndexController extends AbstractActionController {
 	/** @var \Doctrine\ORM\EntityManager $entityManager */

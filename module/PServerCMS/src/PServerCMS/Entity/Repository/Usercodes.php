@@ -15,7 +15,7 @@ class Usercodes extends EntityRepository {
 	 *
 	 * @return null|\PServerCMS\Entity\Usercodes
 	 */
-	public function getData4CodeType($sCode, $sType){
+	public function getData4CodeType($sCode, $sType) {
 		$oQuery = $this->createQueryBuilder('p')
 			->select('p')
 			->where('p.code = :code')
@@ -34,7 +34,7 @@ class Usercodes extends EntityRepository {
 	 *
 	 * @return mixed
 	 */
-	public function deleteCodes4User($iUserId, $sType){
+	public function deleteCodes4User($iUserId, $sType) {
 		$oQuery = $this->createQueryBuilder('p')
 			->delete('PServerCMS\Entity\Usercodes','p')
 			->where('p.usersUsrid = :user_id')

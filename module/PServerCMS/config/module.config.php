@@ -34,20 +34,6 @@ return array(
 					),
 				),
 			),
-            'country' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route'    => '/auth/[:action][/:code][/:country]',
-                    'constraints' => array(
-                        'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'code'     => '[a-zA-Z0-9]*',
-                    ),
-                    'defaults' => array(
-                        'controller'	=> 'PServerCMS\Controller\Auth',
-                        'action'		=> 'login',
-                    ),
-                ),
-            ),
 			'site' => array(
 				'type' => 'segment',
 				'options' => array(

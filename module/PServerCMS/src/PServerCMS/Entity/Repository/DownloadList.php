@@ -15,7 +15,7 @@ class DownloadList extends EntityRepository {
 	/**
 	 * @return null|\PServerCMS\Entity\Downloadlist[]
 	 */
-	public function getActiveDownloadList(){
+	public function getActiveDownloadList() {
 		$oQuery = $this->createQueryBuilder('p')
 			->select('p')
 			->where('p.active = :active')
