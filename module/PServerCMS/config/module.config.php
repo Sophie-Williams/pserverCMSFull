@@ -169,6 +169,7 @@ return array(
 			'subject' => array(
 				'register' => 'RegisterMail',
 				'password' => 'LostPasswordMail',
+				'country' => 'LoginIpMail',
 			),
 			'basic' => array(
 				'name' => 'localhost',
