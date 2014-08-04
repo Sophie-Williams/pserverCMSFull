@@ -53,6 +53,7 @@ class AvailableCountries {
 
 	public function __construct( ) {
 		$this->created = new \DateTime();
+		$this->active = '1';
 	}
 
 	/**

@@ -238,7 +238,6 @@ class User extends InvokableBase {
         $oAvailableCountries = new $class();
         $oAvailableCountries->setCntry($sCountry);
         $oAvailableCountries->setUsersUsrid($oUserEntity);
-        $oAvailableCountries->setActive('1');
 
         $oEntityManager->persist($oAvailableCountries);
         $oEntityManager->remove($oUserCodes);
