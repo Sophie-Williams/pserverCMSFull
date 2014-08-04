@@ -26,28 +26,28 @@ class SRO extends InvokableBase implements DataServiceInterface {
 	 * @return int
 	 */
 	public function setUser( Users $oUser, $sPlainPassword ) {
-		$oAccEntityManager = $this->getAccountEntityManager();
+		$class = Account::TbUser;
+		$accEntityManager = $this->getAccountEntityManager();
 
 		if((bool) $oUser->getBackendId()){
 			$iJID = $oUser->getBackendId();
 
-			$oRepoTbUser = $oAccEntityManager->getRepository(Account::TbUser);
-			/** @var \GameBackend\Entity\SRO\Account\TbUser $oTbUser */
-			$oTbUser = $oRepoTbUser->findOneBy(array('jid' => $iJID));
+			$repoTbUser = $accEntityManager->getRepository($class);
+			/** @var \GameBackend\Entity\SRO\Account\TbUser $tbUser */
+			$tbUser = $repoTbUser->findOneBy(array('jid' => $iJID));
 		}else{
-			$class = Account::TbUser;
-			/** @var \GameBackend\Entity\SRO\Account\TbUser $oTbUser */
-			$oTbUser = new $class();
-			$oTbUser->setStruserid($oUser->getUsername());
-			$oTbUser->setEmail($oUser->getEmail());
-			$oTbUser->setRegIp($oUser->getCreateip());
+			/** @var \GameBackend\Entity\SRO\Account\TbUser $tbUser */
+			$tbUser = new $class();
+			$tbUser->setStruserid($oUser->getUsername());
+			$tbUser->setEmail($oUser->getEmail());
+			$tbUser->setRegIp($oUser->getCreateip());
 		}
 
-		$oTbUser->setPassword(md5($sPlainPassword));
-		$oAccEntityManager->persist($oTbUser);
-		$oAccEntityManager->flush();
+		$tbUser->setPassword(md5($sPlainPassword));
+		$accEntityManager->persist($tbUser);
+		$accEntityManager->flush();
 
-		return $oTbUser->getJid();
+		return $tbUser->getJid();
 	}
 
 	/**
@@ -57,7 +57,38 @@ class SRO extends InvokableBase implements DataServiceInterface {
 	 * @return boolean
 	 */
 	public function setCoins( Users $oUser, $iCoins ) {
-		return false;
+		$class = Account::SkSilk;
+		$accEntityManager = $this->getAccountEntityManager();
+		$repository = $accEntityManager->getRepository($class);
+
+		/** @var \GameBackend\Entity\SRO\Account\SkSilk $skSilk */
+		$skSilk = $repository->findOneBy(array('jid' => $oUser->getBackendId()));
+		if(!$skSilk){
+			$skSilk = new $class;
+			$skSilk->setJid($oUser->getBackendId());
+		}
+
+		$skSilk->setSilkOwn($skSilk->getSilkOwn() + $iCoins);
+		if($skSilk->getSilkOwn() < 0){
+			return false;
+		}
+
+		$class = Account::SkSilkChangeByWeb;
+		/** @var \GameBackend\Entity\SRO\Account\SkSilkChangeByWeb $skSilkChangeByWeb */
+		$skSilkChangeByWeb = new $class;
+		$skSilkChangeByWeb->setJid($oUser->getBackendId());
+		$skSilkChangeByWeb->setSilkRemain($skSilk->getSilkOwn());
+		$skSilkChangeByWeb->setSilkOffset(abs($iCoins));
+		// 0 => normal silk, 1 => gift, 2 => points
+		$skSilkChangeByWeb->setSilkType(0);
+		// 0 => add silk, 3 => remove silk, 4 => add points, 5 => remove points
+		$skSilkChangeByWeb->setReason($iCoins>0?0:3);
+
+		$accEntityManager->persist($skSilk);
+		$accEntityManager->persist($skSilkChangeByWeb);
+		$accEntityManager->flush();
+
+		return true;
 	}
 
 	/**

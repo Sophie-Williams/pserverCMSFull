@@ -223,13 +223,19 @@ class User extends InvokableBase {
 		return $oUserEntity;
 	}
 
-    public function countryConfirm( $sCountry, Usercodes $oUserCodes ){
+    public function countryConfirm( Usercodes $oUserCodes ){
         $oEntityManager = $this->getEntityManager();
 
         /** @var Users $oUserEntity */
         $oUserEntity = $oUserCodes->getUsersUsrid();
 
-        $oAvailableCountries = new AvailableCountries();
+		/** @var CountryList $oCountryList */
+		$oCountryList = $oEntityManager->getRepository(Entity::CountryList);
+		$sCountry = $oCountryList->getCountryCode4Ip(Ip::getIp());
+
+		/** @var AvailableCountries $oAvailableCountries */
+		$class = Entity::AvailableCountries;
+        $oAvailableCountries = new $class();
         $oAvailableCountries->setCntry($sCountry);
         $oAvailableCountries->setUsersUsrid($oUserEntity);
         $oAvailableCountries->setActive('1');

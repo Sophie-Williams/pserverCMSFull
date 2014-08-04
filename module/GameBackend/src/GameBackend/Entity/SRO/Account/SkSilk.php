@@ -17,7 +17,7 @@ class SkSilk
      *
      * @ORM\Column(name="JID", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $jid;
 

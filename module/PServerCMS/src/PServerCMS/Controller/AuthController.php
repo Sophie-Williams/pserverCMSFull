@@ -101,16 +101,15 @@ class AuthController extends AbstractActionController {
 			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
 		}
 
-        $sCountry = $this->params()->fromRoute('country');
-        $oUser = $this->getUserService()->countryConfirm($sCountry, $oCode);
+        $oUser = $this->getUserService()->countryConfirm($oCode);
         if($oUser){
-            return $this->redirect()->toRoute('auth', array('action' => 'country-confirm-done'));
+            return $this->redirect()->toRoute('auth', array('action' => 'ip-confirm-done'));
         }
 
         return array();
     }
 
-    public function countryConfirmDoneAction(){
+    public function ipConfirmDoneAction(){
         return array();
     }
 

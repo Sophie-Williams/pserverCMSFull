@@ -179,6 +179,7 @@ class Mail extends InvokableBase {
 	 */
 	public function getSubject4Key($sKey){
 		$aConfig = $this->getMailConfig();
-		return $aConfig['subject'][$sKey];
+		// added fallback if the key not exists, in the config
+		return isset($aConfig['subject'][$sKey])?$sKey:$aConfig['subject'][$sKey];
 	}
 }
