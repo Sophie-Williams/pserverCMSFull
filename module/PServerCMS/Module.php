@@ -56,6 +56,7 @@ class Module {
 				'pserver_mail_service'				=> 'PServerCMS\Service\Mail',
 				'pserver_usercodes_service'			=> 'PServerCMS\Service\UserCodes',
 				'pserver_configread_service'		=> 'PServerCMS\Service\ConfigRead',
+				'pserver_ticketsystem_service'		=> 'PServerCMS\Service\TicketSystem',
 			),
 			'factories' => array(
 				'user_auth_service' => function($sm){
@@ -78,32 +79,38 @@ class Module {
 					/** @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
 					/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */
 					$oRepositoryUser = $sm->get('Doctrine\ORM\EntityManager')->getRepository(Entity::Users);
-					$oForm = new Form\Register();
-					$oForm->setInputFilter(new Form\RegisterFilter(
+					$form = new Form\Register();
+					$form->setInputFilter(new Form\RegisterFilter(
 						new Validator\NoRecordExists( $oRepositoryUser, 'username' )
 					));
-					return $oForm;
+					return $form;
 				},
                 'pserver_user_login_form' => function(){
-                    $oForm = new Form\Login();
-                    $oForm->setInputFilter(new Form\LoginFilter());
-                    return $oForm;
+                    $form = new Form\Login();
+                    $form->setInputFilter(new Form\LoginFilter());
+                    return $form;
                 },
 				'pserver_user_password_form' => function(){
-					$oForm = new Form\Password();
-					$oForm->setInputFilter(new Form\PasswordFilter());
-					return $oForm;
+					$form = new Form\Password();
+					$form->setInputFilter(new Form\PasswordFilter());
+					return $form;
 				},
 				'pserver_user_pwlost_form' => function($sm){
 					/** @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
 					/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */
 					$oRepositoryUser = $sm->get('Doctrine\ORM\EntityManager')->getRepository(Entity::Users);
-					$oForm = new Form\PwLost();
-					$oForm->setInputFilter(new Form\PwLostFilter(
+					$form = new Form\PwLost();
+					$form->setInputFilter(new Form\PwLostFilter(
 						new Validator\RecordExists( $oRepositoryUser, 'username' )
 					));
-					return $oForm;
+					return $form;
 				},
+				'pserver_ticketsystem_new_form' => function($sm){
+					/** @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
+					$form = new Form\TicketSystem($sm->get('Doctrine\ORM\EntityManager'));
+					$form->setInputFilter(new Form\TicketSystemFilter());
+					return $form;
+				}
 			),
 		);
 	}

@@ -15,8 +15,16 @@ $form->setAttribute('class', 'form-horizontal');
             <div class="col-sm-offset-2 col-sm-10">
                 <?php echo $this->formButton($element) ?>
             </div>
-        <?php elseif ($element instanceof Zend\Form\Element\Captcha): ?>
-            <?php echo $this->formCaptcha($element) . $this->formElementErrors($element) ?>
+		<?php elseif ($element instanceof Zend\Form\Element\Captcha): ?>
+			<?php echo $this->formCaptcha($element) . $this->formElementErrors($element) ?>
+		<?php elseif ($element instanceof DoctrineModule\Form\Element\ObjectSelect): ?>
+			<div class="col-sm-10">
+				<?php echo $this->formSelect($element) . $this->formElementErrors($element) ?>
+			</div>
+		<?php elseif ($element instanceof Zend\Form\Element\Textarea): ?>
+			<div class="col-sm-10">
+				<?php echo $this->formTextarea($element) . $this->formElementErrors($element) ?>
+			</div>
         <?php else: ?>
             <div class="col-sm-10">
                 <?php echo $this->formInput($element) . $this->formElementErrors($element) ?>

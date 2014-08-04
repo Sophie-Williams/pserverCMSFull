@@ -59,6 +59,19 @@ return array(
 					),
 				),
 			),
+			'ticketsystem' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'    => '/panel/ticket-system/[:action].html',
+					'constraints' => array(
+						'action'     => '[a-zA-Z]*',
+					),
+					'defaults' => array(
+						'controller'	=> 'PServerCMS\Controller\TicketSystem',
+						'action'		=> 'index',
+					),
+				),
+			),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -103,7 +116,8 @@ return array(
 			'PServerCMS\Controller\Index' => 'PServerCMS\Controller\IndexController',
 			'PServerCMS\Controller\Auth' => 'PServerCMS\Controller\AuthController',
 			'PServerCMS\Controller\Site' => 'PServerCMS\Controller\SiteController',
-			'PServerCMS\Controller\Account' => 'PServerCMS\Controller\AccountController'
+			'PServerCMS\Controller\Account' => 'PServerCMS\Controller\AccountController',
+			'PServerCMS\Controller\TicketSystem' => 'PServerCMS\Controller\TicketSystemController'
         ),
     ),
     'view_manager' => array(
