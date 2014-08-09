@@ -17,7 +17,7 @@ use PServerCMS\Entity\Repository\CountryList;
 use PServerCMS\Helper\DateTimer;
 use PServerCMS\Helper\Ip;
 use PServerCMS\Keys\Entity;
-use PServerCMS\Mapper\Hydrator;
+use PServerCMS\Mapper\HydratorUser;
 use Zend\Crypt\Password\Bcrypt;
 
 class User extends InvokableBase {
@@ -48,7 +48,7 @@ class User extends InvokableBase {
     public function login( array $aData ){
 
 		$oForm = $this->getLoginForm();
-		$oForm->setHydrator( new Hydrator() );
+		$oForm->setHydrator( new HydratorUser() );
 		$oForm->bind( new Users() );
 		$oForm->setData($aData);
 
@@ -98,7 +98,7 @@ class User extends InvokableBase {
 	public function register( array $aData ){
 
 		$oForm = $this->getRegisterForm();
-		$oForm->setHydrator( new Hydrator() );
+		$oForm->setHydrator( new HydratorUser() );
 		$oForm->bind( new Users() );
 		$oForm->setData($aData);
 		if(!$oForm->isValid()){

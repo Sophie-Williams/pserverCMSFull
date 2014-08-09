@@ -18,6 +18,8 @@
 		"mabuzagu/pdo-dblib-module": "dev-master",
 		"zf-commons/zfc-user": "0.*",
 		"zf-commons/zfc-user-doctrine-orm": "0.*",
-		"bjyoungblood/bjy-authorize": "1.*"
+		"bjyoungblood/bjy-authorize": "1.*",
+		"kokspflanze/zfc-ticket-system": "dev-master",
+		"kokspflanze/zfc-yui-compressor": "dev-master"
     }
 }

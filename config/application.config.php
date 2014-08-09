@@ -13,6 +13,7 @@ return array(
 		'PServerCMS',
 		'PServerAdmin',
 		'GameBackend',
+		'ZfcTicketSystem',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

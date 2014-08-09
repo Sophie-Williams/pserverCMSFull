@@ -73,36 +73,36 @@ class AuthController extends AbstractActionController {
 	}
 
 	public function registerConfirmAction(){
-		$sCode = $this->params()->fromRoute('code');
+		$code = $this->params()->fromRoute('code');
 
-		$oCode = $this->getCode4Data($sCode, Usercodes::Type_Register);
+		$oCode = $this->getCode4Data($code, Usercodes::Type_Register);
 		if(!$oCode){
 			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
 		}
 
-		$oForm = $this->getPasswordForm();
-		$oRequest = $this->getRequest();
-		if($oRequest->isPost()){
-			$oUser = $this->getUserService()->registerGame($this->params()->fromPost(), $oCode);
-			if($oUser){
-				$this->getUserService()->doAuthentication($oUser);
+		$form = $this->getPasswordForm();
+		$request = $this->getRequest();
+		if($request->isPost()){
+			$user = $this->getUserService()->registerGame($this->params()->fromPost(), $oCode);
+			if($user){
+				$this->getUserService()->doAuthentication($user);
 				return $this->redirect()->toRoute('home');
 			}
 		}
 
-		return array('registerForm' => $oForm);
+		return array('registerForm' => $form);
 	}
 
     public function ipConfirmAction(){
-        $sCode = $this->params()->fromRoute('code');
+        $code = $this->params()->fromRoute('code');
 
-		$oCode = $this->getCode4Data($sCode, Usercodes::Type_ConfirmCountry);
+		$oCode = $this->getCode4Data($code, Usercodes::Type_ConfirmCountry);
 		if(!$oCode){
 			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
 		}
 
-        $oUser = $this->getUserService()->countryConfirm($oCode);
-        if($oUser){
+        $user = $this->getUserService()->countryConfirm($oCode);
+        if($user){
             return $this->redirect()->toRoute('auth', array('action' => 'ip-confirm-done'));
         }
 
@@ -133,17 +133,17 @@ class AuthController extends AbstractActionController {
 
 	public function pwLostAction(){
 
-		$oForm = $this->getPasswordLostForm();
+		$form = $this->getPasswordLostForm();
 
-		$oRequest = $this->getRequest();
-		if($oRequest->isPost()){
-			$oUser = $this->getUserService()->lostPw($this->params()->fromPost());
-			if($oUser){
+		$request = $this->getRequest();
+		if($request->isPost()){
+			$user = $this->getUserService()->lostPw($this->params()->fromPost());
+			if($user){
 				return $this->redirect()->toRoute('auth', array('action' => 'pw-lost-done'));
 			}
 		}
 
-		return array('pwLostForm' => $oForm);
+		return array('pwLostForm' => $form);
 	}
 
 	public function pwLostDoneAction(){
@@ -151,23 +151,23 @@ class AuthController extends AbstractActionController {
 	}
 
 	public function pwLostConfirmAction(){
-		$sCode = $this->params()->fromRoute('code');
+		$code = $this->params()->fromRoute('code');
 
-		$oCode = $this->getCode4Data($sCode, Usercodes::Type_LostPassword);
+		$oCode = $this->getCode4Data($code, Usercodes::Type_LostPassword);
 		if(!$oCode){
 			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
 		}
 
-		$oForm = $this->getPasswordForm();
-		$oRequest = $this->getRequest();
-		if($oRequest->isPost()){
-			$oUser = $this->getUserService()->lostPwConfirm($this->params()->fromPost(), $oCode);
-			if($oUser){
+		$form = $this->getPasswordForm();
+		$request = $this->getRequest();
+		if($request->isPost()){
+			$user = $this->getUserService()->lostPwConfirm($this->params()->fromPost(), $oCode);
+			if($user){
 				return $this->redirect()->toRoute('auth', array('action' => 'pw-lost-confirm-done'));
 			}
 		}
 
-		return array('pwLostForm' => $oForm);
+		return array('pwLostForm' => $form);
 	}
 
 	public function pwLostConfirmDoneAction(){

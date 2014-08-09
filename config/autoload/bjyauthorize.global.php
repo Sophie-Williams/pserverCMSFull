@@ -44,7 +44,7 @@ return array(
 			'BjyAuthorize\Provider\Resource\Config' => array(
 				'auth' => array(),
 				'user' => array(),
-				'ticketsystem' => array(),
+				'zfc-ticketsystem' => array(),
 				'admin_home' => array(),
 			),
 		),
@@ -64,7 +64,7 @@ return array(
 					array('guest', 'auth', 'index'),
 					array(array(), 'auth', 'logout'),
 					array(array('user', 'admin'), 'user'),
-					array(array('user', 'admin'), 'ticketsystem'),
+					array(array('user', 'admin'), 'zfc-ticketsystem'),
 					array(array('admin'), 'admin_home'),
 				),
 
@@ -109,8 +109,8 @@ return array(
 				array('controller' => 'PServerCMS\Controller\Auth', 'roles' => array(), 'action' => array('logout')),
 				array('controller' => 'PServerCMS\Controller\Site', 'roles' => array()),
 				array('controller' => 'PServerCMS\Controller\Account', 'roles' => array('user','admin')),
-				array('controller' => 'PServerCMS\Controller\TicketSystem', 'roles' => array('user','admin')),
 				array('controller' => 'PServerAdmin\Controller\Index', 'roles' => array('admin')),
+				array('controller' => 'ZfcTicketSystem\Controller\TicketSystem', 'roles' => array('user','admin')),
 			),
 
 			/* If this guard is specified here (i.e. it is enabled), it will block

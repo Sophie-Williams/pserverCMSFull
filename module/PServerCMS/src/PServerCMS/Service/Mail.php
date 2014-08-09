@@ -42,31 +42,31 @@ class Mail extends InvokableBase {
 	/**
 	 * RegisterMail
 	 *
-	 * @param Users $oUser
-	 * @param       $sCode
+	 * @param Users $user
+	 * @param       $code
 	 */
-	public function register( Users $oUser, $sCode ){
+	public function register( Users $user, $code ){
 
-		$aParams = array(
-			'user' => $oUser,
-			'code' => $sCode
+		$params = array(
+			'user' => $user,
+			'code' => $code
 		);
 
-		$this->send(static::SubjectKeyRegister, $oUser, $aParams);
+		$this->send(static::SubjectKeyRegister, $user, $params);
 	}
 
 	/**
-	 * @param Users $oUser
+	 * @param Users $user
 	 * @param       $sCode
 	 */
-	public function lostPw( Users $oUser, $sCode ){
+	public function lostPw( Users $user, $sCode ){
 
 		$aParams = array(
-			'user' => $oUser,
+			'user' => $user,
 			'code' => $sCode
 		);
 
-		$this->send(static::SubjectKeyPasswordLost, $oUser, $aParams);
+		$this->send(static::SubjectKeyPasswordLost, $user, $aParams);
 	}
 
     /**

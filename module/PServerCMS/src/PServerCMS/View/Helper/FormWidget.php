@@ -23,7 +23,7 @@ class FormWidget extends AbstractHelper {
     public function __invoke($oForm){
 
         $oViewModel = new ViewModel(array(
-			'registerForm' => $oForm
+			'formWidget' => $oForm
 		));
         $oViewModel->setTemplate('helper/formWidget');
 

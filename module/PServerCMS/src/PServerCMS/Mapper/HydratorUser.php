@@ -13,7 +13,7 @@ use ZfcUser\Mapper\Exception;
 use Zend\Stdlib\Hydrator\ClassMethods;
 use PServerCMS\Entity\Users;
 
-class Hydrator extends ClassMethods {
+class HydratorUser extends ClassMethods {
 
 	/**
 	 * Extract values from an object

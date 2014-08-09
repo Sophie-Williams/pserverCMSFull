@@ -102,8 +102,12 @@ abstract class AbstractRecord extends AbstractValidator {
 				$result = $this->getObjectRepository()->findOneBy( array( 'username' => $value ) );
 				break;
 
+			case 'categoryId':
+				$result = $this->getObjectRepository()->findOneBy( array( 'categoryid' => $value, 'active' => '1' ) );
+				break;
+
 			default:
-				throw new \Exception( 'Invalid key used in pserverCMS validator' );
+				throw new \Exception( 'Invalid key used in validator' );
 				break;
 		}
 
