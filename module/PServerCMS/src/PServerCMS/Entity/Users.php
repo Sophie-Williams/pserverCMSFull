@@ -12,7 +12,7 @@ use Zend\Crypt\Password\Bcrypt;
  * @ORM\Table(name="users", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"})})
  * @ORM\Entity
  */
-class Users implements ProviderInterface {
+class Users implements ProviderInterface, \SmallUser\Entity\UsersInterface {
 	/**
 	 * @var integer
 	 *
@@ -231,11 +231,11 @@ class Users implements ProviderInterface {
 	/**
 	 * Add userRole
 	 *
-	 * @param \PServerCMS\Entity\UserRole $userRole
+	 * @param $userRole
 	 *
 	 * @return Users
 	 */
-	public function addUserRole( \PServerCMS\Entity\UserRole $userRole ) {
+	public function addUserRole( $userRole ) {
 		$this->userRole[] = $userRole;
 
 		return $this;
@@ -244,9 +244,9 @@ class Users implements ProviderInterface {
 	/**
 	 * Remove userRole
 	 *
-	 * @param \PServerCMS\Entity\UserRole $userRole
+	 * @param $userRole
 	 */
-	public function removeUserRole( \PServerCMS\Entity\UserRole $userRole ) {
+	public function removeUserRole( $userRole ) {
 		$this->userRole->removeElement( $userRole );
 	}
 
@@ -270,11 +270,11 @@ class Users implements ProviderInterface {
 	/**
 	 * Add userExtension
 	 *
-	 * @param \PServerCMS\Entity\Userexstension $userExtension
+	 * @param Userexstension $userExtension
 	 *
 	 * @return Users
 	 */
-	public function addUserExtension( \PServerCMS\Entity\Userexstension $userExtension ) {
+	public function addUserExtension( $userExtension ) {
 		$this->userExtension[] = $userExtension;
 
 		return $this;
@@ -283,9 +283,9 @@ class Users implements ProviderInterface {
 	/**
 	 * Remove userExtension
 	 *
-	 * @param \PServerCMS\Entity\Userexstension $userExtension
+	 * @param Userexstension $userExtension
 	 */
-	public function removeUserExtension( \PServerCMS\Entity\Userexstension $userExtension ) {
+	public function removeUserExtension( $userExtension ) {
 		$this->userExtension->removeElement( $userExtension );
 
 		return $this;
@@ -304,7 +304,7 @@ class Users implements ProviderInterface {
 	 *
 	 * @return bool
 	 */
-	public static function hashPassword(Users $oEntity, $plaintext){
+	public static function hashPassword( $oEntity, $plaintext ){
 		$oBcrypt = new Bcrypt();
 		return $oBcrypt->verify($plaintext, $oEntity->getPassword());
 	}

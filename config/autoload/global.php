@@ -183,4 +183,7 @@ return array(
 			),
 		),
 	),
+	'zfc-ticket-system' => array(
+		'auth_service' => 'small_user_auth_service'
+	)
 );

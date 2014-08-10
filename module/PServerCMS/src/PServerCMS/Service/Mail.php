@@ -11,6 +11,7 @@ namespace PServerCMS\Service;
 
 use PServerCMS\Entity\Users;
 use PServerCMS\Keys\Entity;
+use SmallUser\Service\InvokableBase;
 use Zend\Mail\Transport\Smtp;
 use Zend\Mail\Transport\SmtpOptions;
 use Zend\Mime\Part;

@@ -1,11 +1,4 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 return array(
     'router' => array(
@@ -20,20 +13,6 @@ return array(
                     ),
                 ),
             ),
-			'auth' => array(
-				'type' => 'segment',
-				'options' => array(
-					'route'    => '/auth/[:action][/:code]',
-					'constraints' => array(
-						'action'   => '[a-zA-Z][a-zA-Z0-9_-]*',
-						'code'     => '[a-zA-Z0-9]*',
-					),
-					'defaults' => array(
-						'controller'	=> 'PServerCMS\Controller\Auth',
-						'action'		=> 'login',
-					),
-				),
-			),
 			'site' => array(
 				'type' => 'segment',
 				'options' => array(
@@ -101,6 +80,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
 			'PServerCMS\Controller\Index' => 'PServerCMS\Controller\IndexController',
+			'SmallUser\Controller\Auth' => 'PServerCMS\Controller\AuthController',
 			'PServerCMS\Controller\Auth' => 'PServerCMS\Controller\AuthController',
 			'PServerCMS\Controller\Site' => 'PServerCMS\Controller\SiteController',
 			'PServerCMS\Controller\Account' => 'PServerCMS\Controller\AccountController'
@@ -150,15 +130,6 @@ return array(
 			),
 		),
 	),
-	'authenticationadapter' => array(
-		'odm_default' => array(
-			'objectManager' => 'doctrine.documentmanager.odm_default',
-			'identityClass' => 'PServerCMS\Entity\Users',
-			'identityProperty' => 'username',
-			'credentialProperty' => 'password',
-			'credentialCallable' => 'PServerCMS\Entity\Users::hashPassword'
-		),
-	),
 	'pserver' => array(
 		'register' => array(
 			'role' => 'user'
@@ -189,5 +160,14 @@ return array(
                 'try' => 5
             )
         )
+	),
+	'authenticationadapter' => array(
+		'odm_default' => array(
+			'objectManager' => 'doctrine.documentmanager.odm_default',
+			'identityClass' => 'PServerCMS\Entity\Users',
+			'identityProperty' => 'username',
+			'credentialProperty' => 'password',
+			'credentialCallable' => 'PServerCMS\Entity\Users::hashPassword'
+		),
 	),
 );

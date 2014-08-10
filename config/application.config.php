@@ -10,10 +10,11 @@ return array(
 		'DoctrineORMModule',
 		'PDODblibModule',
 		'BjyAuthorize',
-		'PServerCMS',
-		'PServerAdmin',
 		'GameBackend',
 		'ZfcTicketSystem',
+		'SmallUser',
+		'PServerCMS',
+		'PServerAdmin',
     ),
 
     // These are various options for the listeners attached to the ModuleManager

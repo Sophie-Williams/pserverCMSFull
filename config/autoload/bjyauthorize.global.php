@@ -46,6 +46,7 @@ return array(
 				'user' => array(),
 				'zfc-ticketsystem' => array(),
 				'admin_home' => array(),
+				'small-user-auth' => array(),
 			),
 		),
 
@@ -63,6 +64,8 @@ return array(
 					// the "wear" privilege on the resource "pants"
 					array('guest', 'auth', 'index'),
 					array(array(), 'auth', 'logout'),
+					array('guest', 'small-user-auth', 'index'),
+					array(array(), 'small-user-auth', 'logout'),
 					array(array('user', 'admin'), 'user'),
 					array(array('user', 'admin'), 'zfc-ticketsystem'),
 					array(array('admin'), 'admin_home'),
@@ -72,6 +75,7 @@ return array(
 				// There are some weird bugs.
 				'deny' => array(
 					array('guest', 'auth', 'logout'),
+					array('guest', 'small-user-auth', 'logout'),
 				),
 			),
 		),
@@ -111,6 +115,8 @@ return array(
 				array('controller' => 'PServerCMS\Controller\Account', 'roles' => array('user','admin')),
 				array('controller' => 'PServerAdmin\Controller\Index', 'roles' => array('admin')),
 				array('controller' => 'ZfcTicketSystem\Controller\TicketSystem', 'roles' => array('user','admin')),
+				array('controller' => 'SmallUser\Controller\Auth', 'roles' => array('guest')),
+				array('controller' => 'SmallUser\Controller\Auth', 'roles' => array(), 'action' => array('logout')),
 			),
 
 			/* If this guard is specified here (i.e. it is enabled), it will block

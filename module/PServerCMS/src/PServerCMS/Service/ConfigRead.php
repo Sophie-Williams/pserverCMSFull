@@ -3,6 +3,8 @@
 namespace PServerCMS\Service;
 
 
+use SmallUser\Service\InvokableBase;
+
 class ConfigRead extends InvokableBase {
 
     /**

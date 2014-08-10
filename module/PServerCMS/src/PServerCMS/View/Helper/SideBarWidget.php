@@ -86,7 +86,7 @@ class SideBarWidget extends AbstractHelper {
 	 */
 	protected function getAuthService() {
 		if (!$this->authService) {
-			$this->authService = $this->getServiceLocator()->get('user_auth_service');
+			$this->authService = $this->getServiceLocator()->get('small_user_auth_service');
 		}
 
 		return $this->authService;

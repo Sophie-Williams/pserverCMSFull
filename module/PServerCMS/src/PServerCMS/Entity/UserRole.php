@@ -4,6 +4,8 @@ namespace PServerCMS\Entity;
 
 use BjyAuthorize\Acl\HierarchicalRoleInterface;
 use Doctrine\ORM\Mapping as ORM;
+use SmallUser\Entity\UserRoleInterface;
+use SmallUser\Entity\UsersInterface;
 
 /**
  * UserRole
@@ -11,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user_role", indexes={@ORM\Index(name="fk_users_role_users_role1_idx", columns={"parent_id"})})
  * @ORM\Entity
  */
-class UserRole implements HierarchicalRoleInterface {
+class UserRole implements HierarchicalRoleInterface, UserRoleInterface {
 	/**
 	 * @var integer
 	 *
@@ -143,12 +145,12 @@ class UserRole implements HierarchicalRoleInterface {
 	/**
 	 * Add usersUsrid
 	 *
-	 * @param \PServerCMS\Entity\Users $usersUsrid
+	 * @param UsersInterface $user
 	 *
 	 * @return UserRole
 	 */
-	public function addUsersUsrid( \PServerCMS\Entity\Users $usersUsrid ) {
-		$this->usersUsrid[] = $usersUsrid;
+	public function addUsersUsrid( UsersInterface $user ) {
+		$this->usersUsrid[] = $user;
 
 		return $this;
 	}
@@ -156,14 +158,14 @@ class UserRole implements HierarchicalRoleInterface {
 	/**
 	 * Remove usersUsrid
 	 *
-	 * @param \PServerCMS\Entity\Users $usersUsrid
+	 * @param UsersInterface $user
 	 */
-	public function removeUsersUsrid( \PServerCMS\Entity\Users $usersUsrid ) {
-		$this->usersUsrid->removeElement( $usersUsrid );
+	public function removeUsersUsrid( UsersInterface $user ) {
+		$this->usersUsrid->removeElement( $user );
 	}
 
 	/**
-	 * Get usersUsrid
+	 * Get Users usersUsrid
 	 *
 	 * @return \Doctrine\Common\Collections\Collection
 	 */

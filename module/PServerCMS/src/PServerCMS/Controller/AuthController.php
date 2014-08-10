@@ -6,47 +6,10 @@ use PServerCMS\Entity\Usercodes;
 use PServerCMS\Keys\Entity;
 use Zend\Mvc\Controller\AbstractActionController;
 
-class AuthController extends AbstractActionController {
-	const ErrorNameSpace = 'user-auth';
-	const RouteLoggedIn = 'home';
+class AuthController extends \SmallUser\Controller\AuthController {
 	protected $passwordLostForm;
-
-	protected $userService;
-	protected $authService;
 	protected $registerForm;
-    protected $loginForm;
 	protected $passwordForm;
-	/**
-	 * @var \Doctrine\ORM\EntityManager
-	 */
-	protected $entityManager;
-
-	/**
-	 * @return array|\Zend\Http\Response
-	 */
-	public function loginAction() {
-
-		//if already login, redirect to success page
-		if ($this->getAuthService()->hasIdentity()){
-			return $this->redirect()->toRoute(self::RouteLoggedIn);
-		}
-
-		$oForm = $this->getLoginForm();
-		$oRequest = $this->getRequest();
-
-		if (!$oRequest->isPost()){
-			return array(
-				'aErrorMessages' => $this->flashmessenger()->getMessagesFromNamespace(self::ErrorNameSpace),
-				//'aErrorMessages' => array('dfdsf'),
-				'loginForm' => $oForm
-			);
-		}
-
-		if($this->getUserService()->login($this->params()->fromPost())){
-			return $this->redirect()->toRoute(self::RouteLoggedIn);
-		}
-		return $this->redirect()->toUrl($this->url()->fromRoute('auth'));
-	}
 
 	public function registerAction(){
 
@@ -61,7 +24,7 @@ class AuthController extends AbstractActionController {
 		if($oRequest->isPost()){
 			$oUser = $this->getUserService()->register($this->params()->fromPost());
 			if($oUser){
-				return $this->redirect()->toRoute('auth', array('action' => 'register-done'));
+				return $this->redirect()->toRoute('small-user-auth', array('action' => 'register-done'));
 			}
 		}
 
@@ -103,7 +66,7 @@ class AuthController extends AbstractActionController {
 
         $user = $this->getUserService()->countryConfirm($oCode);
         if($user){
-            return $this->redirect()->toRoute('auth', array('action' => 'ip-confirm-done'));
+            return $this->redirect()->toRoute('small-user-auth', array('action' => 'ip-confirm-done'));
         }
 
         return array();
@@ -113,24 +76,6 @@ class AuthController extends AbstractActionController {
         return array();
     }
 
-	/**
-	 * Logout and clear the identity + Redirect to fix the identity
-	 */
-	public function logoutAction(){
-
-		$this->getAuthService()->getStorage()->clear();
-		$this->getAuthService()->clearIdentity();
-
-		return $this->redirect()->toRoute('auth', array('action' => 'logout-page'));
-	}
-
-	/**
-	 * LogoutPage
-	 */
-	public function logoutPageAction(){
-		return array();
-	}
-
 	public function pwLostAction(){
 
 		$form = $this->getPasswordLostForm();
@@ -139,7 +84,7 @@ class AuthController extends AbstractActionController {
 		if($request->isPost()){
 			$user = $this->getUserService()->lostPw($this->params()->fromPost());
 			if($user){
-				return $this->redirect()->toRoute('auth', array('action' => 'pw-lost-done'));
+				return $this->redirect()->toRoute('small-user-auth', array('action' => 'pw-lost-done'));
 			}
 		}
 
@@ -163,7 +108,7 @@ class AuthController extends AbstractActionController {
 		if($request->isPost()){
 			$user = $this->getUserService()->lostPwConfirm($this->params()->fromPost(), $oCode);
 			if($user){
-				return $this->redirect()->toRoute('auth', array('action' => 'pw-lost-confirm-done'));
+				return $this->redirect()->toRoute('small-user-auth', array('action' => 'pw-lost-confirm-done'));
 			}
 		}
 
@@ -178,27 +123,14 @@ class AuthController extends AbstractActionController {
 		return array();
 	}
 
-	/**
-	 * @return \Zend\Authentication\AuthenticationService
-	 */
-	protected function getAuthService() {
-		if (!$this->authService) {
-			$this->authService = $this->getServiceLocator()->get('user_auth_service');
-		}
+	protected function getCode4Data($sCode, $sType){
+		$oEntityManager = $this->getEntityManager();
+		/** @var $oRepositoryCode \PServerCMS\Entity\Repository\Usercodes */
+		$oRepositoryCode = $oEntityManager->getRepository(Entity::UserCodes);
+		$oCode = $oRepositoryCode->getData4CodeType($sCode, $sType);
 
-		return $this->authService;
+		return $oCode;
 	}
-
-    /**
-     * @return \PServerCMS\Form\Login
-     */
-    protected function getLoginForm() {
-        if (!$this->loginForm) {
-            $this->loginForm = $this->getServiceLocator()->get('pserver_user_login_form');
-        }
-
-        return $this->loginForm;
-    }
 
 	/**
 	 * @return \PServerCMS\Form\Register
@@ -231,36 +163,5 @@ class AuthController extends AbstractActionController {
 		}
 
 		return $this->passwordLostForm;
-	}
-
-	/**
-	 * @return \PServerCMS\Service\User
-	 */
-	protected function getUserService(){
-		if (!$this->userService) {
-			$this->userService = $this->getServiceLocator()->get('pserver_user_service');
-		}
-
-		return $this->userService;
-	}
-
-	/**
-	 * @return \Doctrine\ORM\EntityManager
-	 */
-	protected function getEntityManager(){
-		if (!$this->entityManager) {
-			$this->entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-		}
-
-		return $this->entityManager;
-	}
-
-	protected function getCode4Data($sCode, $sType){
-		$oEntityManager = $this->getEntityManager();
-		/** @var $oRepositoryCode \PServerCMS\Entity\Repository\Usercodes */
-		$oRepositoryCode = $oEntityManager->getRepository(Entity::UserCodes);
-		$oCode = $oRepositoryCode->getData4CodeType($sCode, $sType);
-
-		return $oCode;
 	}
 }

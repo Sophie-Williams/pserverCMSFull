@@ -3,10 +3,8 @@
 namespace PServerCMS;
 
 use PServerCMS\Keys\Entity;
-use PServerCMS\Model\AuthStorage;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use PServerCMS\Helper;
 use Zend\ServiceManager\AbstractPluginManager;
 
 class Module {
@@ -52,28 +50,12 @@ class Module {
 	public function getServiceConfig() {
 		return array(
 			'invokables' => array(
-				'pserver_user_service'				=> 'PServerCMS\Service\User',
+				'small_user_service'				=> 'PServerCMS\Service\User',
 				'pserver_mail_service'				=> 'PServerCMS\Service\Mail',
 				'pserver_usercodes_service'			=> 'PServerCMS\Service\UserCodes',
 				'pserver_configread_service'		=> 'PServerCMS\Service\ConfigRead',
 			),
 			'factories' => array(
-				'user_auth_service' => function($sm){
-					/** @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
-					/** @var \DoctrineModule\Authentication\Adapter\ObjectRepository $oAdapter */
-					$oAdapter = $sm->get('doctrine.authenticationadapter.odm_default');
-
-					// In Config there is not EntityManager =(, so we have to add it now =)
-					/** @var \PServerCMS\Service\ConfigRead $oConfigService */
-					$oConfigService = $sm->get('pserver_configread_service');
-					$aConfig = $oConfigService->get('authenticationadapter.odm_default', array());
-					$aConfig['objectManager'] = $sm->get('Doctrine\ORM\EntityManager');
-					$oAdapter->setOptions( $aConfig );
-
-					$oAuthService = new \Zend\Authentication\AuthenticationService();
-					$oAuthService->setStorage( new AuthStorage() );
-					return $oAuthService->setAdapter($oAdapter);
-				},
 				'pserver_user_register_form' => function($sm){
 					/** @var $sm \Zend\ServiceManager\ServiceLocatorInterface */
 					/** @var $oRepositoryUser \Doctrine\Common\Persistence\ObjectRepository */
@@ -84,11 +66,6 @@ class Module {
 					));
 					return $form;
 				},
-                'pserver_user_login_form' => function(){
-                    $form = new Form\Login();
-                    $form->setInputFilter(new Form\LoginFilter());
-                    return $form;
-                },
 				'pserver_user_password_form' => function(){
 					$form = new Form\Password();
 					$form->setInputFilter(new Form\PasswordFilter());

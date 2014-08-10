@@ -26,12 +26,12 @@
 	<div class="container">
 		<ul class="loginbar pull-right">
 			{% if isAllowed('auth','index') %}
-				<li><a href="{{ url('auth',{'action':'register'}) }}">{{ translate('Register') }}</a></li>
+				<li><a href="{{ url('small-user-auth',{'action':'register'}) }}">{{ translate('Register') }}</a></li>
 				<li><span class="strich">|</span></li>
-				<li><a href="{{ url('auth') }}">{{ translate('Login') }}</a></li>
+				<li><a href="{{ url('small-user-auth') }}">{{ translate('Login') }}</a></li>
 			{% endif %}
 			{% if isAllowed('auth','logout') %}
-				<li><a href="{{ url('auth',{'action':'logout'}) }}">{{ translate('Logout') }}</a></li>
+				<li><a href="{{ url('small-user-auth',{'action':'logout'}) }}">{{ translate('Logout') }}</a></li>
 			{% endif %}
 		</ul>
 		<div class="clearfix"></div>

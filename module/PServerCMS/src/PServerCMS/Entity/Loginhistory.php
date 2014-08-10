@@ -35,7 +35,7 @@ class Loginhistory {
 	private $created;
 
 	/**
-	 * @var \PServerCMS\Entity\Users
+	 * @var \SmallUser\Entity\Users
 	 *
 	 * @ORM\ManyToOne(targetEntity="PServerCMS\Entity\Users")
 	 * @ORM\JoinColumns({
@@ -104,11 +104,11 @@ class Loginhistory {
 	/**
 	 * Set usersUsrid
 	 *
-	 * @param \PServerCMS\Entity\Users $usersUsrid
+	 * @param \SmallUser\Entity\Users $usersUsrid
 	 *
 	 * @return Loginhistory
 	 */
-	public function setUsersUsrid( \PServerCMS\Entity\Users $usersUsrid = null ) {
+	public function setUsersUsrid( Users $usersUsrid = null ) {
 		$this->usersUsrid = $usersUsrid;
 
 		return $this;
