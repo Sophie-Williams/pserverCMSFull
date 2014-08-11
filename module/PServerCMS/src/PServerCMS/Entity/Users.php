@@ -4,6 +4,7 @@ namespace PServerCMS\Entity;
 
 use BjyAuthorize\Provider\Role\ProviderInterface;
 use Doctrine\ORM\Mapping as ORM;
+use GameBackend\Entity\User\UserInterface;
 use Zend\Crypt\Password\Bcrypt;
 
 /**
@@ -12,7 +13,7 @@ use Zend\Crypt\Password\Bcrypt;
  * @ORM\Table(name="users", uniqueConstraints={@ORM\UniqueConstraint(name="username_UNIQUE", columns={"username"})})
  * @ORM\Entity
  */
-class Users implements ProviderInterface, \SmallUser\Entity\UsersInterface {
+class Users implements ProviderInterface, \SmallUser\Entity\UsersInterface, UserInterface {
 	/**
 	 * @var integer
 	 *

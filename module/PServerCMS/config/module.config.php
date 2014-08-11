@@ -117,6 +117,27 @@ return array(
     ),
 
 	'doctrine' => array(
+		'connection' => array(
+			'orm_default' => array(
+				'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
+				'params' => array(
+					'host'     => 'localhost',
+					'port'     => '3306',
+					'user'     => 'username',
+					'password' => 'password',
+					'dbname'   => 'dbname',
+				),
+				'doctrine_type_mappings' => array(
+					'enum' => 'string'
+				),
+			),
+		),
+		'entitymanager' => array(
+			'orm_default' => array(
+				'connection'    => 'orm_default',
+				'configuration' => 'orm_default'
+			),
+		),
 		'driver' => array(
 			'application_entities' => array(
 				'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',

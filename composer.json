@@ -18,6 +18,7 @@
 		"mabuzagu/pdo-dblib-module": "dev-master",
 		"kokspflanze/zfc-ticket-system": "dev-master",
 		"kokspflanze/zfc-yui-compressor": "dev-master",
-		"kokspflanze/small-user": "dev-master"
+		"kokspflanze/small-user": "dev-master",
+		"kokspflanze/game-backend": "dev-master"
     }
 }
