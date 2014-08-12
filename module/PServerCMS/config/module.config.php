@@ -106,6 +106,8 @@ return array(
 			'zfc-ticket-system/new'			=> __DIR__ . '/../view/zfc-ticket-system/ticket-system/new.twig',
 			'zfc-ticket-system/view'		=> __DIR__ . '/../view/zfc-ticket-system/ticket-system/view.twig',
 			'zfc-ticket-system/index'		=> __DIR__ . '/../view/zfc-ticket-system/ticket-system/index.twig',
+			'small-user/login'				=> __DIR__ . '/../view/p-server-cms/auth/login.twig',
+			'small-user/logout-page'		=> __DIR__ . '/../view/p-server-cms/auth/logout-page.twig',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
