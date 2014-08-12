@@ -103,6 +103,9 @@ return array(
 			'helper/sidebarWidget'			=> __DIR__ . '/../view/helper/sidebar.twig',
 			'helper/sidebarLoggedInWidget'	=> __DIR__ . '/../view/helper/logged-in.twig',
             'helper/formWidget'		        => __DIR__ . '/../view/helper/form.twig',
+			'zfc-ticket-system/new'			=> __DIR__ . '/../view/zfc-ticket-system/ticket-system/new.twig',
+			'zfc-ticket-system/view'		=> __DIR__ . '/../view/zfc-ticket-system/ticket-system/view.twig',
+			'zfc-ticket-system/index'		=> __DIR__ . '/../view/zfc-ticket-system/ticket-system/index.twig',
         ),
         'template_path_stack' => array(
             __DIR__ . '/../view',
