@@ -13,18 +13,15 @@ use PServerCMS\Keys\Entity;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class SiteController extends AbstractActionController {
-	/** @var \Doctrine\ORM\EntityManager $entityManager */
-	protected $entityManager;
+	/** @var \PServerCMS\Service\Download */
+	protected $downloadService;
 
 	/**
 	 * DownloadPage
 	 */
 	public function downloadAction(){
-		/** @var \PServerCMS\Entity\Repository\DownloadList $oRepositoryDownload */
-		$oRepositoryDownload = $this->getEntityManager()->getRepository(Entity::DownloadList);
-
 		return array(
-			'aDownloadList' => $oRepositoryDownload->getActiveDownloadList()
+			'aDownloadList' => $this->getDownloadService()->getActiveList()
 		);
 	}
 
@@ -57,13 +54,13 @@ class SiteController extends AbstractActionController {
 	}
 
 	/**
-	 * @return \Doctrine\ORM\EntityManager
+	 * @return \PServerCMS\Service\Download
 	 */
-	public function getEntityManager(){
-		if (!$this->entityManager) {
-			$this->entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+	public function getDownloadService(){
+		if (!$this->downloadService) {
+			$this->downloadService = $this->getServiceLocator()->get('pserver_download_service');
 		}
 
-		return $this->entityManager;
+		return $this->downloadService;
 	}
 } 

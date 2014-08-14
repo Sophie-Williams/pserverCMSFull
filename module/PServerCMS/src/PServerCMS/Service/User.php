@@ -317,7 +317,7 @@ class User extends \SmallUser\Service\User {
 	/**
 	 * @return \PServerCMS\Form\Register
 	 */
-	protected function getRegisterForm() {
+	public function getRegisterForm() {
 		if (! $this->registerForm) {
 			$this->registerForm = $this->getServiceManager()->get('pserver_user_register_form');
 		}
@@ -328,7 +328,7 @@ class User extends \SmallUser\Service\User {
 	/**
 	 * @return \PServerCMS\Form\Password
 	 */
-	protected function getPasswordForm() {
+	public function getPasswordForm() {
 		if (! $this->passwordForm) {
 			$this->passwordForm = $this->getServiceManager()->get('pserver_user_password_form');
 		}
@@ -339,7 +339,7 @@ class User extends \SmallUser\Service\User {
 	/**
 	 * @return \PServerCMS\Form\PwLost
 	 */
-	protected function getPasswordLostForm() {
+	public function getPasswordLostForm() {
 		if (! $this->passwordLostForm) {
 			$this->passwordLostForm = $this->getServiceManager()->get('pserver_user_pwlost_form');
 		}

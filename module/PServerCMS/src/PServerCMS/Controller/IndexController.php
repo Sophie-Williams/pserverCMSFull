@@ -6,26 +6,23 @@ use PServerCMS\Keys\Entity;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class IndexController extends AbstractActionController {
-	/** @var \Doctrine\ORM\EntityManager $entityManager */
-	protected $entityManager;
+	/** @var \PServerCMS\Service\News */
+	protected $newsService;
 
 	public function indexAction() {
-		/** @var \PServerCMS\Entity\Repository\News $oRepositoryNews */
-		$oRepositoryNews = $this->getEntityManager()->getRepository(Entity::News);
-
 		return array(
-			'aNews' => $oRepositoryNews->getActiveNews()
+			'aNews' => $this->getNewsService()->getActiveNews()
 		);
 	}
 
 	/**
-	 * @return \Doctrine\ORM\EntityManager
+	 * @return \PServerCMS\Service\News
 	 */
-	public function getEntityManager(){
-		if (!$this->entityManager) {
-			$this->entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+	public function getNewsService(){
+		if (!$this->newsService) {
+			$this->newsService = $this->getServiceLocator()->get('pserver_news_service');
 		}
 
-		return $this->entityManager;
+		return $this->newsService;
 	}
 }

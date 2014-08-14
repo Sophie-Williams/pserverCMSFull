@@ -52,6 +52,8 @@ class Module {
 			'invokables' => array(
 				'small_user_service'				=> 'PServerCMS\Service\User',
 				'pserver_mail_service'				=> 'PServerCMS\Service\Mail',
+				'pserver_download_service'			=> 'PServerCMS\Service\Download',
+				'pserver_news_service'				=> 'PServerCMS\Service\News',
 				'pserver_usercodes_service'			=> 'PServerCMS\Service\UserCodes',
 				'pserver_configread_service'		=> 'PServerCMS\Service\ConfigRead',
 			),

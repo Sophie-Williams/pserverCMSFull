@@ -18,7 +18,7 @@ class AuthController extends \SmallUser\Controller\AuthController {
 			return $this->redirect()->toRoute(self::RouteLoggedIn);
 		}
 
-		$oForm = $this->getRegisterForm();
+		$oForm = $this->getUserService()->getRegisterForm();
 
 		$oRequest = $this->getRequest();
 		if($oRequest->isPost()){
@@ -43,7 +43,7 @@ class AuthController extends \SmallUser\Controller\AuthController {
 			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
 		}
 
-		$form = $this->getPasswordForm();
+		$form = $this->getUserService()->getPasswordForm();
 		$request = $this->getRequest();
 		if($request->isPost()){
 			$user = $this->getUserService()->registerGame($this->params()->fromPost(), $oCode);
@@ -78,7 +78,7 @@ class AuthController extends \SmallUser\Controller\AuthController {
 
 	public function pwLostAction(){
 
-		$form = $this->getPasswordLostForm();
+		$form = $this->getUserService()->getPasswordLostForm();
 
 		$request = $this->getRequest();
 		if($request->isPost()){
@@ -103,7 +103,7 @@ class AuthController extends \SmallUser\Controller\AuthController {
 			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
 		}
 
-		$form = $this->getPasswordForm();
+		$form = $this->getUserService()->getPasswordForm();
 		$request = $this->getRequest();
 		if($request->isPost()){
 			$user = $this->getUserService()->lostPwConfirm($this->params()->fromPost(), $oCode);
@@ -131,37 +131,10 @@ class AuthController extends \SmallUser\Controller\AuthController {
 
 		return $oCode;
 	}
-
 	/**
-	 * @return \PServerCMS\Form\Register
+	 * @return \PServerCMS\Service\User
 	 */
-	protected function getRegisterForm() {
-		if (!$this->registerForm) {
-			$this->registerForm = $this->getServiceLocator()->get('pserver_user_register_form');
-		}
-
-		return $this->registerForm;
-	}
-
-	/**
-	 * @return \PServerCMS\Form\Password
-	 */
-	protected function getPasswordForm() {
-		if (!$this->passwordForm) {
-			$this->passwordForm = $this->getServiceLocator()->get('pserver_user_password_form');
-		}
-
-		return $this->passwordForm;
-	}
-
-	/**
-	 * @return \PServerCMS\Form\PwLost
-	 */
-	protected function getPasswordLostForm() {
-		if (!$this->passwordLostForm) {
-			$this->passwordLostForm = $this->getServiceLocator()->get('pserver_user_pwlost_form');
-		}
-
-		return $this->passwordLostForm;
+	protected function getUserService(){
+		return parent::getUserService();
 	}
 }
