@@ -30,6 +30,9 @@ class Module {
 
 	public function getViewHelperConfig(){
 		return array(
+			'invokables' => array(
+				'pserverformerrors' => 'PServerCMS\View\Helper\FormError'
+			),
 			'factories' => array(
 				'sidebarWidget' => function(AbstractPluginManager $pluginManager){
 					return new View\Helper\SideBarWidget($pluginManager->getServiceLocator());
