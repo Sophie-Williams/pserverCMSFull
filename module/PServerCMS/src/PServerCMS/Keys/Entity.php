@@ -20,13 +20,11 @@ class Entity {
 	const LoginHistory			= 'PServerCMS\Entity\Loginhistory';
 	const Logs					= 'PServerCMS\Entity\Logs';
 	const News					= 'PServerCMS\Entity\News';
-	const TicketCategory		= 'PServerCMS\Entity\Ticketcategory';
-	const TicketEntry			= 'PServerCMS\Entity\Ticketentry';
-	const TicketSubject			= 'PServerCMS\Entity\Ticketsubject';
 	const UserBlock				= 'PServerCMS\Entity\Userblock';
 	const UserCodes				= 'PServerCMS\Entity\Usercodes';
 	const UserExtension			= 'PServerCMS\Entity\Userexstension';
 	const UserRole				= 'PServerCMS\Entity\UserRole';
 	const Users					= 'PServerCMS\Entity\Users';
+	const ServerInfo			= 'PServerCMS\Entity\ServerInfo';
 
 } 
