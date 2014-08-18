@@ -76,6 +76,24 @@ return array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
         ),
+		'factories' => array(
+			'pserver_caching_service' => function($sm){
+				$cache = Zend\Cache\StorageFactory::factory(array(
+					'adapter' => 'filesystem',
+					'options' => array(
+						'cache_dir' => __DIR__ . '/../../../data/cache',
+						'ttl' => 86400
+					),
+					'plugins' => array(
+						'exception_handler' => array(
+							'throw_exceptions' => false
+						),
+						'serializer'
+					)
+				));
+				return $cache;
+			},
+		),
     ),
     'controllers' => array(
         'invokables' => array(

@@ -38,6 +38,7 @@ class SideBarWidget extends AbstractHelper {
 	 */
 	protected $timerService;
 	protected $entityManager;
+	protected $cachingService;
 
 	/**
 	 * @param ServiceLocatorInterface $serviceLocatorInterface
@@ -133,18 +134,35 @@ class SideBarWidget extends AbstractHelper {
 	}
 
 	protected function getServerInfo(){
-		$entityManager = $this->getEntityManager();
+		$serverInfo = $this->getCachingService()->getItem(\PServerCMS\Keys\Caching::ServerInfo);
+		if($serverInfo === false){
+			$entityManager = $this->getEntityManager();
 
-		/** @var \PServerCMS\Entity\Repository\ServerInfo $repository */
-		$repository = $entityManager->getRepository(Entity::ServerInfo);
-		return $repository->getActiveInfos();
+			/** @var \PServerCMS\Entity\Repository\ServerInfo $repository */
+			$repository = $entityManager->getRepository(Entity::ServerInfo);
+			$serverInfo = $repository->getActiveInfos();
+
+			$this->getCachingService()->setItem(\PServerCMS\Keys\Caching::ServerInfo, $serverInfo);
+		}
+		return $serverInfo;
+	}
+
+	/**
+	 * @return \Zend\Cache\Storage\StorageInterface
+	 */
+	protected function getCachingService(){
+		if (!$this->cachingService) {
+			$this->cachingService = $this->getServiceLocator()->get('pserver_caching_service');
+		}
+
+		return $this->cachingService;
 	}
 
 
 	/**
 	 * @return \Doctrine\ORM\EntityManager
 	 */
-	public function getEntityManager() {
+	protected function getEntityManager() {
 		if (!$this->entityManager) {
 			$this->entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 		}

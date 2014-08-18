@@ -23,7 +23,7 @@
 				<?php echo $aCurTimer['name'] ?>:
 				<?php if($aCurTimer['time'] > 0){ ?>
 					<span class="timerCountdown" id="<?php echo 'idTimeCountdown_'.$i++; ?>" data-time="<?php echo $aCurTimer['time'] ?>"></span>
-				<?php }else { ?>
+				<?php }else{ ?>
 					<?php echo $this->escapeHtml($aCurTimer['text']) ?>
 				<?php } ?>
 			</li>
