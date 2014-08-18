@@ -15,6 +15,8 @@ use Zend\Mvc\Controller\AbstractActionController;
 class SiteController extends AbstractActionController {
 	/** @var \PServerCMS\Service\Download */
 	protected $downloadService;
+	/** @var \PServerCMS\Service\PageInfo */
+	protected $pageInfoService;
 
 	/**
 	 * DownloadPage
@@ -26,31 +28,19 @@ class SiteController extends AbstractActionController {
 	}
 
 	/**
-	 * FAQPage
+	 * DynamicPages
 	 */
-	public function faqAction(){
-		return array();
-	}
+	public function pageAction(){
 
-	/**
-	 * RulesPage
-	 */
-	public function rulesAction(){
-		return array();
-	}
+		$type = $this->params()->fromRoute('type');
+		$pageInfo = $this->getPageInfoService()->getPage4Type($type);
+		if(!$pageInfo){
+			return $this->redirect()->toRoute('home');
+		}
 
-	/**
-	 * GuidesPage
-	 */
-	public function guidesAction(){
-		return array();
-	}
-
-	/**
-	 * EventsPage
-	 */
-	public function eventsAction(){
-		return array();
+		return array(
+			'pageInfo' => $pageInfo
+		);
 	}
 
 	/**
@@ -62,5 +52,16 @@ class SiteController extends AbstractActionController {
 		}
 
 		return $this->downloadService;
+	}
+
+	/**
+	 * @return \PServerCMS\Service\PageInfo
+	 */
+	public function getPageInfoService(){
+		if (!$this->pageInfoService) {
+			$this->pageInfoService = $this->getServiceLocator()->get('pserver_pageinfo_service');
+		}
+
+		return $this->pageInfoService;
 	}
 } 

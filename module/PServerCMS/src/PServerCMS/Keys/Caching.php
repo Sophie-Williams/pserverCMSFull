@@ -12,5 +12,6 @@ namespace PServerCMS\Keys;
 class Caching {
 
 	const ServerInfo = 'pserver_serverinfo';
+	const PageInfo = 'pserver_pageinfo';
 
 } 

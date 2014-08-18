@@ -18,26 +18,17 @@ use Zend\View\Model\ViewModel;
 
 class SideBarWidget extends AbstractHelper {
 
-	/**
-	 * @var ServiceLocatorInterface
-	 */
+	/** @var ServiceLocatorInterface */
 	protected $serviceLocator;
-
-	/**
-	 * @var \Zend\Authentication\AuthenticationService
-	 */
+	/** @var \Zend\Authentication\AuthenticationService */
 	protected $authService;
-
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	protected $configService;
-
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	protected $timerService;
+	/** @var \Doctrine\ORM\EntityManager */
 	protected $entityManager;
+	/** @var \Zend\Cache\Storage\StorageInterface */
 	protected $cachingService;
 
 	/**
@@ -126,7 +117,12 @@ class SideBarWidget extends AbstractHelper {
 				}else{
 					$sText = $aCurData['time'];
 				}
-				$this->timerService[] = array('time' => $iTime, 'text' => $sText, 'name' => $aCurData['name'], 'icon' => $aCurData['icon']);
+				$this->timerService[] = array(
+					'time' => $iTime,
+					'text' => $sText,
+					'name' => $aCurData['name'],
+					'icon' => $aCurData['icon']
+				);
 			}
 		}
 
@@ -135,7 +131,7 @@ class SideBarWidget extends AbstractHelper {
 
 	protected function getServerInfo(){
 		$serverInfo = $this->getCachingService()->getItem(\PServerCMS\Keys\Caching::ServerInfo);
-		if($serverInfo === false){
+		if(!$serverInfo){
 			$entityManager = $this->getEntityManager();
 
 			/** @var \PServerCMS\Entity\Repository\ServerInfo $repository */

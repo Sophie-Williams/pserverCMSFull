@@ -13,24 +13,35 @@ return array(
                     ),
                 ),
             ),
-			'site' => array(
+			'site-detail' => array(
 				'type' => 'segment',
 				'options' => array(
-					'route'    => '/[:action].html',
+					'route'    => '/detail-[:type].html',
 					'constraints' => array(
-						'action'     => '[a-zA-Z]*',
+						'type'     => '[a-zA-Z]+',
 					),
 					'defaults' => array(
-						'controller'   => 'PServerCMS\Controller\Site',
+						'controller'	=> 'PServerCMS\Controller\Site',
+						'action'		=> 'page'
+					),
+				),
+			),
+			'site-download' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'    => '/download.html',
+					'defaults' => array(
+						'controller'	=> 'PServerCMS\Controller\Site',
+						'action'		=> 'download'
 					),
 				),
 			),
 			'user' => array(
 				'type' => 'segment',
 				'options' => array(
-					'route'    => '/panel/account/[:action].html',
+					'route'    => '/panel/account[/:action].html',
 					'constraints' => array(
-						'action'     => '[a-zA-Z]*',
+						'action'     => '[a-zA-Z]+',
 					),
 					'defaults' => array(
 						'controller'	=> 'PServerCMS\Controller\Account',

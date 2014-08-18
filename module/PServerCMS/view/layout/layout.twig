@@ -53,14 +53,14 @@
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="navigation"><a href="{{ url('home') }}">{{ translate('Home') }}</a></li>
-					<li class="navigation"><a href="{{ url('site', {'action':'download'}) }}">Download</a></li>
+					<li class="navigation"><a href="{{ url('site-download') }}">Download</a></li>
 					<li class="navigation dropdown">
 						<a data-toggle="dropdown" href="#">ServerInfo <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-							<li><a href="{{ url('site', {'action':'faq'}) }}">FAQ</a></li>
-							<li><a href="{{ url('site', {'action':'rules'}) }}">Rules</a></li>
-							<li><a href="{{ url('site', {'action':'guides'}) }}">Guides</a></li>
-							<li><a href="{{ url('site', {'action':'events'}) }}">Events</a></li>
+							<li><a href="{{ url('site-detail', {'type':'faq'}) }}">FAQ</a></li>
+							<li><a href="{{ url('site-detail', {'type':'rules'}) }}">Rules</a></li>
+							<li><a href="{{ url('site-detail', {'type':'guides'}) }}">Guides</a></li>
+							<li><a href="{{ url('site-detail', {'type':'events'}) }}">Events</a></li>
 						</ul>
 					</li>
 					<li class="navigation"><a href="#">Forum</a></li>

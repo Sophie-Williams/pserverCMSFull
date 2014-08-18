@@ -2,15 +2,7 @@
 
 namespace PServerCMS\Service;
 
-
-use SmallUser\Service\InvokableBase;
-
 class ConfigRead extends InvokableBase {
-
-    /**
-     * @var array
-     */
-    private $aConfig;
 
     /**
 	 * Caching the Config String
@@ -45,14 +37,4 @@ class ConfigRead extends InvokableBase {
 
         return $mResult;
     }
-
-	/**
-	 * @return array
-	 */
-	protected function getConfigData(){
-		if(!$this->aConfig){
-			$this->aConfig = $this->getServiceManager()->get('Config');
-		}
-		return $this->aConfig;
-	}
 }

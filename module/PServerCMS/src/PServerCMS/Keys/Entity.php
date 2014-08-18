@@ -20,6 +20,7 @@ class Entity {
 	const LoginHistory			= 'PServerCMS\Entity\Loginhistory';
 	const Logs					= 'PServerCMS\Entity\Logs';
 	const News					= 'PServerCMS\Entity\News';
+	const PageInfo				= 'PServerCMS\Entity\PageInfo';
 	const UserBlock				= 'PServerCMS\Entity\Userblock';
 	const UserCodes				= 'PServerCMS\Entity\Usercodes';
 	const UserExtension			= 'PServerCMS\Entity\Userexstension';

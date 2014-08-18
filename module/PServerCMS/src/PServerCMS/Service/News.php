@@ -8,7 +8,6 @@
 
 namespace PServerCMS\Service;
 
-use SmallUser\Service\InvokableBase;
 use PServerCMS\Keys\Entity;
 
 class News extends InvokableBase {

@@ -59,6 +59,7 @@ class Module {
 				'pserver_news_service'				=> 'PServerCMS\Service\News',
 				'pserver_usercodes_service'			=> 'PServerCMS\Service\UserCodes',
 				'pserver_configread_service'		=> 'PServerCMS\Service\ConfigRead',
+				'pserver_pageinfo_service'			=> 'PServerCMS\Service\PageInfo',
 			),
 			'factories' => array(
 				'pserver_user_register_form' => function($sm){
