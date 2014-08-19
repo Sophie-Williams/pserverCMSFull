@@ -14,6 +14,8 @@ class InvokableBase extends UserBase {
 
 	/** @var \Zend\Cache\Storage\StorageInterface */
 	protected $cachingService;
+	/** @var  CachingHelper */
+	protected $cachingHelperService;
 	/** @var array */
 	private $aConfig;
 
@@ -36,5 +38,16 @@ class InvokableBase extends UserBase {
 		}
 
 		return $this->cachingService;
+	}
+
+	/**
+	 * @return CachingHelper
+	 */
+	protected function getCachingHelperService(){
+		if (!$this->cachingHelperService) {
+			$this->cachingHelperService = $this->getServiceManager()->get('pserver_cachinghelper_service');
+		}
+
+		return $this->cachingHelperService;
 	}
 } 

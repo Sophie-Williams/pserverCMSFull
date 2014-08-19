@@ -23,7 +23,7 @@ class SiteController extends AbstractActionController {
 	 */
 	public function downloadAction(){
 		return array(
-			'aDownloadList' => $this->getDownloadService()->getActiveList()
+			'downloadList' => $this->getDownloadService()->getActiveList()
 		);
 	}
 
