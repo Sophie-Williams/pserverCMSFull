@@ -3,6 +3,7 @@
 namespace PServerCMS;
 
 use PServerCMS\Keys\Entity;
+use PServerCMS\Service\ServiceManager;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\AbstractPluginManager;
@@ -12,6 +13,8 @@ class Module {
 		$eventManager        = $e->getApplication()->getEventManager();
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach( $eventManager );
+
+		ServiceManager::setInstance($e->getApplication()->getServiceManager());
 	}
 
 	public function getConfig() {
@@ -30,6 +33,9 @@ class Module {
 
 	public function getViewHelperConfig(){
 		return array(
+			'invokables' => array(
+				'pserverformerrors' => 'PServerCMS\View\Helper\FormError'
+			),
 			'factories' => array(
 				'sidebarWidget' => function(AbstractPluginManager $pluginManager){
 					return new View\Helper\SideBarWidget($pluginManager->getServiceLocator());
@@ -56,6 +62,8 @@ class Module {
 				'pserver_news_service'				=> 'PServerCMS\Service\News',
 				'pserver_usercodes_service'			=> 'PServerCMS\Service\UserCodes',
 				'pserver_configread_service'		=> 'PServerCMS\Service\ConfigRead',
+				'pserver_pageinfo_service'			=> 'PServerCMS\Service\PageInfo',
+				'pserver_cachinghelper_service'		=> 'PServerCMS\Service\CachingHelper',
 			),
 			'factories' => array(
 				'pserver_user_register_form' => function($sm){

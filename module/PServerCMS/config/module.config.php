@@ -13,24 +13,35 @@ return array(
                     ),
                 ),
             ),
-			'site' => array(
+			'site-detail' => array(
 				'type' => 'segment',
 				'options' => array(
-					'route'    => '/[:action].html',
+					'route'    => '/detail-[:type].html',
 					'constraints' => array(
-						'action'     => '[a-zA-Z]*',
+						'type'     => '[a-zA-Z]+',
 					),
 					'defaults' => array(
-						'controller'   => 'PServerCMS\Controller\Site',
+						'controller'	=> 'PServerCMS\Controller\Site',
+						'action'		=> 'page'
+					),
+				),
+			),
+			'site-download' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'    => '/download.html',
+					'defaults' => array(
+						'controller'	=> 'PServerCMS\Controller\Site',
+						'action'		=> 'download'
 					),
 				),
 			),
 			'user' => array(
 				'type' => 'segment',
 				'options' => array(
-					'route'    => '/panel/account/[:action].html',
+					'route'    => '/panel/account[/:action].html',
 					'constraints' => array(
-						'action'     => '[a-zA-Z]*',
+						'action'     => '[a-zA-Z]+',
 					),
 					'defaults' => array(
 						'controller'	=> 'PServerCMS\Controller\Account',
@@ -76,6 +87,24 @@ return array(
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
         ),
+		'factories' => array(
+			'pserver_caching_service' => function($sm){
+				$cache = Zend\Cache\StorageFactory::factory(array(
+					'adapter' => 'filesystem',
+					'options' => array(
+						'cache_dir' => __DIR__ . '/../../../data/cache',
+						'ttl' => 86400
+					),
+					'plugins' => array(
+						'exception_handler' => array(
+							'throw_exceptions' => false
+						),
+						'serializer'
+					)
+				));
+				return $cache;
+			},
+		),
     ),
     'controllers' => array(
         'invokables' => array(
@@ -100,9 +129,9 @@ return array(
 			'email/tpl/register'			=> __DIR__ . '/../view/email/tpl/register.phtml',
 			'email/tpl/password'			=> __DIR__ . '/../view/email/tpl/password.phtml',
             'email/tpl/country' 			=> __DIR__ . '/../view/email/tpl/country.phtml',
-			'helper/sidebarWidget'			=> __DIR__ . '/../view/helper/sidebar.twig',
-			'helper/sidebarLoggedInWidget'	=> __DIR__ . '/../view/helper/logged-in.twig',
-            'helper/formWidget'		        => __DIR__ . '/../view/helper/form.twig',
+			'helper/sidebarWidget'			=> __DIR__ . '/../view/helper/sidebar.phtml',
+			'helper/sidebarLoggedInWidget'	=> __DIR__ . '/../view/helper/logged-in.phtml',
+            'helper/formWidget'		        => __DIR__ . '/../view/helper/form.phtml',
 			'zfc-ticket-system/new'			=> __DIR__ . '/../view/zfc-ticket-system/ticket-system/new.twig',
 			'zfc-ticket-system/view'		=> __DIR__ . '/../view/zfc-ticket-system/ticket-system/view.twig',
 			'zfc-ticket-system/index'		=> __DIR__ . '/../view/zfc-ticket-system/ticket-system/index.twig',

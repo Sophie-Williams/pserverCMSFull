@@ -10,6 +10,7 @@ namespace PServerCMS\View\Helper;
 
 
 use PServerCMS\Helper\Timer;
+use PServerCMS\Keys\Entity;
 use Zend\Form\View\Helper\AbstractHelper;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -17,25 +18,18 @@ use Zend\View\Model\ViewModel;
 
 class SideBarWidget extends AbstractHelper {
 
-	/**
-	 * @var ServiceLocatorInterface
-	 */
+	/** @var ServiceLocatorInterface */
 	protected $serviceLocator;
-
-	/**
-	 * @var \Zend\Authentication\AuthenticationService
-	 */
+	/** @var \Zend\Authentication\AuthenticationService */
 	protected $authService;
-
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	protected $configService;
-
-	/**
-	 * @var array
-	 */
+	/** @var array */
 	protected $timerService;
+	/** @var \Doctrine\ORM\EntityManager */
+	protected $entityManager;
+	/** @var \Zend\Cache\Storage\StorageInterface */
+	protected $cachingService;
 
 	/**
 	 * @param ServiceLocatorInterface $serviceLocatorInterface
@@ -57,7 +51,8 @@ class SideBarWidget extends AbstractHelper {
 			$sTemplate = $this->getView()->render($oViewModel);
 		}
 		$oViewModel = new ViewModel(array(
-			'timer' => $this->getTimer()
+			'timer' => $this->getTimer(),
+			'serverInfo' => $this->getServerInfo()
 		));
 		$oViewModel->setTemplate('helper/sidebarWidget');
 		return $sTemplate.$this->getView()->render($oViewModel);
@@ -122,10 +117,52 @@ class SideBarWidget extends AbstractHelper {
 				}else{
 					$sText = $aCurData['time'];
 				}
-				$this->timerService[] = array('time' => $iTime, 'text' => $sText, 'name' => $aCurData['name'], 'icon' => $aCurData['icon']);
+				$this->timerService[] = array(
+					'time' => $iTime,
+					'text' => $sText,
+					'name' => $aCurData['name'],
+					'icon' => $aCurData['icon']
+				);
 			}
 		}
 
 		return $this->timerService;
+	}
+
+	protected function getServerInfo(){
+		$serverInfo = $this->getCachingService()->getItem(\PServerCMS\Keys\Caching::ServerInfo);
+		if(!$serverInfo){
+			$entityManager = $this->getEntityManager();
+
+			/** @var \PServerCMS\Entity\Repository\ServerInfo $repository */
+			$repository = $entityManager->getRepository(Entity::ServerInfo);
+			$serverInfo = $repository->getActiveInfos();
+
+			$this->getCachingService()->setItem(\PServerCMS\Keys\Caching::ServerInfo, $serverInfo);
+		}
+		return $serverInfo;
+	}
+
+	/**
+	 * @return \Zend\Cache\Storage\StorageInterface
+	 */
+	protected function getCachingService(){
+		if (!$this->cachingService) {
+			$this->cachingService = $this->getServiceLocator()->get('pserver_caching_service');
+		}
+
+		return $this->cachingService;
+	}
+
+
+	/**
+	 * @return \Doctrine\ORM\EntityManager
+	 */
+	protected function getEntityManager() {
+		if (!$this->entityManager) {
+			$this->entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+		}
+
+		return $this->entityManager;
 	}
 }

@@ -14,7 +14,7 @@ class AuthController extends \SmallUser\Controller\AuthController {
 	public function registerAction(){
 
 		//if already login, redirect to success page
-		if ($this->getAuthService()->hasIdentity()){
+		if ($this->getUserService()->getAuthService()->hasIdentity()){
 			return $this->redirect()->toRoute(self::RouteLoggedIn);
 		}
 
