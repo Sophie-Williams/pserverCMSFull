@@ -27,4 +27,18 @@ class News extends InvokableBase {
 		return $newsInfo;
 	}
 
+	/**
+	 * @return null|\PServerCMS\Entity\News[]
+	 */
+	public function getNews(){
+		/** @var \PServerCMS\Entity\Repository\News $repository */
+		$repository = $this->getEntityManager()->getRepository(Entity::News);
+		return $repository->getNews();
+	}
+
+	public function getNews4Id( $newsId ){
+		/** @var \PServerCMS\Entity\Repository\News $repository */
+		$repository = $this->getEntityManager()->getRepository(Entity::News);
+		return $repository->getNews4Id($newsId);
+	}
 } 

@@ -46,7 +46,7 @@ class SiteController extends AbstractActionController {
 	/**
 	 * @return \PServerCMS\Service\Download
 	 */
-	public function getDownloadService(){
+	protected function getDownloadService(){
 		if (!$this->downloadService) {
 			$this->downloadService = $this->getServiceLocator()->get('pserver_download_service');
 		}
@@ -57,7 +57,7 @@ class SiteController extends AbstractActionController {
 	/**
 	 * @return \PServerCMS\Service\PageInfo
 	 */
-	public function getPageInfoService(){
+	protected function getPageInfoService(){
 		if (!$this->pageInfoService) {
 			$this->pageInfoService = $this->getServiceLocator()->get('pserver_pageinfo_service');
 		}

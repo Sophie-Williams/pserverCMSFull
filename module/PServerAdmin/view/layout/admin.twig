@@ -31,13 +31,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Admin</a>
+            <a class="navbar-brand" href="{{ url('admin_home') }}">Admin</a>
         </div>
 
         <div class="collapse navbar-collapse" id="admin-navbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a>Username</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="{{ url('small-user-auth',{'action':'logout'}) }}">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -46,9 +46,13 @@
 <div id="wrapper">
     <div id="sidebar-wrapper" class="panel-collapse collapse in sidebar">
         <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Messages</a></li>
+            <li class="active"><a href="{{ url('admin_home') }}">Home</a></li>
+			{% if isAllowed('admin_user') %}
+				<li><a href="{{ url('admin_user') }}">Userpanel</a></li>
+			{% endif %}
+			{% if isAllowed('admin_news') %}
+				<li><a href="{{ url('admin_news') }}">News</a></li>
+			{% endif %}
         </ul>
     </div>
 
@@ -72,9 +76,9 @@
 <!--[if lt IE 9]><script type="text/javascript" src="{{ basePath() }}/assets/js/html5shiv.js"></script><![endif]-->
 <script type="text/javascript" src="{{ basePath() }}/js/function.js"></script>
 <script>
-    $("#menu-toggle").click(function(e) {
+    jQuery("#menu-toggle").click(function(e) {
         e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
+        jQuery("#wrapper").toggleClass("toggled");
     });
 </script>
 </body>

@@ -193,4 +193,11 @@ class News {
 		return $this->usersUsrid;
 	}
 
+	/**
+	 * @return \PServerCMS\Entity\Users
+	 */
+	public function getUser() {
+		return $this->getUsersUsrid();
+	}
+
 }

@@ -1,18 +1,31 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: †KôKšPfLâÑzè®
+ * Date: 20.08.14
+ * Time: 20:31
+ */
 
-namespace PServerCMS\Controller;
+namespace PServerAdmin\Controller;
 
-use PServerCMS\Keys\Entity;
 use Zend\Mvc\Controller\AbstractActionController;
 
-class IndexController extends AbstractActionController {
+class NewsController extends AbstractActionController {
 	/** @var \PServerCMS\Service\News */
 	protected $newsService;
 
-	public function indexAction() {
+	public function indexAction(){
 		return array(
-			'aNews' => $this->getNewsService()->getActiveNews()
+			'news' => $this->getNewsService()->getNews()
 		);
+	}
+
+	public function detailAction(){
+
+	}
+
+	public function newAction(){
+
 	}
 
 	/**
@@ -25,4 +38,5 @@ class IndexController extends AbstractActionController {
 
 		return $this->newsService;
 	}
-}
+
+} 
