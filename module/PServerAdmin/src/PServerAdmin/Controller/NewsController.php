@@ -13,6 +13,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 class NewsController extends AbstractActionController {
 	/** @var \PServerCMS\Service\News */
 	protected $newsService;
+	protected $authService;
 
 	public function indexAction(){
 		return array(
@@ -25,7 +26,20 @@ class NewsController extends AbstractActionController {
 	}
 
 	public function newAction(){
+		$form = $this->getNewsService()->getNewsForm();
 
+
+		$request = $this->getRequest();
+		if($request->isPost()){
+			$news = $this->getNewsService()->news($this->params()->fromPost(), $this->getAuthService()->getIdentity());
+			if($news){
+				return $this->redirect()->toRoute('admin_news');
+			}
+		}
+
+		return array(
+			'form' => $form
+		);
 	}
 
 	/**
@@ -37,6 +51,17 @@ class NewsController extends AbstractActionController {
 		}
 
 		return $this->newsService;
+	}
+
+	/**
+	 * @return \Zend\Authentication\AuthenticationService
+	 */
+	protected function getAuthService() {
+		if (!$this->authService) {
+			$this->authService = $this->getServiceLocator()->get('small_user_auth_service');
+		}
+
+		return $this->authService;
 	}
 
 } 

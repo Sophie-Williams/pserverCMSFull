@@ -185,6 +185,15 @@ class News {
 	}
 
 	/**
+	 * @param Users $user
+	 *
+	 * @return News
+	 */
+	public function setUser( Users $user){
+		return $this->setUsersUsrid($user);
+	}
+
+	/**
 	 * Get usersUsrid
 	 *
 	 * @return \PServerCMS\Entity\Users

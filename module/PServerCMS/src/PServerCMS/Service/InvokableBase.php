@@ -50,4 +50,16 @@ class InvokableBase extends UserBase {
 
 		return $this->cachingHelperService;
 	}
+
+	/**
+	 * TODO refactoring
+	 * @param $userId
+	 *
+	 * @return null|\PServerCMS\Entity\Users
+	 */
+	protected function getUser4Id( $userId ){
+		$entityManager = $this->getEntityManager();
+		return $entityManager->getRepository('PServerCMS\Entity\Users')->findOneBy(array('usrid' => $userId));
+	}
+
 } 

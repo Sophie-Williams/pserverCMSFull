@@ -26,6 +26,14 @@ class Module implements ServiceProviderInterface {
 	 * @return array|\Zend\ServiceManager\Config
 	 */
 	public function getServiceConfig() {
-		return array();
+		return array(
+			'factories' => array(
+				'pserver_admin_news_form' => function(){
+					$form = new Form\News();
+					$form->setInputFilter(new Form\NewsFilter());
+					return $form;
+				},
+			)
+		);
 	}
 }

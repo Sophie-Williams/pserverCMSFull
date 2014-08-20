@@ -17,7 +17,7 @@ $form->setAttribute('class', 'form-horizontal');
             </div>
 		<?php elseif ($element instanceof Zend\Form\Element\Captcha): ?>
 			<?php echo $this->formCaptcha($element) . $this->pserverformerrors($element) ?>
-		<?php elseif ($element instanceof DoctrineModule\Form\Element\ObjectSelect): ?>
+		<?php elseif ($element instanceof DoctrineModule\Form\Element\ObjectSelect || $element instanceof Zend\Form\Element\Select): ?>
 			<div class="col-sm-10">
 				<?php echo $this->formSelect($element) . $this->pserverformerrors($element) ?>
 			</div>
