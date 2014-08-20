@@ -3,12 +3,15 @@
 namespace PServerCMS\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use PServerCMS\Keys\Caching;
+use PServerCMS\Service\ServiceManager;
 
 /**
  * News
  *
  * @ORM\Table(name="news", indexes={@ORM\Index(name="fk_news_users1_idx", columns={"users_usrId"})})
  * @ORM\Entity(repositoryClass="PServerCMS\Entity\Repository\News")
+ * @ORM\HasLifecycleCallbacks
  */
 class News {
 	/**
@@ -57,6 +60,15 @@ class News {
 	 * })
 	 */
 	private $usersUsrid;
+
+	/**
+	 * @ORM\PostPersist()
+	 */
+	public function postPersist( ) {
+		/** @var \PServerCMS\Service\CachingHelper $cachingHelperService */
+		$cachingHelperService = ServiceManager::getInstance()->get('pserver_cachinghelper_service');
+		$cachingHelperService->delItem(Caching::News);
+	}
 
 	public function __construct( ) {
 		$this->created = new \DateTime();

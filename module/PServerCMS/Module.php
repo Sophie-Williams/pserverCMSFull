@@ -3,6 +3,7 @@
 namespace PServerCMS;
 
 use PServerCMS\Keys\Entity;
+use PServerCMS\Service\ServiceManager;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\AbstractPluginManager;
@@ -12,6 +13,8 @@ class Module {
 		$eventManager        = $e->getApplication()->getEventManager();
 		$moduleRouteListener = new ModuleRouteListener();
 		$moduleRouteListener->attach( $eventManager );
+
+		ServiceManager::setInstance($e->getApplication()->getServiceManager());
 	}
 
 	public function getConfig() {

@@ -9,12 +9,15 @@
 namespace PServerCMS\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use PServerCMS\Keys\Caching;
+use PServerCMS\Service\ServiceManager;
 
 /**
  * Ipblock
  *
  * @ORM\Table(name="serverInfo")
  * @ORM\Entity(repositoryClass="PServerCMS\Entity\Repository\ServerInfo")
+ * @ORM\HasLifecycleCallbacks
  */
 class ServerInfo {
 
@@ -62,6 +65,15 @@ class ServerInfo {
 	 * @ORM\Column(name="sortkey", type="integer", nullable=false)
 	 */
 	private $sortkey;
+
+	/**
+	 * @ORM\PostPersist()
+	 */
+	public function postPersist() {
+		/** @var \PServerCMS\Service\CachingHelper $cachingHelperService */
+		$cachingHelperService = ServiceManager::getInstance()->get('pserver_cachinghelper_service');
+		$cachingHelperService->delItem(Caching::ServerInfo);
+	}
 
 	/**
 	 * @param string $active

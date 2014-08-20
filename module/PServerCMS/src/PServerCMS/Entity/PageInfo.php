@@ -8,13 +8,17 @@
 
 namespace PServerCMS\Entity;
 
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Mapping as ORM;
+use PServerCMS\Keys\Caching;
+use PServerCMS\Service\ServiceManager;
 
 /**
  * Ipblock
  *
  * @ORM\Table(name="pageInfo")
  * @ORM\Entity(repositoryClass="PServerCMS\Entity\Repository\PageInfo")
+ * @ORM\HasLifecycleCallbacks
  */
 class PageInfo {
 
@@ -60,6 +64,18 @@ class PageInfo {
 	 */
 	private $created;
 
+	/**
+	 * @ORM\PostPersist()
+	 */
+	public function postPersist( LifecycleEventArgs $eventArgs ) {
+		/** @var PageInfo $entity */
+		$entity = $eventArgs->getEntity();
+
+		/** @var \PServerCMS\Service\CachingHelper $cachingHelperService */
+		$cachingHelperService = ServiceManager::getInstance()->get('pserver_cachinghelper_service');
+		$cachingHelperService->delItem(Caching::PageInfo . '_' . $entity->getType());
+		//$em->getUnitOfWork()->getS
+	}
 
 	public function __construct( ) {
 		$this->created = new \DateTime();

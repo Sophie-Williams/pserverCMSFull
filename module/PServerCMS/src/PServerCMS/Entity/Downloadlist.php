@@ -3,12 +3,15 @@
 namespace PServerCMS\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use PServerCMS\Keys\Caching;
+use PServerCMS\Service\ServiceManager;
 
 /**
  * Downloadlist
  *
  * @ORM\Table(name="downloadList")
  * @ORM\Entity(repositoryClass="PServerCMS\Entity\Repository\DownloadList")
+ * @ORM\HasLifecycleCallbacks
  */
 class Downloadlist {
 	/**
@@ -55,6 +58,14 @@ class Downloadlist {
 	 */
 	private $sortkey;
 
+	/**
+	 * @ORM\PostPersist()
+	 */
+	public function postPersist() {
+		/** @var \PServerCMS\Service\CachingHelper $cachingHelperService */
+		$cachingHelperService = ServiceManager::getInstance()->get('pserver_cachinghelper_service');
+		$cachingHelperService->delItem(Caching::Download);
+	}
 
 	/**
 	 * Get did
