@@ -21,14 +21,14 @@
 			<tbody>
 			{% for key, curNews in news %}
 				<tr>
-					<td>{{ curNews.getNid }}</td>
+					<td>{{ curNews.getId }}</td>
 					<td>{{ curNews.getUser.getUsername }}</td>
 					<td>{{ curNews.getTitle }}</td>
 					<td>{{ curNews.getMemo|striptags|slice(0, 200) }}</td>
 					<td>{{ curNews.getActive }}</td>
 					<td>{{ curNews.getCreated|date('d.m.Y H:i') }}</td>
 					<td>
-						<a href="{{ url('admin_news', {'action' : 'detail', 'id' : curNews.getNid }) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> edit</a>
+						<a href="{{ url('admin_news', {'action' : 'detail', 'id' : curNews.getId }) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> edit</a>
 					</td>
 				</tr>
 			{% endfor %}

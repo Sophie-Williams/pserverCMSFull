@@ -8,6 +8,7 @@
 
 namespace PServerAdmin\Controller;
 
+use PServerAdmin\Mapper\HydratorNews;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class NewsController extends AbstractActionController {
@@ -22,12 +23,30 @@ class NewsController extends AbstractActionController {
 	}
 
 	public function detailAction(){
+		$id = $this->params()->fromRoute('id');
+		$news = $this->getNewsService()->getNews4Id($id);
+		if(!$news){
+			return $this->redirect()->toRoute('admin_news');
+		}
 
+		$form = $this->getNewsService()->getNewsForm();
+
+		$request = $this->getRequest();
+		if($request->isPost()){
+			if($this->getNewsService()->newsEdit($this->params()->fromPost(), $news)){
+				return $this->redirect()->toRoute('admin_news');
+			}
+		}else{
+			$newsHydrator = new HydratorNews();
+			$form->setData($newsHydrator->extract($news));
+		}
+		return array(
+			'form' => $form
+		);
 	}
 
 	public function newAction(){
 		$form = $this->getNewsService()->getNewsForm();
-
 
 		$request = $this->getRequest();
 		if($request->isPost()){

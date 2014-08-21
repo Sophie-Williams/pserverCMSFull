@@ -79,8 +79,18 @@ class News {
 	 *
 	 * @return integer
 	 */
-	public function getNid() {
+	public function getId() {
 		return $this->nid;
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return News
+	 */
+	public function setId( $id ) {
+		$this->nid = $id;
+		return $this;
 	}
 
 	/**

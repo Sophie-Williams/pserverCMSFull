@@ -81,6 +81,30 @@ class News extends InvokableBase {
 	}
 
 	/**
+	 * @param array                   $data
+	 * @param \PServerCMS\Entity\News $news
+	 *
+	 * @return bool|\PServerCMS\Entity\News
+	 */
+	public function newsEdit( array $data, \PServerCMS\Entity\News $news ){
+		$form = $this->getNewsForm();
+		$form->setHydrator(new HydratorNews());
+		$form->bind($news);
+		$form->setData($data);
+		if(!$form->isValid()){
+			return false;
+		}
+		/** @var \PServerCMS\Entity\News $news */
+		$news = $form->getData();
+
+		$entity = $this->getEntityManager();
+		$entity->persist($news);
+		$entity->flush();
+
+		return $news;
+	}
+
+	/**
 	 * @return \PServerAdmin\Form\News
 	 */
 	public function getNewsForm(){
