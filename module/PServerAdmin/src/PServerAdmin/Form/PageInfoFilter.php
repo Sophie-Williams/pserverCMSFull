@@ -2,15 +2,15 @@
 /**
  * Created by PhpStorm.
  * User: †KôKšPfLâÑzè®
- * Date: 20.08.14
- * Time: 22:20
+ * Date: 21.08.14
+ * Time: 22:23
  */
 
 namespace PServerAdmin\Form;
 
 use ZfcBase\InputFilter\ProvidesEventsInputFilter;
 
-class NewsFilter extends ProvidesEventsInputFilter {
+class PageInfoFilter extends ProvidesEventsInputFilter {
 
 	public function __construct() {
 
@@ -42,18 +42,5 @@ class NewsFilter extends ProvidesEventsInputFilter {
 				),
 			),
 		));
-
-		$this->add(array(
-			'name'       => 'active',
-			'required'   => true,
-			'validators' => array(
-				array(
-					'name'    => 'InArray',
-					'options' => array(
-						'haystack' => array(0,1),
-					),
-				),
-			),
-		));
 	}
-}
+} 

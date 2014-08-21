@@ -53,6 +53,12 @@
 			{% if isAllowed('admin_news') %}
 				<li><a href="{{ url('admin_news') }}">News</a></li>
 			{% endif %}
+			{% if isAllowed('admin_settings') %}
+				<li><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'faq'}) }}">Settings-FAQ</a></li>
+				<li><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'rules'}) }}">Settings-Rules</a></li>
+				<li><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'guides'}) }}">Settings-Guides</a></li>
+				<li><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'events'}) }}">Settings-Events</a></li>
+			{% endif %}
         </ul>
     </div>
 

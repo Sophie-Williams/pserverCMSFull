@@ -33,6 +33,11 @@ class Module implements ServiceProviderInterface {
 					$form->setInputFilter(new Form\NewsFilter());
 					return $form;
 				},
+				'pserver_admin_page_info_form' => function(){
+					$form = new Form\PageInfo();
+					$form->setInputFilter(new Form\PageInfoFilter());
+					return $form;
+				},
 			)
 		);
 	}

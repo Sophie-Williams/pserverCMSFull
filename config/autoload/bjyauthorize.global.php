@@ -47,6 +47,7 @@ return array(
 				'zfc-ticketsystem' => array(),
 				'admin_home' => array(),
 				'admin_news' => array(),
+				'admin_settings' => array(),
 				'small-user-auth' => array(),
 			),
 		),
@@ -71,6 +72,7 @@ return array(
 					array(array('user', 'admin'), 'zfc-ticketsystem'),
 					array(array('admin'), 'admin_home'),
 					array(array('admin'), 'admin_news'),
+					array(array('admin'), 'admin_settings'),
 				),
 
 				// Don't mix allow/deny rules if you are using role inheritance.
@@ -120,6 +122,7 @@ return array(
 				array('controller' => 'SmallUser\Controller\Auth', 'roles' => array(), 'action' => array('logout')),
 				array('controller' => 'PServerAdmin\Controller\Index', 'roles' => array('admin')),
 				array('controller' => 'PServerAdmin\Controller\News', 'roles' => array('admin')),
+				array('controller' => 'PServerAdmin\Controller\Settings', 'roles' => array('admin')),
 			),
 
 			/* If this guard is specified here (i.e. it is enabled), it will block

@@ -27,12 +27,27 @@ return array(
 					),
 				),
 			),
+			'admin_settings' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'			=> '/admin/settings[/:action][-:type].html',
+					'constraints'	=> array(
+						'action'    => '[a-zA-Z]+',
+						'id'     	=> '[a-zA-Z0-9]+',
+					),
+					'defaults' => array(
+						'controller'	=> 'PServerAdmin\Controller\Settings',
+						'action'		=> 'index',
+					),
+				),
+			),
 		),
 	),
 	'controllers' => array(
 		'invokables' => array(
 			'PServerAdmin\Controller\Index' => 'PServerAdmin\Controller\IndexController',
 			'PServerAdmin\Controller\News' => 'PServerAdmin\Controller\NewsController',
+			'PServerAdmin\Controller\Settings' => 'PServerAdmin\Controller\SettingsController',
 		),
 	),
 	'view_manager' => array(

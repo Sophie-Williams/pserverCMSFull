@@ -22,6 +22,7 @@ class PageInfo extends EntityRepository {
 			->where('p.type = :type')
 			->setParameter('type', $type)
 			->orderBy('p.created', 'desc')
+			->setMaxResults(1)
 			->getQuery();
 
 		return $query->getOneOrNullResult();
