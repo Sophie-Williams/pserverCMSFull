@@ -33,7 +33,7 @@ class NewsController extends AbstractActionController {
 
 		$request = $this->getRequest();
 		if($request->isPost()){
-			if($this->getNewsService()->newsEdit($this->params()->fromPost(), $news)){
+			if($this->getNewsService()->news($this->params()->fromPost(), $this->getAuthService()->getIdentity(), $news)){
 				return $this->redirect()->toRoute('admin_news');
 			}
 		}else{
