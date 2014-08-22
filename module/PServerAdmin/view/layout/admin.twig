@@ -59,6 +59,12 @@
 				<li><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'guides'}) }}">Settings-Guides</a></li>
 				<li><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'events'}) }}">Settings-Events</a></li>
 			{% endif %}
+			{% if isAllowed('admin_download') %}
+				<li><a href="{{ url('admin_download') }}">Download</a></li>
+			{% endif %}
+			{% if isAllowed('admin_server_info') %}
+				<li><a href="{{ url('admin_server_info') }}">ServerInfo</a></li>
+			{% endif %}
         </ul>
     </div>
 

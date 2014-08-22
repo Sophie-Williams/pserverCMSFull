@@ -10,7 +10,6 @@ namespace PServerCMS\View\Helper;
 
 
 use PServerCMS\Helper\Timer;
-use PServerCMS\Keys\Entity;
 use Zend\Form\View\Helper\AbstractHelper;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -30,6 +29,8 @@ class SideBarWidget extends AbstractHelper {
 	protected $entityManager;
 	/** @var \Zend\Cache\Storage\StorageInterface */
 	protected $cachingService;
+	/** @var \PServerCMS\Service\ServerInfo */
+	protected $serverInfoService;
 
 	/**
 	 * @param ServiceLocatorInterface $serviceLocatorInterface
@@ -52,7 +53,7 @@ class SideBarWidget extends AbstractHelper {
 		}
 		$oViewModel = new ViewModel(array(
 			'timer' => $this->getTimer(),
-			'serverInfo' => $this->getServerInfo()
+			'serverInfo' => $this->getServerInfo()->getServerInfo()
 		));
 		$oViewModel->setTemplate('helper/sidebarWidget');
 		return $sTemplate.$this->getView()->render($oViewModel);
@@ -129,18 +130,15 @@ class SideBarWidget extends AbstractHelper {
 		return $this->timerService;
 	}
 
+	/**
+	 * @return \PServerCMS\Service\ServerInfo
+	 */
 	protected function getServerInfo(){
-		$serverInfo = $this->getCachingService()->getItem(\PServerCMS\Keys\Caching::ServerInfo);
-		if(!$serverInfo){
-			$entityManager = $this->getEntityManager();
-
-			/** @var \PServerCMS\Entity\Repository\ServerInfo $repository */
-			$repository = $entityManager->getRepository(Entity::ServerInfo);
-			$serverInfo = $repository->getActiveInfos();
-
-			$this->getCachingService()->setItem(\PServerCMS\Keys\Caching::ServerInfo, $serverInfo);
+		if (!$this->serverInfoService) {
+			$this->serverInfoService = $this->getServiceLocator()->get('pserver_server_info_service');
 		}
-		return $serverInfo;
+
+		return $this->serverInfoService;
 	}
 
 	/**

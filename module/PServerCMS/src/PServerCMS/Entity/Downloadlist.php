@@ -72,7 +72,7 @@ class Downloadlist {
 	 *
 	 * @return integer
 	 */
-	public function getDid() {
+	public function getId() {
 		return $this->did;
 	}
 

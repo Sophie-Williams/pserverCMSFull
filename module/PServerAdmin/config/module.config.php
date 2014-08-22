@@ -41,6 +41,34 @@ return array(
 					),
 				),
 			),
+			'admin_download' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'			=> '/admin/download[/:action][-:id].html',
+					'constraints'	=> array(
+						'action'    => '[a-zA-Z]+',
+						'id'     	=> '[0-9]+',
+					),
+					'defaults' => array(
+						'controller'	=> 'PServerAdmin\Controller\Download',
+						'action'		=> 'index',
+					),
+				),
+			),
+			'admin_server_info' => array(
+				'type' => 'segment',
+				'options' => array(
+					'route'			=> '/admin/server-info[/:action][-:id].html',
+					'constraints'	=> array(
+						'action'    => '[a-zA-Z]+',
+						'id'     	=> '[0-9]+',
+					),
+					'defaults' => array(
+						'controller'	=> 'PServerAdmin\Controller\ServerInfo',
+						'action'		=> 'index',
+					),
+				),
+			),
 		),
 	),
 	'controllers' => array(
@@ -48,6 +76,8 @@ return array(
 			'PServerAdmin\Controller\Index' => 'PServerAdmin\Controller\IndexController',
 			'PServerAdmin\Controller\News' => 'PServerAdmin\Controller\NewsController',
 			'PServerAdmin\Controller\Settings' => 'PServerAdmin\Controller\SettingsController',
+			'PServerAdmin\Controller\Download' => 'PServerAdmin\Controller\DownloadController',
+			'PServerAdmin\Controller\ServerInfo' => 'PServerAdmin\Controller\ServerInfoController',
 		),
 	),
 	'view_manager' => array(

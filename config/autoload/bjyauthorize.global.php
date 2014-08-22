@@ -48,6 +48,8 @@ return array(
 				'admin_home' => array(),
 				'admin_news' => array(),
 				'admin_settings' => array(),
+				'admin_download' => array(),
+				'admin_server_info' => array(),
 				'small-user-auth' => array(),
 			),
 		),
@@ -73,6 +75,8 @@ return array(
 					array(array('admin'), 'admin_home'),
 					array(array('admin'), 'admin_news'),
 					array(array('admin'), 'admin_settings'),
+					array(array('admin'), 'admin_download'),
+					array(array('admin'), 'admin_server_info'),
 				),
 
 				// Don't mix allow/deny rules if you are using role inheritance.
@@ -123,6 +127,8 @@ return array(
 				array('controller' => 'PServerAdmin\Controller\Index', 'roles' => array('admin')),
 				array('controller' => 'PServerAdmin\Controller\News', 'roles' => array('admin')),
 				array('controller' => 'PServerAdmin\Controller\Settings', 'roles' => array('admin')),
+				array('controller' => 'PServerAdmin\Controller\Download', 'roles' => array('admin')),
+				array('controller' => 'PServerAdmin\Controller\ServerInfo', 'roles' => array('admin')),
 			),
 
 			/* If this guard is specified here (i.e. it is enabled), it will block

@@ -24,4 +24,30 @@ class ServerInfo extends EntityRepository {
 			->getQuery();
 		return $oQuery->getResult();
 	}
+
+	/**
+	 * @return null|\PServerCMS\Entity\ServerInfo[]
+	 */
+	public function getInfos() {
+		$oQuery = $this->createQueryBuilder('p')
+			->select('p')
+			->getQuery();
+		return $oQuery->getResult();
+	}
+
+	/**
+	 * @param $id
+	 *
+	 * @return null|\PServerCMS\Entity\ServerInfo
+	 */
+	public function getServerInfo4Id( $id ){
+		$query = $this->createQueryBuilder('p')
+			->select('p')
+			->where('p.id = :id')
+			->setParameter('id', $id)
+			->setMaxResults(1)
+			->getQuery();
+
+		return $query->getOneOrNullResult();
+	}
 } 

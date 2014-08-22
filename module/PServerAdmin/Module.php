@@ -38,6 +38,16 @@ class Module implements ServiceProviderInterface {
 					$form->setInputFilter(new Form\PageInfoFilter());
 					return $form;
 				},
+				'pserver_admin_server_info_form' => function(){
+					$form = new Form\ServerInfo();
+					$form->setInputFilter(new Form\ServerInfoFilter());
+					return $form;
+				},
+				'pserver_admin_download_form' => function(){
+					$form = new Form\Download();
+					$form->setInputFilter(new Form\DownloadFilter());
+					return $form;
+				},
 			)
 		);
 	}
