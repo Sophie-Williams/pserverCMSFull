@@ -1,4 +1,6 @@
-{% extends 'layout/layout' %}
+{% extends 'layout/admin' %}
+
+{% set typeList = {0:'new',1:'open',2:'closed'} %}
 
 {% block title %}
 	TicketSystem
@@ -6,26 +8,25 @@
 
 {% block content %}
 
-	{% set typeList = {0:'new',1:'open',2:'closed'} %}
-
-	<a href="{{ url('zfc-ticketsystem', {'action':'new'}) }}" class="btn btn-primary"><i class="fa fa-plus"></i> new ticket</a>
 	<div class="clearfix"></div>
 	<div class="table-responsive margin-top-10">
 		<table class="table table-bordered table-hover">
 			<tr>
 				<th>Subject</th>
+				<th>Autor</th>
 				<th>Category</th>
-				<th>Type</th>
 				<th>LastEdit</th>
+				<th>Created</th>
 				<th>Option</th>
 			</tr>
 			{% for iKey, oCurTicketSubject in ticketList %}
 				<tr>
 					<th>{{ oCurTicketSubject.getSubject }}</th>
+					<th>{{ oCurTicketSubject.getUser.getUsername }}</th>
 					<th>{{ oCurTicketSubject.getTicketCategory.getSubject }}</th>
-					<th>{{ typeList[oCurTicketSubject.getType] }}</th>
 					<th>{{ oCurTicketSubject.getLastEdit|date('d.m.Y H:i') }}</th>
-					<th><a href="{{ url('zfc-ticketsystem', {'id':oCurTicketSubject.getTicketid, 'action':'view'}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> View</a></th>
+					<th>{{ oCurTicketSubject.getCreated|date('d.m.Y H:i') }}</th>
+					<th><a href="{{ url('zfc-ticketsystem-admin', {'id':oCurTicketSubject.getTicketid, 'action':'view'}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> View</a></th>
 				</tr>
 			{% endfor %}
 		</table>

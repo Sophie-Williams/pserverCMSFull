@@ -108,6 +108,13 @@ class Users implements
 	/**
 	 * @return int
 	 */
+	public function getId(){
+		return $this->getUsrid();
+	}
+
+	/**
+	 * @return int
+	 */
 	public function getBackendId(){
 		return $this->backendId;
 	}

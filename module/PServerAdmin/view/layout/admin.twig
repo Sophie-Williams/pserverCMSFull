@@ -65,6 +65,10 @@
 			{% if isAllowed('admin_server_info') %}
 				<li><a href="{{ url('admin_server_info') }}">ServerInfo</a></li>
 			{% endif %}
+			{% if isAllowed('zfc-ticketsystem-admin') %}
+				<li><a href="{{ url('zfc-ticketsystem-admin', {'type' : '0'}) }}">Ticket-New</a></li>
+				<li><a href="{{ url('zfc-ticketsystem-admin', {'type' : '1'}) }}">Ticket-Open</a></li>
+			{% endif %}
         </ul>
     </div>
 
