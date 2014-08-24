@@ -225,4 +225,9 @@ return array(
 			'credentialCallable' => 'PServerCMS\Entity\Users::hashPassword'
 		),
 	),
+	'small-user' => array(
+		'user_entity' => array(
+			'class' => 'PServerCMS\Entity\Users'
+		)
+	)
 );

@@ -48,7 +48,7 @@ class AuthController extends \SmallUser\Controller\AuthController {
 		if($request->isPost()){
 			$user = $this->getUserService()->registerGame($this->params()->fromPost(), $oCode);
 			if($user){
-				$this->getUserService()->doAuthentication($user);
+				//$this->getUserService()->doAuthentication($user);
 				return $this->redirect()->toRoute('home');
 			}
 		}

@@ -337,6 +337,21 @@ class User extends \SmallUser\Service\User {
 	}
 
 	/**
+	 * Login with a User
+	 * @param UsersInterface $user
+	 */
+	public function doAuthentication( Users $user ){
+		$find = array($this->getUserEntityUserName() => $user->getUsername());
+		$userNew = $this->getEntityManager()->getRepository($this->getUserEntityClassName())->findOneBy($find);
+
+		$authService = $this->getAuthService();
+		// FIX: no roles after register
+		$userNew->getUserRole();
+		$userNew->getUserExtension();
+		$authService->getStorage()->write($userNew);
+	}
+
+	/**
 	 * @return \PServerCMS\Form\PwLost
 	 */
 	public function getPasswordLostForm() {
@@ -383,11 +398,12 @@ class User extends \SmallUser\Service\User {
 	/**
 	 * @return ConfigRead
 	 */
-	public function getConfigService() {
+	protected function getConfigService() {
 		if (!$this->configReadService) {
 			$this->configReadService = $this->getServiceManager()->get('pserver_configread_service');
 		}
 
 		return $this->configReadService;
 	}
+
 }
