@@ -21,12 +21,12 @@
 			</tr>
 			{% for iKey, oCurTicketSubject in ticketList %}
 				<tr>
-					<th>{{ oCurTicketSubject.getSubject }}</th>
-					<th>{{ oCurTicketSubject.getUser.getUsername }}</th>
-					<th>{{ oCurTicketSubject.getTicketCategory.getSubject }}</th>
-					<th>{{ oCurTicketSubject.getLastEdit|date('d.m.Y H:i') }}</th>
-					<th>{{ oCurTicketSubject.getCreated|date('d.m.Y H:i') }}</th>
-					<th><a href="{{ url('zfc-ticketsystem-admin', {'id':oCurTicketSubject.getTicketid, 'action':'view'}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> View</a></th>
+					<td>{{ oCurTicketSubject.getSubject }}</td>
+					<td>{{ oCurTicketSubject.getUser.getUsername }}</td>
+					<td>{{ oCurTicketSubject.getTicketCategory.getSubject }}</td>
+					<td>{{ oCurTicketSubject.getLastEdit|date('d.m.Y H:i') }}</td>
+					<td>{{ oCurTicketSubject.getCreated|date('d.m.Y H:i') }}</td>
+					<td><a href="{{ url('zfc-ticketsystem-admin', {'id':oCurTicketSubject.getTicketid, 'action':'view'}) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> View</a></td>
 				</tr>
 			{% endfor %}
 		</table>
