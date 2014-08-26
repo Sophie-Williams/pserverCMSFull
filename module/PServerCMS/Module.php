@@ -64,6 +64,7 @@ class Module {
 				'pserver_usercodes_service'			=> 'PServerCMS\Service\UserCodes',
 				'pserver_configread_service'		=> 'PServerCMS\Service\ConfigRead',
 				'pserver_pageinfo_service'			=> 'PServerCMS\Service\PageInfo',
+				'pserver_donate_service'			=> 'PServerCMS\Service\Donate',
 				'pserver_cachinghelper_service'		=> 'PServerCMS\Service\CachingHelper',
 			),
 			'factories' => array(
