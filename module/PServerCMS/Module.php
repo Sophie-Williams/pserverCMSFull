@@ -42,6 +42,9 @@ class Module {
 				},
                 'formWidget' => function(AbstractPluginManager $pluginManager){
                     return new View\Helper\FormWidget($pluginManager->getServiceLocator());
+                },
+                'active' => function(AbstractPluginManager $pluginManager){
+                    return new View\Helper\Active($pluginManager->getServiceLocator());
                 }
 			)
 		);

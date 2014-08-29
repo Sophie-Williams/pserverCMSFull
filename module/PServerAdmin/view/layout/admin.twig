@@ -46,28 +46,28 @@
 <div id="wrapper">
     <div id="sidebar-wrapper" class="panel-collapse collapse in sidebar">
         <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="{{ url('admin_home') }}">Home</a></li>
+            <li {% if active('admin_home') %} class="active" {% endif %}><a href="{{ url('admin_home') }}">Home</a></li>
 			{% if isAllowed('admin_user') %}
-				<li><a href="{{ url('admin_user') }}">Userpanel</a></li>
+				<li {% if active('admin_user') %} class="active" {% endif %}><a href="{{ url('admin_user') }}">Userpanel</a></li>
 			{% endif %}
 			{% if isAllowed('admin_news') %}
-				<li><a href="{{ url('admin_news') }}">News</a></li>
+				<li {% if active('admin_news') %} class="active" {% endif %}><a href="{{ url('admin_news') }}">News</a></li>
 			{% endif %}
 			{% if isAllowed('admin_settings') %}
-				<li><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'faq'}) }}">Settings-FAQ</a></li>
-				<li><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'rules'}) }}">Settings-Rules</a></li>
-				<li><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'guides'}) }}">Settings-Guides</a></li>
-				<li><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'events'}) }}">Settings-Events</a></li>
+				<li {% if active('admin_settings', {'action':'pageInfo', 'type' : 'faq'}) %} class="active" {% endif %}><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'faq'}) }}">Settings-FAQ</a></li>
+				<li {% if active('admin_settings', {'action':'pageInfo', 'type' : 'rules'}) %} class="active" {% endif %}><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'rules'}) }}">Settings-Rules</a></li>
+				<li {% if active('admin_settings', {'action':'pageInfo', 'type' : 'guides'}) %} class="active" {% endif %}><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'guides'}) }}">Settings-Guides</a></li>
+				<li {% if active('admin_settings', {'action':'pageInfo', 'type' : 'events'}) %} class="active" {% endif %}><a href="{{ url('admin_settings', {'action':'pageInfo', 'type' : 'events'}) }}">Settings-Events</a></li>
 			{% endif %}
 			{% if isAllowed('admin_download') %}
-				<li><a href="{{ url('admin_download') }}">Download</a></li>
+				<li {% if active('admin_download') %} class="active" {% endif %}><a href="{{ url('admin_download') }}">Download</a></li>
 			{% endif %}
 			{% if isAllowed('admin_server_info') %}
-				<li><a href="{{ url('admin_server_info') }}">ServerInfo</a></li>
+				<li {% if active('admin_server_info') %} class="active" {% endif %}><a href="{{ url('admin_server_info') }}">ServerInfo</a></li>
 			{% endif %}
 			{% if isAllowed('zfc-ticketsystem-admin') %}
-				<li><a href="{{ url('zfc-ticketsystem-admin', {'type' : '0'}) }}">Ticket-New</a></li>
-				<li><a href="{{ url('zfc-ticketsystem-admin', {'type' : '1'}) }}">Ticket-Open</a></li>
+				<li {% if active('zfc-ticketsystem-admin', {'type' : '0'}) %} class="active" {% endif %}><a href="{{ url('zfc-ticketsystem-admin', {'type' : '0'}) }}">Ticket-New</a></li>
+				<li {% if active('zfc-ticketsystem-admin', {'type' : '1'}) %} class="active" {% endif %}><a href="{{ url('zfc-ticketsystem-admin', {'type' : '1'}) }}">Ticket-Open</a></li>
 			{% endif %}
         </ul>
     </div>
