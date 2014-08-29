@@ -62,9 +62,9 @@ class News {
 	private $usersUsrid;
 
 	/**
-	 * @ORM\PostPersist()
+	 * @ORM\PreFlush()
 	 */
-	public function postPersist( ) {
+	public function preFlush( ) {
 		/** @var \PServerCMS\Service\CachingHelper $cachingHelperService */
 		$cachingHelperService = ServiceManager::getInstance()->get('pserver_cachinghelper_service');
 		$cachingHelperService->delItem(Caching::News);
