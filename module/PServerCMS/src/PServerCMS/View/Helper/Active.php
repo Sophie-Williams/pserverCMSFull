@@ -2,60 +2,37 @@
 
 namespace PServerCMS\View\Helper;
 
-use Zend\Form\View\Helper\AbstractHelper;
-use Zend\ServiceManager\ServiceLocatorInterface;
+class Active extends InvokerBase{
 
-class Active extends AbstractHelper{
-    /**
-     * @var ServiceLocatorInterface
-     */
-    protected $serviceLocator;
+	/**
+	 * @param       $routeKey
+	 * @param array $params
+	 *
+	 * @return bool
+	 */
+	public function __invoke( $routeKey, $params = array()){
 
-    /**
-     * @param ServiceLocatorInterface $serviceLocatorInterface
-     */
-    public function __construct(ServiceLocatorInterface $serviceLocatorInterface){
-        $this->setServiceLocator($serviceLocatorInterface);
-    }
+        $router = $this->getRouterService();
+        $request = $this->getRequestService();
 
-    public function __invoke( $routekey, $params = array()){
+		if(is_array($params) || $params instanceof \Traversable ){
+			foreach($params as $key => $param){
+				if($router->match($request)->getParam($key) != $param){
+					return false;
+				}
+			}
+		}
 
-        /** @var \Zend\Mvc\Router\Http\TreeRouteStack $router */
-        $router = $this->serviceLocator->get('router');
-        /** @var \Zend\Http\PhpEnvironment\Request $request */
-        $request = $this->serviceLocator->get('request');
-
-        foreach($params as $key => $param){
-            if($router->match($request)->getParam($key) != $params[$key]){
-                return false;
-            }
-        }
-        
         $routeMatch = $router->match($request);
-        if (!is_null($routeMatch)){
-            if($routekey == $routeMatch->getMatchedRouteName()){
-                return true;
-            }
+
+		if (is_null($routeMatch)){
+			return false;
         }
+
+		if($routeKey == $routeMatch->getMatchedRouteName()){
+			return true;
+		}
 
         return false;
-    }
-
-    /**
-     * @return ServiceLocatorInterface
-     */
-    public function getServiceLocator(){
-        return $this->serviceLocator;
-    }
-
-    /**
-     * @param ServiceLocatorInterface $serviceLocator
-     *
-     * @return $this
-     */
-    public function setServiceLocator(ServiceLocatorInterface $serviceLocator){
-        $this->serviceLocator = $serviceLocator;
-
-        return $this;
     }
 }

@@ -62,7 +62,7 @@ img {
 	background-color: transparent;
 }
 
-.nav li.navigation a:hover, .nav li.navigation a:focus, .nav li.navigation.active a, .nav li.navigation.active a {
+.nav li.navigation > a:hover, .nav li.navigation > a:focus, .nav li.navigation.active > a, .nav li.navigation.active > a {
     background-color: transparent;
     color: #279FBB;
 }
