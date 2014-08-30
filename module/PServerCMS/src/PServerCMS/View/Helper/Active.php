@@ -15,6 +15,16 @@ class Active extends InvokerBase{
         $router = $this->getRouterService();
         $request = $this->getRequestService();
 
+		$routeMatch = $router->match($request);
+
+		if (is_null($routeMatch)){
+			return false;
+		}
+
+		if($routeKey != $routeMatch->getMatchedRouteName()){
+			return false;
+		}
+
 		if(is_array($params) || $params instanceof \Traversable ){
 			foreach($params as $key => $param){
 				if($router->match($request)->getParam($key) != $param){
@@ -23,16 +33,6 @@ class Active extends InvokerBase{
 			}
 		}
 
-        $routeMatch = $router->match($request);
-
-		if (is_null($routeMatch)){
-			return false;
-        }
-
-		if($routeKey == $routeMatch->getMatchedRouteName()){
-			return true;
-		}
-
-        return false;
+        return true;
     }
 }
