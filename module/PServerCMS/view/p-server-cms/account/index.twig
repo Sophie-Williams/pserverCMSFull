@@ -6,6 +6,27 @@
 
 {% block content %}
 
-	TODO, edit web pw, edit ingame pw
+    {% if errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for error in errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% elseif messages %}
+        <div class="alert alert-success" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
 
+    <div class="col-sm-6">
+        <h4>Change Web Password</h4>
+        {{ formWidget(changeWebPwdForm) }}
+    </div>
+
+    <div class="col-sm-6">
+        <h4>Change Ingame Password</h4>
+        {{ formWidget(changeIngamePwdForm) }}
+    </div>
 {% endblock content %}

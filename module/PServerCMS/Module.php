@@ -95,7 +95,12 @@ class Module {
 						new Validator\RecordExists( $oRepositoryUser, 'username' )
 					));
 					return $form;
-				}
+				},
+                'pserver_user_changepwd_form' => function(){
+                        $form = new Form\ChangePwd();
+                        $form->setInputFilter(new Form\ChangePwdFilter());
+                        return $form;
+                },
 			),
 		);
 	}

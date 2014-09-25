@@ -56,9 +56,7 @@ class User extends \SmallUser\Service\User {
 		/** @var Users $oUserEntity */
 		$oUserEntity = $oForm->getData();
 		$oUserEntity->setCreateip(Ip::getIp());
-
-		$oBcrypt = new Bcrypt();
-		$oUserEntity->setPassword($oBcrypt->create($oUserEntity->getPassword()));
+		$oUserEntity->setPassword($this->bcrypt($oUserEntity->getPassword()));
 
 		$oEntityManager->persist($oUserEntity);
 		$oEntityManager->flush();
@@ -122,6 +120,65 @@ class User extends \SmallUser\Service\User {
 		return $oUser;
 	}
 
+    /**
+     * @param array $data
+     * @param Users $user
+     * @return bool
+     */
+    private function validatePwdChange( array $data, Users $user){
+        $form = $this->getChangePwdForm();
+
+        $form->setData($data);
+        if(!$form->isValid()){
+            $this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Form not valid.');
+            return false;
+        }
+
+        $data = $form->getData();
+
+        if(!$user->hashPassword($user, $data['currentPassword'])){
+            $this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Wrong Password.');
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param array $data
+     * @param Users $user
+     * @return bool|null|Users
+     */
+    public function changeWebPwd( array $data, Users $user ){
+
+        if($this->validatePwdChange( $data, $user)){
+            $entityManager = $this->getEntityManager();
+            $user = $this->getUser4Id($user->getId());
+            $user->setPassword($this->bcrypt($data['password']));
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $user;
+        }
+        return false;
+    }
+
+    /**
+     * @param array $data
+     * @param Users $user
+     * @return bool
+     */
+    public function changeIngamePwd( array $data, Users $user ){
+        if($this->validatePwdChange($data, $user)){
+            $gameBackend = $this->getGameBackendService();
+            if($gameBackend->setUser($user, $data['password'])){
+                return true;
+            }
+        }
+        return false;
+    }
+
 	public function lostPw( array $aData ){
 
 		$oForm = $this->getPasswordLostForm();
@@ -159,9 +216,7 @@ class User extends \SmallUser\Service\User {
 		$oEntityManager = $this->getEntityManager();
 		/** @var Users $oUserEntity */
 		$oUserEntity = $oUserCodes->getUsersUsrid();
-
-		$oBcrypt = new Bcrypt();
-		$oUserEntity->setPassword($oBcrypt->create($sPlainPassword));
+		$oUserEntity->setPassword($this->bcrypt($sPlainPassword));
 
 		$oEntityManager->persist($oUserEntity);
 		$oEntityManager->remove($oUserCodes);
@@ -247,6 +302,16 @@ class User extends \SmallUser\Service\User {
 		}
 		return false;
 	}
+
+    /**
+     * @param $userId
+     *
+     * @return null|\PServerCMS\Entity\Users
+     */
+    protected function getUser4Id( $userId ){
+        $entityManager = $this->getEntityManager();
+        return $entityManager->getRepository('PServerCMS\Entity\Users')->findOneBy(array('usrid' => $userId));
+    }
 
 	/**
 	 * @param Users $oUser
@@ -362,6 +427,10 @@ class User extends \SmallUser\Service\User {
 		return $this->passwordLostForm;
 	}
 
+    public function getChangePwdForm(){
+        return $this->getServiceManager()->get('pserver_user_changepwd_form');
+    }
+
 	/**
 	 * @return \PServerCMS\Service\Mail
 	 */
@@ -406,4 +475,8 @@ class User extends \SmallUser\Service\User {
 		return $this->configReadService;
 	}
 
+    protected function bcrypt($password){
+        $bcrypt = new Bcrypt();
+        return $bcrypt->create($password);
+    }
 }

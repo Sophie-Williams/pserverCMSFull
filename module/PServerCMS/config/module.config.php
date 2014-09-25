@@ -41,7 +41,7 @@ return array(
 				'options' => array(
 					'route'    => '/panel/account[/:action].html',
 					'constraints' => array(
-						'action'     => '[a-zA-Z]+',
+						'action'     => '[a-zA-Z-]+',
 					),
 					'defaults' => array(
 						'controller'	=> 'PServerCMS\Controller\Account',
