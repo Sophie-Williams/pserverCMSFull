@@ -9,13 +9,16 @@
 namespace PServerCMS\Controller;
 
 use PServerCMS\Service;
+use Zend\Mvc\Controller\AbstractActionController;
 
-class AccountController extends \SmallUser\Controller\AuthController{
+class AccountController extends AbstractActionController {
+	const ErrorNameSpace = 'pserver-user-account';
+	protected $userService;
 
-	public function indexAction(){
+	public function indexAction() {
 
         /** @var \PServerCMS\Entity\Users $user */
-        $user = $this->getUserService()->getAuthService()->getStorage()->read();
+        $user = $this->getUserService()->getAuthService()->getIdentity();
 
         $form = $this->getUserService()->getChangePwdForm();
         $elements = $form->getElements();
@@ -31,7 +34,12 @@ class AccountController extends \SmallUser\Controller\AuthController{
 
         $oRequest = $this->getRequest();
         if(!$oRequest->isPost()){
-            return array('changeWebPwdForm' => $formChangeWebPwd, 'changeIngamePwdForm' => $formChangeIngamePwd,'messages' => $this->flashmessenger()->getMessagesFromNamespace('success'), 'errors' => $this->flashmessenger()->getMessagesFromNamespace(self::ErrorNameSpace));
+            return array(
+				'changeWebPwdForm' => $formChangeWebPwd,
+				'changeIngamePwdForm' => $formChangeIngamePwd,
+				'messages' => $this->flashmessenger()->getMessagesFromNamespace('success'),
+				'errors' => $this->flashmessenger()->getMessagesFromNamespace(self::ErrorNameSpace)
+			);
 
         }
 
@@ -42,10 +50,14 @@ class AccountController extends \SmallUser\Controller\AuthController{
         return $this->redirect()->toUrl($this->url()->fromRoute('user'));
 	}
 
-    /**
-     * @return \PServerCMS\Service\User
-     */
-    protected function getUserService(){
-        return parent::getUserService();
-    }
+	/**
+	 * @return \PServerCMS\Service\User
+	 */
+	protected function getUserService(){
+		if (!$this->userService) {
+			$this->userService = $this->getServiceLocator()->get('small_user_service');
+		}
+
+		return $this->userService;
+	}
 }

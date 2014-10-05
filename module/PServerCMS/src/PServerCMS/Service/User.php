@@ -36,6 +36,8 @@ class User extends \SmallUser\Service\User {
 	protected $passwordLostForm;
 	/** @var ConfigRead */
 	protected $configReadService;
+	/** @var string for user change namespace */
+	const UserErrorNameSpace = 'pserver-user-account';
 
 	/**
 	 * @param array $aData
@@ -125,19 +127,19 @@ class User extends \SmallUser\Service\User {
      * @param Users $user
      * @return bool
      */
-    private function validatePwdChange( array $data, Users $user){
+    private function isPwdChangeAllowed( array $data, Users $user){
         $form = $this->getChangePwdForm();
 
         $form->setData($data);
         if(!$form->isValid()){
-            $this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Form not valid.');
+            $this->getFlashMessenger()->setNamespace(self::UserErrorNameSpace)->addMessage('Form not valid.');
             return false;
         }
 
         $data = $form->getData();
 
         if(!$user->hashPassword($user, $data['currentPassword'])){
-            $this->getFlashMessenger()->setNamespace(self::ErrorNameSpace)->addMessage('Wrong Password.');
+            $this->getFlashMessenger()->setNamespace(self::UserErrorNameSpace)->addMessage('Wrong Password.');
             return false;
         }
 
@@ -150,18 +152,18 @@ class User extends \SmallUser\Service\User {
      * @return bool|null|Users
      */
     public function changeWebPwd( array $data, Users $user ){
+        if(!$this->isPwdChangeAllowed($data, $user)){
+			return false;
+		}
 
-        if($this->validatePwdChange( $data, $user)){
-            $entityManager = $this->getEntityManager();
-            $user = $this->getUser4Id($user->getId());
-            $user->setPassword($this->bcrypt($data['password']));
+		$entityManager = $this->getEntityManager();
+		$user = $this->getUser4Id($user->getId());
+		$user->setPassword($this->bcrypt($data['password']));
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+		$entityManager->persist($user);
+		$entityManager->flush();
 
-            return $user;
-        }
-        return false;
+		return $user;
     }
 
     /**
@@ -170,13 +172,13 @@ class User extends \SmallUser\Service\User {
      * @return bool
      */
     public function changeIngamePwd( array $data, Users $user ){
-        if($this->validatePwdChange($data, $user)){
-            $gameBackend = $this->getGameBackendService();
-            if($gameBackend->setUser($user, $data['password'])){
-                return true;
-            }
+        if(!$this->isPwdChangeAllowed($data, $user)){
+			return false;
         }
-        return false;
+
+		$gameBackend = $this->getGameBackendService();
+		$gameBackend->setUser($user, $data['password']);
+		return $user;
     }
 
 	public function lostPw( array $aData ){
