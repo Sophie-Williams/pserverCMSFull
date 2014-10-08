@@ -12,6 +12,7 @@ return array(
 		'BjyAuthorize',
 		'GameBackend',
 		'ZfcTicketSystem',
+		'PaymentAPI',
 		'SmallUser',
 		'PServerCMS',
 		'PServerAdmin',

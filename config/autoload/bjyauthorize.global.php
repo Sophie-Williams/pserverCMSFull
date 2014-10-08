@@ -132,6 +132,8 @@ return array(
 				array('controller' => 'PServerAdmin\Controller\Settings', 'roles' => array('admin')),
 				array('controller' => 'PServerAdmin\Controller\Download', 'roles' => array('admin')),
 				array('controller' => 'PServerAdmin\Controller\ServerInfo', 'roles' => array('admin')),
+				//array('controller' => 'PaymentAPI\Controller\PaymentWall', 'roles' => array()),
+				array('controller' => 'PaymentAPI\Controller\SuperReward', 'roles' => array()),
 			),
 
 			/* If this guard is specified here (i.e. it is enabled), it will block
