@@ -15,6 +15,9 @@ class Donatelog {
 	const TypePaymentWall = 'paymentwall';
 	const TypeSuperReward = 'superreward';
 
+	const StatusSuccess = 1;
+	const StatusError = 1;
+
 	/**
 	 * @var integer
 	 *

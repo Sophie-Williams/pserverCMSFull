@@ -84,8 +84,8 @@ class PaymentNotify extends InvokableBase implements LogInterface {
 			$data['errorMessage'] = $errorMessage;
 		}
 
-		$success = $request->getStatus() == $request::StatusSuccess ? 1 : 0;
 		$donateEntity = new Donatelog();
+		$success = $request->getStatus() == $request::StatusSuccess ? $donateEntity::StatusSuccess : $donateEntity::StatusError;
 		$donateEntity->setTransactionId($request->getTransactionId())
 			->setCoins($request->getAmount())
 			->setIp($request->getIp())
