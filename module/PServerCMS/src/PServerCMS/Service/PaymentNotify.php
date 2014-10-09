@@ -12,6 +12,7 @@ use PaymentAPI\Provider\Request;
 use PaymentAPI\Service\LogInterface;
 use PServerCMS\Entity\Donatelog;
 use PServerCMS\Entity\Users;
+use PServerCMS\Keys\Entity;
 
 class PaymentNotify extends InvokableBase implements LogInterface {
 
@@ -27,6 +28,11 @@ class PaymentNotify extends InvokableBase implements LogInterface {
 		$user = $this->getUser4Id($request->getUserId());
 		if(!$user){
 			throw new \Exception('User not found');
+		}
+
+		// we already added add the reward, so skip this =)
+		if($this->isDonateAlreadyAdded($request)){
+			return true;
 		}
 
 		// check if donate should add coins or remove
@@ -62,8 +68,6 @@ class PaymentNotify extends InvokableBase implements LogInterface {
 	public function error( Request $request, \Exception $e ) {
 		$user = $this->getUser4Id($request->getUserId());
 
-
-
 		$this->saveDonateLog($request, $user, $e->getMessage());
 	}
 
@@ -86,7 +90,7 @@ class PaymentNotify extends InvokableBase implements LogInterface {
 			->setCoins($request->getAmount())
 			->setIp($request->getIp())
 			->setSuccess($success)
-			->setType($this->mapPaymentProvider2DonateType($request->getProvider()))
+			->setType($this->mapPaymentProvider2DonateType($request))
 			->setDesc(json_encode($data));
 
 		if($user){
@@ -110,13 +114,13 @@ class PaymentNotify extends InvokableBase implements LogInterface {
 	/**
 	 * Helper to map the PaymentProvider 2 DonateType
 	 *
-	 * @param $provider
+	 * @param Request $request
 	 *
 	 * @return string
 	 */
-	protected function mapPaymentProvider2DonateType( $provider ){
+	protected function mapPaymentProvider2DonateType( Request $request ){
 		$result = '';
-		switch ($provider) {
+		switch ($request->getProvider()) {
 			case Request::ProviderPaymentWall:
 				$result = Donatelog::TypePaymentWall;
 				break;
@@ -125,5 +129,17 @@ class PaymentNotify extends InvokableBase implements LogInterface {
 				break;
 		}
 		return $result;
+	}
+
+	/**
+	 * check is donate already added, if the provider ask, more than 1 time, this only works with a transactionId
+	 * @param Request $request
+	 *
+	 * @return bool
+	 */
+	protected function isDonateAlreadyAdded( Request $request){
+		/** @var \PServerCMS\Entity\Repository\DonateLog $donateEntity */
+		$donateEntity = $this->getEntityManager()->getRepository(Entity::DonateLog);
+		return $donateEntity->isDonateAlreadyAdded($request->getTransactionId(), $this->mapPaymentProvider2DonateType($request));
 	}
 }
