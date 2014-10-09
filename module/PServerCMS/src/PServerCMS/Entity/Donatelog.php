@@ -8,24 +8,35 @@ use Doctrine\ORM\Mapping as ORM;
  * Donatelog
  *
  * @ORM\Table(name="donateLog", indexes={@ORM\Index(name="fk_donateLog_users1_idx", columns={"users_usrId"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="PServerCMS\Entity\Repository\DonateLog")
  */
 class Donatelog {
+
+	const TypePaymentWall = 'paymentwall';
+	const TypeSuperReward = 'superreward';
+
 	/**
 	 * @var integer
 	 *
-	 * @ORM\Column(name="dId", type="integer", nullable=false)
+	 * @ORM\Column(name="id", type="integer", nullable=false)
 	 * @ORM\Id
 	 * @ORM\GeneratedValue(strategy="IDENTITY")
 	 */
-	private $did;
+	private $id;
 
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="type", type="string", length=45, nullable=false)
+	 * @ORM\Column(name="`type`", type="string", length=45, nullable=false)
 	 */
 	private $type;
+
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="transaction_id", type="string", length=255, nullable=true)
+	 */
+	private $transactionId;
 
 	/**
 	 * @var string
@@ -44,7 +55,7 @@ class Donatelog {
 	/**
 	 * @var string
 	 *
-	 * @ORM\Column(name="desc", type="text", nullable=false)
+	 * @ORM\Column(name="`desc`", type="text", nullable=false)
 	 */
 	private $desc;
 
@@ -70,7 +81,7 @@ class Donatelog {
 	 *   @ORM\JoinColumn(name="users_usrId", referencedColumnName="usrId")
 	 * })
 	 */
-	private $usersUsrid;
+	private $user;
 
 	public function __construct( ) {
 		$this->created = new \DateTime();
@@ -81,8 +92,30 @@ class Donatelog {
 	 *
 	 * @return integer
 	 */
-	public function getDid() {
-		return $this->did;
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * Set transactionId
+	 *
+	 * @param string $transactionId
+	 *
+	 * @return Donatelog
+	 */
+	public function setTransactionId( $transactionId ) {
+		$this->transactionId = $transactionId;
+
+		return $this;
+	}
+
+	/**
+	 * Get transactionId
+	 *
+	 * @return string
+	 */
+	public function getTransactionId() {
+		return $this->transactionId;
 	}
 
 	/**
@@ -218,24 +251,24 @@ class Donatelog {
 	}
 
 	/**
-	 * Set usersUsrid
+	 * Set user
 	 *
 	 * @param \PServerCMS\Entity\Users $usersUsrid
 	 *
 	 * @return Donatelog
 	 */
-	public function setUsersUsrid( \PServerCMS\Entity\Users $usersUsrid = null ) {
-		$this->usersUsrid = $usersUsrid;
+	public function setUser( \PServerCMS\Entity\Users $usersUsrid = null ) {
+		$this->user = $usersUsrid;
 
 		return $this;
 	}
 
 	/**
-	 * Get usersUsrid
+	 * Get user
 	 *
 	 * @return \PServerCMS\Entity\Users
 	 */
-	public function getUsersUsrid() {
-		return $this->usersUsrid;
+	public function getUser() {
+		return $this->user;
 	}
 }

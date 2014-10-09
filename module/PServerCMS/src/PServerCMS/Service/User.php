@@ -477,6 +477,12 @@ class User extends \SmallUser\Service\User {
 		return $this->configReadService;
 	}
 
+	/**
+	 * We want to crypt a password =)
+	 * @param $password
+	 *
+	 * @return string
+	 */
     protected function bcrypt($password){
         $bcrypt = new Bcrypt();
         return $bcrypt->create($password);

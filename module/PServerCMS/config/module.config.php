@@ -105,6 +105,9 @@ return array(
 				return $cache;
 			},
 		),
+		'invokables' => array(
+			'payment_api_log_service'		=> 'PServerCMS\Service\PaymentNotify',
+		)
     ),
     'controllers' => array(
         'invokables' => array(
@@ -112,7 +115,7 @@ return array(
 			'SmallUser\Controller\Auth' => 'PServerCMS\Controller\AuthController',
 			'PServerCMS\Controller\Auth' => 'PServerCMS\Controller\AuthController',
 			'PServerCMS\Controller\Site' => 'PServerCMS\Controller\SiteController',
-			'PServerCMS\Controller\Account' => 'PServerCMS\Controller\AccountController'
+			'PServerCMS\Controller\Account' => 'PServerCMS\Controller\AccountController',
         ),
     ),
     'view_manager' => array(
@@ -229,5 +232,8 @@ return array(
 		'user_entity' => array(
 			'class' => 'PServerCMS\Entity\Users'
 		)
+	),
+	'payment-api' => array(
+		'ban-time' => '123456789',
 	)
 );

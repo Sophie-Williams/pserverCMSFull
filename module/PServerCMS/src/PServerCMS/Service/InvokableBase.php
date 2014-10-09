@@ -16,6 +16,8 @@ class InvokableBase extends UserBase {
 	protected $cachingService;
 	/** @var  CachingHelper */
 	protected $cachingHelperService;
+	/** @var  \GameBackend\DataService\DataServiceInterface */
+	protected $gameBackendService;
 	/** @var array */
 	private $aConfig;
 
@@ -49,6 +51,17 @@ class InvokableBase extends UserBase {
 		}
 
 		return $this->cachingHelperService;
+	}
+
+	/**
+	 * @return \GameBackend\DataService\DataServiceInterface
+	 */
+	protected function getGameBackendService() {
+		if (! $this->gaeBackendService) {
+			$this->gameBackendService = $this->getServiceManager()->get('gamebackend_dataservice');
+		}
+
+		return $this->gameBackendService;
 	}
 
 	/**
