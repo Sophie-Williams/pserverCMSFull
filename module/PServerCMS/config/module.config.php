@@ -106,7 +106,18 @@ return array(
 			},
 		),
 		'invokables' => array(
-			'payment_api_log_service'		=> 'PServerCMS\Service\PaymentNotify',
+			'small_user_service'				=> 'PServerCMS\Service\User',
+			'pserver_mail_service'				=> 'PServerCMS\Service\Mail',
+			'pserver_download_service'			=> 'PServerCMS\Service\Download',
+			'pserver_server_info_service'		=> 'PServerCMS\Service\ServerInfo',
+			'pserver_news_service'				=> 'PServerCMS\Service\News',
+			'pserver_usercodes_service'			=> 'PServerCMS\Service\UserCodes',
+			'pserver_configread_service'		=> 'PServerCMS\Service\ConfigRead',
+			'pserver_pageinfo_service'			=> 'PServerCMS\Service\PageInfo',
+			'pserver_donate_service'			=> 'PServerCMS\Service\Donate',
+			'pserver_cachinghelper_service'		=> 'PServerCMS\Service\CachingHelper',
+			'payment_api_log_service'			=> 'PServerCMS\Service\PaymentNotify',
+			'pserver_user_block_service'		=> 'PServerCMS\Service\UserBlock',
 		)
     ),
     'controllers' => array(
@@ -234,6 +245,6 @@ return array(
 		)
 	),
 	'payment-api' => array(
-		'ban-time' => '123456789',
+		'ban-time' => '946681200',
 	)
 );

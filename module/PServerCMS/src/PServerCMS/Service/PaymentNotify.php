@@ -49,7 +49,10 @@ class PaymentNotify extends InvokableBase implements LogInterface {
 		}
 
 		if($request->getStatus() == $request::StatusChargeBack){
-			// TODO BanUser
+			$expire = (int) $this->getConfigService()->get('payment-api.ban-time', 0) + time();
+			$reason = 'Donate - ChargeBack';
+
+			$this->getUserBlockService()->blockUser($user, $expire, $reason);
 		}
 
 		$this->saveDonateLog($request, $user, $errorMessage);
@@ -85,11 +88,10 @@ class PaymentNotify extends InvokableBase implements LogInterface {
 		}
 
 		$donateEntity = new Donatelog();
-		$success = $request->getStatus() == $request::StatusSuccess ? $donateEntity::StatusSuccess : $donateEntity::StatusError;
 		$donateEntity->setTransactionId($request->getTransactionId())
 			->setCoins($request->getAmount())
 			->setIp($request->getIp())
-			->setSuccess($success)
+			->setSuccess($request->getStatus())
 			->setType($this->mapPaymentProvider2DonateType($request))
 			->setDesc(json_encode($data));
 

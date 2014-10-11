@@ -3,6 +3,7 @@
 namespace PServerCMS\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use PServerCMS\Helper\DateTimer;
 
 /**
  * Userblock
@@ -49,7 +50,7 @@ class Userblock {
 	 *   @ORM\JoinColumn(name="users_usrId", referencedColumnName="usrId")
 	 * })
 	 */
-	private $usersUsrid;
+	private $user;
 
 	public function __construct( ) {
 		$this->created = new \DateTime();
@@ -89,11 +90,14 @@ class Userblock {
 	/**
 	 * Set expire
 	 *
-	 * @param \DateTime $expire
+	 * @param $expire
 	 *
 	 * @return Userblock
 	 */
 	public function setExpire( $expire ) {
+		if(!$expire instanceof \DateTime){
+			$expire = DateTimer::getDateTime4TimeStamp($expire);
+		}
 		$this->expire = $expire;
 
 		return $this;
@@ -136,9 +140,19 @@ class Userblock {
 	 * @param \PServerCMS\Entity\Users $usersUsrid
 	 *
 	 * @return Userblock
+	 * @deprecated use setUser
 	 */
 	public function setUsersUsrid( \PServerCMS\Entity\Users $usersUsrid = null ) {
-		$this->usersUsrid = $usersUsrid;
+		return $this->setUser($usersUsrid);
+	}
+
+	/**
+	 * @param Users $user
+	 *
+	 * @return $this
+	 */
+	public function setUser( Users $user ){
+		$this->user = $user;
 
 		return $this;
 	}
@@ -147,8 +161,18 @@ class Userblock {
 	 * Get usersUsrid
 	 *
 	 * @return \PServerCMS\Entity\Users
+	 * @deprecated use getUser
 	 */
 	public function getUsersUsrid() {
-		return $this->usersUsrid;
+		return $this->getUser();
+	}
+
+	/**
+	 * @param Users $user
+	 *
+	 * @return $this
+	 */
+	public function getUser(){
+		return $this->user;
 	}
 }

@@ -18,6 +18,10 @@ class InvokableBase extends UserBase {
 	protected $cachingHelperService;
 	/** @var  \GameBackend\DataService\DataServiceInterface */
 	protected $gameBackendService;
+	/** @var  ConfigRead */
+	protected $configReadService;
+	/** @var  UserBlock */
+	protected $userBlockService;
 	/** @var array */
 	private $aConfig;
 
@@ -57,7 +61,7 @@ class InvokableBase extends UserBase {
 	 * @return \GameBackend\DataService\DataServiceInterface
 	 */
 	protected function getGameBackendService() {
-		if (! $this->gaeBackendService) {
+		if (!$this->gameBackendService) {
 			$this->gameBackendService = $this->getServiceManager()->get('gamebackend_dataservice');
 		}
 
@@ -73,6 +77,28 @@ class InvokableBase extends UserBase {
 	protected function getUser4Id( $userId ){
 		$entityManager = $this->getEntityManager();
 		return $entityManager->getRepository('PServerCMS\Entity\Users')->findOneBy(array('usrid' => $userId));
+	}
+
+	/**
+	 * @return ConfigRead
+	 */
+	protected function getConfigService() {
+		if (!$this->configReadService) {
+			$this->configReadService = $this->getServiceManager()->get('pserver_configread_service');
+		}
+
+		return $this->configReadService;
+	}
+
+	/**
+	 * @return UserBlock
+	 */
+	protected function getUserBlockService() {
+		if (!$this->userBlockService) {
+			$this->userBlockService = $this->getServiceManager()->get('pserver_user_block_service');
+		}
+
+		return $this->userBlockService;
 	}
 
 } 
