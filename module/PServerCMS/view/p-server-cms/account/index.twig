@@ -20,13 +20,15 @@
         </div>
     {% endif %}
 
+	{% if changeWebPwdForm %}
     <div class="col-sm-6">
         <h4>Change Web Password</h4>
         {{ formWidget(changeWebPwdForm) }}
     </div>
+	{% endif %}
 
     <div class="col-sm-6">
-        <h4>Change Ingame Password</h4>
+        <h4>Change {{ changeWebPwdForm?'Ingame':''  }} Password</h4>
         {{ formWidget(changeIngamePwdForm) }}
     </div>
 {% endblock content %}

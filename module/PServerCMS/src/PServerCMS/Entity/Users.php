@@ -5,6 +5,7 @@ namespace PServerCMS\Entity;
 use BjyAuthorize\Provider\Role\ProviderInterface;
 use Doctrine\ORM\Mapping as ORM;
 use GameBackend\Entity\User\UserInterface;
+use PServerCMS\Service\ServiceManager;
 use SmallUser\Entity\UsersInterface;
 use Zend\Crypt\Password\Bcrypt;
 
@@ -311,14 +312,21 @@ class Users implements
 	}
 
 	/**
-	 * @param Users $oEntity
+	 * @param Users $entity
 	 * @param       $plaintext
 	 *
 	 * @return bool
 	 */
-	public static function hashPassword( $oEntity, $plaintext ){
+	public static function hashPassword( $entity, $plaintext ){
+
+		/** @var \PServerCMS\Service\User $userService */
+		$userService = ServiceManager::getInstance()->get('small_user_service');
+		if(!$userService->isSamePasswordOption()){
+			return $userService->getGameBackendService()->isPasswordSame($entity->getPassword(), $plaintext);
+		}
+
 		$oBcrypt = new Bcrypt();
-		return $oBcrypt->verify($plaintext, $oEntity->getPassword());
+		return $oBcrypt->verify($plaintext, $entity->getPassword());
 	}
 
 }

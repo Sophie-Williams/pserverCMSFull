@@ -228,7 +228,13 @@ return array(
                 'time' => 900, //in seconds
                 'try' => 5
             )
-        )
+        ),
+		'password' => array(
+			/*
+			 * set other pw for web as ingame
+			 */
+			'different-passwords' => true
+		)
 	),
 	'authenticationadapter' => array(
 		'odm_default' => array(

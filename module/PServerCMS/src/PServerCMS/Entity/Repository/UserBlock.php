@@ -10,14 +10,14 @@ use Doctrine\ORM\EntityRepository;
 class UserBlock extends EntityRepository {
 
     /**
-     * @param $iUserId
-     * @return \PServerCMS\Entity\UserBlock
+     * @param $userId
+	 * @return \PServerCMS\Entity\UserBlock
      */
-    public function isUserAllowed( $iUserId ) {
+    public function isUserAllowed( $userId ) {
         $oQuery = $this->createQueryBuilder('p')
             ->select('p')
-            ->where('p.usersUsrid = :userId')
-            ->setParameter('userId', $iUserId)
+            ->where('p.user = :userId')
+            ->setParameter('userId', $userId)
             ->andWhere('p.expire >= :expireTime')
             ->setParameter('expireTime', new \DateTime())
             ->orderBy('p.expire', 'desc')

@@ -36,17 +36,21 @@ class AuthController extends \SmallUser\Controller\AuthController {
 	}
 
 	public function registerConfirmAction(){
-		$code = $this->params()->fromRoute('code');
+		$codeRoute = $this->params()->fromRoute('code');
 
-		$oCode = $this->getCode4Data($code, Usercodes::Type_Register);
-		if(!$oCode){
+		$userCode = $this->getCode4Data($codeRoute, Usercodes::Type_Register);
+		if(!$userCode){
 			return $this->forward()->dispatch('PServerCMS\Controller\Auth', array('action' => 'wrong-code'));
 		}
 
+		$user = $this->getUserService()->registerGameWithSamePassword($userCode);
+
 		$form = $this->getUserService()->getPasswordForm();
 		$request = $this->getRequest();
-		if($request->isPost()){
-			$user = $this->getUserService()->registerGame($this->params()->fromPost(), $oCode);
+		if($request->isPost() || $user){
+			if(!$user) {
+				$user = $this->getUserService()->registerGameWithOtherPw($this->params()->fromPost(), $userCode);
+			}
 			if($user){
 				//$this->getUserService()->doAuthentication($user);
 				return $this->redirect()->toRoute('home');

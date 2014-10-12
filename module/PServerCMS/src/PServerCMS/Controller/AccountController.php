@@ -27,13 +27,18 @@ class AccountController extends AbstractActionController {
                 $element->setValue('');
             }
         }
-        $form1 = clone $form;
-        $formChangeWebPwd = $form1->setWhich('web');
-        $form2 = clone $form;
-        $formChangeIngamePwd = $form2->setWhich('ingame');
 
-        $oRequest = $this->getRequest();
-        if(!$oRequest->isPost()){
+		$formChangeWebPwd = null;
+		if($this->getUserService()->isSamePasswordOption()){
+			$webPasswordForm = clone $form;
+			$formChangeWebPwd = $webPasswordForm->setWhich('web');
+		}
+
+		$inGamePasswordForm = clone $form;
+        $formChangeIngamePwd = $inGamePasswordForm->setWhich('ingame');
+
+        $request = $this->getRequest();
+        if(!$request->isPost()){
             return array(
 				'changeWebPwdForm' => $formChangeWebPwd,
 				'changeIngamePwdForm' => $formChangeIngamePwd,

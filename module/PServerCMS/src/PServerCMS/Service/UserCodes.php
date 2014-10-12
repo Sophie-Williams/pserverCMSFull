@@ -51,6 +51,17 @@ class UserCodes extends InvokableBase {
 	}
 
 	/**
+	 * delete a userCode from database
+	 *
+	 * @param \PServerCMS\Entity\Usercodes $userCode
+	 */
+	public function deleteCode( \PServerCMS\Entity\Usercodes $userCode ){
+		$entityManager = $this->getEntityManager();
+		$entityManager->remove($userCode);
+		$entityManager->flush();
+	}
+
+	/**
 	 * @return \Doctrine\Common\Persistence\ObjectRepository|\PServerCMS\Entity\Repository\Usercodes
 	 */
 	protected function getRepositoryManager(){
