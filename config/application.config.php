@@ -16,6 +16,7 @@ return array(
 		'SmallUser',
 		'PServerCMS',
 		'PServerAdmin',
+		'PServerCLI'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
