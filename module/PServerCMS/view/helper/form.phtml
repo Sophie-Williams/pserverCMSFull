@@ -8,7 +8,9 @@ $form->setAttribute('class', 'form-horizontal');
 
 <?php echo $this->form()->openTag($form) ?>
 <?php foreach ($form as $element): ?>
-	<?php if($element->getAttribute('type') == 'hidden'): ?>
+	<?php
+	/** @var \Zend\Form\Element $element */
+	if($element->getAttribute('type') == 'hidden'): ?>
 		<?php echo $this->formInput($element) . $this->pserverformerrors($element) ?>
 	<?php
 	 	continue;
