@@ -1,8 +1,8 @@
 <?php
-return array(
-	'bjyauthorize' => array(
+return [
+	'bjyauthorize' => [
 
-		// set the 'guest' role as default (must be defined in a role provider)
+		// set the 'guest' role as default (must be defined in a role provider]
 		'default_role' => 'guest',
 
 		/* this module uses a meta-role that inherits from any roles that should
@@ -27,127 +27,128 @@ return array(
 		 * to specify roles in a config file and one to load roles using a
 		 * Zend\Db adapter.
 		 */
-		'role_providers' => array(
+		'role_providers' => [
 			// this will load roles from
 			// the 'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' service
-			'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => array(
+			'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => [
 				// class name of the entity representing the role
 				'role_entity_class' => 'PServerCMS\Entity\UserRole',
 				// service name of the object manager
 				'object_manager'    => 'doctrine.entitymanager.orm_default',
-			),
-		),
+			],
+		],
 
 		// resource providers provide a list of resources that will be tracked
 		// in the ACL. like roles, they can be hierarchical
-		'resource_providers' => array(
-			'BjyAuthorize\Provider\Resource\Config' => array(
-				'auth' => array(),
-				'user' => array(),
-				'zfc-ticketsystem' => array(),
-				'zfc-ticketsystem-admin' => array(),
-				'admin_home' => array(),
-				'admin_news' => array(),
-				'admin_settings' => array(),
-				'admin_download' => array(),
-				'admin_server_info' => array(),
-				'small-user-auth' => array(),
-			),
-		),
+		'resource_providers' => [
+			'BjyAuthorize\Provider\Resource\Config' => [
+				'auth' => [],
+				'user' => [],
+				'zfc-ticketsystem' => [],
+				'zfc-ticketsystem-admin' => [],
+				'admin_home' => [],
+				'admin_news' => [],
+				'admin_settings' => [],
+				'admin_download' => [],
+				'admin_server_info' => [],
+				'small-user-auth' => [],
+			],
+		],
 
 
 		/* rules can be specified here with the format:
-		 * array(roles (array), resource, [privilege (array|string), assertion])
+		 * [roles (array], resource, [privilege (array|string], assertion]]
 		 * assertions will be loaded using the service manager and must implement
 		 * Zend\Acl\Assertion\AssertionInterface.
 		 * *if you use assertions, define them using the service manager!*
 		 */
-		'rule_providers' => array(
-			'BjyAuthorize\Provider\Rule\Config' => array(
-				'allow' => array(
-					// allow guests and users (and admins, through inheritance)
+		'rule_providers' => [
+			'BjyAuthorize\Provider\Rule\Config' => [
+				'allow' => [
+					// allow guests and users (and admins, through inheritance]
 					// the "wear" privilege on the resource "pants"
-					array('guest', 'auth', 'index'),
-					array(array(), 'auth', 'logout'),
-					array('guest', 'small-user-auth', 'index'),
-					array(array(), 'small-user-auth', 'logout'),
-					array(array('user', 'admin'), 'user'),
-					array(array('user', 'admin'), 'zfc-ticketsystem'),
-					array(array('admin'), 'zfc-ticketsystem-admin'),
-					array(array('admin'), 'admin_home'),
-					array(array('admin'), 'admin_news'),
-					array(array('admin'), 'admin_settings'),
-					array(array('admin'), 'admin_download'),
-					array(array('admin'), 'admin_server_info'),
-				),
+					['guest', 'auth', 'index'],
+					[[], 'auth', 'logout'],
+					['guest', 'small-user-auth', 'index'],
+					[[], 'small-user-auth', 'logout'],
+					[['user', 'admin'], 'user'],
+					[['user', 'admin'], 'zfc-ticketsystem'],
+					[['admin'], 'zfc-ticketsystem-admin'],
+					[['admin'], 'admin_home'],
+					[['admin'], 'admin_news'],
+					[['admin'], 'admin_settings'],
+					[['admin'], 'admin_download'],
+					[['admin'], 'admin_server_info'],
+				],
 
 				// Don't mix allow/deny rules if you are using role inheritance.
 				// There are some weird bugs.
-				'deny' => array(
-					array('guest', 'auth', 'logout'),
-					array('guest', 'small-user-auth', 'logout'),
-				),
-			),
-		),
+				'deny' => [
+					['guest', 'auth', 'logout'],
+					['guest', 'small-user-auth', 'logout'],
+				],
+			],
+		],
 
 
 		/* Currently, only controller and route guards exist
 		 *
 		 * Consider enabling either the controller or the route guard depending on your needs.
 		 */
-		'guards' => array(
-			/* If this guard is specified here (i.e. it is enabled), it will block
+		'guards' => [
+			/* If this guard is specified here (i.e. it is enabled], it will block
 			 * access to all controllers and actions unless they are specified here.
 			 * You may omit the 'action' index to allow access to the entire controller
 			 */
-			'BjyAuthorize\Guard\Controller' => array(
-				/*array('controller' => 'index', 'roles' => array('guest')),
-				array('controller' => 'site', 'roles' => array('guest')),
-				// You can also specify an array of actions or an array of controllers (or both)
+			'BjyAuthorize\Guard\Controller' => [
+				/*['controller' => 'index', 'roles' => ['guest']],
+				['controller' => 'site', 'roles' => ['guest']],
+				// You can also specify an array of actions or an array of controllers (or both]
 				// allow "guest" and "admin" to access actions "list" and "manage" on these "index",
 				// "static" and "console" controllers
-				array(
-					'controller' => array('index', 'static', 'console'),
-					'action' => array('list', 'manage'),
-					'roles' => array('guest', 'admin')
-				),
-				array(
-					'controller' => array('search', 'administration'),
-					'roles' => array('admin')
-				),
-				array('controller' => 'zfcuser', 'roles' => array()),
+				[
+					'controller' => ['index', 'static', 'console'],
+					'action' => ['list', 'manage'],
+					'roles' => ['guest', 'admin']
+				],
+				[
+					'controller' => ['search', 'administration'],
+					'roles' => ['admin']
+				],
+				['controller' => 'zfcuser', 'roles' => []],
 				 */
 				// Below is the default index action used by the ZendSkeletonApplication
-				array('controller' => 'PServerCMS\Controller\Index', 'roles' => array()),
-				array('controller' => 'PServerCMS\Controller\Auth', 'roles' => array('guest')),
-				array('controller' => 'PServerCMS\Controller\Auth', 'roles' => array(), 'action' => array('logout')),
-				array('controller' => 'PServerCMS\Controller\Site', 'roles' => array()),
-				array('controller' => 'PServerCMS\Controller\Account', 'roles' => array('user','admin')),
-				array('controller' => 'ZfcTicketSystem\Controller\TicketSystem', 'roles' => array('user','admin')),
-				array('controller' => 'ZfcTicketSystem\Controller\Admin', 'roles' => array('admin')),
-				array('controller' => 'SmallUser\Controller\Auth', 'roles' => array('guest')),
-				array('controller' => 'SmallUser\Controller\Auth', 'roles' => array(), 'action' => array('logout')),
-				array('controller' => 'PServerAdmin\Controller\Index', 'roles' => array('admin')),
-				array('controller' => 'PServerAdmin\Controller\News', 'roles' => array('admin')),
-				array('controller' => 'PServerAdmin\Controller\Settings', 'roles' => array('admin')),
-				array('controller' => 'PServerAdmin\Controller\Download', 'roles' => array('admin')),
-				array('controller' => 'PServerAdmin\Controller\ServerInfo', 'roles' => array('admin')),
-				//array('controller' => 'PaymentAPI\Controller\PaymentWall', 'roles' => array()),
-				array('controller' => 'PaymentAPI\Controller\SuperReward', 'roles' => array()),
-			),
+				['controller' => 'PServerCMS\Controller\Index', 'roles' => []],
+				['controller' => 'PServerCMS\Controller\Auth', 'roles' => ['guest']],
+				['controller' => 'PServerCMS\Controller\Auth', 'roles' => [], 'action' => ['logout']],
+				['controller' => 'PServerCMS\Controller\Site', 'roles' => []],
+				['controller' => 'PServerCMS\Controller\Account', 'roles' => ['user','admin']],
+				['controller' => 'ZfcTicketSystem\Controller\TicketSystem', 'roles' => ['user','admin']],
+				['controller' => 'ZfcTicketSystem\Controller\Admin', 'roles' => ['admin']],
+				['controller' => 'SmallUser\Controller\Auth', 'roles' => ['guest']],
+				['controller' => 'SmallUser\Controller\Auth', 'roles' => [], 'action' => ['logout']],
+				['controller' => 'PServerAdmin\Controller\Index', 'roles' => ['admin']],
+				['controller' => 'PServerAdmin\Controller\News', 'roles' => ['admin']],
+				['controller' => 'PServerAdmin\Controller\Settings', 'roles' => ['admin']],
+				['controller' => 'PServerAdmin\Controller\Download', 'roles' => ['admin']],
+				['controller' => 'PServerAdmin\Controller\ServerInfo', 'roles' => ['admin']],
+				//['controller' => 'PaymentAPI\Controller\PaymentWall', 'roles' => []],
+				['controller' => 'PaymentAPI\Controller\SuperReward', 'roles' => []],
+				['controller' => 'PServerCLI\Controller\PlayerHistory', 'roles' => []],
+			],
 
-			/* If this guard is specified here (i.e. it is enabled), it will block
+			/* If this guard is specified here (i.e. it is enabled], it will block
 			 * access to all routes unless they are specified here.
-			'BjyAuthorize\Guard\Route' => array(
-				array('route' => 'zfcuser', 'roles' => array('user')),
-				array('route' => 'zfcuser/logout', 'roles' => array('user')),
-				array('route' => 'zfcuser/login', 'roles' => array('guest')),
-				array('route' => 'zfcuser/register', 'roles' => array('guest')),
+			'BjyAuthorize\Guard\Route' => [
+				['route' => 'zfcuser', 'roles' => ['user']],
+				['route' => 'zfcuser/logout', 'roles' => ['user']],
+				['route' => 'zfcuser/login', 'roles' => ['guest']],
+				['route' => 'zfcuser/register', 'roles' => ['guest']],
 				// Below is the default index action used by the ZendSkeletonApplication
-				array('route' => 'home', 'roles' => array('guest', 'user')),
-			),
+				['route' => 'home', 'roles' => ['guest', 'user']],
+			],
 			 */
-		),
+		],
 		// strategy service name for the strategy listener to be used when permission-related errors are detected
 		'unauthorized_strategy' => 'BjyAuthorize\View\UnauthorizedStrategy',
 
@@ -155,16 +156,16 @@ return array(
 		'template'              => 'error/403',
 
 		// cache options have to be compatible with Zend\Cache\StorageFactory::factory
-		'cache_options'         => array(
-			'adapter'   => array(
+		'cache_options'         => [
+			'adapter'   => [
 				'name' => 'memory',
-			),
-			'plugins'   => array(
+			],
+			'plugins'   => [
 				'serializer',
-			)
-		),
+			]
+		],
 
 		// Key used by the cache for caching the acl
 		'cache_key'             => 'bjyauthorize_acl'
-	),
-);
+	],
+];

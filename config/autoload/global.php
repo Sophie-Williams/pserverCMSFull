@@ -11,81 +11,81 @@
  * file.
  */
 
-return array(
-	'zfctwig' => array(
+return [
+	'zfctwig' => [
 		'environment_loader' => 'ZfcTwigLoaderChain',
-		'environment_options' => array(),
-		'loader_chain' => array(
+		'environment_options' => [],
+		'loader_chain' => [
 			'ZfcTwigLoaderTemplateMap',
 			'ZfcTwigLoaderTemplatePathStack'
-		),
-		'extensions' => array(
+		],
+		'extensions' => [
 			'zfctwig' => 'ZfcTwigExtension'
-		),
+		],
 		'suffix' => 'twig',
 		'enable_fallback_functions' => true,
 		'disable_zf_model' => true,
-	),
-	'zenddevelopertools' => array(
+	],
+	'zenddevelopertools' => [
 		/**
 		 * General Profiler settings
 		 */
-		'profiler' => array(
+		'profiler' => [
 			'enabled' => false,
 			'strict' => true,
 			'flush_early' => true,
 			'cache_dir' => 'data/cache',
-			'matcher' => array(),
-			'collectors' => array(),
-		),
+			'matcher' => [],
+			'collectors' => [],
+		],
 		/**
 		 * General Toolbar settings
 		 */
-		'toolbar' => array(
+		'toolbar' => [
 			'enabled' => false,
 			'auto_hide' => true,
 			'position' => 'bottom',
 			'version_check' => true,
-			'entries' => array(),
-		),
-	),
-	'pserver' => array(
-		'timer' => array(
-			array(
+			'entries' => [],
+		],
+	],
+	'pserver' => [
+		'timer' => [
+			[
 				'name' => 'CTF',
-				'hours' => array(
+				'hours' => [
 					0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23
-				),
+				],
 				'min' => 30,
 				'icon' => 'fa fa-cubes'
-			),
-			array(
+			],
+			[
 				'name' => 'Medusa',
-				'hours' => array(
+				'hours' => [
 					1,22,23
-				),
+				],
 				'min' => 14,
 				'icon' => 'fa fa-digg'
-			),
+			],
 			//'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
-			array(
+			[
 				'name' => 'Fortresswar',
-				'days' => array(
+				'days' => [
 					'Wednesday','Monday'
-				),
+				],
 				'hour' => 8,
 				'min' => 14,
 				'icon' => 'fa fa-bomb'
-			),
-			array(
+			],
+			[
 				'name' => 'Register',
 				'type' => 'static',
 				'time' => 'Saturday 12:00 - 23:00',
 				'icon' => 'fa fa-digg'
-			),
-		),
-	),
-	'zfc-ticket-system' => array(
+			],
+		],
+	],
+	'zfc-ticket-system' => [
 		'auth_service' => 'small_user_auth_service'
-	)
-);
+	]
+];

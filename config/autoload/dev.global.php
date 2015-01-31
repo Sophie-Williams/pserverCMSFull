@@ -11,20 +11,19 @@
  * file.
  */
 
-return array(
-	'zenddevelopertools' => array(
+return [
+	'zenddevelopertools' => [
 		/**
 		 * General Profiler settings
 		 */
-		'profiler' => array(
+		'profiler' => [
 			'enabled' => true,
-		),
+		],
 		/**
 		 * General Toolbar settings
 		 */
-		'toolbar' => array(
+		'toolbar' => [
 			'enabled' => true,
-		),
-	),
-
-);
+		],
+	],
+];
