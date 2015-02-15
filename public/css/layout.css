@@ -144,3 +144,6 @@ ul.nav li.dropdown:hover > a {
 	font-size: 26px;
 	margin-top: 12px;
 }
+
+.sceditor-group *,.sceditor-group *:before,.sceditor-group *:after {-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box;}
+.sceditor-container textarea { height: 150px; }

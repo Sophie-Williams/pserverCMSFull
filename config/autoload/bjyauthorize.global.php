@@ -132,7 +132,7 @@ return [
 				['controller' => 'PServerAdmin\Controller\Settings', 'roles' => ['admin']],
 				['controller' => 'PServerAdmin\Controller\Download', 'roles' => ['admin']],
 				['controller' => 'PServerAdmin\Controller\ServerInfo', 'roles' => ['admin']],
-				//['controller' => 'PaymentAPI\Controller\PaymentWall', 'roles' => []],
+				['controller' => 'PaymentAPI\Controller\PaymentWall', 'roles' => []],
 				['controller' => 'PaymentAPI\Controller\SuperReward', 'roles' => []],
 				['controller' => 'PServerCLI\Controller\PlayerHistory', 'roles' => []],
 			],
