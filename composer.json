@@ -22,6 +22,7 @@
     "zf-commons/zfc-twig": "dev-master",
     "mabuzagu/pdo-dblib-module": "dev-master",
     "kokspflanze/zfc-bbcode": "dev-master",
-    "samclarke/sbb-code-parser": "dev-master"
+    "samclarke/sbb-code-parser": "dev-master",
+    "beberlei/doctrineextensions": "dev-master"
   }
 }

@@ -51,7 +51,8 @@ return [
 				'admin_settings' => [],
 				'admin_download' => [],
 				'admin_server_info' => [],
-				'small-user-auth' => [],
+                'small-user-auth' => [],
+                'admin_donate' => [],
 			],
 		],
 
@@ -78,7 +79,8 @@ return [
 					[['admin'], 'admin_news'],
 					[['admin'], 'admin_settings'],
 					[['admin'], 'admin_download'],
-					[['admin'], 'admin_server_info'],
+                    [['admin'], 'admin_server_info'],
+                    [['admin'], 'admin_donate'],
 				],
 
 				// Don't mix allow/deny rules if you are using role inheritance.
@@ -131,7 +133,8 @@ return [
 				['controller' => 'PServerAdmin\Controller\News', 'roles' => ['admin']],
 				['controller' => 'PServerAdmin\Controller\Settings', 'roles' => ['admin']],
 				['controller' => 'PServerAdmin\Controller\Download', 'roles' => ['admin']],
-				['controller' => 'PServerAdmin\Controller\ServerInfo', 'roles' => ['admin']],
+                ['controller' => 'PServerAdmin\Controller\ServerInfo', 'roles' => ['admin']],
+                ['controller' => 'PServerAdmin\Controller\Donate', 'roles' => ['admin']],
 				['controller' => 'PaymentAPI\Controller\PaymentWall', 'roles' => []],
 				['controller' => 'PaymentAPI\Controller\SuperReward', 'roles' => []],
 				['controller' => 'PServerCLI\Controller\PlayerHistory', 'roles' => []],
