@@ -145,5 +145,9 @@ ul.nav li.dropdown:hover > a {
 	margin-top: 12px;
 }
 
+.table > caption + thead > tr:first-child > td, .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > td, .table > thead:first-child > tr:first-child > th {
+	font-weight: bold;
+}
+
 .sceditor-group *,.sceditor-group *:before,.sceditor-group *:after {-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box;}
 .sceditor-container textarea { height: 150px; }
