@@ -1,3 +1,4 @@
+var xhr;
 
 function startClockTimer(sElement){
 	clockTimer(sElement);
@@ -70,6 +71,28 @@ function loadCheck(){
 			clearInterval(timerCountdown[sKey]);
 		}
 	});
+}
+
+function paginatorAjax( element, urlData ){
+	ajaxReload();
+	xhr = jQuery.ajax({
+		url : urlData,
+		type: "POST",
+		dataType: "html",
+		success : function(data){
+			jQuery(element).html(data);
+		},
+		error: function(e) {
+			alert('smth wrong');
+		}
+	});
+}
+
+
+function ajaxReload(){
+	if(xhr && xhr.readystate != 4){
+		xhr.abort();
+	}
 }
 
 jQuery(document).ready(function(){
