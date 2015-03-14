@@ -147,6 +147,7 @@ return [
 				['controller' => 'PaymentAPI\Controller\PaymentWall', 'roles' => []],
 				['controller' => 'PaymentAPI\Controller\SuperReward', 'roles' => []],
 				['controller' => 'PServerCLI\Controller\PlayerHistory', 'roles' => []],
+                ['controller' => 'PServerCLI\Controller\CodeCleanUp', 'roles' => []],
 			],
 
 			/* If this guard is specified here (i.e. it is enabled], it will block
