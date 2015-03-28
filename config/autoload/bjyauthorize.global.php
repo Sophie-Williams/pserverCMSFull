@@ -148,6 +148,7 @@ return [
 				['controller' => 'PaymentAPI\Controller\SuperReward', 'roles' => []],
 				['controller' => 'PServerCLI\Controller\PlayerHistory', 'roles' => []],
                 ['controller' => 'PServerCLI\Controller\CodeCleanUp', 'roles' => []],
+                ['controller' => 'SanCaptcha\Controller\Captcha', 'roles' => []],
 			],
 
 			/* If this guard is specified here (i.e. it is enabled], it will block

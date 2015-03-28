@@ -24,6 +24,7 @@
     "kokspflanze/zfc-bbcode": "dev-master",
     "samclarke/sbb-code-parser": "dev-master",
     "beberlei/doctrineextensions": "dev-master",
-    "thadafinser/zfc-datagrid": "dev-master"
+    "thadafinser/zfc-datagrid": "dev-master",
+    "san/san-captcha": "dev-master"
   }
 }

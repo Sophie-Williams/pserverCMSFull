@@ -14,6 +14,7 @@ return [
         'ZfcTicketSystem',
         'ZfcBBCode',
         'PaymentAPI',
+        'SanCaptcha',
         'ZfcDatagrid',
 		'SmallUser',
 		'PServerCMS',
