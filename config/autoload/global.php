@@ -49,43 +49,11 @@ return [
 			'entries' => [],
 		],
 	],
-	'pserver' => [
-		'timer' => [
-			[
-				'name' => 'CTF',
-				'hours' => [
-					0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23
-				],
-				'min' => 30,
-				'icon' => 'fa fa-cubes'
-			],
-			[
-				'name' => 'Medusa',
-				'hours' => [
-					1,22,23
-				],
-				'min' => 14,
-				'icon' => 'fa fa-digg'
-			],
-			//'Sunday' | 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | 'Saturday'
-			[
-				'name' => 'Fortresswar',
-				'days' => [
-					'Wednesday','Monday'
-				],
-				'hour' => 8,
-				'min' => 14,
-				'icon' => 'fa fa-bomb'
-			],
-			[
-				'name' => 'Register',
-				'type' => 'static',
-				'time' => 'Saturday 12:00 - 23:00',
-				'icon' => 'fa fa-digg'
-			],
-		],
-	],
 	'zfc-ticket-system' => [
 		'auth_service' => 'small_user_auth_service'
-	]
+	],
+    'view_manager' => [
+        'display_not_found_reason' => false,
+        'display_exceptions'       => false,
+    ],
 ];
