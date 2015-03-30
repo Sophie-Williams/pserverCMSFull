@@ -22,10 +22,10 @@ return [
                 // mssql db @ linux  => 'GameBackend\DBAL\Driver\PDODblib\Driver',
                 'driverClass' =>'Doctrine\DBAL\Driver\PDOMySql\Driver',
                 'params' => [
-                    'host'     => '192.168.178.28',
+                    'host'     => '127.0.0.1',
                     'port'     => '3306',
                     'user'     => 'root',
-                    'password' => '112233',
+                    'password' => 'barr',
                     'dbname'   => 'pserverCMS2',
                 ],
             ],
@@ -67,8 +67,8 @@ return [
                 'port' => 465,
                 'connection_class' => 'login',
                 'connection_config' => [
-                    'username' => 'register@co-sl.com',
-                    'password' => '17021989',
+                    'username' => 'noreply@mail.com',
+                    'password' => 'foobar',
                     'ssl'=> 'ssl',
                 ],
             ],
