@@ -56,6 +56,7 @@ return [
                 'admin_donate' => [],
                 'admin_log' => [],
                 'admin_user' => [],
+                'admin_user_role' => []
 			],
 		],
 
@@ -87,6 +88,7 @@ return [
                     [['admin'], 'admin_donate'],
                     [['admin'], 'admin_log'],
                     [['admin'], 'admin_user'],
+                    [['admin'], 'admin_user_role'],
 				],
 
 				// Don't mix allow/deny rules if you are using role inheritance.
@@ -147,6 +149,7 @@ return [
                 ['controller' => 'PServerAdmin\Controller\Donate', 'roles' => ['admin']],
                 ['controller' => 'PServerAdmin\Controller\Log', 'roles' => ['admin']],
                 ['controller' => 'PServerAdmin\Controller\UserPanel', 'roles' => ['admin']],
+                ['controller' => 'PServerAdmin\Controller\UserRole', 'roles' => ['admin']],
 				['controller' => 'PaymentAPI\Controller\PaymentWall', 'roles' => []],
 				['controller' => 'PaymentAPI\Controller\SuperReward', 'roles' => []],
 				['controller' => 'PServerCLI\Controller\PlayerHistory', 'roles' => []],
