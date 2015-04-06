@@ -127,7 +127,7 @@ return [
 				 */
 				// Below is the default index action used by the ZendSkeletonApplication
 				['controller' => 'PServerCMS\Controller\Index', 'roles' => []],
-				['controller' => 'PServerCMS\Controller\Auth', 'roles' => ['guest']],
+				['controller' => 'PServerCMS\Controller\Auth', 'roles' => ['guest', 'user', 'admin']],
 				['controller' => 'PServerCMS\Controller\Auth', 'roles' => [], 'action' => ['logout']],
                 ['controller' => 'PServerCMS\Controller\Site', 'roles' => []],
                 ['controller' => 'PServerCMS\Controller\Ranking', 'roles' => []],
@@ -137,7 +137,7 @@ return [
                 ['controller' => 'PServerCMS\Controller\Donate', 'roles' => ['user','admin']],
 				['controller' => 'ZfcTicketSystem\Controller\TicketSystem', 'roles' => ['user','admin']],
 				['controller' => 'ZfcTicketSystem\Controller\Admin', 'roles' => ['admin']],
-				['controller' => 'SmallUser\Controller\Auth', 'roles' => ['guest']],
+				['controller' => 'SmallUser\Controller\Auth', 'roles' => ['guest', 'user', 'admin']],
 				['controller' => 'SmallUser\Controller\Auth', 'roles' => [], 'action' => ['logout']],
 				['controller' => 'PServerAdmin\Controller\Index', 'roles' => ['admin']],
 				['controller' => 'PServerAdmin\Controller\News', 'roles' => ['admin']],
