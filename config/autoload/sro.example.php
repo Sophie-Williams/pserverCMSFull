@@ -2,6 +2,7 @@
 return [
     /*
      * DEBUG HELPER
+     *
         'zenddevelopertools' => [
             'profiler' => [
                 'enabled' => true,
@@ -30,6 +31,9 @@ return [
                 ],
             ],
             'orm_sro_account' => [
+                // mssql db @ windows  => 'GameBackend\DBAL\Driver\PDOSqlsrv\Driver'
+                // mssql db @ linux  => 'GameBackend\DBAL\Driver\PDODblib\Driver',
+                //'driverClass' =>'GameBackend\DBAL\Driver\PDODblib\Driver',
                 'params' => [
                     'host'     => 'local',
                     'port'     => '1443',
@@ -39,6 +43,9 @@ return [
                 ],
             ],
             'orm_sro_shard' => [
+                // mssql db @ windows  => 'GameBackend\DBAL\Driver\PDOSqlsrv\Driver'
+                // mssql db @ linux  => 'GameBackend\DBAL\Driver\PDODblib\Driver',
+                //'driverClass' =>'GameBackend\DBAL\Driver\PDODblib\Driver',
                 'params' => [
                     'host'     => 'local',
                     'port'     => '1443',
@@ -48,6 +55,9 @@ return [
                 ],
             ],
             'orm_sro_log' => [
+                // mssql db @ windows  => 'GameBackend\DBAL\Driver\PDOSqlsrv\Driver'
+                // mssql db @ linux  => 'GameBackend\DBAL\Driver\PDODblib\Driver',
+                //'driverClass' =>'GameBackend\DBAL\Driver\PDODblib\Driver',
                 'params' => [
                     'host'     => 'local',
                     'port'     => '1443',
