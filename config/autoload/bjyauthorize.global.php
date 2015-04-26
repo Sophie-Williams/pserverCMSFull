@@ -42,10 +42,10 @@ return [
 		// in the ACL. like roles, they can be hierarchical
 		'resource_providers' => [
 			'BjyAuthorize\Provider\Resource\Config' => [
-				'auth' => [],
-                'user' => [],
-                'panel_donate' => [],
-                'panel_character' => [],
+                'PServerCMS/user' => [],
+                'PServerCMS/panel_donate' => [],
+                'PServerCMS/panel_character' => [],
+                'small-user-auth' => [],
 				'zfc-ticketsystem' => [],
 				'zfc-ticketsystem-admin' => [],
 				'PServerAdmin/home' => [],
@@ -53,7 +53,6 @@ return [
 				'PServerAdmin/settings' => [],
 				'PServerAdmin/download' => [],
 				'PServerAdmin/server_info' => [],
-                'small-user-auth' => [],
                 'PServerAdmin/donate' => [],
                 'PServerAdmin/log' => [],
                 'PServerAdmin/user' => [],
@@ -74,13 +73,11 @@ return [
 				'allow' => [
 					// allow guests and users (and admins, through inheritance]
 					// the "wear" privilege on the resource "pants"
-					['guest', 'auth', 'index'],
-					[[], 'auth', 'logout'],
 					['guest', 'small-user-auth', 'index'],
 					[[], 'small-user-auth', 'logout'],
-                    [['user', 'admin'], 'user'],
-                    [['user', 'admin'], 'panel_donate'],
-                    [['user', 'admin'], 'panel_character'],
+                    [['user', 'admin'], 'PServerCMS/user'],
+                    [['user', 'admin'], 'PServerCMS/panel_donate'],
+                    [['user', 'admin'], 'PServerCMS/panel_character'],
 					[['user', 'admin'], 'zfc-ticketsystem'],
 					[['admin'], 'zfc-ticketsystem-admin'],
 					[['admin'], 'PServerAdmin/home'],
@@ -98,7 +95,6 @@ return [
 				// Don't mix allow/deny rules if you are using role inheritance.
 				// There are some weird bugs.
 				'deny' => [
-					['guest', 'auth', 'logout'],
 					['guest', 'small-user-auth', 'logout'],
 				],
 			],
