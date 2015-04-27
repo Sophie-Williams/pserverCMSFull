@@ -18,6 +18,8 @@ return [
 		'SmallUser',
 		'PServerCMS',
 		'PServerAdmin',
+        'PServerRanking',
+        //'PServerPanel',
 		'PServerCLI'
     ],
 
