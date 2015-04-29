@@ -137,7 +137,7 @@ return [
                 ['controller' => 'PServerRanking\Controller\Guild', 'roles' => []],
                 ['controller' => 'PServerCMS\Controller\Account', 'roles' => ['user','admin']],
                 ['controller' => 'PServerCMS\Controller\Donate', 'roles' => ['user','admin']],
-                ['controller' => 'PServerCMS\Controller\CharacterPanel', 'roles' => ['user','admin']],
+                ['controller' => 'PServerPanel\Controller\Character', 'roles' => ['user','admin']],
 				['controller' => 'ZfcTicketSystem\Controller\TicketSystem', 'roles' => ['user','admin']],
 				['controller' => 'ZfcTicketSystem\Controller\Admin', 'roles' => ['admin']],
 				['controller' => 'SmallUser\Controller\Auth', 'roles' => ['guest', 'user', 'admin']],

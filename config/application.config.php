@@ -19,7 +19,7 @@ return [
 		'PServerCMS',
 		'PServerAdmin',
         'PServerRanking',
-        //'PServerPanel',
+        'PServerPanel',
 		'PServerCLI'
     ],
 
