@@ -109,8 +109,8 @@ ul.nav li.dropdown:hover > a {
 }
 
 .navbar-brand {
-	width: 100px;
-	background: url('../images/zf2-logo-mark.png') 0 3px no-repeat;
+	width: 164px;
+	background: url('../images/logo-default.png') 0 3px no-repeat;
 }
 
 .navbar-default {
