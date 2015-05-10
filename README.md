@@ -56,6 +56,7 @@ the 86x Version]
  ```
  
  If you work with a MsSQL DB you have to copy the `php_pdo_sqlsrv_56_ts.dll` from the download above, to the `ext` directory from your PHP.
+ You also have to install https://www.microsoft.com/de-de/download/details.aspx?id=36434 for MsSQL.
  
 ### PHP-Path in Environment Variables
  
@@ -96,7 +97,7 @@ the 86x Version]
   
   That can take some minutes.
   
-## Configuration for Apache
+## Step 3 Configuration for Apache
 
  Add the following things in your `httpd.conf` file.
 
@@ -138,3 +139,15 @@ the 86x Version]
 	</Directory>
 </VirtualHost>
  ```
+
+## Step 4 PServerCMS basic configuration
+
+ Go to the `config/autoload` directory and create `sro.local.php` with the content of `sro.example.php`. Now you have to eidt the 
+ configuration with the sql connect´s and other parts like mail and and and, you can find some other parts in [PServerCMS-Config](https://github.com/kokspflanze/PServerCMS/blob/master/config/module.config.php)
+ 
+ For other games you can also use the `sro.example.php`, but you have to change `gamebackend_dataservice`.
+ 
+## Step 5 Start with the PServerCMS todo
+
+ Follow the link to the ToDo-List and start with `Generate the Database`.
+ [ToDo-List](https://github.com/kokspflanze/PServerCMS/blob/master/README.md#generate-the-database)
