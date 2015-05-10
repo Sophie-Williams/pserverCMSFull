@@ -112,7 +112,7 @@ the 86x Version]
  
  Also you have change
  
- ``ìni
+ ```ìni
 <IfModule dir_module>
 	DirectoryIndex index.html
 </IfModule>
@@ -120,7 +120,7 @@ the 86x Version]
  
  to
  
- ``ìni
+ ```ìni
 <IfModule dir_module>
 	DirectoryIndex index.html index.php
 </IfModule>
