@@ -8,7 +8,7 @@ requires PHP 5.4 or later; we recommend using the latest PHP version whenever po
 
 ## Step 0 Setup a WebServer + PHP + different extensions
 
- requires `Windows Vista` (x64) and above
+ requires `Windows Vista` and above
  the tutorial for linux will soon added
 
 ### DownloadList
@@ -24,7 +24,7 @@ the 86x Version]
  Use the CommandlineTool and go to the apache/bin directory and type `httpd -k install` as administrator. than you can start the 
  ApacheMonitor to check if the Apache24 is listed and can be start.
  
- Now you have to add the following lines in your Apache `https.conf` (you can find it in the `conf` directory).
+ Now you have to add the following lines in your Apache `httpd.conf` (you can find it in the `conf` directory).
  
  ```ini
  LoadModule php5_module "c:/PHP/php5apache2_4.dll"
@@ -96,5 +96,45 @@ the 86x Version]
   
   That can take some minutes.
   
+## Configuration for Apache
 
+ Add the following things in your `httpd.conf` file.
 
+ ```ini
+ LoadModule rewrite_module modules/mod_rewrite.so
+ LoadModule vhost_alias_module modules/mod_vhost_alias.so
+ 
+ # Virtual hosts
+ Include conf/extra/httpd-vhosts.conf
+ ```
+ 
+ Change `DocumentRoot "c:/Apache24/htdocs"` to `DocumentRoot "c:/Apache24/htdocs/default"` and create the `default` directory in `htdocs`.
+ 
+ Also you have change
+ 
+ ``ìni
+<IfModule dir_module>
+	DirectoryIndex index.html
+</IfModule>
+ ```
+ 
+ to
+ 
+ ``ìni
+<IfModule dir_module>
+	DirectoryIndex index.html index.php
+</IfModule>
+ ```
+ 
+ Remove everything in `httpd-vhosts.conf` and add the following, in the `conf/extra` directory.
+  
+ ```ini
+<VirtualHost *:80>
+	DocumentRoot "${SRVROOT}/htdocs/pserverCMSFull/public"
+	
+	<Directory "${SRVROOT}/htdocs/pserverCMSFull/public">
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+	</Directory>
+</VirtualHost>
+ ```
