@@ -58,6 +58,11 @@ the 86x Version]
  If you work with a MsSQL DB you have to copy the `php_pdo_sqlsrv_56_ts.dll` from the download above, to the `ext` directory from your PHP.
  You also have to install https://www.microsoft.com/de-de/download/details.aspx?id=36434 for MsSQL.
  
+### DateTime settings
+ 
+ You have to set a valid DateTimeZone, search in your `php.ini` the config entry `date.timezone` and 
+ set it to your favorite timezone [Timezone-List](http://php.net/manual/en/timezones.php). Please check that before the config is no `;`.
+ 
 ### PHP-Path in Environment Variables
  
  In Control Panel -> Search -> Advanced System Settings and use the button Environment Variables. 
