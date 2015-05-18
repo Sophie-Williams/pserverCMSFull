@@ -15,7 +15,7 @@ return [
             'display_not_found_reason' => true,
             'display_exceptions'       => true,
         ],
-    */
+    //*/
     'doctrine' => [
         'connection' => [
             'orm_default' => [
