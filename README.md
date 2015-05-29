@@ -147,10 +147,11 @@ the 86x Version]
 
 ## Step 4 PServerCMS basic configuration
 
- Go to the `config/autoload` directory and create `sro.local.php` with the content of `sro.example.php`. Now you have to edit the 
+ Go to the `config/autoload` directory and create `[GAME].local.php` with the content of `[GAME].example.php`. Now you have to edit the 
  configuration with the sql connect´s and other parts like mail and and and, you can find some other parts in [PServerCMS-Config](https://github.com/kokspflanze/PServerCMS/blob/master/config/module.config.php)
  
- For other games you can also use the `sro.example.php`, but you have to change `gamebackend_dataservice`, if you only want to test you can use the Mocking-Class.
+ For other games you can also use the `*.example.php`, but you have to change `gamebackend_dataservice`, if you only want to test you can
+  use the Mocking-Class.
  
 ## Step 5 Start with the PServerCMS todo
 
