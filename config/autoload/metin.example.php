@@ -57,6 +57,15 @@ return [
                 ],
             ],
         ],
+        'password' => [
+            /**
+             * some games does not allowed so long password
+             */
+            'length' => [
+                'min' => 6,
+                'max' => 16
+            ],
+        ],
         'timer' => [
             [
                 'name' => 'CTF',
