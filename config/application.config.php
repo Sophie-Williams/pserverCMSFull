@@ -20,7 +20,8 @@ return [
 		'PServerAdmin',
         'PServerRanking',
         'PServerPanel',
-		'PServerCLI'
+		'PServerCLI',
+        'Customize'
     ],
 
     // These are various options for the listeners attached to the ModuleManager
