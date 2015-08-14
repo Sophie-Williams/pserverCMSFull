@@ -64,7 +64,8 @@ return [
                 'PServerAdmin/user' => [],
                 'PServerAdmin/user_role' => [],
                 'PServerAdmin/user_block' => [],
-                'PServerAdmin/user_coin' => [],
+				'PServerAdmin/user_coin' => [],
+				'PServerAdmin/ticket_system_category' => [],
 			],
 		],
 
@@ -103,7 +104,8 @@ return [
                     [['admin'], 'PServerAdmin/user'],
                     [['admin'], 'PServerAdmin/user_role'],
                     [['admin'], 'PServerAdmin/user_block'],
-                    [['admin'], 'PServerAdmin/user_coin'],
+					[['admin'], 'PServerAdmin/user_coin'],
+					[['admin'], 'PServerAdmin/ticket_system_category'],
 				],
 
 				// Don't mix allow/deny rules if you are using role inheritance.
@@ -168,7 +170,8 @@ return [
                 ['controller' => 'PServerAdmin\Controller\UserPanel', 'roles' => ['admin']],
                 ['controller' => 'PServerAdmin\Controller\UserRole', 'roles' => ['admin']],
                 ['controller' => 'PServerAdmin\Controller\UserBlock', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\UserCoin', 'roles' => ['admin']],
+				['controller' => 'PServerAdmin\Controller\UserCoin', 'roles' => ['admin']],
+				['controller' => 'PServerAdmin\Controller\TicketSystemCategory', 'roles' => ['admin']],
 				['controller' => 'PaymentAPI\Controller\PaymentWall', 'roles' => []],
 				['controller' => 'PaymentAPI\Controller\SuperReward', 'roles' => []],
 				['controller' => 'PServerCLI\Controller\PlayerHistory', 'roles' => []],
