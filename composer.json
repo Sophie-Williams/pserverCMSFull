@@ -23,7 +23,6 @@
     "kokspflanze/zfc-bbcode": "~1.0",
     "zf-commons/zfc-twig": "dev-master",
     "mabuzagu/pdo-dblib-module": "dev-master",
-    "samclarke/sbb-code-parser": "dev-master",
     "thadafinser/zfc-datagrid": "dev-master",
     "san/san-captcha": "dev-master"
   }
