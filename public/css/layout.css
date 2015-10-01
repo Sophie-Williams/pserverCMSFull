@@ -1,5 +1,5 @@
 * {
-	font-family: "Segoe UI Light","Segoe WPC","Segoe UI", Helvetica, Arial, "Arial Unicode MS", Sans-Serif;
+	font-family: "Segoe UI Light","Segoe WPC","Segoe UI", "Helvetica", "Arial", "Arial Unicode MS", "Sans-Serif";
 	font-weight: lighter;
 }
 
@@ -149,5 +149,53 @@ ul.nav li.dropdown:hover > a {
 	font-weight: bold;
 }
 
-.sceditor-group *,.sceditor-group *:before,.sceditor-group *:after {-moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box;}
-.sceditor-container textarea { height: 150px; }
+.sceditor-group *,.sceditor-group *:before,.sceditor-group *:after {
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
+.sceditor-container textarea {
+	height: 150px;
+}
+
+.sro-item-detail .item {
+	width: 32px;
+	height: 32px;
+	float: left;
+	margin: 3px;
+	padding: 0 !important;
+	color: #fff;
+	background: gray;
+}
+
+.sro-item-detail .item .amount {
+	background: rgba(50, 50, 50, 0.5);
+	padding: 1px 2px;
+	float: left;
+}
+
+.sro-item-detail .info {
+	color: #fff;
+	z-index: 80;
+	position: absolute;
+	left: 34px;
+	top: 3px;
+	width: 180px;
+	background: rgba(88, 98, 170, 0.85);
+	border: 2px solid #303d4d;
+	padding: 5px;
+	display: none;
+	line-height: 18px;
+	font-size: 10px;
+}
+
+.ui-tooltip {
+	background: black !important;
+}
+
+.ui-tooltip-content {
+	font-size: 10px;
+	line-height: 15px;
+	background: black;
+	color: #fff;
+}

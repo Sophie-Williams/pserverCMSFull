@@ -3,8 +3,6 @@
 namespace Customize;
 
 
-use Zend\ServiceManager\AbstractPluginManager;
-
 class Module
 {
     /**

@@ -1,11 +1,14 @@
 var xhr;
+var timerCountdown = {};
 
-function startClockTimer(sElement){
-	clockTimer(sElement);
-	window.setInterval( 'clockTimer("'+sElement+'")', 999 );
+function startClockTimer(element)
+{
+	clockTimer(element);
+	window.setInterval( 'clockTimer("'+element+'")', 999 );
 }
 
-function clockTimer(sElement){
+function clockTimer(element)
+{
 	if (!document.all && !document.getElementById) {
 		return;
 	}
@@ -23,11 +26,12 @@ function clockTimer(sElement){
 	if (Sekunden <= 9) {
 		Sekunden = "0" + Sekunden;
 	}
-	jQuery(sElement).text(Stunden.toString()+':'+Minuten.toString()+':'+Sekunden.toString());
+	jQuery(element).text(Stunden.toString()+':'+Minuten.toString()+':'+Sekunden.toString());
 }
 
 
-function tTimer(iEndTimeStamp, iTimeStamp, sElement) {
+function tTimer(iEndTimeStamp, iTimeStamp, sElement)
+{
 	iTimeStamp = iTimeStamp - Math.round(+new Date() / 1000) - iEndTimeStamp;
 	oElement = jQuery('#'+sElement);
 	if (iTimeStamp < 0) {
@@ -54,7 +58,8 @@ function tTimer(iEndTimeStamp, iTimeStamp, sElement) {
 	return true;
 }
 
-function checkLength(sString) {
+function checkLength(sString)
+{
 	sString = sString.toString();
 	if (sString.length == 1) {
 		sString = '0' + sString;
@@ -62,10 +67,8 @@ function checkLength(sString) {
 	return sString;
 }
 
-
-var timerCountdown = {};
-
-function loadCheck(){
+function loadCheck()
+{
 	jQuery.each(timerCountdown, function(sKey, iEntTime){
 		if(!tTimer( iTimeStamp, iEntTime, sKey)){
 			clearInterval(timerCountdown[sKey]);
@@ -73,7 +76,8 @@ function loadCheck(){
 	});
 }
 
-function paginatorAjax( element, urlData ){
+function paginatorAjax( element, urlData )
+{
 	ajaxReload();
 	xhr = jQuery.ajax({
 		url : urlData,
@@ -89,10 +93,37 @@ function paginatorAjax( element, urlData ){
 }
 
 
-function ajaxReload(){
+function ajaxReload()
+{
 	if(xhr && xhr.readystate != 4){
 		xhr.abort();
 	}
+}
+
+function itemInfo()
+{
+	jQuery(document).tooltip({
+		items: "[data-itemInfo], [title]",
+		position: {my: "left+5 center", at: "right center"},
+		content: function () {
+			var element = jQuery(this);
+
+			if (jQuery(this).prop("tagName").toUpperCase() == 'IFRAME') {
+				return;
+			}
+
+			if (element.is("[data-itemInfo]")) {
+				if (element.parent().find('.info').html() == '') {
+					return;
+				}
+				return element.parent().find('.info').html();
+			}
+
+			if (element.is("[title]")) {
+				return element.attr("title");
+			}
+		}
+	});
 }
 
 jQuery(document).ready(function(){
@@ -102,4 +133,5 @@ jQuery(document).ready(function(){
 		loadCheck();
 	});
 	window.setInterval('loadCheck();',999);
+	itemInfo();
 });
