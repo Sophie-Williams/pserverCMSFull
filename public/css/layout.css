@@ -174,7 +174,7 @@ ul.nav li.dropdown:hover > a {
 	margin: 3px;
 	padding: 0 !important;
 	color: #fff;
-	background: gray;
+	background: #1f1f1f;
 }
 
 .sro-item-detail .item .amount {
