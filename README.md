@@ -102,6 +102,11 @@ the 86x Version]
   
   That can take some minutes.
   
+#### API rate limit
+
+ If you have a problem like that please create a GitHub account and follow the link after "Head to" in the message.
+ If you later input the token, it is hidden, so you dont see a input, that is normal. 
+  
 ## Step 3 Configuration for Apache
 
  Add the following things in your `httpd.conf` file.
