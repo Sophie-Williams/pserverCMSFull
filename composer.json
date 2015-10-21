@@ -20,7 +20,6 @@
     "kokspflanze/p-server-panel": "dev-master",
     "zf-commons/zfc-twig": "dev-master",
     "mabuzagu/pdo-dblib-module": "dev-master",
-    "thadafinser/zfc-datagrid": "dev-master",
     "san/san-captcha": "dev-master"
   }
 }
