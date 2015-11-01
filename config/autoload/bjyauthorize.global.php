@@ -68,6 +68,7 @@ return [
 				'PServerAdmin/ticket_system_category' => [],
 				'PServerAdmin/secret_question' => [],
 				'PServerAdminStatistic/user' => [],
+				'PServerAdminStatistic/player' => [],
 			],
 		],
 
@@ -110,6 +111,7 @@ return [
 					[['admin'], 'PServerAdmin/ticket_system_category'],
 					[['admin'], 'PServerAdmin/secret_question'],
 					[['admin'], 'PServerAdminStatistic/user'],
+					[['admin'], 'PServerAdminStatistic/player'],
 				],
 
 				// Don't mix allow/deny rules if you are using role inheritance.
@@ -179,6 +181,7 @@ return [
 				['controller' => 'PServerAdmin\Controller\TicketSystemCategory', 'roles' => ['admin']],
 				['controller' => 'PServerAdmin\Controller\SecretQuestion', 'roles' => ['admin']],
 				['controller' => 'PServerAdminStatistic\Controller\User', 'roles' => ['admin']],
+				['controller' => 'PServerAdminStatistic\Controller\Player', 'roles' => ['admin']],
 				['controller' => 'PaymentAPI\Controller\PaymentWall', 'roles' => []],
 				['controller' => 'PaymentAPI\Controller\SuperReward', 'roles' => []],
 				['controller' => 'PServerCLI\Controller\PlayerHistory', 'roles' => []],
