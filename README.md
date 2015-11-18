@@ -13,7 +13,7 @@ requires PHP 5.5 or later; we recommend using the latest PHP version whenever po
 
 ### DownloadList
 
-- http://windows.php.net/downloads/releases/archives/php-5.6.9-Win32-VC11-x86.zip
+- http://windows.php.net/downloads/releases/archives/php-5.6.14-Win32-VC11-x86.zip
 - http://www.apachehaus.com/cgi-bin/download.plx?dli=ZJjUv1UaZFjTUN2LRVlTtlkVOpkVFd1aidFaK10d
 - For MSVCR110.dll Error, you have to download and install following http://www.microsoft.com/en-us/download/details.aspx?id=30679 [use 
 the 86x Version]
