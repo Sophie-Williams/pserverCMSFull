@@ -184,6 +184,7 @@ return [
 				['controller' => 'PServerAdminStatistic\Controller\Player', 'roles' => ['admin']],
 				['controller' => 'PaymentAPI\Controller\PaymentWall', 'roles' => []],
 				['controller' => 'PaymentAPI\Controller\SuperReward', 'roles' => []],
+				['controller' => 'PaymentAPI\Controller\Xsolla', 'roles' => []],
 				['controller' => 'PServerCLI\Controller\PlayerHistory', 'roles' => []],
                 ['controller' => 'PServerCLI\Controller\CodeCleanUp', 'roles' => []],
                 ['controller' => 'SanCaptcha\Controller\Captcha', 'roles' => []],
