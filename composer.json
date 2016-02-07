@@ -9,10 +9,7 @@
   "homepage": "https://github.com/kokspflanze/pserverCMSFull",
   "require": {
     "zendframework/Zend-developer-tools": "dev-master",
-    "kokspflanze/p-server-cms": "dev-master",
-    "kokspflanze/p-server-admin": "dev-master",
-    "kokspflanze/p-server-ranking": "dev-master",
-    "kokspflanze/p-server-panel": "dev-master",
+    "kokspflanze/p-server-cms": "~0.1",
     "zf-commons/zfc-twig": "dev-master",
     "mabuzagu/pdo-dblib-module": "dev-master",
     "san/san-captcha": "dev-master"
