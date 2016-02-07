@@ -16,7 +16,7 @@ return [
         'SanCaptcha',
         'ZfcDatagrid',
 		'SmallUser',
-		'PServerCMS',
+		'PServerCore',
         'PServerAdmin',
         'PServerAdminStatistic',
         'PServerRanking',

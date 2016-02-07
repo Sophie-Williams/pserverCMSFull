@@ -6,13 +6,11 @@
     "zf2",
     "twig"
   ],
-  "homepage": "http://framework.zend.com/",
+  "homepage": "https://github.com/kokspflanze/pserverCMSFull",
   "require": {
     "zendframework/Zend-developer-tools": "dev-master",
     "kokspflanze/p-server-cms": "dev-master",
     "kokspflanze/p-server-admin": "dev-master",
-    "kokspflanze/zfc-ticket-system": "dev-master",
-    "kokspflanze/game-backend": "dev-master",
     "kokspflanze/p-server-ranking": "dev-master",
     "kokspflanze/p-server-panel": "dev-master",
     "zf-commons/zfc-twig": "dev-master",

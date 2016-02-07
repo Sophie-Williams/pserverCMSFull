@@ -32,7 +32,7 @@ return [
             // the 'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' service
             'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => [
                 // class name of the entity representing the role
-                'role_entity_class' => 'PServerCMS\Entity\UserRole',
+                'role_entity_class' => 'PServerCore\Entity\UserRole',
                 // service name of the object manager
                 'object_manager' => 'doctrine.entitymanager.orm_default',
             ],
@@ -42,11 +42,11 @@ return [
         // in the ACL. like roles, they can be hierarchical
         'resource_providers' => [
             'BjyAuthorize\Provider\Resource\Config' => [
-                'PServerCMS' => [],
-                'PServerCMS/site-download' => [],
-                'PServerCMS/site-detail' => [],
-                'PServerCMS/user' => [],
-                'PServerCMS/panel_donate' => [],
+                'PServerCore' => [],
+                'PServerCore/site-download' => [],
+                'PServerCore/site-detail' => [],
+                'PServerCore/user' => [],
+                'PServerCore/panel_donate' => [],
                 'small-user-auth' => [],
                 'zfc-ticketsystem' => [],
                 'zfc-ticketsystem-admin' => [],
@@ -87,11 +87,11 @@ return [
                     // the "wear" privilege on the resource "pants"
                     ['guest', 'small-user-auth', 'index'],
                     [[], 'small-user-auth', 'logout'],
-                    [[], 'PServerCMS'],
-                    [[], 'PServerCMS/site-download'],
-                    [[], 'PServerCMS/site-detail'],
-                    [['user', 'admin'], 'PServerCMS/user'],
-                    [['user', 'admin'], 'PServerCMS/panel_donate'],
+                    [[], 'PServerCore'],
+                    [[], 'PServerCore/site-download'],
+                    [[], 'PServerCore/site-detail'],
+                    [['user', 'admin'], 'PServerCore/user'],
+                    [['user', 'admin'], 'PServerCore/panel_donate'],
                     [['user', 'admin'], 'zfc-ticketsystem'],
                     [['admin'], 'zfc-ticketsystem-admin'],
                     [['user', 'admin'], 'PServerPanel/character'],
@@ -152,16 +152,16 @@ return [
                 ['controller' => 'zfcuser', 'roles' => []],
                  */
                 // Below is the default index action used by the ZendSkeletonApplication
-                ['controller' => 'PServerCMS\Controller\Index', 'roles' => []],
-                ['controller' => 'PServerCMS\Controller\Auth', 'roles' => ['guest', 'user', 'admin']],
-                ['controller' => 'PServerCMS\Controller\Auth', 'roles' => [], 'action' => ['logout']],
-                ['controller' => 'PServerCMS\Controller\Site', 'roles' => []],
-                ['controller' => 'PServerCMS\Controller\Info', 'roles' => []],
+                ['controller' => 'PServerCore\Controller\Index', 'roles' => []],
+                ['controller' => 'PServerCore\Controller\Auth', 'roles' => ['guest', 'user', 'admin']],
+                ['controller' => 'PServerCore\Controller\Auth', 'roles' => [], 'action' => ['logout']],
+                ['controller' => 'PServerCore\Controller\Site', 'roles' => []],
+                ['controller' => 'PServerCore\Controller\Info', 'roles' => []],
                 ['controller' => 'PServerRanking\Controller\Ranking', 'roles' => []],
                 ['controller' => 'PServerRanking\Controller\Character', 'roles' => []],
                 ['controller' => 'PServerRanking\Controller\Guild', 'roles' => []],
-                ['controller' => 'PServerCMS\Controller\Account', 'roles' => ['user', 'admin']],
-                ['controller' => 'PServerCMS\Controller\Donate', 'roles' => ['user', 'admin']],
+                ['controller' => 'PServerCore\Controller\Account', 'roles' => ['user', 'admin']],
+                ['controller' => 'PServerCore\Controller\Donate', 'roles' => ['user', 'admin']],
                 ['controller' => 'PServerPanel\Controller\Character', 'roles' => ['user', 'admin']],
                 ['controller' => 'PServerPanel\Controller\Vote', 'roles' => ['user', 'admin']],
                 ['controller' => 'ZfcTicketSystem\Controller\TicketSystem', 'roles' => ['user', 'admin']],
