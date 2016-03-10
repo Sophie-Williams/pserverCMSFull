@@ -120,8 +120,8 @@ return [
     ],
 
     'service_manager' => [
-        'invokables' => [
-            'gamebackend_dataservice' => 'GameBackend\DataService\SRO',
+        'aliases' => [
+            'gamebackend_dataservice' => GameBackend\DataService\SRO::class,
         ],
     ],
 ];

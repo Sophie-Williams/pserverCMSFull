@@ -103,8 +103,8 @@ return [
     ],
 
     'service_manager' => [
-        'invokables' => [
-            'gamebackend_dataservice' => 'GameBackend\DataService\Metin',
+        'aliases' => [
+            'gamebackend_dataservice' => GameBackend\DataService\Metin::class,
         ],
     ],
 ];
