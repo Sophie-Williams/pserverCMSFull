@@ -4,7 +4,6 @@ return [
     'modules' => [
 		'ZendDeveloperTools',
 		'ZfcTwig',
-		'ZfcBase',
 		'DoctrineModule',
 		'DoctrineORMModule',
 		'PDODblibModule',
