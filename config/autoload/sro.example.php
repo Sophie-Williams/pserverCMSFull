@@ -19,9 +19,9 @@ return [
     'doctrine' => [
         'connection' => [
             'orm_default' => [
-                // mssql db @ windows  => 'GameBackend\DBAL\Driver\PDOSqlsrv\Driver'
-                // mssql db @ linux  => 'GameBackend\DBAL\Driver\PDODblib\Driver',
-                'driverClass' =>'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                // mssql db @ windows  => GameBackend\DBAL\Driver\PDOSqlsrv\Driver::class
+                // mssql db @ linux  => GameBackend\DBAL\Driver\PDODblib\Driver::class,
+                'driverClass' => Doctrine\DBAL\Driver\PDOMySql\Driver::class,
                 'params' => [
                     'host'     => '127.0.0.1',
                     'port'     => '3306',
@@ -31,9 +31,9 @@ return [
                 ],
             ],
             'orm_sro_account' => [
-                // mssql db @ windows  => 'GameBackend\DBAL\Driver\PDOSqlsrv\Driver'
-                // mssql db @ linux  => 'GameBackend\DBAL\Driver\PDODblib\Driver',
-                //'driverClass' =>'GameBackend\DBAL\Driver\PDODblib\Driver',
+                // mssql db @ windows  => GameBackend\DBAL\Driver\PDOSqlsrv\Driver::class
+                // mssql db @ linux  => GameBackend\DBAL\Driver\PDODblib\Driver::class,
+                //'driverClass' => GameBackend\DBAL\Driver\PDODblib\Driver::class,
                 'params' => [
                     'host'     => 'local',
                     'port'     => '1443',
@@ -43,9 +43,9 @@ return [
                 ],
             ],
             'orm_sro_shard' => [
-                // mssql db @ windows  => 'GameBackend\DBAL\Driver\PDOSqlsrv\Driver'
-                // mssql db @ linux  => 'GameBackend\DBAL\Driver\PDODblib\Driver',
-                //'driverClass' =>'GameBackend\DBAL\Driver\PDODblib\Driver',
+                // mssql db @ windows  => GameBackend\DBAL\Driver\PDOSqlsrv\Driver::class
+                // mssql db @ linux  => GameBackend\DBAL\Driver\PDODblib\Driver::class,
+                //'driverClass' => GameBackend\DBAL\Driver\PDODblib\Driver::class,
                 'params' => [
                     'host'     => 'local',
                     'port'     => '1443',
@@ -55,9 +55,9 @@ return [
                 ],
             ],
             'orm_sro_log' => [
-                // mssql db @ windows  => 'GameBackend\DBAL\Driver\PDOSqlsrv\Driver'
-                // mssql db @ linux  => 'GameBackend\DBAL\Driver\PDODblib\Driver',
-                //'driverClass' =>'GameBackend\DBAL\Driver\PDODblib\Driver',
+                // mssql db @ windows  => GameBackend\DBAL\Driver\PDOSqlsrv\Driver::class
+                // mssql db @ linux  => GameBackend\DBAL\Driver\PDODblib\Driver::class,
+                //'driverClass' => GameBackend\DBAL\Driver\PDODblib\Driver::class,
                 'params' => [
                     'host'     => 'local',
                     'port'     => '1443',
