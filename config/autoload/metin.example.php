@@ -21,7 +21,7 @@ return [
             'orm_default' => [
                 // mssql db @ windows  => 'GameBackend\DBAL\Driver\PDOSqlsrv\Driver'
                 // mssql db @ linux  => 'GameBackend\DBAL\Driver\PDODblib\Driver',
-                'driverClass' =>'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'driverClass' => \Doctrine\DBAL\Driver\PDOMySql\Driver::class,
                 'params' => [
                     'host'     => '127.0.0.1',
                     'port'     => '3306',
@@ -31,7 +31,7 @@ return [
                 ],
             ],
             'orm_metin_account' => [
-                'driverClass' =>'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                'driverClass' => \Doctrine\DBAL\Driver\PDOMySql\Driver::class,
                 'params' => [
                     'host'     => '127.0.0.1',
                     'port'     => '3306',
@@ -104,7 +104,7 @@ return [
 
     'service_manager' => [
         'aliases' => [
-            'gamebackend_dataservice' => GameBackend\DataService\Metin::class,
+            'gamebackend_dataservice' => \GameBackend\DataService\Metin::class,
         ],
     ],
 ];

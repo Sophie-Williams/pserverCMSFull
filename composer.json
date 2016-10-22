@@ -3,14 +3,17 @@
   "description": "CMS for pServer",
   "keywords": [
     "framework",
-    "zf2",
+    "zf",
     "twig"
   ],
   "homepage": "https://github.com/kokspflanze/pserverCMSFull",
+  "autoload": {
+    "psr-4": {
+      "Customize\\": "module/Customize/src/Customize"
+    }
+  },
   "require": {
-    "zendframework/Zend-developer-tools": "dev-master",
-    "kokspflanze/p-server-cms": "~0.1",
-    "zf-commons/zfc-twig": "dev-master",
-    "mabuzagu/pdo-dblib-module": "dev-master"
+    "zendframework/Zend-developer-tools": "^1.1",
+    "kokspflanze/p-server-cms": "^1.0"
   }
 }

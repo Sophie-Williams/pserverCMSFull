@@ -2,6 +2,16 @@
 return [
     // This should be an array of module namespaces used in the p-server-cms.
     'modules' => [
+        'Zend\I18n',
+        'Zend\Mail',
+        'Zend\Router',
+        'Zend\Validator',
+        'Zend\Form',
+        'Zend\Session',
+        'Zend\Mvc\Console',
+        'Zend\Mvc\Plugin\FlashMessenger',
+
+
 		'ZendDeveloperTools',
 		'ZfcTwig',
 		'DoctrineModule',

@@ -1,4 +1,14 @@
 <?php
+
+use BjyAuthorize\Provider;
+use PaymentAPI\Controller as APIController;
+use PServerAdmin\Controller as AdminController;
+use PServerAdminStatistic\Controller as AdminStatisticController;
+use PServerCLI\Controller as CLIController;
+use PServerCore\Controller as CoreController;
+use PServerPanel\Controller as PanelController;
+use PServerRanking\Controller as RankingController;
+
 return [
     'bjyauthorize' => [
 
@@ -11,7 +21,7 @@ return [
          *
          * for ZfcUser, this will be your default identity provider
          */
-        'identity_provider' => 'BjyAuthorize\Provider\Identity\AuthenticationIdentityProvider',
+        'identity_provider' => Provider\Identity\AuthenticationIdentityProvider::class,
 
         /* If you only have a default role and an authenticated role, you can
          * use the 'AuthenticationIdentityProvider' to allow/restrict access
@@ -30,9 +40,9 @@ return [
         'role_providers' => [
             // this will load roles from
             // the 'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' service
-            'BjyAuthorize\Provider\Role\ObjectRepositoryProvider' => [
+            Provider\Role\ObjectRepositoryProvider::class => [
                 // class name of the entity representing the role
-                'role_entity_class' => 'PServerCore\Entity\UserRole',
+                'role_entity_class' => \PServerCore\Entity\UserRole::class,
                 // service name of the object manager
                 'object_manager' => 'doctrine.entitymanager.orm_default',
             ],
@@ -41,7 +51,7 @@ return [
         // resource providers provide a list of resources that will be tracked
         // in the ACL. like roles, they can be hierarchical
         'resource_providers' => [
-            'BjyAuthorize\Provider\Resource\Config' => [
+            Provider\Resource\Config::class => [
                 'PServerCore' => [],
                 'PServerCore/site-download' => [],
                 'PServerCore/site-detail' => [],
@@ -82,7 +92,7 @@ return [
          * *if you use assertions, define them using the service manager!*
          */
         'rule_providers' => [
-            'BjyAuthorize\Provider\Rule\Config' => [
+            Provider\Rule\Config::class => [
                 'allow' => [
                     // allow guests and users (and admins, through inheritance]
                     // the "wear" privilege on the resource "pants"
@@ -91,12 +101,12 @@ return [
                     [[], 'PServerCore'],
                     [[], 'PServerCore/site-download'],
                     [[], 'PServerCore/site-detail'],
-                    [['user', 'admin'], 'PServerCore/user'],
-                    [['user', 'admin'], 'PServerCore/panel_donate'],
-                    [['user', 'admin'], 'zfc-ticketsystem'],
+                    [['user'], 'PServerCore/user'],
+                    [['user'], 'PServerCore/panel_donate'],
+                    [['user'], 'zfc-ticketsystem'],
                     [['admin'], 'zfc-ticketsystem-admin'],
-                    [['user', 'admin'], 'PServerPanel/character'],
-                    [['user', 'admin'], 'PServerPanel/vote'],
+                    [['user'], 'PServerPanel/character'],
+                    [['user'], 'PServerPanel/vote'],
                     [[], 'PServerRanking/ranking'],
                     [['admin'], 'PServerAdmin/home'],
                     [['admin'], 'PServerAdmin/news'],
@@ -136,81 +146,53 @@ return [
              * access to all controllers and actions unless they are specified here.
              * You may omit the 'action' index to allow access to the entire controller
              */
-            'BjyAuthorize\Guard\Controller' => [
-                /*['controller' => 'index', 'roles' => ['guest']],
-                ['controller' => 'site', 'roles' => ['guest']],
-                // You can also specify an array of actions or an array of controllers (or both]
-                // allow "guest" and "admin" to access actions "list" and "manage" on these "index",
-                // "static" and "console" controllers
-                [
-                    'controller' => ['index', 'static', 'console'],
-                    'action' => ['list', 'manage'],
-                    'roles' => ['guest', 'admin']
-                ],
-                [
-                    'controller' => ['search', 'administration'],
-                    'roles' => ['admin']
-                ],
-                ['controller' => 'zfcuser', 'roles' => []],
-                 */
+            BjyAuthorize\Guard\Controller::class => [
                 // Below is the default index action used by the ZendSkeletonApplication
-                ['controller' => 'PServerCore\Controller\Index', 'roles' => []],
-                ['controller' => 'PServerCore\Controller\Auth', 'roles' => ['guest', 'user', 'admin']],
-                ['controller' => 'PServerCore\Controller\Auth', 'roles' => [], 'action' => ['logout']],
-                ['controller' => 'PServerCore\Controller\Site', 'roles' => []],
-                ['controller' => 'PServerCore\Controller\Info', 'roles' => []],
-                ['controller' => 'PServerRanking\Controller\Ranking', 'roles' => []],
-                ['controller' => 'PServerRanking\Controller\Character', 'roles' => []],
-                ['controller' => 'PServerRanking\Controller\Guild', 'roles' => []],
-                ['controller' => \PServerRanking\Controller\SearchController::class, 'roles' => []],
-                ['controller' => 'PServerCore\Controller\Account', 'roles' => ['user', 'admin']],
-                ['controller' => 'PServerCore\Controller\Donate', 'roles' => ['user', 'admin']],
-                ['controller' => 'PServerPanel\Controller\Character', 'roles' => ['user', 'admin']],
-                ['controller' => 'PServerPanel\Controller\Vote', 'roles' => ['user', 'admin']],
-                ['controller' => 'ZfcTicketSystem\Controller\TicketSystem', 'roles' => ['user', 'admin']],
-                ['controller' => 'SmallUser\Controller\Auth', 'roles' => ['guest', 'user', 'admin']],
+                ['controller' => CoreController\IndexController::class, 'roles' => []],
+                ['controller' => CoreController\AuthController::class, 'roles' => ['guest', 'user']],
+                ['controller' => CoreController\AuthController::class, 'roles' => [], 'action' => ['logout']],
+                ['controller' => CoreController\SiteController::class, 'roles' => []],
+                ['controller' => CoreController\InfoController::class, 'roles' => []],
+                ['controller' => RankingController\RankingController::class, 'roles' => []],
+                ['controller' => RankingController\CharacterController::class, 'roles' => []],
+                ['controller' => RankingController\GuildController::class, 'roles' => []],
+                ['controller' => RankingController\SearchController::class, 'roles' => []],
+                ['controller' => CoreController\AccountController::class, 'roles' => ['user']],
+                ['controller' => CoreController\DonateController::class, 'roles' => ['user']],
+                ['controller' => PanelController\CharacterController::class, 'roles' => ['user']],
+                ['controller' => PanelController\VoteController::class, 'roles' => ['user']],
+                ['controller' => 'ZfcTicketSystem\Controller\TicketSystem', 'roles' => ['user']],
+                ['controller' => 'SmallUser\Controller\Auth', 'roles' => ['guest', 'user']],
                 ['controller' => 'SmallUser\Controller\Auth', 'roles' => [], 'action' => ['logout']],
-                ['controller' => 'PServerAdmin\Controller\Index', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\News', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\Settings', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\Download', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\ServerInfo', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\Donate', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\Log', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\Vote', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\UserPanel', 'roles' => ['admin']],
-                ['controller' => \PServerAdmin\Controller\UserEditController::class, 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\UserRole', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\UserBlock', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\UserCoin', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\UserHelper', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\TicketSystemCategory', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\TicketSystem', 'roles' => ['admin']],
-                ['controller' => 'PServerAdmin\Controller\SecretQuestion', 'roles' => ['admin']],
-                ['controller' => 'PServerAdminStatistic\Controller\User', 'roles' => ['admin']],
-                ['controller' => 'PServerAdminStatistic\Controller\Player', 'roles' => ['admin']],
-                ['controller' => \PaymentAPI\Controller\PaymentWallController::class, 'roles' => []],
-                ['controller' => \PaymentAPI\Controller\SuperRewardController::class, 'roles' => []],
-                ['controller' => \PaymentAPI\Controller\XsollaController::class, 'roles' => []],
-                ['controller' => 'PServerCLI\Controller\PlayerHistory', 'roles' => []],
-                ['controller' => 'PServerCLI\Controller\CodeCleanUp', 'roles' => []],
+                ['controller' => AdminController\IndexController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\NewsController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\SettingsController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\DownloadController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\ServerInfoController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\DonateController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\LogController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\VoteController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\UserPanelController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\UserEditController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\UserRoleController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\UserBlockController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\UserCoinController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\UserHelperController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\TicketSystemCategoryController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\TicketSystemController::class, 'roles' => ['admin']],
+                ['controller' => AdminController\SecretQuestionController::class, 'roles' => ['admin']],
+                ['controller' => AdminStatisticController\UserController::class, 'roles' => ['admin']],
+                ['controller' => AdminStatisticController\PlayerController::class, 'roles' => ['admin']],
+                ['controller' => APIController\PaymentWallController::class, 'roles' => []],
+                ['controller' => APIController\SuperRewardController::class, 'roles' => []],
+                ['controller' => APIController\XsollaController::class, 'roles' => []],
+                ['controller' => CLIController\PlayerHistoryController::class, 'roles' => []],
+                ['controller' => CLIController\CodeCleanUpController::class, 'roles' => []],
                 ['controller' => 'SanCaptcha\Controller\Captcha', 'roles' => []],
             ],
-
-            /* If this guard is specified here (i.e. it is enabled], it will block
-             * access to all routes unless they are specified here.
-            'BjyAuthorize\Guard\Route' => [
-                ['route' => 'zfcuser', 'roles' => ['user']],
-                ['route' => 'zfcuser/logout', 'roles' => ['user']],
-                ['route' => 'zfcuser/login', 'roles' => ['guest']],
-                ['route' => 'zfcuser/register', 'roles' => ['guest']],
-                // Below is the default index action used by the ZendSkeletonApplication
-                ['route' => 'home', 'roles' => ['guest', 'user']],
-            ],
-             */
         ],
         // strategy service name for the strategy listener to be used when permission-related errors are detected
-        'unauthorized_strategy' => 'BjyAuthorize\View\UnauthorizedStrategy',
+        'unauthorized_strategy' => BjyAuthorize\View\UnauthorizedStrategy::class,
 
         // Template name for the unauthorized strategy
         'template' => 'error/403',

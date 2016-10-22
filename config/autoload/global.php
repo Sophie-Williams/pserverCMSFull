@@ -12,20 +12,6 @@
  */
 
 return [
-	'zfctwig' => [
-		'environment_loader' => 'ZfcTwigLoaderChain',
-		'environment_options' => [],
-		'loader_chain' => [
-			'ZfcTwigLoaderTemplateMap',
-			'ZfcTwigLoaderTemplatePathStack'
-		],
-		'extensions' => [
-			'zfctwig' => 'ZfcTwigExtension'
-		],
-		'suffix' => 'twig',
-		'enable_fallback_functions' => true,
-		'disable_zf_model' => true,
-	],
 	'zenddevelopertools' => [
 		/**
 		 * General Profiler settings
