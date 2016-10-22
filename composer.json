@@ -13,14 +13,7 @@
     }
   },
   "require": {
-    "zendframework/Zend-developer-tools": "~1.1",
-    "kokspflanze/p-server-core": "dev-master as 0.999",
-    "kokspflanze/p-server-cli": "dev-master as 0.999",
-    "kokspflanze/p-server-admin": "dev-master as 0.8",
-    "kokspflanze/p-server-admin-statistic": "dev-master as 0.8",
-    "kokspflanze/p-server-panel": "dev-master as 0.8",
-    "kokspflanze/p-server-ranking": "dev-master as 0.8",
-    "kokspflanze/pdo-dblib-module": "dev-master as 1.8",
-    "thadafinser/zfc-datagrid": "dev-develop as 1.4"
+    "zendframework/Zend-developer-tools": "^1.1",
+    "kokspflanze/p-server-cms": "^1.0"
   }
 }

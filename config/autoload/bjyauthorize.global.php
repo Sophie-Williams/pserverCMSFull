@@ -4,8 +4,8 @@ use BjyAuthorize\Provider;
 use PaymentAPI\Controller as APIController;
 use PServerAdmin\Controller as AdminController;
 use PServerAdminStatistic\Controller as AdminStatisticController;
-use PServerCore\Controller as CoreController;
 use PServerCLI\Controller as CLIController;
+use PServerCore\Controller as CoreController;
 use PServerPanel\Controller as PanelController;
 use PServerRanking\Controller as RankingController;
 

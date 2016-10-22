@@ -12,7 +12,7 @@ if (php_sapi_name() === 'cli-server' && is_file(__DIR__ . parse_url($_SERVER['RE
 }
 
 // Setup autoloading
-require 'vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 // Run the p-server-cms!
-Zend\Mvc\Application::init(require 'config/application.config.php')->run();
+Zend\Mvc\Application::init(require __DIR__ . '/../config/application.config.php')->run();

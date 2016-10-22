@@ -21,7 +21,7 @@ return [
             'orm_default' => [
                 // mssql db @ windows  => GameBackend\DBAL\Driver\PDOSqlsrv\Driver::class
                 // mssql db @ linux  => GameBackend\DBAL\Driver\PDODblib\Driver::class,
-                'driverClass' => Doctrine\DBAL\Driver\PDOMySql\Driver::class,
+                'driverClass' => \Doctrine\DBAL\Driver\PDOMySql\Driver::class,
                 'params' => [
                     'host'     => '127.0.0.1',
                     'port'     => '3306',
@@ -121,7 +121,7 @@ return [
 
     'service_manager' => [
         'aliases' => [
-            'gamebackend_dataservice' => GameBackend\DataService\SRO::class,
+            'gamebackend_dataservice' => \GameBackend\DataService\SRO::class,
         ],
     ],
 ];

@@ -6,7 +6,7 @@ return [
 
         ],
         'template_path_stack' => [
-            __DIR__ . '/../view',
+            'Customize' => __DIR__ . '/../view',
         ],
     ],
 ];
