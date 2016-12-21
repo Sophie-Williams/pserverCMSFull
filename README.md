@@ -1,23 +1,23 @@
-# How to install the PServerCMS
+# How to install the PServerCMS on Windows
 
-The following tut is in progress
+This guide requires `Visual Studio 2015`, if you use a older version please check [PHP5.6](https://github.com/kokspflanze/pserverCMSFull/blob/42adaf1ed09d893345aec783b5ceb1fb4f4a9b7f/README.md)
 
 ## SYSTEM REQUIREMENTS
 
-requires PHP 5.6 or later; we recommend using the latest PHP version whenever possible.
+requires PHP 7.0 or later; we recommend using the latest PHP version whenever possible.
 
 ## Step 0 Setup a WebServer + PHP + different extensions
 
- requires `Windows Vista` and above
+ requires `Visual Studio 2015` and above
  the tutorial for linux will soon added
 
 ### DownloadList
 
-- http://windows.php.net/downloads/releases/archives/php-5.6.23-Win32-VC11-x86.zip
-- http://www.apachehaus.com/cgi-bin/download.plx?dli=ZJjUv1UaZFjTUN2LRVlTtlkVOpkVFd1aidFaK10d
-- For MSVCR110.dll Error, you have to download and install following http://www.microsoft.com/en-us/download/details.aspx?id=30679 [use 
-the 86x Version]
-- [ONLY FOR MsSQL] https://www.microsoft.com/en-us/download/details.aspx?id=20098 [Download Version 3.2]
+- http://windows.php.net/downloads/releases/php-7.1.0-Win32-VC14-x64.zip OR http://windows.php.net/downloads/releases/archives/php-7.1.0-Win32-VC14-x64.zip
+- http://www.apachehaus.com/cgi-bin/download.plx?dli=QTuBXWVBTQz0kentmWYZlSKVlUGR1Uwh2YUZVM
+- https://www.microsoft.com/en-us/download/details.aspx?id=48145
+- [ONLY FOR MsSQL] https://www.microsoft.com/en-us/download/details.aspx?id=36434
+- [ONLY FOR MsSQL] https://github.com/Microsoft/msphpsql/releases/download/4.1.4-Windows/7.1.zip
 
 ### Setup basic Apache with default PHP
 
@@ -27,7 +27,7 @@ the 86x Version]
  Now you have to add the following lines in your Apache `httpd.conf` (you can find it in the `conf` directory).
  
  ```ini
- LoadModule php5_module "c:/PHP/php5apache2_4.dll"
+ LoadModule php7_module "c:/PHP/php7apache2_4.dll"
  <FilesMatch \.php$>
        SetHandler application/x-httpd-php
   </FilesMatch>
@@ -52,11 +52,10 @@ the 86x Version]
  extension=php_openssl.dll
  extension=php_pdo_mysql.dll ; if you work with a mysql DB
  extension=php_sockets.dll
- extension=php_pdo_sqlsrv_56_ts.dll ; if you work with a mssql DB 
+ extension=php_pdo_sqlsrv_7_ts.dll ; if you work with a mssql DB 
  ```
  
- If you work with a MsSQL DB you have to copy the `php_pdo_sqlsrv_56_ts.dll` from the download above, to the `ext` directory from your PHP.
- You also have to install https://www.microsoft.com/de-de/download/details.aspx?id=36434 for MsSQL.
+ If you work with a MsSQL DB you have to copy the `php_pdo_sqlsrv_7_ts.dll` from the download above, to the `ext` directory from your PHP.
  
 ### DateTime settings
  
