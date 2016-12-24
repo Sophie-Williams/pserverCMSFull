@@ -19,7 +19,7 @@ requires PHP 7.0 or later; we recommend using the latest PHP version whenever po
 - [ONLY FOR MsSQL] https://www.microsoft.com/en-us/download/details.aspx?id=36434
 - [ONLY FOR MsSQL] https://github.com/Microsoft/msphpsql/releases/download/4.1.4-Windows/7.1.zip
 
-![DownloadList](https://raw.github.com/kokspflanze/pserverCMSFull/master/docs/images/download.png)
+![DownloadList](https://raw.github.com/kokspflanze/pserverCMSFull/master/doc/images/download.png)
 
 ### Install dependencies 
 
@@ -30,7 +30,7 @@ Please install `vc_redist.x64.exe` or `vc_redist.x86.exe` and  `msodbcsql.msi` (
  Use the CommandlineTool and go to the apache/bin directory and type `httpd -k install` as administrator. than you can start the 
  ApacheMonitor to check if the Apache24 is listed and can be start.
  
- ![ApacheInstall](https://raw.github.com/kokspflanze/pserverCMSFull/master/docs/images/apache-install.png)
+ ![ApacheInstall](https://raw.github.com/kokspflanze/pserverCMSFull/master/doc/images/apache-install.png)
  
  Now you have to add the following lines in your Apache `httpd.conf` (you can find it in the `conf` directory).
  
@@ -46,7 +46,7 @@ Please install `vc_redist.x64.exe` or `vc_redist.x86.exe` and  `msodbcsql.msi` (
  
  You you have to restart your Apache, to test if the PHP works.
  
- ![ApacheSetup](https://raw.github.com/kokspflanze/pserverCMSFull/master/docs/images/apache-setup.gif)
+ ![ApacheSetup](https://raw.github.com/kokspflanze/pserverCMSFull/master/doc/images/apache-setup.gif)
  
 ### Enable PHP extensions
  
@@ -67,14 +67,14 @@ Please install `vc_redist.x64.exe` or `vc_redist.x86.exe` and  `msodbcsql.msi` (
  
  If you work with a MsSQL DB you have to copy the `php_pdo_sqlsrv_71_ts.dll` from the download above, to the `ext` directory from your PHP.
  
- ![PHPExtensions](https://raw.github.com/kokspflanze/pserverCMSFull/master/docs/images/php-extensions.gif)
+ ![PHPExtensions](https://raw.github.com/kokspflanze/pserverCMSFull/master/doc/images/php-extensions.gif)
  
 ### DateTime settings
  
  You have to set a valid DateTimeZone, search in your `php.ini` the config entry `date.timezone` and 
  set it to your favorite timezone [Timezone-List](http://php.net/manual/en/timezones.php). Please check that before the config is no `;`.
  
- ![ApacheInstall](https://raw.github.com/kokspflanze/pserverCMSFull/master/docs/images/php-datetime.png)
+ ![ApacheInstall](https://raw.github.com/kokspflanze/pserverCMSFull/master/doc/images/php-datetime.png)
  
 ### PHP-Path in Environment Variables
  
@@ -85,7 +85,7 @@ Please install `vc_redist.x64.exe` or `vc_redist.x86.exe` and  `msodbcsql.msi` (
   - you have to use a `;` as delimiter (only on older windows systems)
   - restart your computer or close the Apache2 and the ApacheMonitor and start it again 
   
- ![PHPPathEnv](https://raw.github.com/kokspflanze/pserverCMSFull/master/docs/images/php-path-env.gif)
+ ![PHPPathEnv](https://raw.github.com/kokspflanze/pserverCMSFull/master/doc/images/php-path-env.gif)
  
 ## Step 1 Git-Client Install
 
@@ -106,7 +106,7 @@ Please install `vc_redist.x64.exe` or `vc_redist.x86.exe` and  `msodbcsql.msi` (
  Than type `git clone https://github.com/kokspflanze/pserverCMSFull.git`, if you later want to update the Full-System, you can easy type 
  `git pull` [That only work in the pserverCMS-Directory, `cd /c/Apache24/htdocs/pserverCMSFull`].
  
- ![GitClone](https://raw.github.com/kokspflanze/pserverCMSFull/master/docs/images/git-clone.gif)
+ ![GitClone](https://raw.github.com/kokspflanze/pserverCMSFull/master/doc/images/git-clone.gif)
  
 ### Download all other parts with composer
  
