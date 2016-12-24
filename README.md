@@ -166,6 +166,7 @@ Please install `vc_redist.x64.exe` or `vc_redist.x86.exe` and  `msodbcsql.msi` (
 	</Directory>
 </VirtualHost>
  ```
+ ![ApacheVHost](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/images/apache-vhost.gif?raw=true)
 
 ## Step 4 PServerCMS basic configuration
 
