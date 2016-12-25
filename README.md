@@ -18,10 +18,10 @@ requires PHP 7.0 or later; we recommend using the latest PHP version whenever po
  - [donation-setup](https://github.com/kokspflanze/PServerCMS#donation)
  
 ## Customize Guides
- - [layout/design](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/CUSTOMIZE.md)
+ - [layout/design](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/CUSTOMIZE.md#how-to-change-the-layout)
  
 ## Special extensions for games
- - [SRO](https://github.com/kokspflanze/PServerSRO)
+ - [SRO](https://github.com/kokspflanze/PServerSRO#installation)
  
  
 ## General information

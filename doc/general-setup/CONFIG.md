@@ -17,4 +17,4 @@
  
 ## Finished
 
- if everything done, the page works and you can start with [customize](https://github.com/kokspflanze/PServerCMS/blob/master/doc/CUSTOMIZE.md) the system.
+ if everything done, the page works and you can start with [customize](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/CUSTOMIZE.md) the system.
