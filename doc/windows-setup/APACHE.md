@@ -60,4 +60,4 @@
   
  ![PHPPathEnv](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/images/php-path-env.gif?raw=true)
  
-Continue with [GIT](https://github.com/kokspflanze/pserverCMSFull/master/doc/windows-setup/GIT.md)
+Continue with [GIT](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/windows-setup/GIT.md)

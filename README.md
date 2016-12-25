@@ -9,16 +9,16 @@ This repository provide you every thing for the first start with the PServerCMS
 requires PHP 7.0 or later; we recommend using the latest PHP version whenever possible.
 
 ## Install Guides
- - [Windows](https://github.com/kokspflanze/pserverCMSFull/master/doc/windows-setup/INDEX.md)
+ - [Windows](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/windows-setup/INDEX.md)
  - Centos7 in progress
  
 ## General Guides
- - [config](https://github.com/kokspflanze/pserverCMSFull/master/doc/general-setup/CONFIG.md)
+ - [config](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CONFIG.md)
  - [cron-setup](https://github.com/kokspflanze/PServerCMS#crontab-settings)
  - [donation-setup](https://github.com/kokspflanze/PServerCMS#donation)
  
 ## Customize Guides
- - [layout/design](https://github.com/kokspflanze/pserverCMSFull/master/doc/CUSTOMIZE.md)
+ - [layout/design](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/CUSTOMIZE.md)
  
 ## Special extensions for games
  - [SRO](https://github.com/kokspflanze/PServerSRO)

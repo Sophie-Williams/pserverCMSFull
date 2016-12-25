@@ -29,4 +29,4 @@ Install the downloaded Git-Client
  If you have a problem like that please create a GitHub account and follow the link after "Head to" in the message.
  If you later input the token, it is hidden, so you dont see a input, that is normal. 
  
-Continue with [configuration for Apache](https://github.com/kokspflanze/pserverCMSFull/master/doc/windows-setup/APACHE-CONFIG.md)
+Continue with [configuration for Apache](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/windows-setup/APACHE-CONFIG.md)
