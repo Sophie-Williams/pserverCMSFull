@@ -2,7 +2,7 @@
 
 This guide is a little setup script which provide you how to setup the PServerCMS.
 There should be a clean system with no webserver and no php. If there are conflicts please delete the old parts. or install it manuel.
-We also recommend a centos7.minimal image. 
+We also recommend a [centos7.minimal](http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1611.iso) image. 
 
 ## Install script
 
@@ -19,9 +19,9 @@ chmod +x setup.sh
 ## PServerCMS-DB
 
 For the PServerCMS you need a DBMS as example mysql or mssql, we recommend to use mysql (mariaDB).
-A install guide you can find here [digitalocean](https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-centos-7).
+You can find a install guide @ [digitalocean](https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-centos-7).
 
-As mysql client you can use [heidisql](http://www.heidisql.com/) with this [guide](http://www.heidisql.com/help.php) for the connection.
+As mysql client you can use [heidisql](http://www.heidisql.com/), with this [guide](http://www.heidisql.com/help.php) for the connection.
  
 ## Configuration
 
