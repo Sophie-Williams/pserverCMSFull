@@ -10,7 +10,7 @@ requires PHP 7.0 or later; we recommend using the latest PHP version whenever po
 
 ## Install Guides
  - [Windows](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/windows-setup/INDEX.md)
- - Centos7 in progress
+ - [CentOS7](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/centos-setup/INDEX.md) with some changes it works on other linux distributions too
  
 ## General Guides
  - [config](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CONFIG.md)
