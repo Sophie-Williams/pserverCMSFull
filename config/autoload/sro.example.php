@@ -27,7 +27,7 @@ return [
                     'port'     => '3306',
                     'user'     => 'root',
                     'password' => 'barr',
-                    'dbname'   => 'pserverCMS2',
+                    'dbname'   => 'pserverCMS',
                 ],
             ],
             'orm_sro_account' => [
