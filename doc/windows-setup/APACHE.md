@@ -49,6 +49,14 @@
  
  ![ApacheInstall](https://raw.github.com/kokspflanze/pserverCMSFull/master/doc/images/php-datetime.png)
  
+## Curl CAInfo [optional]
+
+ [Guide StackOverflow](http://stackoverflow.com/questions/21114371/php-curl-error-code-60#answer-21114601)
+ 
+ Download the content of https://curl.haxx.se/ca/cacert.pem and save it under `c:\PHP\cacert.pem`.
+
+ Than add `curl.cainfo = "C:\PHP\cacert.pem"` in your php.ini
+ 
 ## PHP-Path in Environment Variables
  
  In Control Panel -> Search -> Advanced System Settings and use the button Environment Variables. 
