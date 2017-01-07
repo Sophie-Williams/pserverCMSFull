@@ -45,7 +45,7 @@ git clone https://github.com/kokspflanze/pserverCMSFull.git /var/www/page
 cd /var/www/page
 
 php composer.phar selfupdate
-php composer.phar update
+php composer.phar update -o
 
 # selinux
 setsebool -P httpd_can_network_connect on
