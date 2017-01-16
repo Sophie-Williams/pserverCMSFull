@@ -208,3 +208,8 @@ ul.nav li.dropdown:hover > a {
 	background: black;
 	color: #fff;
 }
+
+.captcha-reload {
+	cursor: pointer;
+	margin-left: 15px;
+}

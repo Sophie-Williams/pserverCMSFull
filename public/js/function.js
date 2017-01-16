@@ -127,11 +127,32 @@ function itemInfo()
 }
 
 jQuery(document).ready(function(){
-	jQuery('.timerCountdown').each(function(){
+	jQuery('.timerCountdown').each(function() {
 		sString = jQuery(this).attr('id');
 		timerCountdown[sString] = jQuery(this).data('time');
 		loadCheck();
 	});
 	window.setInterval('loadCheck();',999);
 	itemInfo();
+
+	jQuery('.captcha-reload').click(function() {
+		icon = jQuery(this);
+        parent = icon.addClass('fa-spin').parent('div');
+        ajaxReload();
+        xhr = jQuery.ajax({
+            url : jQuery(this).data('url'),
+            type: "POST",
+            dataType: "json",
+            success : function(data){
+                parent.find('img').attr('src', data['url'] + data['id']);
+                parent.find('input[name=\'captcha[id]\']').val(data['id']);
+                parent.find('input[name=\'captcha[input]\']').val('');
+                icon.removeClass('fa-spin');
+            },
+            error: function(e) {
+                alert('smth wrong');
+                icon.removeClass('fa-spin');
+            }
+        });
+	});
 });
