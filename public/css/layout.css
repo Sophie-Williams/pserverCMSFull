@@ -213,3 +213,7 @@ ul.nav li.dropdown:hover > a {
 	cursor: pointer;
 	margin-left: 15px;
 }
+
+.coins-widget-reload {
+	cursor: pointer;
+}
