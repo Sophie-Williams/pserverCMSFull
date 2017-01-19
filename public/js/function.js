@@ -135,8 +135,8 @@ jQuery(document).ready(function(){
 	window.setInterval('loadCheck();',999);
 	itemInfo();
 
-	jQuery('.captcha-reload').click(function() {
-		icon = jQuery(this);
+    jQuery('.captcha-reload').click(function() {
+        icon = jQuery(this);
         parent = icon.addClass('fa-spin').parent('div');
         ajaxReload();
         xhr = jQuery.ajax({
@@ -154,5 +154,24 @@ jQuery(document).ready(function(){
                 icon.removeClass('fa-spin');
             }
         });
-	});
+    });
+
+    jQuery('.coins-widget-reload').click(function() {
+        icon = jQuery(this);
+        parent = icon.addClass('fa-spin').parent('div');
+        ajaxReload();
+        xhr = jQuery.ajax({
+            url : jQuery(this).data('url'),
+            type: "POST",
+            dataType: "html",
+            success : function(data){
+                jQuery('#coinsWidgetSidebar').html(data);
+                icon.removeClass('fa-spin');
+            },
+            error: function(e) {
+                alert('smth wrong');
+                icon.removeClass('fa-spin');
+            }
+        });
+    });
 });
