@@ -28,6 +28,8 @@ requires PHP 7.0 or later; we recommend using the latest PHP version whenever po
 
  - [How to enable debugger?](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/DEBUGGER.md)
  
+ You have other questions, or found a issue? please you join our [gitter chat](https://gitter.im/kokspflanze/PServerCMS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge), or write a issue.
+ 
 ## General information
   
  ![ScreenShot](https://raw.github.com/kokspflanze/PServerCMS/master/docs/screenshots/news.png)
