@@ -24,6 +24,9 @@ requires PHP 7.0 or later; we recommend using the latest PHP version whenever po
 ## Special extensions for games
  - [SRO](https://github.com/kokspflanze/PServerSRO#installation)
  
+## Problems
+
+ - [How to enable debugger?](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/DEBUGGER.md)
  
 ## General information
   
