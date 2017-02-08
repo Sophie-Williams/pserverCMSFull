@@ -29,7 +29,7 @@ the main content should be
 
 ```php
 <?php if ($this->item) : ?>
-<img src"<?= $this->basePath() . $this->item->getRefItem()->getIconPath() ?>" />
+<img src="<?= $this->basePath() . $this->item->getRefItem()->getIconPath() ?>" />
 <?php endif; ?>
 ```
 
