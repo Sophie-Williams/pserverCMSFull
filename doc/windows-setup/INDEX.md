@@ -9,11 +9,11 @@ requires `Visual Studio 2015` and above
 
 ## DownloadList
 
-- http://windows.php.net/downloads/releases/php-7.1.0-Win32-VC14-x64.zip OR http://windows.php.net/downloads/releases/archives/php-7.1.0-Win32-VC14-x64.zip
+- http://windows.php.net/downloads/releases/php-7.1.1-Win32-VC14-x64.zip OR http://windows.php.net/downloads/releases/archives/php-7.1.1-Win32-VC14-x64.zip
 - http://www.apachehaus.com/cgi-bin/download.plx?dli=QTuBXWVBTQz0kentmWYZlSKVlUGR1Uwh2YUZVM
 - https://www.microsoft.com/en-us/download/details.aspx?id=48145
 - [ONLY FOR MsSQL] https://www.microsoft.com/en-us/download/details.aspx?id=36434
-- [ONLY FOR MsSQL] https://github.com/Microsoft/msphpsql/releases/download/4.1.4-Windows/7.1.zip
+- [ONLY FOR MsSQL] https://github.com/Microsoft/msphpsql/releases/download/4.1.5-Windows/7.1.zip
 
 ![DownloadList](https://raw.github.com/kokspflanze/pserverCMSFull/master/doc/images/download.png)
 
