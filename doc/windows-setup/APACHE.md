@@ -53,8 +53,7 @@
 
  [Guide StackOverflow](http://stackoverflow.com/questions/21114371/php-curl-error-code-60#answer-21114601)
  
- Download the content of https://curl.haxx.se/ca/cacert.pem and save it under `c:\PHP\cacert.pem`.
-
+ Download the content of https://curl.haxx.se/ca/cacert.pem and save it under `c:\PHP\cacert.pem`. Please check that you dont add a `txt` extension in the filename.
  Than add `curl.cainfo = "C:\PHP\cacert.pem"` in your php.ini
  
 ## PHP-Path in Environment Variables
