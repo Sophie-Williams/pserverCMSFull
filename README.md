@@ -27,6 +27,7 @@ requires PHP 7.0 or later; we recommend using the latest PHP version whenever po
  
 ## Special extensions for games
  - [SRO](https://github.com/kokspflanze/PServerSRO#installation)
+ - [SRO-Unique](https://github.com/PServerCMS/SROUnique#installation)
  - [How to show icons in ranking](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/RANKING_ICONS.md)
  
 ## Problems
