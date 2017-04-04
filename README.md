@@ -26,9 +26,10 @@ requires PHP 7.0 or later; we recommend using the latest PHP version whenever po
  - [how to call a view-helper](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CUSTOMIZE.md#how-to-call a-view-helper)
  
 ## Special extensions for games
- - [SRO](https://github.com/kokspflanze/PServerSRO#installation)
- - [SRO-Unique](https://github.com/PServerCMS/SROUnique#installation)
+ - [SRO](https://github.com/kokspflanze/PServerSRO#installation) (more SRO parts in general, from view-helpers to adminpanel)
+ - [SRO-Unique](https://github.com/PServerCMS/SROUnique#installation) (for SRO-Unique stuff)
  - [How to show icons in ranking](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/RANKING_ICONS.md)
+ - [DonateAction](https://github.com/PServerCMS/DonateAction) (to give more donate rewards, like DonateStats or DailyCashCounter)
  
 ## Problems
 
