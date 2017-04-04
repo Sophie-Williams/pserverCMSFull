@@ -23,7 +23,7 @@ requires PHP 7.0 or later; we recommend using the latest PHP version whenever po
 ## Customize Guides
  - [layout/design](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CUSTOMIZE.md#how-to-change-the-layout)
  - [how to get the template alias?](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CUSTOMIZE.md#how-to-get-the-template-alias)
- - [how to call a view-helper](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CUSTOMIZE.md#how-to-call a-view-helper)
+ - [how to call a view-helper](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CUSTOMIZE.md#how-to-call-a-view-helper)
  
 ## Special extensions for games
  - [SRO](https://github.com/kokspflanze/PServerSRO#installation) (more SRO parts in general, from view-helpers to adminpanel)
