@@ -61,3 +61,9 @@ return [
 these is just an example how the widget looks, you have to replace the `XXXXXX` parts.
 
 If this is done you can see the Donate widget.
+
+### PingBack reward problem
+
+If your pingback failed and you dont know why. Go to `Adminpanel` -> `Donate` -> `OverView` and check the first entry and in the description the `errorMessage` will help you.
+
+If you found no entry in the table, than the pingback url is wrong.
