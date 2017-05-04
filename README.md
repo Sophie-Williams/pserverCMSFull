@@ -42,6 +42,6 @@ requires PHP 7.0 or later; we recommend using the latest PHP version whenever po
  
  List of features you can find in the [feature-list](https://github.com/kokspflanze/PServerCMS#features)
   
-## Problems or improvements
+## improvements
  
  Please write an issue or create a pull-request @ GitHub
