@@ -18,6 +18,7 @@ requires PHP 7.0 or later; we recommend using the latest PHP version whenever po
  - [donation-setup](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/DONATE.md)
  - [cron-setup](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CRONTAB.md)
  - [how to update](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/UPDATE.md)
+ - [mail setup](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/MAIL.md)
  
 ## Customize Guides
  - [layout/design](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CUSTOMIZE.md#how-to-change-the-layout)

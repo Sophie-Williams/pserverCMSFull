@@ -69,20 +69,6 @@ return [
         ],
     ],
     'pserver' => [
-        'mail' => [
-            'from' => 'noreply@mail.com',
-            'basic' => [
-                'name' => 'mail.com',
-                'host' => 'mail.com',
-                'port' => 465,
-                'connection_class' => 'login',
-                'connection_config' => [
-                    'username' => 'noreply@mail.com',
-                    'password' => 'foobar',
-                    'ssl'=> 'ssl',
-                ],
-            ],
-        ],
         'timer' => [
             [
                 'name' => 'CTF',
