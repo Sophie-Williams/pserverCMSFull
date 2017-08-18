@@ -75,8 +75,8 @@ If you found no entry in the table, than the pingback url is wrong.
 
 Create a button in paypal with a select-box for the `Coin options` which have different options like
 
-- 2995 - $5,00 USD
-- 3999 - $10,00 USD
+- 2995
+- 3999
 
 Than we need a input-field, which will be for the `UserId`.
 
@@ -106,6 +106,7 @@ you have to change it a bit (the above example already has the changes)
 
 - change the UserID input to hidden
 - set the UserID value to `{{ user.getId() }}`
+- you can also change the option text of the select-box but not the value
 
 put these html-form in to the content section of the `Donate-Template`.
 
