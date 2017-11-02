@@ -71,6 +71,13 @@ If you found no entry in the table, than the pingback url is wrong.
 
 ### PayPal IPN Setup
 
+
+#### Install dependencies
+
+````ssh
+php composer.phar require wadeshuler/php-paypal-ipn
+````
+
 #### Button
 
 Create a button in paypal with a select-box for the `Coin options` which have different options like
