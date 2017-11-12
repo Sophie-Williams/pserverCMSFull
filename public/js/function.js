@@ -61,7 +61,7 @@ function tTimer(iEndTimeStamp, iTimeStamp, sElement)
 function checkLength(sString)
 {
 	sString = sString.toString();
-	if (sString.length == 1) {
+	if (sString.length === 1) {
 		sString = '0' + sString;
 	}
 	return sString;
@@ -95,7 +95,7 @@ function paginatorAjax( element, urlData )
 
 function ajaxReload()
 {
-	if(xhr && xhr.readystate != 4){
+	if(xhr && xhr.readystate !== 4){
 		xhr.abort();
 	}
 }
@@ -108,7 +108,7 @@ function itemInfo()
 		content: function () {
 			var element = jQuery(this);
 
-			if (jQuery(this).prop("tagName").toUpperCase() == 'IFRAME') {
+			if (element.prop("tagName").toUpperCase() == 'IFRAME') {
 				return;
 			}
 
