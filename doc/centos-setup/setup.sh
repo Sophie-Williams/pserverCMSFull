@@ -25,7 +25,7 @@ yum -y install epel-release curl crontabs git
 
 systemctl enable httpd crond
 
-echo "expose_php = Off" > /etc/opt/remi/php72/php.d/custome.ini
+echo "expose_php = Off" > /etc/opt/remi/php72/php.d/50-custome.ini
 
 ln -s /bin/php72 /bin/php
 
