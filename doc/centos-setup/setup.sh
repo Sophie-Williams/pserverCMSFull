@@ -10,9 +10,6 @@ firewall-cmd --reload
 rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 rpm -Uvh https://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
-yum -y install yum-utils
-yum-config-manager --enable remi-php72
-
 # stay up to date
 yum -y update
 
