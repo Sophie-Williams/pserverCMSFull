@@ -44,44 +44,28 @@ img {
 .margin-bottom-25 { margin-bottom: 25px; }
 .margin-bottom-30 { margin-bottom: 30px; }
 
-
-.navbar {
-    margin-bottom: 0;
-}
-
-.navbar-default {
-    box-shadow: none !important;
-	background-image: none;
-}
-
-.nav li.navigation a{
+nav .navbar-nav a {
     font-size: 17px;
 }
 
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-	background-color: transparent;
+.navbar-light .navbar-nav .nav-link {
+	color: #000;
 }
 
-.nav li.navigation > a:hover, .nav li.navigation > a:focus, .nav li.navigation.active > a, .nav li.navigation.active > a {
-    background-color: transparent;
-    color: #279FBB;
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-item.active .nav-link,
+.navbar-light .navbar-nav .nav-link.active {
+	color: #279FBB;
 }
 
-ul.nav li.dropdown:hover > ul.dropdown-menu {
-	display: block;
-}
-ul.nav li.dropdown:hover > a {
+ul.navbar-nav li.dropdown:hover > a {
 	color: #279FBB;
 }
 
 .navbar-default .navbar-nav .active a{
     box-shadow: none;
     background-image: none;
-}
-
-.carouselimage {
-    width: 100%;
-    max-height: 400px;
 }
 
 .top {
@@ -102,7 +86,7 @@ ul.nav li.dropdown:hover > a {
 	padding-bottom: 15px;
 }
 .top ul.loginbar  li a, .top ul.loginbar li a:hover {
-	color: #7c8082;
+	color: #000;
 	font-family: 'Open Sans',sans-serif;
 	font-size: 11px;
 	text-transform: uppercase;
@@ -110,12 +94,12 @@ ul.nav li.dropdown:hover > a {
 
 .navbar-brand {
 	width: 164px;
+	height: 53px;
 	background: url('../images/logo-default.png') 0 3px no-repeat;
 }
 
-.navbar-default {
-	background-color: transparent;
-	border-color: transparent;
+.carousel {
+	margin-bottom: 10px;
 }
 
 .footer {
@@ -123,6 +107,7 @@ ul.nav li.dropdown:hover > a {
 	width: 100%;
 	height: auto;
 	background-color: #383838;
+	padding: 10px 0;
 }
 
 .footertext a {
@@ -235,4 +220,8 @@ ul.nav li.dropdown:hover > a {
 .sidebar-nav .navbar li a {
 	padding-top: 12px;
 	padding-bottom: 12px;
+}
+
+.alert ul {
+	margin-bottom: 0;
 }
