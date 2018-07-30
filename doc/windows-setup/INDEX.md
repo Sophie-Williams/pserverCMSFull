@@ -13,7 +13,7 @@ requires `Visual Studio 2015` and above
 - [Apache](http://www.apachehaus.com/cgi-bin/download.plx?dli=QTuBXWVBTQz0kentmWYZlSKVlUGR1Uwh2YUZVM)
 - [Visual C++ Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=48145)
 - [ODBC Driver 11](https://www.microsoft.com/en-us/download/details.aspx?id=36434), ONLY FOR MsSQL
-- [mssql-extenmsion](https://github.com/Microsoft/msphpsql/releases/download/4.1.5-Windows/7.1.zip), ONLY FOR MsSQL
+- [mssql-extension](https://github.com/Microsoft/msphpsql/releases/download/4.1.5-Windows/7.1.zip), ONLY FOR MsSQL
 
 ![DownloadList](https://raw.github.com/kokspflanze/pserverCMSFull/master/doc/images/download.png)
 
