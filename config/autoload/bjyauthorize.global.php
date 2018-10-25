@@ -8,6 +8,7 @@ use PServerCLI\Controller as CLIController;
 use PServerCore\Controller as CoreController;
 use PServerPanel\Controller as PanelController;
 use PServerRanking\Controller as RankingController;
+use ZfcSitemap\Controller as ZfcSitemapController;
 
 return [
     'bjyauthorize' => [
@@ -195,6 +196,8 @@ return [
                 ['controller' => CLIController\PlayerHistoryController::class, 'roles' => []],
                 ['controller' => CLIController\CodeCleanUpController::class, 'roles' => []],
                 ['controller' => 'SanCaptcha\Controller\Captcha', 'roles' => []],
+
+                ['controller' => ZfcSitemapController\IndexController::class, 'roles' => []],
             ],
         ],
         // strategy service name for the strategy listener to be used when permission-related errors are detected

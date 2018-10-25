@@ -23,6 +23,7 @@ return [
         'PaymentAPI',
         'SanCaptcha',
         'ZfcDatagrid',
+        'ZfcSitemap',
         'SmallUser',
         'PServerCore',
         'PServerAdmin',
