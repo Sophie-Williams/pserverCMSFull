@@ -6,7 +6,7 @@ This repository provide you every thing for the first start with the PServerCMS
 
 ## SYSTEM REQUIREMENTS
 
-requires PHP 7.0 or later; we recommend using the latest PHP version whenever possible.
+requires PHP 7.1 or later; we recommend using the latest PHP version whenever possible.
 
 ## Install Guides
  - [Windows](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/windows-setup/INDEX.md)
