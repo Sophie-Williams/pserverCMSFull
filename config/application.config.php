@@ -31,7 +31,10 @@ return [
         'PServerRanking',
         'PServerPanel',
         'PServerCLI',
-        'Customize'
+
+        // add here new modules
+
+        'Customize', // hint your custom modules should be on the last position
     ],
 
     // These are various options for the listeners attached to the ModuleManager
