@@ -70,3 +70,8 @@ return [
 ## Problems?
 
 If you receive no mail, you can go to the `AdminPanel / Logs / Web` there you see all errors.
+
+if you get `Could not read from XXX`, following parts are possible
+- network problem (check your firewall)
+- tls/ssl problem? switch `'port' => 587,` to `'port' => 465,` and `'ssl'=> 'tls',` to `'ssl'=> 'ssl',`
+- try to ping the mail host from your webserver
