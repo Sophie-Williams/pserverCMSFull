@@ -11,7 +11,7 @@ Install the downloaded Git-Client
  Than type `git clone https://github.com/kokspflanze/pserverCMSFull.git`, if you later want to update the Full-System, you can easy type 
  `git pull` [That only work in the pserverCMS-Directory, `cd /c/Apache24/htdocs/pserverCMSFull`].
  
- ![GitClone](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/images/git-clone.gif?raw=true)
+ ![GitClone](/doc/images/git-clone.gif?raw=true)
  
 ## Download all other parts with composer
  
@@ -29,4 +29,4 @@ Install the downloaded Git-Client
  If you have a problem like that please create a GitHub account and follow the link after "Head to" in the message.
  If you later input the token, it is hidden, so you dont see a input, that is normal. 
  
-Continue with [configuration for Apache](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/windows-setup/APACHE-CONFIG.md)
+Continue with [configuration for Apache](/doc/windows-setup/APACHE-CONFIG.md)

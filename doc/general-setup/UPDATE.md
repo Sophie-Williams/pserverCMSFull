@@ -2,7 +2,7 @@
 
 if you login and go to the admin panel you see the latest tags of each main module of the CMS.
 
-![ScreenShot](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/images/ADMIN_OVERVIEW_MODULES.png)
+![ScreenShot](/doc/images/ADMIN_OVERVIEW_MODULES.png)
 
 if you see some changes, please go to the command line to the pserver-cms directory.
 

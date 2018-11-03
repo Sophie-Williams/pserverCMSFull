@@ -19,7 +19,7 @@
  
  You you have to restart your Apache, to test if the PHP works.
  
- ![ApacheSetup](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/images/apache-setup.gif?raw=true)
+ ![ApacheSetup](/doc/images/apache-setup.gif?raw=true)
  
 ## Enable PHP extensions
  
@@ -40,7 +40,7 @@
  
  If you work with a MsSQL DB you have to copy the `php_pdo_sqlsrv_71_ts.dll` from the download above, to the `ext` directory from your PHP.
  
- ![PHPExtensions](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/images/php-extensions.gif?raw=true)
+ ![PHPExtensions](/doc/images/php-extensions.gif?raw=true)
  
 ## DateTime settings
  
@@ -65,6 +65,6 @@
   - you have to use a `;` as delimiter (only on older windows systems)
   - restart your computer or close the Apache2 and the ApacheMonitor and start it again 
   
- ![PHPPathEnv](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/images/php-path-env.gif?raw=true)
+ ![PHPPathEnv](/doc/images/php-path-env.gif?raw=true)
  
-Continue with [GIT](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/windows-setup/GIT.md)
+Continue with [GIT](/doc/windows-setup/GIT.md)

@@ -29,4 +29,4 @@ As mysql client you can use [heidisql](http://www.heidisql.com/), with this [gui
 cd /var/www/page
 ```
 
-than you can continue with [config](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CONFIG.md)
+than you can continue with [config](/doc/general-setup/CONFIG.md)

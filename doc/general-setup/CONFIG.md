@@ -6,14 +6,14 @@
  For other games you can also use the `*.example.php`, but you have to change `gamebackend_dataservice`, if you only want to test you can
   use the Mocking-Class.
   
- ![BasicConfig](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/images/basic-config.gif?raw=true)
+ ![BasicConfig](/doc/images/basic-config.gif?raw=true)
  
 ## Start with the PServerCMS ToDo-List
 
  Follow the link to the ToDo-List and start with `Generate the Database`.
  [ToDo-List](https://github.com/kokspflanze/PServerCMS/blob/master/README.md#generate-the-database)
  
- ![CreateDatabase](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/images/generate-the-database.gif?raw=true)
+ ![CreateDatabase](/doc/images/generate-the-database.gif?raw=true)
  
 ## Finished
 

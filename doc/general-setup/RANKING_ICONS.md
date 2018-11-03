@@ -2,7 +2,7 @@
 
 if you go to the ranking page and select a character you should see on the button smth like
 
-![ScreenShot](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/images/RANKING_DEFAULT.png)
+![ScreenShot](/doc/images/RANKING_DEFAULT.png)
 
 ## Copy your icons
 
@@ -63,4 +63,4 @@ return [
 
 please dont copy that example, otherwise you can destroy current changes.
 
-see also [how to get the template alias?](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CUSTOMIZE.md#how-to-get-the-template-alias)
+see also [how to get the template alias?](/doc/general-setup/CUSTOMIZE.md#how-to-get-the-template-alias)

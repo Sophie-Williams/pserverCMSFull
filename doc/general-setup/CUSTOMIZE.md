@@ -40,4 +40,4 @@ In that file is also a `view_helpers` section with a `aliases` part, these view-
 
 please check also [zend-guide](https://zendframework.github.io/zend-view/helpers/intro/)
 
-see also [How to show icons in ranking](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/RANKING_ICONS.md)
+see also [How to show icons in ranking](/doc/general-setup/RANKING_ICONS.md)

@@ -21,4 +21,4 @@ requires `Visual Studio 2015` and above
 
 Please install `vc_redist.x64.exe` or `vc_redist.x86.exe` and  `msodbcsql.msi` (if you want to use a MsSQL connection)
 
-Continue with [Apache + PHP Setup](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/windows-setup/APACHE.md)
+Continue with [Apache + PHP Setup](/doc/windows-setup/APACHE.md)

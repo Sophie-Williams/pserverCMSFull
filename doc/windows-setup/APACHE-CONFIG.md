@@ -40,6 +40,6 @@
 	</Directory>
 </VirtualHost>
  ```
- ![ApacheVHost](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/images/apache-vhost.gif?raw=true)
+ ![ApacheVHost](/doc/images/apache-vhost.gif?raw=true)
  
-Continue with [config](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/CONFIG.md)
+Continue with [config](/doc/general-setup/CONFIG.md)
