@@ -28,6 +28,7 @@ requires PHP 7.1 or later; we recommend using the latest PHP version whenever po
 ## Special extensions for games
  - [SRO](https://github.com/kokspflanze/PServerSRO#installation) (more SRO parts in general, from view-helpers to adminpanel)
  - [SRO-Unique](https://github.com/PServerCMS/SROUnique#installation) (for SRO-Unique stuff)
+ - [SRO-ItemPoints](https://github.com/PServerCMS/SROItemPoints) (for ItemPoints in ranking)
  - [How to show icons in ranking](https://github.com/kokspflanze/pserverCMSFull/blob/master/doc/general-setup/RANKING_ICONS.md)
  - [DonateAction](https://github.com/PServerCMS/DonateAction) (to give more donate rewards, like DonateStats or DailyCashCounter)
  
