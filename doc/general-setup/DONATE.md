@@ -40,7 +40,7 @@ return [
  
  In the donate directory you have to create a `index.twig` file, with following content.
  
-```php
+```twig
  {% extends 'layout/layout' %}
  
  {% block title %}
