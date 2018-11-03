@@ -45,6 +45,8 @@ to
 
 and
 
-remove `['controller' => CoreController\DonateController::class, 'roles' => ['user']],` 
+`['controller' => CoreController\DonateController::class, 'roles' => ['user']],` 
+to
+`['controller' => CoreController\DonateController::class, 'roles' => ['admin']],`
 
 now you can see donation only as admin
