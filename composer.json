@@ -15,5 +15,10 @@
   "require": {
     "zendframework/Zend-developer-tools": "^1.1",
     "kokspflanze/p-server-cms": "^1.0.1"
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
   }
 }
