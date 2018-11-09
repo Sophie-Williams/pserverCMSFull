@@ -9,7 +9,7 @@ requires `Visual Studio 2015` and above
 
 ## DownloadList
 
-- [PHP 7.1.13](http://windows.php.net/downloads/releases/php-7.1.13-Win32-VC14-x64.zip) OR [PHP 7.1.13 Archive](http://windows.php.net/downloads/releases/archives/php-7.1.13-Win32-VC14-x64.zip), use the archive version if the first link not work or download the latest 7.1.X VC14 x64 Thread Safe
+- [PHP 7.1.24](http://windows.php.net/downloads/releases/php-7.1.24-Win32-VC14-x64.zip) OR [PHP 7.1.24 Archive](http://windows.php.net/downloads/releases/archives/php-7.1.24-Win32-VC14-x64.zip), use the archive version if the first link not work or download the latest 7.1.X VC14 x64 Thread Safe
 - [Apache](http://www.apachehaus.com/cgi-bin/download.plx?dli=QTuBXWVBTQz0kentmWYZlSKVlUGR1Uwh2YUZVM)
 - [Visual C++ Redistributable](https://www.microsoft.com/en-us/download/details.aspx?id=48145)
 - [ODBC Driver 11](https://www.microsoft.com/en-us/download/details.aspx?id=36434), ONLY FOR MsSQL
