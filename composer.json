@@ -13,6 +13,7 @@
     }
   },
   "require": {
+    "php": "^7.1",
     "zendframework/Zend-developer-tools": "^1.1",
     "kokspflanze/p-server-cms": "^1.0.1"
   },
