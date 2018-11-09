@@ -37,8 +37,6 @@
  extension=php_mbstring.dll
  extension=php_exif.dll      ; Must be after mbstring as it depends on it
  extension=php_openssl.dll
- extension=php_pdo_mysql.dll
- extension=php_pdo_odbc.dll
  extension=php_pdo_mysql.dll ; if you work with a mysql DB
  extension=php_sockets.dll
  extension=php_pdo_sqlsrv_71_ts.dll ; if you work with a mssql DB 
