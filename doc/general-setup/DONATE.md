@@ -78,6 +78,16 @@ If you found no entry in the table, than the pingback url is wrong.
 php composer.phar require wadeshuler/php-paypal-ipn
 ````
 
+#### ACL
+
+You have to enable the PayPal workflow in the ACL. Otherwise, you will receive the error code 403 (Forbidden).
+
+To enable it go to `config/autoload/bjyauthorize.global.php` and add following line into the `guards` section
+
+````php
+['controller' => APIController\PayPalController::class, 'roles' => []],
+````
+
 #### Button
 
 Create a button in paypal with a select-box for the `Coin options` which have different options like
