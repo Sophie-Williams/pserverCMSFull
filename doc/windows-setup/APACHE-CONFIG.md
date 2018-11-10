@@ -37,6 +37,7 @@
 	<Directory "${SRVROOT}/htdocs/pserverCMSFull/public">
 		Options Indexes FollowSymLinks MultiViews
 		AllowOverride All
+		Require all granted
 	</Directory>
 </VirtualHost>
  ```
