@@ -41,3 +41,19 @@ In that file is also a `view_helpers` section with a `aliases` part, these view-
 please check also [zend-guide](https://zendframework.github.io/zend-view/helpers/intro/)
 
 see also [How to show icons in ranking](/doc/general-setup/RANKING_ICONS.md)
+
+## Why some styles/scripts get not loaded?
+
+Since PServerCore 1.9 we use internal the [HeadScript](https://docs.zendframework.com/zend-view/helpers/head-script/) and [HeadLink](https://docs.zendframework.com/zend-view/helpers/head-link/) system from [Zend-View](https://docs.zendframework.com/zend-view/).
+That help use to set all stylesheet-files on top and all script-files on the bottom of the layout, thats improve the performance and its possible to call custom filters to minimize the size and load-time.
+
+### What happens if i do nothing?
+
+You will see no editor in the ticket-system.
+
+### What i have todo?
+
+- add `{{ headLink()|raw }}` after your custom styles in your layout
+- add `{{ headScript()|raw }}` after your custom scripts in your layout
+
+You can find an example [here](https://github.com/kokspflanze/PServerCore/commit/169214d5fd0e493216c215aeda5423e14286483b). There you see these changes and the advanced method, to change the favicon, styles and scripts directly in the system.
