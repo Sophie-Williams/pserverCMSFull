@@ -45,7 +45,7 @@ see also [How to show icons in ranking](/doc/general-setup/RANKING_ICONS.md)
 ## Why some styles/scripts get not loaded?
 
 Since PServerCore 1.9 we use internal the [HeadScript](https://docs.zendframework.com/zend-view/helpers/head-script/) and [HeadLink](https://docs.zendframework.com/zend-view/helpers/head-link/) system from [Zend-View](https://docs.zendframework.com/zend-view/).
-That help use to set all stylesheet-files on top and all script-files on the bottom of the layout, thats improve the performance and its possible to call custom filters to minimize the size and load-time.
+That help us to set all stylesheet-files on top and all script-files on the bottom of the layout, thats improve the performance and its possible to call custom filters to minimize the size and load-time.
 
 ### What happens if i do nothing?
 
