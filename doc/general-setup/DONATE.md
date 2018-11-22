@@ -187,8 +187,10 @@ To enable it go to `config/autoload/bjyauthorize.global.php` and add following l
 #### IFrame integration
 
 ````html
- <iframe src="https://sandbox.payssion.com/checkout/<-- YOUR API KEY -->?api_sig={{ paymentAPIPayssionSecret('<-- PRICE -->', '<-- CURRENCY -->', user.getId()) }}&order_id={{ user.getId() }}&payer_email={{ user.getEmail() }}&description=<-- DESCRIPTION -->&amount=<-- PRICE -->&currency=<-- CURRENCY -->"  frameborder="0" width="728" height="700" scrolling="yes"></iframe>
+ <iframe src="https://www.payssion.com/checkout/<-- YOUR API KEY -->?api_sig={{ paymentAPIPayssionSecret('<-- PRICE -->', '<-- CURRENCY -->', user.getId()) }}&order_id={{ user.getId() }}&payer_email={{ user.getEmail() }}&description=<-- DESCRIPTION -->&amount=<-- PRICE -->&currency=<-- CURRENCY -->"  frameborder="0" width="728" height="700" scrolling="yes"></iframe>
 ````
+
+PS: if you use the test system please use following url `https://sandbox.payssion.com/checkout`.
 
 you have to replace it with your values
 
