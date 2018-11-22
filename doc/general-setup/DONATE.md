@@ -30,7 +30,7 @@ return [
 ];
 ```
  
- Don´t forget to set the secret-key, if you don´t use one of them, than set just use a '' as secret-key.
+ Don´t forget to set the secret-key, if you don´t use one of them, than set just use a `''` as secret-key.
  
  You can test this secret-key with the pingback test of the payment-provider, in the adminpanel you can see the log, if you have problems.
  
@@ -160,3 +160,71 @@ return [
 
 The `packet_mapping` part map the value of the of the section option to the reward coins, if there is no mapping (realy-empty), the value will be used as reward.
 If there is a mapping but no match, the value will be zero.
+
+### Payssion Setup
+
+#### Dependencies
+
+create a account [here](https://payssion.com/register) for live, [this](http://sandbox.payssion.com/register) is for testing.
+
+create a new direct-api app [here](http://sandbox.payssion.com/account/app/add/directapi).
+
+in the notify url input box you have to add following ``http://www.example.com/payment-api/payssion.html`` (`http://www.example.com`, this you have to replace with yours). 
+
+this should look like this
+![ScreenShot](/doc/images/payssion.png)
+
+#### ACL
+
+You have to enable the Payssion workflow in the ACL. Otherwise, you will receive the error code 403 (Forbidden).
+
+To enable it go to `config/autoload/bjyauthorize.global.php` and add following line into the `guards` section
+
+````php
+['controller' => APIController\PayssionController::class, 'roles' => []],
+````
+
+#### IFrame integration
+
+````html
+ <iframe src="https://sandbox.payssion.com/checkout/<-- YOUR API KEY -->?api_sig={{ paymentAPIPayssionSecret('<-- PRICE -->', '<-- CURRENCY -->', user.getId()) }}&order_id={{ user.getId() }}&payer_email={{ user.getEmail() }}&description=<-- DESCRIPTION -->&amount=<-- PRICE -->&currency=<-- CURRENCY -->"  frameborder="0" width="728" height="700" scrolling="yes"></iframe>
+````
+
+you have to replace it with your values
+
+- `<-- YOUR API KEY -->` as example `live_FOOBAR`
+- `<-- PRICE -->` as example `10.00`
+- `<-- CURRENCY -->` as example `USD`
+- `<-- DESCRIPTION -->` as example `1000 COINS`
+
+put these html-form in to the content section of the `Donate-Template`.
+
+#### Config
+
+Go to `config/autoload/payment.local.php` and add the following.
+ 
+```php
+<?php
+return [
+    'payment-api' => [
+        'payssion' => [
+            'api_key' => '<-- YOUR API KEY -->',
+            'secret_key' => '<-- YOUR API SECRET -->',
+            /**
+             * map the payment-amount to game-amount
+             *
+            'packet_mapping' => [
+                '10.00' => 1000,
+                '0.01' => 1,
+                '4.00' => 400,
+             ],
+             * so if you pay 10USD you will get 1000 coins
+             */
+            'packet_mapping' => [],
+        ],
+    ],
+];
+```
+
+The `packet_mapping` part map the price to the amount of coins, if there is an invalid mapping the user get zero coins.
+Note payssion deliver every time with cents, so if the donation is 10USD the api deliver `10.00`, so you have to map `10.00` and not just `10`.
