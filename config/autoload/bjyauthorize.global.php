@@ -173,6 +173,7 @@ return [
                 ['controller' => PanelController\CharacterController::class, 'roles' => ['user']],
                 ['controller' => PanelController\VoteController::class, 'roles' => ['user']],
                 ['controller' => 'ZfcTicketSystem\Controller\TicketSystem', 'roles' => ['user']],
+                ['controller' => ZfcTicketSystem\Controller\TicketSystemController::class, 'roles' => ['user']],
                 ['controller' => 'SmallUser\Controller\Auth', 'roles' => ['guest', 'user']],
                 ['controller' => 'SmallUser\Controller\Auth', 'roles' => [], 'action' => ['logout']],
                 ['controller' => AdminController\IndexController::class, 'roles' => ['admin']],
