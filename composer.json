@@ -1,5 +1,5 @@
 {
-  "name": "kokspflanze/pserverCMS",
+  "name": "kokspflanze/p-server-cms-full",
   "description": "CMS for pServer",
   "keywords": [
     "framework",
@@ -15,7 +15,7 @@
   "require": {
     "php": "^7.1",
     "ext-mbstring": "*",
-    "zendframework/Zend-developer-tools": "^1.1",
+    "zendframework/zend-developer-tools": "^1.1",
     "kokspflanze/p-server-cms": "^1.0.1"
   },
   "config": {
