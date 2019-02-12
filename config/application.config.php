@@ -6,6 +6,7 @@ return [
         'Zend\Mail',
         'Zend\Router',
         'Zend\Validator',
+        'Zend\InputFilter',
         'Zend\Form',
         'Zend\Session',
         'Zend\Mvc\Console',
